@@ -29,47 +29,47 @@ typedef struct _SMBIOS_WINDOW_CONTEXT
 
 static const PH_KEY_VALUE_PAIR EtSMBIOSProbeStatus[] =
 {
-    SIP(L"Other", SMBIOS_PROBE_STATUS_OTHER),
-    SIP(L"Unknown", SMBIOS_PROBE_STATUS_UNKNOWN),
-    SIP(L"Ok", SMBIOS_PROBE_STATUS_OK),
-    SIP(L"Non-critical", SMBIOS_PROBE_STATUS_NON_CRITICAL),
-    SIP(L"Critical", SMBIOS_PROBE_STATUS_CRITICAL),
-    SIP(L"Non-recoverable", SMBIOS_PROBE_STATUS_NON_RECOVERABLE),
+    SIP(L"其他", SMBIOS_PROBE_STATUS_OTHER),
+    SIP(L"未知", SMBIOS_PROBE_STATUS_UNKNOWN),
+    SIP(L"就绪", SMBIOS_PROBE_STATUS_OK),
+    SIP(L"非关键", SMBIOS_PROBE_STATUS_NON_CRITICAL),
+    SIP(L"关键", SMBIOS_PROBE_STATUS_CRITICAL),
+    SIP(L"不可恢复", SMBIOS_PROBE_STATUS_NON_RECOVERABLE),
 };
 
 static const PH_KEY_VALUE_PAIR EtSMBIOSMemoryErrorTypes[] =
 {
-    SIP(L"Other", SMBIOS_MEMORY_ERROR_TYPE_OTHER),
-    SIP(L"Unknown", SMBIOS_MEMORY_ERROR_TYPE_UNKNOWN),
-    SIP(L"Ok", SMBIOS_MEMORY_ERROR_TYPE_OK),
-    SIP(L"Bad read", SMBIOS_MEMORY_ERROR_TYPE_BAD_READ),
-    SIP(L"Parity", SMBIOS_MEMORY_ERROR_TYPE_PARITY),
-    SIP(L"Single-bit", SMBIOS_MEMORY_ERROR_TYPE_SINGLE_BIT),
-    SIP(L"Double-bit", SMBIOS_MEMORY_ERROR_TYPE_DOUBLE_BIT),
-    SIP(L"Multi-bit", SMBIOS_MEMORY_ERROR_TYPE_MULTI_BIT),
-    SIP(L"Nibble", SMBIOS_MEMORY_ERROR_TYPE_NIBBLE),
-    SIP(L"Checksum", SMBIOS_MEMORY_ERROR_TYPE_CHECKSUM),
+    SIP(L"其他", SMBIOS_MEMORY_ERROR_TYPE_OTHER),
+    SIP(L"未知", SMBIOS_MEMORY_ERROR_TYPE_UNKNOWN),
+    SIP(L"就绪", SMBIOS_MEMORY_ERROR_TYPE_OK),
+    SIP(L"读取错误", SMBIOS_MEMORY_ERROR_TYPE_BAD_READ),
+    SIP(L"奇偶校验", SMBIOS_MEMORY_ERROR_TYPE_PARITY),
+    SIP(L"单字节", SMBIOS_MEMORY_ERROR_TYPE_SINGLE_BIT),
+    SIP(L"双字节", SMBIOS_MEMORY_ERROR_TYPE_DOUBLE_BIT),
+    SIP(L"多字节", SMBIOS_MEMORY_ERROR_TYPE_MULTI_BIT),
+    SIP(L"1/2 字节", SMBIOS_MEMORY_ERROR_TYPE_NIBBLE),
+    SIP(L"校验和", SMBIOS_MEMORY_ERROR_TYPE_CHECKSUM),
     SIP(L"CRC", SMBIOS_MEMORY_ERROR_TYPE_CRC),
-    SIP(L"Corrected singled-bit", SMBIOS_MEMORY_ERROR_TYPE_CORRECTED_SINGLE_BIT),
-    SIP(L"Corrected", SMBIOS_MEMORY_ERROR_TYPE_CORRECTED),
-    SIP(L"Uncorrectable", SMBIOS_MEMORY_ERROR_TYPE_UNCORRECTABLE),
+    SIP(L"已纠正单字节", SMBIOS_MEMORY_ERROR_TYPE_CORRECTED_SINGLE_BIT),
+    SIP(L"已纠正", SMBIOS_MEMORY_ERROR_TYPE_CORRECTED),
+    SIP(L"不可纠正", SMBIOS_MEMORY_ERROR_TYPE_UNCORRECTABLE),
 };
 
 static const PH_KEY_VALUE_PAIR EtSMBIOSMemoryErrorGranularities[] =
 {
-    SIP(L"Other", SMBIOS_MEMORY_ERROR_GRANULARITY_OTHER),
-    SIP(L"Unknown", SMBIOS_MEMORY_ERROR_GRANULARITY_UNKNOWN),
-    SIP(L"Device", SMBIOS_MEMORY_ERROR_GRANULARITY_DEVICE),
-    SIP(L"Partition", SMBIOS_MEMORY_ERROR_GRANULARITY_PARTITION),
+    SIP(L"其他", SMBIOS_MEMORY_ERROR_GRANULARITY_OTHER),
+    SIP(L"未知", SMBIOS_MEMORY_ERROR_GRANULARITY_UNKNOWN),
+    SIP(L"设备", SMBIOS_MEMORY_ERROR_GRANULARITY_DEVICE),
+    SIP(L"分区", SMBIOS_MEMORY_ERROR_GRANULARITY_PARTITION),
 };
 
 static const PH_KEY_VALUE_PAIR EtSMBIOSMemoryErrorOperations[] =
 {
-    SIP(L"Other", SMBIOS_MEMORY_ERROR_OPERATION_OTHER),
-    SIP(L"Unknown", SMBIOS_MEMORY_ERROR_OPERATION_UNKNOWN),
-    SIP(L"Read", SMBIOS_MEMORY_ERROR_OPERATION_READ),
-    SIP(L"Write", SMBIOS_MEMORY_ERROR_OPERATION_WRITE),
-    SIP(L"Partial write", SMBIOS_MEMORY_ERROR_OPERATION_PARTIAL_WRITE),
+    SIP(L"其他", SMBIOS_MEMORY_ERROR_OPERATION_OTHER),
+    SIP(L"未知", SMBIOS_MEMORY_ERROR_OPERATION_UNKNOWN),
+    SIP(L"读取", SMBIOS_MEMORY_ERROR_OPERATION_READ),
+    SIP(L"写入", SMBIOS_MEMORY_ERROR_OPERATION_WRITE),
+    SIP(L"部分写入", SMBIOS_MEMORY_ERROR_OPERATION_PARTIAL_WRITE),
 };
 
 ULONG EtAddSMBIOSGroup(
@@ -101,7 +101,7 @@ VOID EtAddSMBIOSBoolean(
     _In_ BOOLEAN Value
     )
 {
-    EtAddSMBIOSItem(Context, Group, Name, Value ? L"true" : L"false");
+    EtAddSMBIOSItem(Context, Group, Name, Value ? L"是" : L"否");
 }
 
 VOID EtAddSMBIOSUInt32(
@@ -182,7 +182,7 @@ VOID EtAddSMBIOSString(
     }
     else
     {
-        EtAddSMBIOSItem(Context, Group, Name, L"INVALID STRING INDEX");
+        EtAddSMBIOSItem(Context, Group, Name, L"无效字符串索引");
     }
 }
 
@@ -263,7 +263,7 @@ VOID EtAddSMBIOSEnum(
     if (PhFindStringSiKeyValuePairs(Values, SizeOfValues, Value, &string))
         EtAddSMBIOSItem(Context, Group, Name, string);
     else
-        EtAddSMBIOSItem(Context, Group, Name, L"Undefined");
+        EtAddSMBIOSItem(Context, Group, Name, L"未定义");
 }
 
 #define ET_SMBIOS_GROUP(n)              ULONG group = EtAddSMBIOSGroup(Context, n)
@@ -287,7 +287,7 @@ VOID EtSMBIOSFirmware(
 {
     static const PH_ACCESS_ENTRY characteristics[] =
     {
-        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_NOT_SUPPORTED, L"Not supported"),
+        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_NOT_SUPPORTED, L"不支持"),
         ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_ISA_SUPPORTED, L"ISA"),
         ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_MCA_SUPPORTED, L"MCA"),
         ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_EISA_SUPPORTED, L"EISA"),
@@ -295,26 +295,26 @@ VOID EtSMBIOSFirmware(
         ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_PCMCIA_SUPPORTED, L"PCMCIA"),
         ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_PNP_SUPPORTED, L"PNP"),
         ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_APM_SUPPORTED, L"APM"),
-        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_UPGRADE_SUPPORTED, L"Upgradeable"),
-        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_SHADOWING_SUPPORTED, L"Shadowing"),
+        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_UPGRADE_SUPPORTED, L"可更新"),
+        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_SHADOWING_SUPPORTED, L"影子"),
         ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_VL_VESA_SUPPORTED, L"VL-VESA"),
         ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_ESCD_SUPPORTED, L"ESCD"),
-        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_BOOT_FROM_CD_SUPPORTED, L"Boot from CD"),
-        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_SELECTABLE_BOOT_SUPPORTED, L"Selectable boot"),
-        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_ROM_SOCKETED, L"ROM socketed"),
-        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_PCMCIA_BOOT_SUPPORTED, L"PCMCIA boot"),
+        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_BOOT_FROM_CD_SUPPORTED, L"从 CD 启动"),
+        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_SELECTABLE_BOOT_SUPPORTED, L"可选择启动"),
+        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_ROM_SOCKETED, L"ROM 插槽"),
+        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_PCMCIA_BOOT_SUPPORTED, L"PCMCIA 启动"),
         ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_EDD_SUPPORTED, L"EDD"),
-        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_FLOPPY_NEC_9800_SUPPORTED, L"NEC 9800 floppy"),
-        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_FLOPPY_TOSHIBA_SUPPORTED, L"Toshiba floppy"),
-        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_FLOPPY_5_25_360KB_SUPPORTED, L"5.25\" 360KB floppy"),
-        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_FLOPPY_5_25_1_2_MB_SUPPORTED, L"5.25\" 1.5MB floppy"),
-        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_FLOPPY_3_5_720KB_SUPPORTED, L"3.5\" 720KM floppy"),
-        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_FLOPPY_3_5_2_88MB_SUPPORTED, L"3.5\" 2.88MB floppy"),
-        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_PRINT_SCREEN_SUPPORTED, L"Print screen"),
-        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_8042_KEYBOARD_SUPPORTED, L"8020 keyboard"),
-        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_SERIAL_SUPPORTED, L"Serial"),
-        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_PRINTER_SUPPORTED, L"Printer"),
-        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_CGA_VIDEO_SUPPORTED, L"CGA video"),
+        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_FLOPPY_NEC_9800_SUPPORTED, L"NEC 9800 软盘"),
+        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_FLOPPY_TOSHIBA_SUPPORTED, L"Toshiba 软盘"),
+        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_FLOPPY_5_25_360KB_SUPPORTED, L"5.25\" 360KB 软盘"),
+        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_FLOPPY_5_25_1_2_MB_SUPPORTED, L"5.25\" 1.5MB 软盘"),
+        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_FLOPPY_3_5_720KB_SUPPORTED, L"3.5\" 720KM 软盘"),
+        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_FLOPPY_3_5_2_88MB_SUPPORTED, L"3.5\" 2.88MB 软盘"),
+        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_PRINT_SCREEN_SUPPORTED, L"屏幕截图"),
+        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_8042_KEYBOARD_SUPPORTED, L"8020 键盘"),
+        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_SERIAL_SUPPORTED, L"序列号"),
+        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_PRINTER_SUPPORTED, L"打印机"),
+        ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_CGA_VIDEO_SUPPORTED, L"CGA 视频"),
         ET_SMBIOS_FLAG((ULONG)SMBIOS_FIRMWARE_FLAG_NEC_PC_98, L"NEC PC-98"),
         // Upper bits are reserved for platform and system
     };
@@ -322,38 +322,38 @@ VOID EtSMBIOSFirmware(
     static const PH_ACCESS_ENTRY characteristics2[] =
     {
         ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_ACPI_SUPPORTED, L"ACPI"),
-        ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_USB_LEGACY_SUPPORTED, L"USB legacy"),
+        ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_USB_LEGACY_SUPPORTED, L"USB 遗留模式"),
         ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_AGP_SUPPORTED, L"AGP"),
-        ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_I20_BOOT_SUPPORTED, L"I20 boot"),
-        ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_LS_120_BOOT_SUPPORTED, L"LS-120 boot"),
-        ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_ZIP_BOOT_SUPPORTED, L"ZIP boot"),
-        ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_1394_BOOT_SUPPORTED, L"1394 boot"),
-        ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_SMART_BATTERY_SUPPORTED, L"Smart battery"),
-        ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_BIOS_BOOT_SUPPORTED, L"BIOS boot"),
-        ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_FN_KEY_NET_BOOT_SUPPORTED, L"Function key network boot"),
-        ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_CONTENT_DISTRIBUTION_SUPPORTED, L"Content distribution"),
+        ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_I20_BOOT_SUPPORTED, L"I20 引导"),
+        ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_LS_120_BOOT_SUPPORTED, L"LS-120 引导"),
+        ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_ZIP_BOOT_SUPPORTED, L"ZIP 引导"),
+        ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_1394_BOOT_SUPPORTED, L"1394 引导"),
+        ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_SMART_BATTERY_SUPPORTED, L"智能电池"),
+        ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_BIOS_BOOT_SUPPORTED, L"BIOS 引导"),
+        ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_FN_KEY_NET_BOOT_SUPPORTED, L"功能键网络引导"),
+        ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_CONTENT_DISTRIBUTION_SUPPORTED, L"内容分发"),
         ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_UEFI_SUPPORTED, L"UEFI"),
-        ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_MANUFACTURING_MODE_ENABLED, L"Manufacturing mode"),
+        ET_SMBIOS_FLAG(SMBIOS_FIRMWARE_FLAG_2_MANUFACTURING_MODE_ENABLED, L"制造模式"),
     };
 
-    ET_SMBIOS_GROUP(L"Firmware");
+    ET_SMBIOS_GROUP(L"固件");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Firmware, Vendor))
-        ET_SMBIOS_STRING(L"Vendor", Entry->Firmware.Vendor);
+        ET_SMBIOS_STRING(L"制造商", Entry->Firmware.Vendor);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Firmware, Version))
-        ET_SMBIOS_STRING(L"Version", Entry->Firmware.Version);
+        ET_SMBIOS_STRING(L"版本", Entry->Firmware.Version);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Firmware, StartingAddressSegment) &&
         Entry->Firmware.StartingAddressSegment != 0)
     {
-        ET_SMBIOS_UINT32IX(L"Starting address segment", Entry->Firmware.StartingAddressSegment);
+        ET_SMBIOS_UINT32IX(L"起始地址段", Entry->Firmware.StartingAddressSegment);
     }
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Firmware, ReleaseDate))
-        ET_SMBIOS_STRING(L"Release date", Entry->Firmware.ReleaseDate);
+        ET_SMBIOS_STRING(L"发行日期", Entry->Firmware.ReleaseDate);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Firmware, RomSize))
     {
@@ -362,39 +362,39 @@ VOID EtSMBIOSFirmware(
             if (PH_SMBIOS_CONTAINS_FIELD(Entry, Firmware, RomSize2))
             {
                 if (Entry->Firmware.RomSize2.Unit == SMBIOS_FIRMWARE_ROM_UNIT_MB)
-                    ET_SMBIOS_SIZE(L"ROM size", (ULONG64)Entry->Firmware.RomSize * 0x100000);
+                    ET_SMBIOS_SIZE(L"ROM 大小", (ULONG64)Entry->Firmware.RomSize * 0x100000);
                 else if (Entry->Firmware.RomSize2.Unit == SMBIOS_FIRMWARE_ROM_UNIT_GB)
-                    ET_SMBIOS_SIZE(L"ROM size", (ULONG64)Entry->Firmware.RomSize * 0x40000000);
+                    ET_SMBIOS_SIZE(L"ROM 大小", (ULONG64)Entry->Firmware.RomSize * 0x40000000);
             }
         }
         else
         {
-            ET_SMBIOS_SIZE(L"ROM size", (ULONG64)(Entry->Firmware.RomSize + 1) * 0x10000);
+            ET_SMBIOS_SIZE(L"ROM 大小", (ULONG64)(Entry->Firmware.RomSize + 1) * 0x10000);
         }
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Firmware, Characteristics))
-        ET_SMBIOS_FLAGS(L"Characteristics", (ULONG)Entry->Firmware.Characteristics, characteristics);
+        ET_SMBIOS_FLAGS(L"特性", (ULONG)Entry->Firmware.Characteristics, characteristics);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Firmware, Characteristics2))
-        ET_SMBIOS_FLAGS(L"Characteristics extended", Entry->Firmware.Characteristics2, characteristics2);
+        ET_SMBIOS_FLAGS(L"扩展特性", Entry->Firmware.Characteristics2, characteristics2);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Firmware, MajorRelease))
-        ET_SMBIOS_UINT32(L"Major release", Entry->Firmware.MajorRelease);
+        ET_SMBIOS_UINT32(L"主版本号", Entry->Firmware.MajorRelease);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Firmware, MinorRelease))
-        ET_SMBIOS_UINT32(L"Minor release", Entry->Firmware.MinorRelease);
+        ET_SMBIOS_UINT32(L"次版本号", Entry->Firmware.MinorRelease);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Firmware, ControllerMajorRelease) &&
         Entry->Firmware.ControllerMajorRelease != UCHAR_MAX)
     {
-        ET_SMBIOS_UINT32(L"Controller major release", Entry->Firmware.ControllerMajorRelease);
+        ET_SMBIOS_UINT32(L"控制器主版本号", Entry->Firmware.ControllerMajorRelease);
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Firmware, ControllerMinorRelease) &&
         Entry->Firmware.ControllerMinorRelease != UCHAR_MAX)
     {
-        ET_SMBIOS_UINT32(L"Controller major release", Entry->Firmware.ControllerMinorRelease);
+        ET_SMBIOS_UINT32(L"控制器主版本号", Entry->Firmware.ControllerMinorRelease);
     }
 
 }
@@ -407,32 +407,32 @@ VOID EtSMBIOSSystem(
 {
     const PH_KEY_VALUE_PAIR wakeUpTimes[] =
     {
-        SIP(L"Reserved", SMBIOS_SYSTEM_WAKE_UP_TYPE_RESERVED),
-        SIP(L"Other", SMBIOS_SYSTEM_WAKE_UP_TYPE_OTHER),
-        SIP(L"Unknown", SMBIOS_SYSTEM_WAKE_UP_UNKNOWN),
-        SIP(L"APM timer", SMBIOS_SYSTEM_WAKE_UP_APM_TIMER),
-        SIP(L"Modem ring", SMBIOS_SYSTEM_WAKE_UP_MODEM_RING),
-        SIP(L"LAN remote", SMBIOS_SYSTEM_WAKE_UP_LAN_REMOTE),
-        SIP(L"Power switch", SMBIOS_SYSTEM_WAKE_UP_POWER_SWITCH),
+        SIP(L"保留", SMBIOS_SYSTEM_WAKE_UP_TYPE_RESERVED),
+        SIP(L"其他", SMBIOS_SYSTEM_WAKE_UP_TYPE_OTHER),
+        SIP(L"未知", SMBIOS_SYSTEM_WAKE_UP_UNKNOWN),
+        SIP(L"APM 计时器", SMBIOS_SYSTEM_WAKE_UP_APM_TIMER),
+        SIP(L"调制解调器唤醒", SMBIOS_SYSTEM_WAKE_UP_MODEM_RING),
+        SIP(L"LAN 远程", SMBIOS_SYSTEM_WAKE_UP_LAN_REMOTE),
+        SIP(L"电源切换", SMBIOS_SYSTEM_WAKE_UP_POWER_SWITCH),
         SIP(L"PCI PME", SMBIOS_SYSTEM_WAKE_UP_PCI_PME),
-        SIP(L"AC power restored", SMBIOS_SYSTEM_WAKE_UP_AC_POWER_RESTORED),
+        SIP(L"AC 电源恢复", SMBIOS_SYSTEM_WAKE_UP_AC_POWER_RESTORED),
     };
 
-    ET_SMBIOS_GROUP(L"System");
+    ET_SMBIOS_GROUP(L"系统");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, System, Manufacturer))
-        ET_SMBIOS_STRING(L"Manufacturer", Entry->System.Manufacturer);
+        ET_SMBIOS_STRING(L"制造商", Entry->System.Manufacturer);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, System, ProductName))
-        ET_SMBIOS_STRING(L"Product name", Entry->System.ProductName);
+        ET_SMBIOS_STRING(L"产品名称", Entry->System.ProductName);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, System, Version))
-        ET_SMBIOS_STRING(L"Version", Entry->System.Version);
+        ET_SMBIOS_STRING(L"版本", Entry->System.Version);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, System, SerialNumber))
-        ET_SMBIOS_STRING(L"Serial number", Entry->System.SerialNumber);
+        ET_SMBIOS_STRING(L"序列号", Entry->System.SerialNumber);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, System, UniqueID))
     {
@@ -444,13 +444,13 @@ VOID EtSMBIOSSystem(
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, System, WakeUpType))
-        ET_SMBIOS_ENUM(L"Wake-up type", Entry->System.WakeUpType, wakeUpTimes);
+        ET_SMBIOS_ENUM(L"唤醒类型", Entry->System.WakeUpType, wakeUpTimes);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, System, SKUNumber))
-        ET_SMBIOS_STRING(L"SKU number", Entry->System.SKUNumber);
+        ET_SMBIOS_STRING(L"SKU 编号", Entry->System.SKUNumber);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, System, Family))
-        ET_SMBIOS_STRING(L"Family", Entry->System.Family);
+        ET_SMBIOS_STRING(L"家族", Entry->System.Family);
 
 }
 
@@ -462,60 +462,60 @@ VOID EtSMBIOSBaseboard(
 {
     static const PH_ACCESS_ENTRY features[] =
     {
-        ET_SMBIOS_FLAG(SMBIOS_BASEBOARD_FEATURE_HOSTING_BOARD, L"Hosting"),
-        ET_SMBIOS_FLAG(SMBIOS_BASEBOARD_FEATURE_REQUIRES_DAUGHTER_BOARD, L"Daughter"),
-        ET_SMBIOS_FLAG(SMBIOS_BASEBOARD_FEATURE_REMOVABLE_BOARD, L"Removable"),
-        ET_SMBIOS_FLAG(SMBIOS_BASEBOARD_FEATURE_REPLACEABLE_BOARD, L"Replaceable"),
-        ET_SMBIOS_FLAG(SMBIOS_BASEBOARD_FEATURE_HOT_SWAP_BOARD, L"Hot swappable"),
+        ET_SMBIOS_FLAG(SMBIOS_BASEBOARD_FEATURE_HOSTING_BOARD, L"主机板"),
+        ET_SMBIOS_FLAG(SMBIOS_BASEBOARD_FEATURE_REQUIRES_DAUGHTER_BOARD, L"子板"),
+        ET_SMBIOS_FLAG(SMBIOS_BASEBOARD_FEATURE_REMOVABLE_BOARD, L"可移除"),
+        ET_SMBIOS_FLAG(SMBIOS_BASEBOARD_FEATURE_REPLACEABLE_BOARD, L"可更换"),
+        ET_SMBIOS_FLAG(SMBIOS_BASEBOARD_FEATURE_HOT_SWAP_BOARD, L"可热插拔"),
     };
 
     static const PH_KEY_VALUE_PAIR boardTypes[] =
     {
-        SIP(L"Unknown", SMBIOS_BASEBOARD_TYPE_UNKNOWN),
-        SIP( L"Other", SMBIOS_BASEBOARD_TYPE_OTHER),
-        SIP(L"Server blade", SMBIOS_BASEBOARD_TYPE_SERVER_BLADE),
-        SIP(L"Connectivity switch", SMBIOS_BASEBOARD_TYPE_CONNECTIVITY_SWITCH),
-        SIP(L"System management module", SMBIOS_BASEBOARD_TYPE_SYSTEM_MANAGEMENT_MODULE),
-        SIP(L"Processor module", SMBIOS_BASEBOARD_TYPE_PROCESSOR_MODULE),
-        SIP(L"I/O module", SMBIOS_BASEBOARD_TYPE_IO_MODULE),
-        SIP(L"Memory module", SMBIOS_BASEBOARD_TYPE_MEMORY_MODULE),
-        SIP(L"Daughter board", SMBIOS_BASEBOARD_TYPE_DAUGHTER_BOARD),
-        SIP(L"Motherboard", SMBIOS_BASEBOARD_TYPE_MOTHERBOARD),
-        SIP(L"Processor memory module", SMBIOS_BASEBOARD_TYPE_PROCESSOR_MEMORY_MODULE),
-        SIP(L"Processor I/O module", SMBIOS_BASEBOARD_TYPE_PROCESSOR_IO_MODULE),
-        SIP(L"Interconnect", SMBIOS_BASEBOARD_TYPE_INTERCONNECT),
+        SIP(L"未知", SMBIOS_BASEBOARD_TYPE_UNKNOWN),
+        SIP( L"其他", SMBIOS_BASEBOARD_TYPE_OTHER),
+        SIP(L"服务器主板", SMBIOS_BASEBOARD_TYPE_SERVER_BLADE),
+        SIP(L"连接交换机", SMBIOS_BASEBOARD_TYPE_CONNECTIVITY_SWITCH),
+        SIP(L"系统管理模块", SMBIOS_BASEBOARD_TYPE_SYSTEM_MANAGEMENT_MODULE),
+        SIP(L"处理器模块", SMBIOS_BASEBOARD_TYPE_PROCESSOR_MODULE),
+        SIP(L"I/O 模块", SMBIOS_BASEBOARD_TYPE_IO_MODULE),
+        SIP(L"内存模块", SMBIOS_BASEBOARD_TYPE_MEMORY_MODULE),
+        SIP(L"子板", SMBIOS_BASEBOARD_TYPE_DAUGHTER_BOARD),
+        SIP(L"母板", SMBIOS_BASEBOARD_TYPE_MOTHERBOARD),
+        SIP(L"处理器内存模块", SMBIOS_BASEBOARD_TYPE_PROCESSOR_MEMORY_MODULE),
+        SIP(L"处理器 I/O 模块", SMBIOS_BASEBOARD_TYPE_PROCESSOR_IO_MODULE),
+        SIP(L"互连", SMBIOS_BASEBOARD_TYPE_INTERCONNECT),
     };
 
-    ET_SMBIOS_GROUP(L"Baseboard");
+    ET_SMBIOS_GROUP(L"基板");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Baseboard, Manufacturer))
-        ET_SMBIOS_STRING(L"Manufacturer", Entry->Baseboard.Manufacturer);
+        ET_SMBIOS_STRING(L"制造商", Entry->Baseboard.Manufacturer);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Baseboard, Product))
-        ET_SMBIOS_STRING(L"Product", Entry->Baseboard.Product);
+        ET_SMBIOS_STRING(L"产品", Entry->Baseboard.Product);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Baseboard, Version))
-        ET_SMBIOS_STRING(L"Version", Entry->Baseboard.Version);
+        ET_SMBIOS_STRING(L"版本", Entry->Baseboard.Version);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Baseboard, SerialNumber))
-        ET_SMBIOS_STRING(L"Serial number", Entry->Baseboard.SerialNumber);
+        ET_SMBIOS_STRING(L"序列号", Entry->Baseboard.SerialNumber);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Baseboard, AssetTag))
-        ET_SMBIOS_STRING(L"Asset tag", Entry->Baseboard.AssetTag);
+        ET_SMBIOS_STRING(L"资产标签", Entry->Baseboard.AssetTag);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Baseboard, Features))
-        ET_SMBIOS_FLAGS(L"Features", Entry->Baseboard.Features, features);
+        ET_SMBIOS_FLAGS(L"功能", Entry->Baseboard.Features, features);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Baseboard, Location))
-        ET_SMBIOS_STRING(L"Location", Entry->Baseboard.Location);
+        ET_SMBIOS_STRING(L"位置", Entry->Baseboard.Location);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Baseboard, ChassisHandle))
-        ET_SMBIOS_UINT32IX(L"Chassis handle", Entry->Baseboard.ChassisHandle);
+        ET_SMBIOS_UINT32IX(L"机箱把手", Entry->Baseboard.ChassisHandle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Baseboard, BoardType))
-        ET_SMBIOS_ENUM(L"Board type", Entry->Baseboard.BoardType, boardTypes);
+        ET_SMBIOS_ENUM(L"主板类型", Entry->Baseboard.BoardType, boardTypes);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Baseboard, NumberOfHandles) &&
         Entry->Baseboard.NumberOfHandles > 0)
@@ -540,7 +540,7 @@ VOID EtSMBIOSBaseboard(
 
         string = PhFinalStringBuilderString(&sb);
 
-        EtAddSMBIOSItem(Context, group, L"Handles", PhGetString(string));
+        EtAddSMBIOSItem(Context, group, L"句柄", PhGetString(string));
 
         PhDereferenceObject(string);
     }
@@ -554,113 +554,113 @@ VOID EtSMBIOSChassis(
 {
     static const PH_KEY_VALUE_PAIR chassisTypes[] =
     {
-        SIP(L"Other", SMBIOS_CHASSIS_TYPE_OTHER),
-        SIP(L"Unknown", SMBIOS_CHASSIS_TYPE_UNKNOWN),
-        SIP(L"Desktop", SMBIOS_CHASSIS_TYPE_DESKTOP),
-        SIP(L"Low-profile desktop", SMBIOS_CHASSIS_TYPE_LOW_PROFILE_DESKTOP),
-        SIP(L"Pizza box", SMBIOS_CHASSIS_TYPE_PIZZA_BOX),
-        SIP(L"Mini tower", SMBIOS_CHASSIS_TYPE_MINI_TOWER),
-        SIP(L"Tower", SMBIOS_CHASSIS_TYPE_TOWER),
-        SIP(L"Portable", SMBIOS_CHASSIS_TYPE_PORTABLE),
-        SIP(L"Laptop", SMBIOS_CHASSIS_TYPE_LAPTOP),
-        SIP(L"Notebook", SMBIOS_CHASSIS_TYPE_NOTEBOOK),
-        SIP(L"Hand held", SMBIOS_CHASSIS_TYPE_HAND_HELD),
-        SIP(L"Docking station", SMBIOS_CHASSIS_TYPE_DOCKING_STATION),
-        SIP(L"All-in-one", SMBIOS_CHASSIS_TYPE_ALL_IN_ONE),
-        SIP(L"Sub notebook", SMBIOS_CHASSIS_TYPE_SUB_NOTEBOOK),
-        SIP(L"Space saving", SMBIOS_CHASSIS_TYPE_SPACE_SAVING),
-        SIP(L"Lunch box", SMBIOS_CHASSIS_TYPE_LUNCH_BOX),
-        SIP(L"Main server", SMBIOS_CHASSIS_TYPE_MAIN_SERVER),
-        SIP(L"Expansion", SMBIOS_CHASSIS_TYPE_EXPANSION),
-        SIP(L"Sub chassis", SMBIOS_CHASSIS_TYPE_SUB),
-        SIP(L"Bus expansion", SMBIOS_CHASSIS_TYPE_BUS_EXPANSION),
-        SIP(L"Peripheral", SMBIOS_CHASSIS_TYPE_PERIPHERAL),
+        SIP(L"其他", SMBIOS_CHASSIS_TYPE_OTHER),
+        SIP(L"未知", SMBIOS_CHASSIS_TYPE_UNKNOWN),
+        SIP(L"台式机", SMBIOS_CHASSIS_TYPE_DESKTOP),
+        SIP(L"低型台式机", SMBIOS_CHASSIS_TYPE_LOW_PROFILE_DESKTOP),
+        SIP(L"披萨盒", SMBIOS_CHASSIS_TYPE_PIZZA_BOX),
+        SIP(L"微型桌上计算机", SMBIOS_CHASSIS_TYPE_MINI_TOWER),
+        SIP(L"桌上计算机", SMBIOS_CHASSIS_TYPE_TOWER),
+        SIP(L"便携式", SMBIOS_CHASSIS_TYPE_PORTABLE),
+        SIP(L"笔记本电脑", SMBIOS_CHASSIS_TYPE_LAPTOP),
+        SIP(L"笔记本计算机", SMBIOS_CHASSIS_TYPE_NOTEBOOK),
+        SIP(L"手持式", SMBIOS_CHASSIS_TYPE_HAND_HELD),
+        SIP(L"对接底座", SMBIOS_CHASSIS_TYPE_DOCKING_STATION),
+        SIP(L"一体式", SMBIOS_CHASSIS_TYPE_ALL_IN_ONE),
+        SIP(L"子笔记本", SMBIOS_CHASSIS_TYPE_SUB_NOTEBOOK),
+        SIP(L"节省空间", SMBIOS_CHASSIS_TYPE_SPACE_SAVING),
+        SIP(L"便携式", SMBIOS_CHASSIS_TYPE_LUNCH_BOX),
+        SIP(L"主服务器", SMBIOS_CHASSIS_TYPE_MAIN_SERVER),
+        SIP(L"可扩展", SMBIOS_CHASSIS_TYPE_EXPANSION),
+        SIP(L"子机箱", SMBIOS_CHASSIS_TYPE_SUB),
+        SIP(L"总线扩展", SMBIOS_CHASSIS_TYPE_BUS_EXPANSION),
+        SIP(L"外设", SMBIOS_CHASSIS_TYPE_PERIPHERAL),
         SIP(L"RAID", SMBIOS_CHASSIS_TYPE_RAID),
-        SIP(L"Rack mount", SMBIOS_CHASSIS_TYPE_RACK_MOUNT),
-        SIP(L"Sealed-case", SMBIOS_CHASSIS_TYPE_SEALED_CASE_PC),
-        SIP(L"Multi-system", SMBIOS_CHASSIS_TYPE_MULTI_SYSTEM),
-        SIP(L"Compact PCI", SMBIOS_CHASSIS_TYPE_COMPACT_PCI),
-        SIP(L"Advanced TCA", SMBIOS_CHASSIS_TYPE_ADVANCED_TCA),
-        SIP(L"Blade", SMBIOS_CHASSIS_TYPE_BLADE),
-        SIP(L"Blade enclosure", SMBIOS_CHASSIS_TYPE_BLADE_ENCLOSURE),
-        SIP(L"Tablet", SMBIOS_CHASSIS_TYPE_TABLET),
-        SIP(L"Convertible", SMBIOS_CHASSIS_TYPE_CONVERTIBLE),
-        SIP(L"Detachable", SMBIOS_CHASSIS_TYPE_DETACHABLE),
-        SIP(L"Gateway", SMBIOS_CHASSIS_TYPE_IOT_GATEWAY),
-        SIP(L"Embedded", SMBIOS_CHASSIS_TYPE_EMBEDDED_PC),
-        SIP(L"Mini", SMBIOS_CHASSIS_TYPE_MINI_PC),
-        SIP(L"Sick", SMBIOS_CHASSIS_TYPE_STICK_PC),
+        SIP(L"机架式", SMBIOS_CHASSIS_TYPE_RACK_MOUNT),
+        SIP(L"密封外壳", SMBIOS_CHASSIS_TYPE_SEALED_CASE_PC),
+        SIP(L"多系统", SMBIOS_CHASSIS_TYPE_MULTI_SYSTEM),
+        SIP(L"紧凑型 PCI", SMBIOS_CHASSIS_TYPE_COMPACT_PCI),
+        SIP(L"高级 TCA", SMBIOS_CHASSIS_TYPE_ADVANCED_TCA),
+        SIP(L"刀片式", SMBIOS_CHASSIS_TYPE_BLADE),
+        SIP(L"刀片式机箱", SMBIOS_CHASSIS_TYPE_BLADE_ENCLOSURE),
+        SIP(L"平板电脑", SMBIOS_CHASSIS_TYPE_TABLET),
+        SIP(L"可转换", SMBIOS_CHASSIS_TYPE_CONVERTIBLE),
+        SIP(L"可拆卸", SMBIOS_CHASSIS_TYPE_DETACHABLE),
+        SIP(L"网关", SMBIOS_CHASSIS_TYPE_IOT_GATEWAY),
+        SIP(L"嵌入式", SMBIOS_CHASSIS_TYPE_EMBEDDED_PC),
+        SIP(L"迷你计算机", SMBIOS_CHASSIS_TYPE_MINI_PC),
+        SIP(L"病态", SMBIOS_CHASSIS_TYPE_STICK_PC),
     };
 
     static const PH_KEY_VALUE_PAIR chassisStates[] =
     {
-        SIP(L"Other", SMBIOS_CHASSIS_STATE_OTHER),
-        SIP(L"Unknown", SMBIOS_CHASSIS_STATE_UNKNOWN),
-        SIP(L"Safe", SMBIOS_CHASSIS_STATE_SAFE),
-        SIP(L"Warning", SMBIOS_CHASSIS_STATE_WARNING),
-        SIP(L"Critical", SMBIOS_CHASSIS_STATE_CRITICAL),
-        SIP(L"Non-recoverable", SMBIOS_CHASSIS_STATE_NON_RECOVERABLE),
+        SIP(L"其他", SMBIOS_CHASSIS_STATE_OTHER),
+        SIP(L"未知", SMBIOS_CHASSIS_STATE_UNKNOWN),
+        SIP(L"安全", SMBIOS_CHASSIS_STATE_SAFE),
+        SIP(L"警告", SMBIOS_CHASSIS_STATE_WARNING),
+        SIP(L"关键", SMBIOS_CHASSIS_STATE_CRITICAL),
+        SIP(L"不可恢复", SMBIOS_CHASSIS_STATE_NON_RECOVERABLE),
     };
 
     static const PH_KEY_VALUE_PAIR securityStates[] =
     {
-        SIP(L"Other", SMBIOS_CHASSIS_SECURITY_STATE_OTHER),
-        SIP(L"Unknown", SMBIOS_CHASSIS_SECURITY_STATE_UNKNOWN),
-        SIP(L"None", SMBIOS_CHASSIS_SECURITY_STATE_NONE),
-        SIP(L"Locked out", SMBIOS_CHASSIS_SECURITY_STATE_LOCKED_OUT),
-        SIP(L"Enabled", SMBIOS_CHASSIS_SECURITY_STATE_ENABLED),
+        SIP(L"其他", SMBIOS_CHASSIS_SECURITY_STATE_OTHER),
+        SIP(L"未知", SMBIOS_CHASSIS_SECURITY_STATE_UNKNOWN),
+        SIP(L"无", SMBIOS_CHASSIS_SECURITY_STATE_NONE),
+        SIP(L"已锁出", SMBIOS_CHASSIS_SECURITY_STATE_LOCKED_OUT),
+        SIP(L"已启用", SMBIOS_CHASSIS_SECURITY_STATE_ENABLED),
     };
 
-    ET_SMBIOS_GROUP(L"Chassis");
+    ET_SMBIOS_GROUP(L"机箱");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Chassis, Manufacturer))
-        ET_SMBIOS_STRING(L"Manufacturer", Entry->Chassis.Manufacturer);
+        ET_SMBIOS_STRING(L"制造商", Entry->Chassis.Manufacturer);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Chassis, Chassis))
     {
-        ET_SMBIOS_ENUM(L"Type", Entry->Chassis.Chassis.Type, chassisTypes);
-        ET_SMBIOS_BOOLEAN(L"Locked", !!Entry->Chassis.Chassis.Locked);
+        ET_SMBIOS_ENUM(L"类型", Entry->Chassis.Chassis.Type, chassisTypes);
+        ET_SMBIOS_BOOLEAN(L"锁定", !!Entry->Chassis.Chassis.Locked);
     }
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Chassis, Version))
-        ET_SMBIOS_STRING(L"Version", Entry->Chassis.Version);
+        ET_SMBIOS_STRING(L"版本", Entry->Chassis.Version);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Chassis, SerialNumber))
-        ET_SMBIOS_STRING(L"Serial number", Entry->Chassis.SerialNumber);
+        ET_SMBIOS_STRING(L"序列号", Entry->Chassis.SerialNumber);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Chassis, AssetTag))
-        ET_SMBIOS_STRING(L"Asset tag", Entry->Chassis.AssetTag);
+        ET_SMBIOS_STRING(L"资产标签", Entry->Chassis.AssetTag);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Chassis, BootUpState))
-        ET_SMBIOS_ENUM(L"Boot-up state", Entry->Chassis.BootUpState, chassisStates);
+        ET_SMBIOS_ENUM(L"启动状态", Entry->Chassis.BootUpState, chassisStates);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Chassis, PowerSupplyState))
-        ET_SMBIOS_ENUM(L"Power supply state", Entry->Chassis.PowerSupplyState, chassisStates);
+        ET_SMBIOS_ENUM(L"电源状态", Entry->Chassis.PowerSupplyState, chassisStates);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Chassis, ThermalState))
-        ET_SMBIOS_ENUM(L"Thermal state", Entry->Chassis.ThermalState, chassisStates);
+        ET_SMBIOS_ENUM(L"过热状态", Entry->Chassis.ThermalState, chassisStates);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Chassis, SecurityState))
-        ET_SMBIOS_ENUM(L"Security state", Entry->Chassis.SecurityState, securityStates);
+        ET_SMBIOS_ENUM(L"安全状态", Entry->Chassis.SecurityState, securityStates);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Chassis, OEMDefined) &&
         Entry->Chassis.OEMDefined != 0)
     {
-        ET_SMBIOS_UINT32IX(L"OEM defined", Entry->Chassis.OEMDefined);
+        ET_SMBIOS_UINT32IX(L"OEM 已定义", Entry->Chassis.OEMDefined);
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Chassis, Height) &&
         Entry->Chassis.Height != 0)
     {
-        ET_SMBIOS_UINT32_UNITS(L"Height", Entry->Chassis.Height, L"U");
+        ET_SMBIOS_UINT32_UNITS(L"高度", Entry->Chassis.Height, L"U");
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Chassis, NumberOfPowerCords) &&
         Entry->Chassis.NumberOfPowerCords != 0)
     {
-        ET_SMBIOS_UINT32(L"Number of power cords", Entry->Chassis.NumberOfPowerCords);
+        ET_SMBIOS_UINT32(L"电源线数量", Entry->Chassis.NumberOfPowerCords);
     }
 
     // TODO contained elements - SMBIOS_CHASSIS_CONTAINED_ELEMENT
@@ -682,7 +682,7 @@ VOID EtSMBIOSChassis(
     extended = PTR_ADD_OFFSET(Entry, length);
 
     if (Entry->Header.Length >= (length + RTL_SIZEOF_THROUGH_FIELD(SMBIOS_CHASSIS_INFORMATION_EX, SKUNumber)))
-        ET_SMBIOS_STRING(L"SKU number", extended->SKUNumber);
+        ET_SMBIOS_STRING(L"SKU 编号", extended->SKUNumber);
 }
 
 VOID EtSMBIOSProcessor(
@@ -693,59 +693,59 @@ VOID EtSMBIOSProcessor(
 {
     static const PH_KEY_VALUE_PAIR processorTypes[] =
     {
-        SIP(L"Other", SMBIOS_PROCESSOR_TYPE_OTHER),
-        SIP(L"Unknown", SMBIOS_PROCESSOR_TYPE_UNKNOWN),
-        SIP(L"Central", SMBIOS_PROCESSOR_TYPE_CENTRAL),
-        SIP(L"Math", SMBIOS_PROCESSOR_TYPE_MATH),
+        SIP(L"其他", SMBIOS_PROCESSOR_TYPE_OTHER),
+        SIP(L"未知", SMBIOS_PROCESSOR_TYPE_UNKNOWN),
+        SIP(L"中心", SMBIOS_PROCESSOR_TYPE_CENTRAL),
+        SIP(L"数学", SMBIOS_PROCESSOR_TYPE_MATH),
         SIP(L"DSP", SMBIOS_PROCESSOR_TYPE_DSP),
-        SIP(L"Video", SMBIOS_PROCESSOR_TYPE_VIDEO),
+        SIP(L"视频", SMBIOS_PROCESSOR_TYPE_VIDEO),
     };
 
     static const PH_KEY_VALUE_PAIR processorStatus[] =
     {
-        SIP(L"Unknown", SMBIOS_PROCESSOR_STATUS_UNKNOWN),
-        SIP(L"Enabled", SMBIOS_PROCESSOR_STATUS_ENABLED),
-        SIP(L"Disabled by user", SMBIOS_PROCESSOR_STATUS_DISABLED_BY_USER),
-        SIP(L"Disabled by firmware", SMBIOS_PROCESSOR_STATUS_DISABLED_BY_FIRMWARE),
-        SIP(L"Idle", SMBIOS_PROCESSOR_STATUS_IDLE),
-        SIP(L"Other", SMBIOS_PROCESSOR_STATUS_OTHER),
+        SIP(L"未知", SMBIOS_PROCESSOR_STATUS_UNKNOWN),
+        SIP(L"已启用", SMBIOS_PROCESSOR_STATUS_ENABLED),
+        SIP(L"已被用户禁用", SMBIOS_PROCESSOR_STATUS_DISABLED_BY_USER),
+        SIP(L"已被固件禁用", SMBIOS_PROCESSOR_STATUS_DISABLED_BY_FIRMWARE),
+        SIP(L"空闲", SMBIOS_PROCESSOR_STATUS_IDLE),
+        SIP(L"其他", SMBIOS_PROCESSOR_STATUS_OTHER),
     };
 
     static const PH_ACCESS_ENTRY characteristics[] =
     {
-        ET_SMBIOS_FLAG(SMBIOS_PROCESSOR_FLAG_UNKNOWN, L"Unknown"),
-        ET_SMBIOS_FLAG(SMBIOS_PROCESSOR_FLAG_64_BIT_CAPABLE, L"64-bit capable"),
-        ET_SMBIOS_FLAG(SMBIOS_PROCESSOR_FLAG_MILT_CORE, L"Multi-core"),
-        ET_SMBIOS_FLAG(SMBIOS_PROCESSOR_FLAG_HARDWARE_THREADED, L"Hardware threaded"),
-        ET_SMBIOS_FLAG(SMBIOS_PROCESSOR_FLAG_EXECUTE_PROTECTION, L"Execute protection"),
-        ET_SMBIOS_FLAG(SMBIOS_PROCESSOR_FLAG_ENHANCED_VIRTUALIZATION, L"Enhanced virtualization"),
-        ET_SMBIOS_FLAG(SMBIOS_PROCESSOR_FLAG_POWER_PERFORMANCE_CONTROL, L"Power performance control"),
-        ET_SMBIOS_FLAG(SMBIOS_PROCESSOR_FLAG_128_BIT_CAPABLE, L"128-bit capable"),
+        ET_SMBIOS_FLAG(SMBIOS_PROCESSOR_FLAG_UNKNOWN, L"未知"),
+        ET_SMBIOS_FLAG(SMBIOS_PROCESSOR_FLAG_64_BIT_CAPABLE, L"支持 64 位系统"),
+        ET_SMBIOS_FLAG(SMBIOS_PROCESSOR_FLAG_MILT_CORE, L"多核心"),
+        ET_SMBIOS_FLAG(SMBIOS_PROCESSOR_FLAG_HARDWARE_THREADED, L"硬件线程"),
+        ET_SMBIOS_FLAG(SMBIOS_PROCESSOR_FLAG_EXECUTE_PROTECTION, L"执行保护"),
+        ET_SMBIOS_FLAG(SMBIOS_PROCESSOR_FLAG_ENHANCED_VIRTUALIZATION, L"增强型虚拟化"),
+        ET_SMBIOS_FLAG(SMBIOS_PROCESSOR_FLAG_POWER_PERFORMANCE_CONTROL, L"电源性能控制"),
+        ET_SMBIOS_FLAG(SMBIOS_PROCESSOR_FLAG_128_BIT_CAPABLE, L"支持 128 位系统"),
         ET_SMBIOS_FLAG(SMBIOS_PROCESSOR_FLAG_ARM64_SOC, L"ARM64 SOC"),
     };
 
-    ET_SMBIOS_GROUP(L"Processor");
+    ET_SMBIOS_GROUP(L"处理器");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Processor, SocketDesignation))
-        ET_SMBIOS_STRING(L"Socket designation", Entry->Processor.SocketDesignation);
+        ET_SMBIOS_STRING(L"插槽标识", Entry->Processor.SocketDesignation);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Processor, Type))
-        ET_SMBIOS_ENUM(L"Type", Entry->Processor.Type, processorTypes);
+        ET_SMBIOS_ENUM(L"类型", Entry->Processor.Type, processorTypes);
 
     //if (PH_SMBIOS_CONTAINS_FIELD(Entry, Processor, Family)
-    //    ET_SMBIOS_ENUM(L"Family", Entry->Processor.Family, processorFamilies);
-    //    ET_SMBIOS_ENUM(L"Family", Entry->Processor.Family2, processorFamilies);
+    //    ET_SMBIOS_ENUM(L"家族", Entry->Processor.Family, processorFamilies);
+    //    ET_SMBIOS_ENUM(L"家族", Entry->Processor.Family2, processorFamilies);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Processor, Manufacturer))
-        ET_SMBIOS_STRING(L"Manufacturer", Entry->Processor.Manufacturer);
+        ET_SMBIOS_STRING(L"制造商", Entry->Processor.Manufacturer);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Processor, Identifier))
-        ET_SMBIOS_UINT64IX(L"Identifier", Entry->Processor.Identifier);
+        ET_SMBIOS_UINT64IX(L"标识符", Entry->Processor.Identifier);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Processor, Version))
-        ET_SMBIOS_STRING(L"Version", Entry->Processor.Version);
+        ET_SMBIOS_STRING(L"版本", Entry->Processor.Version);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Processor, Voltage))
     {
@@ -761,7 +761,7 @@ VOID EtSMBIOSProcessor(
         if (Entry->Processor.Voltage.Capable5000mV)
             PhAppendStringBuilder2(&sb, L"5V, ");
         if (!Entry->Processor.Voltage.Mode)
-            PhAppendStringBuilder2(&sb, L"legacy");
+            PhAppendStringBuilder2(&sb, L"传统模式");
 
         if (PhEndsWithString2(sb.String, L", ", FALSE))
             PhRemoveEndStringBuilder(&sb, 2);
@@ -769,7 +769,7 @@ VOID EtSMBIOSProcessor(
         string = PhFinalStringBuilderString(&sb);
 
         if (string->Length)
-            EtAddSMBIOSItem(Context, group, L"Voltage", PhGetString(string));
+            EtAddSMBIOSItem(Context, group, L"电压", PhGetString(string));
 
         PhDereferenceObject(string);
     }
@@ -777,51 +777,51 @@ VOID EtSMBIOSProcessor(
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Processor, ExternalClock) &&
         Entry->Processor.ExternalClock != 0)
     {
-        ET_SMBIOS_UINT32_UNITS(L"External clock", Entry->Processor.ExternalClock, L" MHz");
+        ET_SMBIOS_UINT32_UNITS(L"扩展时钟", Entry->Processor.ExternalClock, L" MHz");
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Processor, MaxSpeed) &&
         Entry->Processor.MaxSpeed != 0)
     {
-        ET_SMBIOS_UINT32_UNITS(L"Max speed", Entry->Processor.MaxSpeed, L" MHz");
+        ET_SMBIOS_UINT32_UNITS(L"最大速度", Entry->Processor.MaxSpeed, L" MHz");
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Processor, CurrentSpeed) &&
         Entry->Processor.CurrentSpeed != 0)
     {
-        ET_SMBIOS_UINT32_UNITS(L"Current speed", Entry->Processor.CurrentSpeed, L" MHz");
+        ET_SMBIOS_UINT32_UNITS(L"当前速度", Entry->Processor.CurrentSpeed, L" MHz");
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Processor, Status))
     {
-        ET_SMBIOS_BOOLEAN(L"Populated", !!Entry->Processor.Status.Populated);
-        ET_SMBIOS_ENUM(L"Status", Entry->Processor.Status.Status, processorStatus);
+        ET_SMBIOS_BOOLEAN(L"已连接", !!Entry->Processor.Status.Populated);
+        ET_SMBIOS_ENUM(L"状态", Entry->Processor.Status.Status, processorStatus);
     }
 
     //if (PH_SMBIOS_CONTAINS_FIELD(Entry, Processor, Upgrade))
-    //    ET_SMBIOS_ENUM(L"Upgrade", Entry->Processor.Upgrade, processorUpgrade);
+    //    ET_SMBIOS_ENUM(L"更新", Entry->Processor.Upgrade, processorUpgrade);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Processor, L1CacheHandle))
-        ET_SMBIOS_UINT32IX(L"L1 cache handle", Entry->Processor.L1CacheHandle);
+        ET_SMBIOS_UINT32IX(L"L1 缓存句柄", Entry->Processor.L1CacheHandle);
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Processor, L2CacheHandle))
-        ET_SMBIOS_UINT32IX(L"L2 cache handle", Entry->Processor.L2CacheHandle);
+        ET_SMBIOS_UINT32IX(L"L2 缓存句柄", Entry->Processor.L2CacheHandle);
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Processor, L3CacheHandle))
-        ET_SMBIOS_UINT32IX(L"L3 cache handle", Entry->Processor.L3CacheHandle);
+        ET_SMBIOS_UINT32IX(L"L3 缓存句柄", Entry->Processor.L3CacheHandle);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Processor, SerialNumber))
-        ET_SMBIOS_STRING(L"Serial number", Entry->Processor.SerialNumber);
+        ET_SMBIOS_STRING(L"序列号", Entry->Processor.SerialNumber);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Processor, AssetTag))
-        ET_SMBIOS_STRING(L"Asset tag", Entry->Processor.AssetTag);
+        ET_SMBIOS_STRING(L"资产标签", Entry->Processor.AssetTag);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Processor, PartNumber))
-        ET_SMBIOS_STRING(L"Part number", Entry->Processor.PartNumber);
+        ET_SMBIOS_STRING(L"部件号", Entry->Processor.PartNumber);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Processor, Characteristics))
-        ET_SMBIOS_FLAGS(L"Characteristics", Entry->Processor.Characteristics, characteristics);
+        ET_SMBIOS_FLAGS(L"特性", Entry->Processor.Characteristics, characteristics);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Processor, SocketType))
-        ET_SMBIOS_STRING(L"Socket type", Entry->Processor.SocketType);
+        ET_SMBIOS_STRING(L"插槽类型", Entry->Processor.SocketType);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Processor, CoreCount))
     {
@@ -832,11 +832,11 @@ VOID EtSMBIOSProcessor(
         else if (Entry->Processor.CoreCount == UCHAR_MAX)
         {
             if (PH_SMBIOS_CONTAINS_STRING(Entry, Processor, CoreCount2))
-                ET_SMBIOS_UINT32(L"Core count", Entry->Processor.CoreCount2);
+                ET_SMBIOS_UINT32(L"核心计数", Entry->Processor.CoreCount2);
         }
         else
         {
-            ET_SMBIOS_UINT32(L"Core count", Entry->Processor.CoreCount);
+            ET_SMBIOS_UINT32(L"核心计数", Entry->Processor.CoreCount);
         }
     }
 
@@ -849,11 +849,11 @@ VOID EtSMBIOSProcessor(
         else if (Entry->Processor.CoresEnabled == UCHAR_MAX)
         {
             if (PH_SMBIOS_CONTAINS_STRING(Entry, Processor, CoresEnabled2))
-                ET_SMBIOS_UINT32(L"Cores enabled", Entry->Processor.CoresEnabled2);
+                ET_SMBIOS_UINT32(L"核心启用", Entry->Processor.CoresEnabled2);
         }
         else
         {
-            ET_SMBIOS_UINT32(L"Cores enabled", Entry->Processor.CoresEnabled);
+            ET_SMBIOS_UINT32(L"核心启用", Entry->Processor.CoresEnabled);
         }
     }
 
@@ -866,16 +866,16 @@ VOID EtSMBIOSProcessor(
         else if (Entry->Processor.ThreadCount == UCHAR_MAX)
         {
             if (PH_SMBIOS_CONTAINS_STRING(Entry, Processor, ThreadCount2))
-                ET_SMBIOS_UINT32(L"Thread count", Entry->Processor.ThreadCount2);
+                ET_SMBIOS_UINT32(L"线程计数", Entry->Processor.ThreadCount2);
         }
         else
         {
-            ET_SMBIOS_UINT32(L"Thread count", Entry->Processor.ThreadCount2);
+            ET_SMBIOS_UINT32(L"线程计数", Entry->Processor.ThreadCount2);
         }
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Processor, ThreadsEnabled))
-        ET_SMBIOS_UINT32(L"Threads enabled", Entry->Processor.ThreadsEnabled);
+        ET_SMBIOS_UINT32(L"线程启用", Entry->Processor.ThreadsEnabled);
 }
 
 VOID EtSMBIOSMemoryController(
@@ -886,40 +886,40 @@ VOID EtSMBIOSMemoryController(
 {
     static const PH_KEY_VALUE_PAIR errorDetections[] =
     {
-        SIP(L"Other", SMBIOS_MEMORY_CONTROLLER_ERROR_DETECTION_OTHER),
-        SIP(L"Unknown", SMBIOS_MEMORY_CONTROLLER_ERROR_DETECTION_UNKNOWN),
-        SIP(L"None", SMBIOS_MEMORY_CONTROLLER_ERROR_DETECTION_NONE),
-        SIP(L"8-bit parity", SMBIOS_MEMORY_CONTROLLER_ERROR_DETECTION_8_BIT_PARITY),
-        SIP(L"32-bit ECC", SMBIOS_MEMORY_CONTROLLER_ERROR_DETECTION_32_BIT_ECC),
-        SIP(L"64-bit ECC", SMBIOS_MEMORY_CONTROLLER_ERROR_DETECTION_64_BIT_ECC),
-        SIP(L"128-bit ECC", SMBIOS_MEMORY_CONTROLLER_ERROR_DETECTION_128_BIT_ECC),
+        SIP(L"其他", SMBIOS_MEMORY_CONTROLLER_ERROR_DETECTION_OTHER),
+        SIP(L"未知", SMBIOS_MEMORY_CONTROLLER_ERROR_DETECTION_UNKNOWN),
+        SIP(L"无", SMBIOS_MEMORY_CONTROLLER_ERROR_DETECTION_NONE),
+        SIP(L"8 位奇偶校验", SMBIOS_MEMORY_CONTROLLER_ERROR_DETECTION_8_BIT_PARITY),
+        SIP(L"32 位 ECC", SMBIOS_MEMORY_CONTROLLER_ERROR_DETECTION_32_BIT_ECC),
+        SIP(L"64 位 ECC", SMBIOS_MEMORY_CONTROLLER_ERROR_DETECTION_64_BIT_ECC),
+        SIP(L"128 位 ECC", SMBIOS_MEMORY_CONTROLLER_ERROR_DETECTION_128_BIT_ECC),
         SIP(L"CRC", SMBIOS_MEMORY_CONTROLLER_ERROR_DETECTION_CRC),
     };
 
     static const PH_KEY_VALUE_PAIR errorCorrections[] =
     {
-        SIP(L"Other", SMBIOS_MEMORY_CONTROLLER_ERROR_CORRECTION_OTHER),
-        SIP(L"Unknown", SMBIOS_MEMORY_CONTROLLER_ERROR_CORRECTION_UNKNOWN),
-        SIP(L"Single-bit", SMBIOS_MEMORY_CONTROLLER_ERROR_CORRECTION_SINGLE_BIT),
-        SIP(L"Double-bit", SMBIOS_MEMORY_CONTROLLER_ERROR_CORRECTION_DOUBLE_BIT),
-        SIP(L"Scrubbing", SMBIOS_MEMORY_CONTROLLER_ERROR_CORRECTION_SCRUBBING),
+        SIP(L"其他", SMBIOS_MEMORY_CONTROLLER_ERROR_CORRECTION_OTHER),
+        SIP(L"未知", SMBIOS_MEMORY_CONTROLLER_ERROR_CORRECTION_UNKNOWN),
+        SIP(L"单字节", SMBIOS_MEMORY_CONTROLLER_ERROR_CORRECTION_SINGLE_BIT),
+        SIP(L"双字节", SMBIOS_MEMORY_CONTROLLER_ERROR_CORRECTION_DOUBLE_BIT),
+        SIP(L"擦除", SMBIOS_MEMORY_CONTROLLER_ERROR_CORRECTION_SCRUBBING),
     };
 
     static const PH_KEY_VALUE_PAIR interleave[] =
     {
-        SIP(L"Other", SMBIOS_MEMORY_CONTROLLER_INTERLEAVE_OTHER),
-        SIP(L"Unknown", SMBIOS_MEMORY_CONTROLLER_INTERLEAVE_UNKNOWN),
-        SIP(L"One-way", SMBIOS_MEMORY_CONTROLLER_INTERLEAVE_ONE_WAY),
-        SIP(L"Two-way", SMBIOS_MEMORY_CONTROLLER_INTERLEAVE_TWO_WAY),
-        SIP(L"Four-way", SMBIOS_MEMORY_CONTROLLER_INTERLEAVE_FOUR_WAY),
-        SIP(L"Eight-way", SMBIOS_MEMORY_CONTROLLER_INTERLEAVE_EIGHT_WAY),
-        SIP(L"Sixteen-way", SMBIOS_MEMORY_CONTROLLER_INTERLEAVE_SIXTEEN_WAY),
+        SIP(L"其他", SMBIOS_MEMORY_CONTROLLER_INTERLEAVE_OTHER),
+        SIP(L"未知", SMBIOS_MEMORY_CONTROLLER_INTERLEAVE_UNKNOWN),
+        SIP(L"1 路", SMBIOS_MEMORY_CONTROLLER_INTERLEAVE_ONE_WAY),
+        SIP(L"2 路", SMBIOS_MEMORY_CONTROLLER_INTERLEAVE_TWO_WAY),
+        SIP(L"4 路", SMBIOS_MEMORY_CONTROLLER_INTERLEAVE_FOUR_WAY),
+        SIP(L"8 路", SMBIOS_MEMORY_CONTROLLER_INTERLEAVE_EIGHT_WAY),
+        SIP(L"16 路", SMBIOS_MEMORY_CONTROLLER_INTERLEAVE_SIXTEEN_WAY),
     };
 
     static const PH_ACCESS_ENTRY speeds[] =
     {
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_CONTROLLER_SPEEDS_OTHER, L"Other"),
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_CONTROLLER_SPEEDS_UNKNOWN, L"Unknown"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_CONTROLLER_SPEEDS_OTHER, L"其他"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_CONTROLLER_SPEEDS_UNKNOWN, L"未知"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_CONTROLLER_SPEEDS_70NS, L"70ns"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_CONTROLLER_SPEEDS_60NS, L"60ns"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_CONTROLLER_SPEEDS_50NS, L"50ns"),
@@ -927,40 +927,40 @@ VOID EtSMBIOSMemoryController(
 
     static const PH_ACCESS_ENTRY supportedTypes[] =
     {
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_OTHER, L"Other"),
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_UNKNOWN, L"Unknown"),
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_STANDARD, L"Standard"),
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_FAST_PAGE_MODE, L"Fast-page mode"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_OTHER, L"其他"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_UNKNOWN, L"未知"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_STANDARD, L"标准"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_FAST_PAGE_MODE, L"快速换页模式"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_EDO, L"EDO"),
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_PARITY, L"Parity"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_PARITY, L"奇偶校验"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_ECC, L"ECC"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_SIMM, L"SIMM"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_DIMM, L"DIMM"),
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_BURST_EDO, L"Burst EDO"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_BURST_EDO, L"突发式 EDO"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_SDRAM, L"SDRAM"),
     };
 
-    ET_SMBIOS_GROUP(L"Memory controller");
+    ET_SMBIOS_GROUP(L"内存控制器");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryController, ErrorDetectionMethod))
-        ET_SMBIOS_ENUM(L"Error detection method", Entry->MemoryController.ErrorDetectionMethod, errorDetections);
+        ET_SMBIOS_ENUM(L"错误检测方法", Entry->MemoryController.ErrorDetectionMethod, errorDetections);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryController, ErrorCorrectionCapabilities))
-        ET_SMBIOS_ENUM(L"Error correction capabilities", Entry->MemoryController.ErrorCorrectionCapabilities, errorCorrections);
+        ET_SMBIOS_ENUM(L"纠错能力", Entry->MemoryController.ErrorCorrectionCapabilities, errorCorrections);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryController, SupportedInterleave))
-        ET_SMBIOS_ENUM(L"Supported interleave", Entry->MemoryController.SupportedInterleave, interleave);
+        ET_SMBIOS_ENUM(L"支持交错模式", Entry->MemoryController.SupportedInterleave, interleave);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryController, MaximumModuleSize))
-        ET_SMBIOS_SIZE(L"Maximum module size", 1ULL < Entry->MemoryController.MaximumModuleSize);
+        ET_SMBIOS_SIZE(L"最大模块尺寸", 1ULL < Entry->MemoryController.MaximumModuleSize);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryController, SupportedSpeeds))
-        ET_SMBIOS_FLAGS(L"Supported speeds", Entry->MemoryController.SupportedSpeeds, speeds);
+        ET_SMBIOS_FLAGS(L"支持速度", Entry->MemoryController.SupportedSpeeds, speeds);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryController, SupportedTypes))
-        ET_SMBIOS_FLAGS(L"Supported types", Entry->MemoryController.SupportedTypes, supportedTypes);
+        ET_SMBIOS_FLAGS(L"支持类型", Entry->MemoryController.SupportedTypes, supportedTypes);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryController, ModuleVoltage))
     {
@@ -982,7 +982,7 @@ VOID EtSMBIOSMemoryController(
         string = PhFinalStringBuilderString(&sb);
 
         if (string->Length)
-            EtAddSMBIOSItem(Context, group, L"Module voltage", PhGetString(string));
+            EtAddSMBIOSItem(Context, group, L"模块电压", PhGetString(string));
 
         PhDereferenceObject(string);
     }
@@ -1010,7 +1010,7 @@ VOID EtSMBIOSMemoryController(
 
         string = PhFinalStringBuilderString(&sb);
 
-        EtAddSMBIOSItem(Context, group, L"Handles", PhGetString(string));
+        EtAddSMBIOSItem(Context, group, L"句柄", PhGetString(string));
 
         PhDereferenceObject(string);
     }
@@ -1032,7 +1032,7 @@ VOID EtSMBIOSMemoryController(
     extended = PTR_ADD_OFFSET(Entry, length);
 
     if (Entry->Header.Length >= (length + RTL_SIZEOF_THROUGH_FIELD(SMBIOS_MEMORY_CONTROLLER_INFORMATION_EX, EnabledErrorCorrectionCapabilities)))
-        ET_SMBIOS_ENUM(L"Enabled error correction capabilities", extended->EnabledErrorCorrectionCapabilities, errorCorrections);
+        ET_SMBIOS_ENUM(L"已启用纠错功能", extended->EnabledErrorCorrectionCapabilities, errorCorrections);
 }
 
 VOID EtSMBIOSMemoryModule(
@@ -1043,52 +1043,52 @@ VOID EtSMBIOSMemoryModule(
 {
     static const PH_ACCESS_ENTRY types[] =
     {
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_OTHER, L"Other"),
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_UNKNOWN, L"Unknown"),
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_STANDARD, L"Standard"),
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_FAST_PAGE_MODE, L"Fast-page mode"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_OTHER, L"其他"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_UNKNOWN, L"未知"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_STANDARD, L"标准"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_FAST_PAGE_MODE, L"快速换页模式"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_EDO, L"EDO"),
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_PARITY, L"Parity"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_PARITY, L"奇偶校验"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_ECC, L"ECC"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_SIMM, L"SIMM"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_DIMM, L"DIMM"),
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_BURST_EDO, L"Burst EDO"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_BURST_EDO, L"突发式 EDO"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_MODULE_TYPE_SDRAM, L"SDRAM"),
     };
 
-    ET_SMBIOS_GROUP(L"Memory module");
+    ET_SMBIOS_GROUP(L"内存模块");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, MemoryModule, SocketDesignation))
-        ET_SMBIOS_STRING(L"Socket designation", Entry->MemoryModule.SocketDesignation);
+        ET_SMBIOS_STRING(L"插槽标识", Entry->MemoryModule.SocketDesignation);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryModule, BankConnections))
-        ET_SMBIOS_UINT32IX(L"Bank connections", Entry->MemoryModule.BankConnections);
+        ET_SMBIOS_UINT32IX(L"通道连接", Entry->MemoryModule.BankConnections);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryModule, CurrentSpeed))
-        ET_SMBIOS_UINT32_UNITS(L"Current speed", Entry->MemoryModule.CurrentSpeed, L" ns");
+        ET_SMBIOS_UINT32_UNITS(L"当前速度", Entry->MemoryModule.CurrentSpeed, L" ns");
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryModule, MemoryType))
-        ET_SMBIOS_FLAGS(L"Memory type", Entry->MemoryModule.MemoryType, types);
+        ET_SMBIOS_FLAGS(L"内存类型", Entry->MemoryModule.MemoryType, types);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryModule, InstalledSize))
     {
         PPH_STRING string;
 
         if (Entry->MemoryModule.InstalledSize.Size == SMBIOS_MEMORY_MODULE_SIZE_VALUE_NOT_DETERMINABLE)
-            string = PhCreateString(L"Not determinable");
+            string = PhCreateString(L"无法确定");
         else if (Entry->MemoryModule.InstalledSize.Size == SMBIOS_MEMORY_MODULE_SIZE_VALUE_NOT_ENABLED)
-            string = PhCreateString(L"Not enabled");
+            string = PhCreateString(L"未启用");
         else if (Entry->MemoryModule.InstalledSize.Size == SMBIOS_MEMORY_MODULE_SIZE_VALUE_NOT_INSTALLED)
-            string = PhCreateString(L"Not installed");
+            string = PhCreateString(L"未安装");
         else
             string = PhFormatSize(1ULL << Entry->MemoryModule.InstalledSize.Size, ULONG_MAX);
 
         if (Entry->MemoryModule.InstalledSize.DoubleBank)
-            PhMoveReference(&string, PhConcatStringRefZ(&string->sr, L", double-bank"));
+            PhMoveReference(&string, PhConcatStringRefZ(&string->sr, L", 双通道"));
 
-        EtAddSMBIOSItem(Context, group, L"Installed size", PhGetString(string));
+        EtAddSMBIOSItem(Context, group, L"安装大小", PhGetString(string));
 
         PhDereferenceObject(string);
     }
@@ -1098,18 +1098,18 @@ VOID EtSMBIOSMemoryModule(
         PPH_STRING string;
 
         if (Entry->MemoryModule.EnabledSize.Size == SMBIOS_MEMORY_MODULE_SIZE_VALUE_NOT_DETERMINABLE)
-            string = PhCreateString(L"Not determinable");
+            string = PhCreateString(L"无法确定");
         else if (Entry->MemoryModule.EnabledSize.Size == SMBIOS_MEMORY_MODULE_SIZE_VALUE_NOT_ENABLED)
-            string = PhCreateString(L"Not enabled");
+            string = PhCreateString(L"未启用");
         else if (Entry->MemoryModule.EnabledSize.Size == SMBIOS_MEMORY_MODULE_SIZE_VALUE_NOT_INSTALLED)
-            string = PhCreateString(L"Not installed");
+            string = PhCreateString(L"未安装");
         else
             string = PhFormatSize(1ULL << Entry->MemoryModule.EnabledSize.Size, ULONG_MAX);
 
         if (Entry->MemoryModule.EnabledSize.DoubleBank)
-            PhMoveReference(&string, PhConcatStringRefZ(&string->sr, L", double-bank"));
+            PhMoveReference(&string, PhConcatStringRefZ(&string->sr, L", 双通道"));
 
-        EtAddSMBIOSItem(Context, group, L"Enabled size", PhGetString(string));
+        EtAddSMBIOSItem(Context, group, L"启用大小", PhGetString(string));
 
         PhDereferenceObject(string);
     }
@@ -1123,18 +1123,18 @@ VOID EtSMBIOSMemoryModule(
         PhInitializeStringBuilder(&sb, 10);
 
         if (Entry->MemoryModule.ErrorStatus.UncorrectableErrors)
-            PhAppendStringBuilder2(&sb, L"Uncorrectable errors");
+            PhAppendStringBuilder2(&sb, L"不可纠正错误");
         if (Entry->MemoryModule.ErrorStatus.CorrectableErrors)
-            PhAppendStringBuilder2(&sb, L"Correctable errors");
+            PhAppendStringBuilder2(&sb, L"可纠正错误");
         if (Entry->MemoryModule.ErrorStatus.SeeEventLog)
-            PhAppendStringBuilder2(&sb, L"See event log");
+            PhAppendStringBuilder2(&sb, L"查看事件日志");
 
         if (PhEndsWithString2(sb.String, L", ", FALSE))
             PhRemoveEndStringBuilder(&sb, 2);
 
         string = PhFinalStringBuilderString(&sb);
 
-        EtAddSMBIOSItem(Context, group, L"Error status", PhGetString(string));
+        EtAddSMBIOSItem(Context, group, L"错误状态", PhGetString(string));
 
         PhDereferenceObject(string);
     }
@@ -1148,74 +1148,74 @@ VOID EtSMBIOSCache(
 {
     static const PH_KEY_VALUE_PAIR locations[] =
     {
-        SIP(L"Internal", SMBIOS_CACHE_LOCATION_INTERNAL),
-        SIP(L"External", SMBIOS_CACHE_LOCATION_EXTERNAL),
-        SIP(L"Reserved", SMBIOS_CACHE_LOCATION_RESERVED),
-        SIP(L"Unknown", SMBIOS_CACHE_LOCATION_UNKNOWN),
+        SIP(L"内部", SMBIOS_CACHE_LOCATION_INTERNAL),
+        SIP(L"扩展", SMBIOS_CACHE_LOCATION_EXTERNAL),
+        SIP(L"保留", SMBIOS_CACHE_LOCATION_RESERVED),
+        SIP(L"未知", SMBIOS_CACHE_LOCATION_UNKNOWN),
     };
 
     static const PH_KEY_VALUE_PAIR modes[] =
     {
-        SIP(L"Write through", SMBIOS_CACHE_MODE_WRITE_THROUGH),
-        SIP(L"Write back", SMBIOS_CACHE_MODE_WRITE_BACK),
-        SIP(L"Write with memory address", SMBIOS_CACHE_MODE_VARIES_WITH_MEMORY_ADDRESS),
-        SIP(L"Unknown", SMBIOS_CACHE_MODE_UNKNOWN),
+        SIP(L"直写", SMBIOS_CACHE_MODE_WRITE_THROUGH),
+        SIP(L"回写", SMBIOS_CACHE_MODE_WRITE_BACK),
+        SIP(L"写入内存地址", SMBIOS_CACHE_MODE_VARIES_WITH_MEMORY_ADDRESS),
+        SIP(L"未知", SMBIOS_CACHE_MODE_UNKNOWN),
     };
 
     static const PH_ACCESS_ENTRY supportSRAM[] =
     {
-        ET_SMBIOS_FLAG(SMBIOS_CACHE_SUPPORTED_SRAM_OTHER, L"Other"),
-        ET_SMBIOS_FLAG(SMBIOS_CACHE_SUPPORTED_SRAM_UNKNOWN, L"Unknown"),
-        ET_SMBIOS_FLAG(SMBIOS_CACHE_SUPPORTED_SRAM_NON_BURST, L"Non-burst"),
-        ET_SMBIOS_FLAG(SMBIOS_CACHE_SUPPORTED_SRAM_BURST, L"Burst"),
-        ET_SMBIOS_FLAG(SMBIOS_CACHE_SUPPORTED_SRAM_PIPELINE_BURST, L"Pipeline burst"),
-        ET_SMBIOS_FLAG(SMBIOS_CACHE_SUPPORTED_SRAM_SYNCHRONOUS, L"Synchronous"),
-        ET_SMBIOS_FLAG(SMBIOS_CACHE_SUPPORTED_SRAM_ASYNCHRONOUS, L"Asynchronous"),
+        ET_SMBIOS_FLAG(SMBIOS_CACHE_SUPPORTED_SRAM_OTHER, L"其他"),
+        ET_SMBIOS_FLAG(SMBIOS_CACHE_SUPPORTED_SRAM_UNKNOWN, L"未知"),
+        ET_SMBIOS_FLAG(SMBIOS_CACHE_SUPPORTED_SRAM_NON_BURST, L"非突发"),
+        ET_SMBIOS_FLAG(SMBIOS_CACHE_SUPPORTED_SRAM_BURST, L"突发"),
+        ET_SMBIOS_FLAG(SMBIOS_CACHE_SUPPORTED_SRAM_PIPELINE_BURST, L"流水线突发"),
+        ET_SMBIOS_FLAG(SMBIOS_CACHE_SUPPORTED_SRAM_SYNCHRONOUS, L"同步"),
+        ET_SMBIOS_FLAG(SMBIOS_CACHE_SUPPORTED_SRAM_ASYNCHRONOUS, L"异步"),
     };
 
     static const PH_KEY_VALUE_PAIR errorCorrection[] =
     {
-        SIP(L"Other", SMBIOS_CACHE_ERROR_CORRECTION_OTHER),
-        SIP(L"Unknown", SMBIOS_CACHE_ERROR_CORRECTION_UNKNOWN),
-        SIP(L"None", SMBIOS_CACHE_ERROR_CORRECTION_NONE),
-        SIP(L"Parity", SMBIOS_CACHE_ERROR_CORRECTION_PARITY),
-        SIP(L"Single-bit ECC", SMBIOS_CACHE_ERROR_CORRECTION_SINGLE_BIT_ECC),
-        SIP(L"Multi-bit ECC", SMBIOS_CACHE_ERROR_CORRECTION_MULTI_BIT_ECC),
+        SIP(L"其他", SMBIOS_CACHE_ERROR_CORRECTION_OTHER),
+        SIP(L"未知", SMBIOS_CACHE_ERROR_CORRECTION_UNKNOWN),
+        SIP(L"无", SMBIOS_CACHE_ERROR_CORRECTION_NONE),
+        SIP(L"奇偶校验", SMBIOS_CACHE_ERROR_CORRECTION_PARITY),
+        SIP(L"单比特 ECC", SMBIOS_CACHE_ERROR_CORRECTION_SINGLE_BIT_ECC),
+        SIP(L"多比特 ECC", SMBIOS_CACHE_ERROR_CORRECTION_MULTI_BIT_ECC),
     };
 
     static const PH_KEY_VALUE_PAIR systemCache[] =
     {
-        SIP(L"Other", SMBIOS_CACHE_SYSTEM_CACHE_OTHER),
-        SIP(L"Unknown", SMBIOS_CACHE_SYSTEM_CACHE_UNKNOWN),
-        SIP(L"Instruction", SMBIOS_CACHE_SYSTEM_CACHE_INSTRUCTION),
-        SIP(L"Data", SMBIOS_CACHE_SYSTEM_CACHE_DATA),
-        SIP(L"Unified", SMBIOS_CACHE_SYSTEM_CACHE_UNIFIED),
+        SIP(L"其他", SMBIOS_CACHE_SYSTEM_CACHE_OTHER),
+        SIP(L"未知", SMBIOS_CACHE_SYSTEM_CACHE_UNKNOWN),
+        SIP(L"指令", SMBIOS_CACHE_SYSTEM_CACHE_INSTRUCTION),
+        SIP(L"数据", SMBIOS_CACHE_SYSTEM_CACHE_DATA),
+        SIP(L"统一", SMBIOS_CACHE_SYSTEM_CACHE_UNIFIED),
     };
 
     static const PH_KEY_VALUE_PAIR associativity[] =
     {
-        SIP(L"Other", SMBIOS_CACHE_ASSOCIATIVITY_OTHER),
-        SIP(L"Unknown", SMBIOS_CACHE_ASSOCIATIVITY_UNKNOWN),
-        SIP(L"Direct mapped", SMBIOS_CACHE_ASSOCIATIVITY_DIRECT_MAPPED),
-        SIP(L"2-way", SMBIOS_CACHE_ASSOCIATIVITY_2_WAY),
-        SIP(L"4-way", SMBIOS_CACHE_ASSOCIATIVITY_4_WAY),
-        SIP(L"Full", SMBIOS_CACHE_ASSOCIATIVITY_FULL),
-        SIP(L"8-way", SMBIOS_CACHE_ASSOCIATIVITY_8_WAY),
-        SIP(L"16-way", SMBIOS_CACHE_ASSOCIATIVITY_16_WAY),
-        SIP(L"12-way", SMBIOS_CACHE_ASSOCIATIVITY_12_WAY),
-        SIP(L"24-way", SMBIOS_CACHE_ASSOCIATIVITY_24_WAY),
-        SIP(L"32-way", SMBIOS_CACHE_ASSOCIATIVITY_32_WAY),
-        SIP(L"48-way", SMBIOS_CACHE_ASSOCIATIVITY_48_WAY),
-        SIP(L"64-way", SMBIOS_CACHE_ASSOCIATIVITY_64_WAY),
-        SIP(L"20-way", SMBIOS_CACHE_ASSOCIATIVITY_20_WAY),
+        SIP(L"其他", SMBIOS_CACHE_ASSOCIATIVITY_OTHER),
+        SIP(L"未知", SMBIOS_CACHE_ASSOCIATIVITY_UNKNOWN),
+        SIP(L"直接映射", SMBIOS_CACHE_ASSOCIATIVITY_DIRECT_MAPPED),
+        SIP(L"2 路", SMBIOS_CACHE_ASSOCIATIVITY_2_WAY),
+        SIP(L"4 路", SMBIOS_CACHE_ASSOCIATIVITY_4_WAY),
+        SIP(L"全相联", SMBIOS_CACHE_ASSOCIATIVITY_FULL),
+        SIP(L"8 路", SMBIOS_CACHE_ASSOCIATIVITY_8_WAY),
+        SIP(L"16 路", SMBIOS_CACHE_ASSOCIATIVITY_16_WAY),
+        SIP(L"12 路", SMBIOS_CACHE_ASSOCIATIVITY_12_WAY),
+        SIP(L"24 路", SMBIOS_CACHE_ASSOCIATIVITY_24_WAY),
+        SIP(L"32 路", SMBIOS_CACHE_ASSOCIATIVITY_32_WAY),
+        SIP(L"48 路", SMBIOS_CACHE_ASSOCIATIVITY_48_WAY),
+        SIP(L"64 路", SMBIOS_CACHE_ASSOCIATIVITY_64_WAY),
+        SIP(L"20 路", SMBIOS_CACHE_ASSOCIATIVITY_20_WAY),
     };
 
-    ET_SMBIOS_GROUP(L"Cache");
+    ET_SMBIOS_GROUP(L"缓存");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, Cache, SocketDesignation))
-        ET_SMBIOS_STRING(L"Socket designation", Entry->Cache.SocketDesignation);
+        ET_SMBIOS_STRING(L"插槽标识", Entry->Cache.SocketDesignation);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Cache, Configuration))
     {
@@ -1226,13 +1226,13 @@ VOID EtSMBIOSCache(
         PhInitFormatU(&format[1], Entry->Cache.Configuration.Level + 1);
 
         string = PhFormat(format, 2, 10);
-        EtAddSMBIOSItem(Context, group, L"Level", PhGetString(string));
+        EtAddSMBIOSItem(Context, group, L"级别", PhGetString(string));
         PhDereferenceObject(string);
 
-        ET_SMBIOS_BOOLEAN(L"Socketed", !!Entry->Cache.Configuration.Socketed);
-        ET_SMBIOS_ENUM(L"Location", Entry->Cache.Configuration.Location, locations);
-        ET_SMBIOS_BOOLEAN(L"Enabled", !!Entry->Cache.Configuration.Enabled);
-        ET_SMBIOS_ENUM(L"Mode", Entry->Cache.Configuration.Mode, modes);
+        ET_SMBIOS_BOOLEAN(L"插槽", !!Entry->Cache.Configuration.Socketed);
+        ET_SMBIOS_ENUM(L"位置", Entry->Cache.Configuration.Location, locations);
+        ET_SMBIOS_BOOLEAN(L"已启用", !!Entry->Cache.Configuration.Enabled);
+        ET_SMBIOS_ENUM(L"模式", Entry->Cache.Configuration.Mode, modes);
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Cache, MaximumSize))
@@ -1255,7 +1255,7 @@ VOID EtSMBIOSCache(
                 size = (ULONG64)Entry->Cache.MaximumSize.Size * 0x400;
         }
 
-        ET_SMBIOS_SIZE(L"Maximum size", size);
+        ET_SMBIOS_SIZE(L"最大大小", size);
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Cache, InstalledSize))
@@ -1278,29 +1278,29 @@ VOID EtSMBIOSCache(
                 size = (ULONG64)Entry->Cache.InstalledSize.Size * 0x400;
         }
 
-        ET_SMBIOS_SIZE(L"Installed size", size);
+        ET_SMBIOS_SIZE(L"安装大小", size);
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Cache, SupportedSRAM))
-        ET_SMBIOS_FLAGS(L"Supported SRAM", Entry->Cache.SupportedSRAM, supportSRAM);
+        ET_SMBIOS_FLAGS(L"支持的 SRAM", Entry->Cache.SupportedSRAM, supportSRAM);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Cache, CurrentSRAM))
-        ET_SMBIOS_FLAGS(L"Current SRAM", Entry->Cache.CurrentSRAM, supportSRAM);
+        ET_SMBIOS_FLAGS(L"当前 SRAM", Entry->Cache.CurrentSRAM, supportSRAM);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Cache, Speed) &&
         Entry->Cache.Speed != 0)
     {
-        ET_SMBIOS_UINT32_UNITS(L"Speed", Entry->Cache.Speed, L" ns");
+        ET_SMBIOS_UINT32_UNITS(L"速度", Entry->Cache.Speed, L" ns");
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Cache, ErrorCorrectionType))
-        ET_SMBIOS_ENUM(L"Error correction type", Entry->Cache.ErrorCorrectionType, errorCorrection);
+        ET_SMBIOS_ENUM(L"纠错类型", Entry->Cache.ErrorCorrectionType, errorCorrection);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Cache, SystemCacheType))
-        ET_SMBIOS_ENUM(L"System cache type", Entry->Cache.SystemCacheType, systemCache);
+        ET_SMBIOS_ENUM(L"系统缓存类型", Entry->Cache.SystemCacheType, systemCache);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, Cache, Associativity))
-        ET_SMBIOS_ENUM(L"Associativity", Entry->Cache.Associativity, associativity);
+        ET_SMBIOS_ENUM(L"关联性", Entry->Cache.Associativity, associativity);
 }
 
 VOID EtSMBIOSPortConnector(
@@ -1311,7 +1311,7 @@ VOID EtSMBIOSPortConnector(
 {
     static const PH_KEY_VALUE_PAIR types[] =
     {
-        SIP(L"None", SMBIOS_PORT_CONNECTOR_TYPE_NONE),
+        SIP(L"无", SMBIOS_PORT_CONNECTOR_TYPE_NONE),
         SIP(L"Centronics", SMBIOS_PORT_CONNECTOR_TYPE_CENTRONICS),
         SIP(L"Mini centronics", SMBIOS_PORT_CONNECTOR_TYPE_MINI_CENTRONICS),
         SIP(L"Proprietary", SMBIOS_PORT_CONNECTOR_TYPE_PROPRIETARY),
@@ -1352,12 +1352,12 @@ VOID EtSMBIOSPortConnector(
         SIP(L"PC-H98", SMBIOS_PORT_CONNECTOR_TYPE_PC_H98),
         SIP(L"PC-98 note", SMBIOS_PORT_CONNECTOR_TYPE_PC_98_NOTE),
         SIP(L"PC-98 full", SMBIOS_PORT_CONNECTOR_TYPE_PC_98_FULL),
-        SIP(L"Other", SMBIOS_PORT_CONNECTOR_TYPE_OTHER),
+        SIP(L"其他", SMBIOS_PORT_CONNECTOR_TYPE_OTHER),
     };
 
     static const PH_KEY_VALUE_PAIR portTypes[] =
     {
-        SIP(L"None", SMBIOS_PORT_CONNECTOR_PORT_TYPE_NONE),
+        SIP(L"无", SMBIOS_PORT_CONNECTOR_PORT_TYPE_NONE),
         SIP(L"Parallel port XT/AT", SMBIOS_PORT_CONNECTOR_PORT_TYPE_PARALLEL_XT_AT),
         SIP(L"Parallel port PS/2", SMBIOS_PORT_CONNECTOR_PORT_TYPE_PARALLEL_PS2),
         SIP(L"Parallel port ECP", SMBIOS_PORT_CONNECTOR_PORT_TYPE_PARALLEL_ECP),
@@ -1385,7 +1385,7 @@ VOID EtSMBIOSPortConnector(
         SIP(L"PC-98", SMBIOS_PORT_CONNECTOR_PORT_TYPE_PC_98),
         SIP(L"PC-98-Hireso", SMBIOS_PORT_CONNECTOR_PORT_TYPE_PC_98_HIRESO),
         SIP(L"PC-H98", SMBIOS_PORT_CONNECTOR_PORT_TYPE_PC_98H),
-        SIP(L"Video", SMBIOS_PORT_CONNECTOR_PORT_TYPE_VIDEO),
+        SIP(L"视频", SMBIOS_PORT_CONNECTOR_PORT_TYPE_VIDEO),
         SIP(L"Audio", SMBIOS_PORT_CONNECTOR_PORT_TYPE_AUDIO),
         SIP(L"Modem", SMBIOS_PORT_CONNECTOR_PORT_TYPE_MODEM),
         SIP(L"Network", SMBIOS_PORT_CONNECTOR_PORT_TYPE_NETWORK),
@@ -1395,12 +1395,12 @@ VOID EtSMBIOSPortConnector(
         SIP(L"Thunderbolt", SMBIOS_PORT_CONNECTOR_PORT_TYPE_THUNDERBOLT),
         SIP(L"8251", SMBIOS_PORT_CONNECTOR_PORT_TYPE_8251),
         SIP(L"8251 FIFO", SMBIOS_PORT_CONNECTOR_PORT_TYPE_8251_FIFO),
-        SIP(L"Other", SMBIOS_PORT_CONNECTOR_PORT_TYPE_8251_OTHER),
+        SIP(L"其他", SMBIOS_PORT_CONNECTOR_PORT_TYPE_8251_OTHER),
     };
 
     ET_SMBIOS_GROUP(L"Port connector");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, PortConnector, InternalReferenceDesignator))
         ET_SMBIOS_STRING(L"Internal reference designator", Entry->PortConnector.InternalReferenceDesignator);
@@ -1426,8 +1426,8 @@ VOID EtSMBIOSSystemSlot(
 {
     static const PH_KEY_VALUE_PAIR slotTypes[] =
     {
-        SIP(L"Other", SMBIOS_SYSTEM_SLOT_TYPE_OTHER),
-        SIP(L"Unknown", SMBIOS_SYSTEM_SLOT_TYPE_UNKNOWN),
+        SIP(L"其他", SMBIOS_SYSTEM_SLOT_TYPE_OTHER),
+        SIP(L"未知", SMBIOS_SYSTEM_SLOT_TYPE_UNKNOWN),
         SIP(L"ISA", SMBIOS_SYSTEM_SLOT_TYPE_ISA),
         SIP(L"MCA", SMBIOS_SYSTEM_SLOT_TYPE_MCA),
         SIP(L"EISA", SMBIOS_SYSTEM_SLOT_TYPE_EISA),
@@ -1509,8 +1509,8 @@ VOID EtSMBIOSSystemSlot(
 
     static const PH_KEY_VALUE_PAIR busWidths[] =
     {
-        SIP(L"Other", SMBIOS_SYSTEM_SLOT_BUS_WIDTH_OTHER),
-        SIP(L"Unknown", SMBIOS_SYSTEM_SLOT_BUS_WIDTH_UNKNOWN),
+        SIP(L"其他", SMBIOS_SYSTEM_SLOT_BUS_WIDTH_OTHER),
+        SIP(L"未知", SMBIOS_SYSTEM_SLOT_BUS_WIDTH_UNKNOWN),
         SIP(L"8 bit", SMBIOS_SYSTEM_SLOT_BUS_WIDTH_8_BIT),
         SIP(L"16 bit", SMBIOS_SYSTEM_SLOT_BUS_WIDTH_16_BIT),
         SIP(L"32 bit", SMBIOS_SYSTEM_SLOT_BUS_WIDTH_32_BIT),
@@ -1527,8 +1527,8 @@ VOID EtSMBIOSSystemSlot(
 
     static const PH_KEY_VALUE_PAIR slotUsages[] =
     {
-        SIP(L"Other", SMBIOS_SYSTEM_SLOT_USAGE_OTHER),
-        SIP(L"Unknown", SMBIOS_SYSTEM_SLOT_USAGE_UNKNOWN),
+        SIP(L"其他", SMBIOS_SYSTEM_SLOT_USAGE_OTHER),
+        SIP(L"未知", SMBIOS_SYSTEM_SLOT_USAGE_UNKNOWN),
         SIP(L"Available", SMBIOS_SYSTEM_SLOT_USAGE_AVAILABLE),
         SIP(L"In use", SMBIOS_SYSTEM_SLOT_USAGE_IN_USE),
         SIP(L"Unavailable", SMBIOS_SYSTEM_SLOT_USAGE_UNAVAILABLE),
@@ -1536,8 +1536,8 @@ VOID EtSMBIOSSystemSlot(
 
     static const PH_KEY_VALUE_PAIR slotLengths[] =
     {
-        SIP(L"Other", SMBIOS_SYSTEM_SLOT_LENGTH_OTHER),
-        SIP(L"Unknown", SMBIOS_SYSTEM_SLOT_LENGTH_UNKNOWN),
+        SIP(L"其他", SMBIOS_SYSTEM_SLOT_LENGTH_OTHER),
+        SIP(L"未知", SMBIOS_SYSTEM_SLOT_LENGTH_UNKNOWN),
         SIP(L"Short", SMBIOS_SYSTEM_SLOT_LENGTH_SHORT),
         SIP(L"Long", SMBIOS_SYSTEM_SLOT_LENGTH_LONG),
         SIP(L"2.5\" drive", SMBIOS_SYSTEM_SLOT_LENGTH_2_5_DRIVE),
@@ -1546,7 +1546,7 @@ VOID EtSMBIOSSystemSlot(
 
     static const PH_ACCESS_ENTRY slotFlags[] =
     {
-        ET_SMBIOS_FLAG(SMBIOS_SYSTEM_SLOT_FLAG_UNKNOWN, L"Unknown"),
+        ET_SMBIOS_FLAG(SMBIOS_SYSTEM_SLOT_FLAG_UNKNOWN, L"未知"),
         ET_SMBIOS_FLAG(SMBIOS_SYSTEM_SLOT_FLAG_5000MV, L"5 V"),
         ET_SMBIOS_FLAG(SMBIOS_SYSTEM_SLOT_FLAG_3300MV, L"3.3 V"),
         ET_SMBIOS_FLAG(SMBIOS_SYSTEM_SLOT_FLAG_SHARED, L"Shared"),
@@ -1571,21 +1571,21 @@ VOID EtSMBIOSSystemSlot(
     static const PH_KEY_VALUE_PAIR slotHeights[] =
     {
         SIP(L"Not applicable", SMBIOS_SYSTEM_SLOT_HEIGHT_NOT_APPLICABLE),
-        SIP(L"Other", SMBIOS_SYSTEM_SLOT_HEIGHT_OTHER),
-        SIP(L"Unknown", SMBIOS_SYSTEM_SLOT_HEIGHT_UNKNOWN),
+        SIP(L"其他", SMBIOS_SYSTEM_SLOT_HEIGHT_OTHER),
+        SIP(L"未知", SMBIOS_SYSTEM_SLOT_HEIGHT_UNKNOWN),
         SIP(L"Full height", SMBIOS_SYSTEM_SLOT_HEIGHT_FULL_HEIGHT),
         SIP(L"Low profile", SMBIOS_SYSTEM_SLOT_HEIGHT_LOW_PROFILE),
     };
 
     ET_SMBIOS_GROUP(L"System slot");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, SystemSlot, SocketDesignation))
         ET_SMBIOS_STRING(L"Slot designation", Entry->SystemSlot.SocketDesignation);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, SystemSlot, Type))
-        ET_SMBIOS_ENUM(L"Type", Entry->SystemSlot.Type, slotTypes);
+        ET_SMBIOS_ENUM(L"类型", Entry->SystemSlot.Type, slotTypes);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, SystemSlot, BusWidth))
         ET_SMBIOS_ENUM(L"Bus width", Entry->SystemSlot.BusWidth, busWidths);
@@ -1594,13 +1594,13 @@ VOID EtSMBIOSSystemSlot(
         ET_SMBIOS_ENUM(L"Current usage", Entry->SystemSlot.CurrentUsage, slotUsages);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, SystemSlot, Length))
-        ET_SMBIOS_ENUM(L"Length", Entry->SystemSlot.Length, slotLengths);
+        ET_SMBIOS_ENUM(L"长度", Entry->SystemSlot.Length, slotLengths);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, SystemSlot, Identifier))
-        ET_SMBIOS_UINT32IX(L"Identifier", Entry->SystemSlot.Identifier);
+        ET_SMBIOS_UINT32IX(L"标识符", Entry->SystemSlot.Identifier);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, SystemSlot, Characteristics))
-        ET_SMBIOS_FLAGS(L"Characteristics", Entry->SystemSlot.Characteristics, slotFlags);
+        ET_SMBIOS_FLAGS(L"特性", Entry->SystemSlot.Characteristics, slotFlags);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, SystemSlot, Characteristics2))
         ET_SMBIOS_FLAGS(L"Characteristics 2", Entry->SystemSlot.Characteristics2, slotFlags2);
@@ -1670,7 +1670,7 @@ VOID EtSMBIOSSystemSlot(
         ET_SMBIOS_UINT32(L"Physical width", extended->Pitch);
 
     if (Entry->Header.Length >= (length + RTL_SIZEOF_THROUGH_FIELD(SMBIOS_SYSTEM_SLOT_INFORMATION_EX, Height)))
-        ET_SMBIOS_ENUM(L"Height", extended->Height, slotHeights);
+        ET_SMBIOS_ENUM(L"高度", extended->Height, slotHeights);
 }
 
 VOID EtSMBIOSOnBoardDevice(
@@ -1681,9 +1681,9 @@ VOID EtSMBIOSOnBoardDevice(
 {
     static const PH_KEY_VALUE_PAIR types[] =
     {
-        SIP(L"Other", SMBIOS_ON_BOARD_DEVICE_TYPE_OTHER),
-        SIP(L"Unknown", SMBIOS_ON_BOARD_DEVICE_TYPE_UNKNOWN),
-        SIP(L"Video", SMBIOS_ON_BOARD_DEVICE_TYPE_VIDEO),
+        SIP(L"其他", SMBIOS_ON_BOARD_DEVICE_TYPE_OTHER),
+        SIP(L"未知", SMBIOS_ON_BOARD_DEVICE_TYPE_UNKNOWN),
+        SIP(L"视频", SMBIOS_ON_BOARD_DEVICE_TYPE_VIDEO),
         SIP(L"Controller", SMBIOS_ON_BOARD_DEVICE_TYPE_SCSI_CONTROLLER),
         SIP(L"Ethernet", SMBIOS_ON_BOARD_DEVICE_TYPE_ETHERNET),
         SIP(L"Token ring", SMBIOS_ON_BOARD_DEVICE_TYPE_TOKEN_RING),
@@ -1701,10 +1701,10 @@ VOID EtSMBIOSOnBoardDevice(
     {
         ET_SMBIOS_GROUP(L"On board device");
 
-        ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+        ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
         ET_SMBIOS_STRING(L"Description", Entry->OnBoardDevice.Devices[i].Description);
-        ET_SMBIOS_ENUM(L"Type", Entry->OnBoardDevice.Devices[i].Device.Type, types);
-        ET_SMBIOS_BOOLEAN(L"Enabled", !!Entry->OnBoardDevice.Devices[i].Device.Enabled);
+        ET_SMBIOS_ENUM(L"类型", Entry->OnBoardDevice.Devices[i].Device.Type, types);
+        ET_SMBIOS_BOOLEAN(L"已启用", !!Entry->OnBoardDevice.Devices[i].Device.Enabled);
     }
 }
 
@@ -1718,7 +1718,7 @@ VOID EtSMBIOSOemString(
         return;
 
     ET_SMBIOS_GROUP(L"OEM strings");
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
     ET_SMBIOS_UINT32(L"Number of strings", Entry->OEMString.Count);
 
     for (UCHAR i = 0; i < Entry->OEMString.Count; i++)
@@ -1752,7 +1752,7 @@ VOID EtSMBIOSSystemConfigurationOption(
         return;
 
     ET_SMBIOS_GROUP(L"System configuration options");
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
     ET_SMBIOS_UINT32(L"Number of strings", Entry->SystemConfigurationOption.Count);
 
     for (UCHAR i = 0; i < Entry->OEMString.Count; i++)
@@ -1784,7 +1784,7 @@ VOID EtSMBIOSFirmwareLanguage(
 {
     ET_SMBIOS_GROUP(L"Firmware language");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, FirmwareLanguage, InstallableLanguages))
         ET_SMBIOS_UINT32(L"Number of languages available", Entry->FirmwareLanguage.InstallableLanguages);
@@ -1804,10 +1804,10 @@ VOID EtSMBIOSGroupAssociation(
 {
     ET_SMBIOS_GROUP(L"Group association");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, GroupAssociation, Name))
-        ET_SMBIOS_STRING(L"Name", Entry->GroupAssociation.Name);
+        ET_SMBIOS_STRING(L"名称", Entry->GroupAssociation.Name);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, GroupAssociation, ItemType))
         ET_SMBIOS_UINT32(L"Item type", Entry->GroupAssociation.ItemType);
@@ -1824,7 +1824,7 @@ VOID EtSMBIOSSystemEventLog(
 {
     ET_SMBIOS_GROUP(L"System event log");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     // TODO parse the logs, just dumping the meta data for now
 
@@ -1864,9 +1864,9 @@ VOID EtSMBIOSPhysicalMemoryArray(
 {
     static const PH_KEY_VALUE_PAIR locations[] =
     {
-        SIP(L"Other", SMBIOS_PHYSICAL_MEMORY_ARRAY_LOCATION_OTHER),
-        SIP(L"Unknown", SMBIOS_PHYSICAL_MEMORY_ARRAY_LOCATION_UNKNOWN),
-        SIP(L"Motherboard", SMBIOS_PHYSICAL_MEMORY_ARRAY_LOCATION_MOTHERBOARD),
+        SIP(L"其他", SMBIOS_PHYSICAL_MEMORY_ARRAY_LOCATION_OTHER),
+        SIP(L"未知", SMBIOS_PHYSICAL_MEMORY_ARRAY_LOCATION_UNKNOWN),
+        SIP(L"母板", SMBIOS_PHYSICAL_MEMORY_ARRAY_LOCATION_MOTHERBOARD),
         SIP(L"ISA", SMBIOS_PHYSICAL_MEMORY_ARRAY_LOCATION_ISA),
         SIP(L"EISA", SMBIOS_PHYSICAL_MEMORY_ARRAY_LOCATION_EISA),
         SIP(L"PCI", SMBIOS_PHYSICAL_MEMORY_ARRAY_LOCATION_PCI),
@@ -1883,32 +1883,32 @@ VOID EtSMBIOSPhysicalMemoryArray(
 
     static const PH_KEY_VALUE_PAIR uses[] =
     {
-        SIP(L"Other", SMBIOS_PHYSICAL_MEMORY_ARRAY_USE_OTHER),
-        SIP(L"Unknown", SMBIOS_PHYSICAL_MEMORY_ARRAY_USE_UNKNOWN),
+        SIP(L"其他", SMBIOS_PHYSICAL_MEMORY_ARRAY_USE_OTHER),
+        SIP(L"未知", SMBIOS_PHYSICAL_MEMORY_ARRAY_USE_UNKNOWN),
         SIP(L"System", SMBIOS_PHYSICAL_MEMORY_ARRAY_USE_SYSTEM),
-        SIP(L"Video", SMBIOS_PHYSICAL_MEMORY_ARRAY_USE_VIDEO),
+        SIP(L"视频", SMBIOS_PHYSICAL_MEMORY_ARRAY_USE_VIDEO),
         SIP(L"Flash", SMBIOS_PHYSICAL_MEMORY_ARRAY_USE_FLASH),
         SIP(L"Non-volatile", SMBIOS_PHYSICAL_MEMORY_ARRAY_USE_NON_VOLATILE),
-        SIP(L"Cache", SMBIOS_PHYSICAL_MEMORY_ARRAY_USE_CACHE),
+        SIP(L"缓存", SMBIOS_PHYSICAL_MEMORY_ARRAY_USE_CACHE),
     };
 
     static const PH_KEY_VALUE_PAIR corrections[] =
     {
-        SIP(L"Other", SMBIOS_PHYSICAL_MEMORY_ARRAY_ERROR_CORRECTION_OTHER),
-        SIP(L"Unknown", SMBIOS_PHYSICAL_MEMORY_ARRAY_ERROR_CORRECTION_UNKNOWN),
-        SIP(L"None", SMBIOS_PHYSICAL_MEMORY_ARRAY_ERROR_CORRECTION_NONE),
-        SIP(L"Parity", SMBIOS_PHYSICAL_MEMORY_ARRAY_ERROR_CORRECTION_PARITY),
-        SIP(L"Single-bit ECC", SMBIOS_PHYSICAL_MEMORY_ARRAY_ERROR_CORRECTION_SINGLE_BIT_ECC),
-        SIP(L"Multi-bit ECC", SMBIOS_PHYSICAL_MEMORY_ARRAY_ERROR_CORRECTION_MULTI_BIT_ECC),
+        SIP(L"其他", SMBIOS_PHYSICAL_MEMORY_ARRAY_ERROR_CORRECTION_OTHER),
+        SIP(L"未知", SMBIOS_PHYSICAL_MEMORY_ARRAY_ERROR_CORRECTION_UNKNOWN),
+        SIP(L"无", SMBIOS_PHYSICAL_MEMORY_ARRAY_ERROR_CORRECTION_NONE),
+        SIP(L"奇偶校验", SMBIOS_PHYSICAL_MEMORY_ARRAY_ERROR_CORRECTION_PARITY),
+        SIP(L"单比特 ECC", SMBIOS_PHYSICAL_MEMORY_ARRAY_ERROR_CORRECTION_SINGLE_BIT_ECC),
+        SIP(L"多比特 ECC", SMBIOS_PHYSICAL_MEMORY_ARRAY_ERROR_CORRECTION_MULTI_BIT_ECC),
         SIP(L"CRC", SMBIOS_PHYSICAL_MEMORY_ARRAY_ERROR_CORRECTION_CRC),
     };
 
     ET_SMBIOS_GROUP(L"Physical memory array");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, PhysicalMemoryArray, Location))
-        ET_SMBIOS_ENUM(L"Location", Entry->PhysicalMemoryArray.Location, locations);
+        ET_SMBIOS_ENUM(L"位置", Entry->PhysicalMemoryArray.Location, locations);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, PhysicalMemoryArray, Use))
         ET_SMBIOS_ENUM(L"Use", Entry->PhysicalMemoryArray.Use, uses);
@@ -1944,8 +1944,8 @@ VOID EtSMBIOSMemoryDevice(
 {
     static const PH_KEY_VALUE_PAIR formFactors[] =
     {
-        SIP(L"Other", SMBIOS_MEMORY_DEVICE_FORM_FACTOR_OTHER),
-        SIP(L"Unknown", SMBIOS_MEMORY_DEVICE_FORM_FACTOR_UNKNOWN),
+        SIP(L"其他", SMBIOS_MEMORY_DEVICE_FORM_FACTOR_OTHER),
+        SIP(L"未知", SMBIOS_MEMORY_DEVICE_FORM_FACTOR_UNKNOWN),
         SIP(L"SIMM", SMBIOS_MEMORY_DEVICE_FORM_FACTOR_SIMM),
         SIP(L"SIP", SMBIOS_MEMORY_DEVICE_FORM_FACTOR_SIP),
         SIP(L"Chip", SMBIOS_MEMORY_DEVICE_FORM_FACTOR_CHIP),
@@ -1965,8 +1965,8 @@ VOID EtSMBIOSMemoryDevice(
 
     static const PH_KEY_VALUE_PAIR types[] =
     {
-        SIP(L"Other", SMBIOS_MEMORY_DEVICE_TYPE_OTHER),
-        SIP(L"Unknown", SMBIOS_MEMORY_DEVICE_TYPE_UNKNOWN),
+        SIP(L"其他", SMBIOS_MEMORY_DEVICE_TYPE_OTHER),
+        SIP(L"未知", SMBIOS_MEMORY_DEVICE_TYPE_UNKNOWN),
         SIP(L"DRAM", SMBIOS_MEMORY_DEVICE_TYPE_DRAM),
         SIP(L"EDRAM", SMBIOS_MEMORY_DEVICE_TYPE_EDRAM),
         SIP(L"VRAM", SMBIOS_MEMORY_DEVICE_TYPE_VRAM),
@@ -2002,14 +2002,14 @@ VOID EtSMBIOSMemoryDevice(
 
     static const PH_ACCESS_ENTRY typeDetails[] =
     {
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_TYPE_DETAIL_RESERVED, L"Reserved"),
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_TYPE_DETAIL_OTHER, L"Other"),
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_TYPE_DETAIL_UNKNOWN, L"Unknown"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_TYPE_DETAIL_RESERVED, L"保留"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_TYPE_DETAIL_OTHER, L"其他"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_TYPE_DETAIL_UNKNOWN, L"未知"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_TYPE_DETAIL_FAST_PAGED, L"Fast-paged"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_TYPE_DETAIL_STATIC_COL, L"Static column"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_TYPE_DETAIL_PSEUDO_STATIC, L"Pseudo-static"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_TYPE_DETAIL_RAMBUS, L"RAMBUS"),
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_TYPE_DETAIL_SYNCHRONOUS, L"Synchronous"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_TYPE_DETAIL_SYNCHRONOUS, L"同步"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_TYPE_DETAIL_CMOS, L"CMOS"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_TYPE_DETAIL_EDO, L"EDO"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_TYPE_DETAIL_WINDOW_DRAM, L"Window DRAM"),
@@ -2022,8 +2022,8 @@ VOID EtSMBIOSMemoryDevice(
 
     static const PH_KEY_VALUE_PAIR technologies[] =
     {
-        SIP(L"Other", SMBIOS_MEMORY_DEVICE_TECHNOLOGY_OTHER),
-        SIP(L"Unknown", SMBIOS_MEMORY_DEVICE_TECHNOLOGY_UNKNOWN),
+        SIP(L"其他", SMBIOS_MEMORY_DEVICE_TECHNOLOGY_OTHER),
+        SIP(L"未知", SMBIOS_MEMORY_DEVICE_TECHNOLOGY_UNKNOWN),
         SIP(L"DRAM", SMBIOS_MEMORY_DEVICE_TECHNOLOGY_DRAM),
         SIP(L"NVDIMM-N", SMBIOS_MEMORY_DEVICE_TECHNOLOGY_NVDIMM_N),
         SIP(L"NVDIMM-F", SMBIOS_MEMORY_DEVICE_TECHNOLOGY_NVDIMM_F),
@@ -2034,9 +2034,9 @@ VOID EtSMBIOSMemoryDevice(
 
     static const PH_ACCESS_ENTRY deviceModes[] =
     {
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_MODE_RESERVED, L"Reserved"),
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_MODE_OTHER, L"Other"),
-        ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_MODE_UNKNOWN, L"Unknown"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_MODE_RESERVED, L"保留"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_MODE_OTHER, L"其他"),
+        ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_MODE_UNKNOWN, L"未知"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_MODE_VOLATILE, L"Volatile"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_MODE_BYTE_ACCESSIBLE_PERSISTENT, L"Byte-accessible persistent"),
         ET_SMBIOS_FLAG(SMBIOS_MEMORY_DEVICE_MODE_BLOCK_ACCESSIBLE_PERSISTENT, L"Block-accessible persistent"),
@@ -2044,7 +2044,7 @@ VOID EtSMBIOSMemoryDevice(
 
     ET_SMBIOS_GROUP(L"Memory device");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryDevice, PhysicalArrayHandle))
         ET_SMBIOS_UINT32IX(L"Physical array handle", Entry->MemoryDevice.PhysicalArrayHandle);
@@ -2107,7 +2107,7 @@ VOID EtSMBIOSMemoryDevice(
         ET_SMBIOS_STRING(L"Bank locator", Entry->MemoryDevice.BankLocator);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryDevice, MemoryType))
-        ET_SMBIOS_ENUM(L"Memory type", Entry->MemoryDevice.MemoryType, types);
+        ET_SMBIOS_ENUM(L"内存类型", Entry->MemoryDevice.MemoryType, types);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryDevice, TypeDetail) &&
         Entry->MemoryDevice.TypeDetail != 0)
@@ -2122,12 +2122,12 @@ VOID EtSMBIOSMemoryDevice(
         {
             if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryDevice, ExtendedSpeed))
             {
-                ET_SMBIOS_UINT32_UNITS(L"Speed", Entry->MemoryDevice.ExtendedSpeed, L" MT/s");
+                ET_SMBIOS_UINT32_UNITS(L"速度", Entry->MemoryDevice.ExtendedSpeed, L" MT/s");
             }
         }
         else
         {
-            ET_SMBIOS_UINT32_UNITS(L"Speed", Entry->MemoryDevice.Speed, L" MT/s");
+            ET_SMBIOS_UINT32_UNITS(L"速度", Entry->MemoryDevice.Speed, L" MT/s");
         }
     }
 
@@ -2148,16 +2148,16 @@ VOID EtSMBIOSMemoryDevice(
     }
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, MemoryDevice, Manufacturer))
-        ET_SMBIOS_STRING(L"Manufacturer", Entry->MemoryDevice.Manufacturer);
+        ET_SMBIOS_STRING(L"制造商", Entry->MemoryDevice.Manufacturer);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, MemoryDevice, SerialNumber))
-        ET_SMBIOS_STRING(L"Serial number", Entry->MemoryDevice.SerialNumber);
+        ET_SMBIOS_STRING(L"序列号", Entry->MemoryDevice.SerialNumber);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, MemoryDevice, AssetTag))
-        ET_SMBIOS_STRING(L"Asset tag", Entry->MemoryDevice.AssetTag);
+        ET_SMBIOS_STRING(L"资产标签", Entry->MemoryDevice.AssetTag);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, MemoryDevice, PartNumber))
-        ET_SMBIOS_STRING(L"Part number", Entry->MemoryDevice.PartNumber);
+        ET_SMBIOS_STRING(L"部件号", Entry->MemoryDevice.PartNumber);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryDevice, Attributes))
     {
@@ -2294,10 +2294,10 @@ VOID EtSMBIOS32BitMemoryError(
 {
     ET_SMBIOS_GROUP(L"32-bit memory error");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryError32, Type))
-        ET_SMBIOS_ENUM(L"Type", Entry->MemoryError32.Type, EtSMBIOSMemoryErrorTypes);
+        ET_SMBIOS_ENUM(L"类型", Entry->MemoryError32.Type, EtSMBIOSMemoryErrorTypes);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryError32, Granularity))
         ET_SMBIOS_ENUM(L"Granularity", Entry->MemoryError32.Granularity, EtSMBIOSMemoryErrorGranularities);
@@ -2338,7 +2338,7 @@ VOID EtSMBIOSMemoryArrayMappedAddress(
 {
     ET_SMBIOS_GROUP(L"Memory array mapped address");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryArrayMappedAddress, StartingAddress))
     {
@@ -2385,7 +2385,7 @@ VOID EtSMBIOSMemoryDeviceMappedAddress(
 {
     ET_SMBIOS_GROUP(L"Memory device mapped address");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryDeviceMappedAddress, StartingAddress))
     {
@@ -2453,8 +2453,8 @@ VOID EtSMBIOSBuiltInPointingDevice(
 {
     static const PH_KEY_VALUE_PAIR types[] =
     {
-        SIP(L"Other", SMBIOS_BUILT_IN_POINTING_DEVICE_TYPE_OTHER),
-        SIP(L"Unknown", SMBIOS_BUILT_IN_POINTING_DEVICE_TYPE_UNKNOWN),
+        SIP(L"其他", SMBIOS_BUILT_IN_POINTING_DEVICE_TYPE_OTHER),
+        SIP(L"未知", SMBIOS_BUILT_IN_POINTING_DEVICE_TYPE_UNKNOWN),
         SIP(L"Mouse", SMBIOS_BUILT_IN_POINTING_DEVICE_TYPE_MOUSE),
         SIP(L"Track ball", SMBIOS_BUILT_IN_POINTING_DEVICE_TYPE_TRACK_BALL),
         SIP(L"Track point", SMBIOS_BUILT_IN_POINTING_DEVICE_TYPE_TRACK_POINT),
@@ -2466,9 +2466,9 @@ VOID EtSMBIOSBuiltInPointingDevice(
 
     static const PH_KEY_VALUE_PAIR interfaces[] =
     {
-        SIP(L"Other", SMBIOS_BUILT_IN_POINTING_DEVICE_INTERFACE_OTHER),
-        SIP(L"Unknown", SMBIOS_BUILT_IN_POINTING_DEVICE_INTERFACE_UNKNOWN),
-        SIP(L"Serial", SMBIOS_BUILT_IN_POINTING_DEVICE_INTERFACE_SERIAL),
+        SIP(L"其他", SMBIOS_BUILT_IN_POINTING_DEVICE_INTERFACE_OTHER),
+        SIP(L"未知", SMBIOS_BUILT_IN_POINTING_DEVICE_INTERFACE_UNKNOWN),
+        SIP(L"序列号", SMBIOS_BUILT_IN_POINTING_DEVICE_INTERFACE_SERIAL),
         SIP(L"PS/2", SMBIOS_BUILT_IN_POINTING_DEVICE_INTERFACE_PS2),
         SIP(L"Infrared", SMBIOS_BUILT_IN_POINTING_DEVICE_INTERFACE_INFRARED),
         SIP(L"HP-HIL", SMBIOS_BUILT_IN_POINTING_DEVICE_INTERFACE_HP_HIL),
@@ -2483,10 +2483,10 @@ VOID EtSMBIOSBuiltInPointingDevice(
 
     ET_SMBIOS_GROUP(L"Built-in pointing device");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, BuiltInPointingDevice, PointerType))
-        ET_SMBIOS_ENUM(L"Type", Entry->BuiltInPointingDevice.PointerType, types);
+        ET_SMBIOS_ENUM(L"类型", Entry->BuiltInPointingDevice.PointerType, types);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, BuiltInPointingDevice, PointerInterface))
         ET_SMBIOS_ENUM(L"Interface", Entry->BuiltInPointingDevice.PointerInterface, interfaces);
@@ -2503,8 +2503,8 @@ VOID EtSMBIOSPortableBattery(
 {
     static const PH_KEY_VALUE_PAIR chemistry[] =
     {
-        SIP(L"Other", SMBIOS_PORTABLE_BATTERY_CHEMISTRY_OTHER),
-        SIP(L"Unknown", SMBIOS_PORTABLE_BATTERY_CHEMISTRY_UNKNOWN),
+        SIP(L"其他", SMBIOS_PORTABLE_BATTERY_CHEMISTRY_OTHER),
+        SIP(L"未知", SMBIOS_PORTABLE_BATTERY_CHEMISTRY_UNKNOWN),
         SIP(L"Lead acid", SMBIOS_PORTABLE_BATTERY_CHEMISTRY_LEAD_ACID),
         SIP(L"Nickel cadmium", SMBIOS_PORTABLE_BATTERY_CHEMISTRY_NICKEL_CADMIUM),
         SIP(L"Nickel metal", SMBIOS_PORTABLE_BATTERY_CHEMISTRY_NICKEL_METAL),
@@ -2515,19 +2515,19 @@ VOID EtSMBIOSPortableBattery(
 
     ET_SMBIOS_GROUP(L"Portable battery");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, PortableBattery, Location))
-        ET_SMBIOS_STRING(L"Location", Entry->PortableBattery.Location);
+        ET_SMBIOS_STRING(L"位置", Entry->PortableBattery.Location);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, PortableBattery, Manufacturer))
-        ET_SMBIOS_STRING(L"Manufacturer", Entry->PortableBattery.Manufacturer);
+        ET_SMBIOS_STRING(L"制造商", Entry->PortableBattery.Manufacturer);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, PortableBattery, ManufactureDate))
         ET_SMBIOS_STRING(L"Manufacture date", Entry->PortableBattery.ManufactureDate);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, PortableBattery, SerialNumber))
-        ET_SMBIOS_STRING(L"Serial number", Entry->PortableBattery.SerialNumber);
+        ET_SMBIOS_STRING(L"序列号", Entry->PortableBattery.SerialNumber);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, PortableBattery, DeviceName))
         ET_SMBIOS_STRING(L"Device name", Entry->PortableBattery.DeviceName);
@@ -2611,7 +2611,7 @@ VOID EtSMBIOSSystemReset(
 {
     static const PH_KEY_VALUE_PAIR watchdog[] =
     {
-        SIP(L"Reserved", SMBIOS_SYSTEM_RESET_WATCHDOG_RESERVED),
+        SIP(L"保留", SMBIOS_SYSTEM_RESET_WATCHDOG_RESERVED),
         SIP(L"Operating system", SMBIOS_SYSTEM_RESET_WATCHDOG_OPERATING_SYSTEM),
         SIP(L"System utilities", SMBIOS_SYSTEM_RESET_WATCHDOG_SYSTEM_UTILITES),
         SIP(L"Do not reboot", SMBIOS_SYSTEM_RESET_WATCHDOG_DO_NOT_REBOOT),
@@ -2619,7 +2619,7 @@ VOID EtSMBIOSSystemReset(
 
     ET_SMBIOS_GROUP(L"System reset");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, SystemReset, Capabilities))
     {
@@ -2663,14 +2663,14 @@ VOID EtSMBIOSHardwareSecurity(
     static const PH_KEY_VALUE_PAIR settings[] =
     {
         SIP(L"Disabled", SMBIOS_HARDWARE_SECURITY_SETTING_DISABLED),
-        SIP(L"Enabled", SMBIOS_HARDWARE_SECURITY_SETTING_ENABLED),
+        SIP(L"已启用", SMBIOS_HARDWARE_SECURITY_SETTING_ENABLED),
         SIP(L"Not implemented", SMBIOS_HARDWARE_SECURITY_SETTING_NOT_IMPLEMENTED),
-        SIP(L"Unknown", SMBIOS_HARDWARE_SECURITY_SETTING_UNKNOWN),
+        SIP(L"未知", SMBIOS_HARDWARE_SECURITY_SETTING_UNKNOWN),
     };
 
     ET_SMBIOS_GROUP(L"Hardware security");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, HardwareSecurity, HardwareSecuritySettings))
     {
@@ -2689,7 +2689,7 @@ VOID EtSMBIOSSystemPowerControls(
 {
     ET_SMBIOS_GROUP(L"System power controls");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (Entry->Header.Length >= sizeof(SMBIOS_SYSTEM_POWER_CONTROLS_INFORMATION))
     {
@@ -2720,30 +2720,30 @@ VOID EtSMBIOSVoltageProbe(
 {
     static const PH_KEY_VALUE_PAIR locations[] =
     {
-        SIP(L"Other", SMBIOS_VOLTAGE_PROBE_LOCATION_OTHER),
-        SIP(L"Unknown", SMBIOS_VOLTAGE_PROBE_LOCATION_UNKNOWN),
-        SIP(L"Processor", SMBIOS_VOLTAGE_PROBE_LOCATION_PROCESSOR),
+        SIP(L"其他", SMBIOS_VOLTAGE_PROBE_LOCATION_OTHER),
+        SIP(L"未知", SMBIOS_VOLTAGE_PROBE_LOCATION_UNKNOWN),
+        SIP(L"处理器", SMBIOS_VOLTAGE_PROBE_LOCATION_PROCESSOR),
         SIP(L"Disk", SMBIOS_VOLTAGE_PROBE_LOCATION_DISK),
         SIP(L"Peripheral bay", SMBIOS_VOLTAGE_PROBE_LOCATION_PERIPHERAL_BAY),
-        SIP(L"System management module", SMBIOS_VOLTAGE_PROBE_LOCATION_SYSTEM_MANAGEMENT_MODULE),
-        SIP(L"Motherboard", SMBIOS_VOLTAGE_PROBE_LOCATION_MOTHERBOARD),
-        SIP(L"Memory module", SMBIOS_VOLTAGE_PROBE_LOCATION_MEMORY_MODULE),
-        SIP(L"Processor module", SMBIOS_VOLTAGE_PROBE_LOCATION_PROCESSOR_MODULE),
+        SIP(L"系统管理模块", SMBIOS_VOLTAGE_PROBE_LOCATION_SYSTEM_MANAGEMENT_MODULE),
+        SIP(L"母板", SMBIOS_VOLTAGE_PROBE_LOCATION_MOTHERBOARD),
+        SIP(L"内存模块", SMBIOS_VOLTAGE_PROBE_LOCATION_MEMORY_MODULE),
+        SIP(L"处理器模块", SMBIOS_VOLTAGE_PROBE_LOCATION_PROCESSOR_MODULE),
         SIP(L"Power unit", SMBIOS_VOLTAGE_PROBE_LOCATION_POWER_UNIT),
         SIP(L"Add-in card", SMBIOS_VOLTAGE_PROBE_LOCATION_ADD_IN_CARD),
     };
 
     ET_SMBIOS_GROUP(L"Voltage probe");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, VoltageProbe, Description))
         ET_SMBIOS_STRING(L"Description", Entry->VoltageProbe.Description);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, VoltageProbe, LocationAndStatus))
     {
-        ET_SMBIOS_ENUM(L"Location", Entry->VoltageProbe.LocationAndStatus.Location, locations);
-        ET_SMBIOS_ENUM(L"Status", Entry->VoltageProbe.LocationAndStatus.Status, EtSMBIOSProbeStatus);
+        ET_SMBIOS_ENUM(L"位置", Entry->VoltageProbe.LocationAndStatus.Location, locations);
+        ET_SMBIOS_ENUM(L"状态", Entry->VoltageProbe.LocationAndStatus.Status, EtSMBIOSProbeStatus);
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, VoltageProbe, MaximumValue) &&
@@ -2814,7 +2814,7 @@ VOID EtSMBIOSVoltageProbe(
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, VoltageProbe, OEMDefined))
-        ET_SMBIOS_UINT32IX(L"OEM defined", Entry->VoltageProbe.OEMDefined);
+        ET_SMBIOS_UINT32IX(L"OEM 已定义", Entry->VoltageProbe.OEMDefined);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, VoltageProbe, NominalValue) &&
         Entry->VoltageProbe.NominalValue != 0x8000)
@@ -2838,8 +2838,8 @@ VOID EtSMBIOSCoolingDevice(
 {
     static const PH_KEY_VALUE_PAIR types[] =
     {
-        SIP(L"Other", SMBIOS_COOLING_DEVICE_TYPE_OTHER),
-        SIP(L"Unknown", SMBIOS_COOLING_DEVICE_TYPE_UNKNOWN),
+        SIP(L"其他", SMBIOS_COOLING_DEVICE_TYPE_OTHER),
+        SIP(L"未知", SMBIOS_COOLING_DEVICE_TYPE_UNKNOWN),
         SIP(L"Fan", SMBIOS_COOLING_DEVICE_TYPE_FAN),
         SIP(L"Centrifugal blower", SMBIOS_COOLING_DEVICE_TYPE_CENTRIFUGAL_BLOWER),
         SIP(L"Chip fan", SMBIOS_COOLING_DEVICE_TYPE_CHIP_FAN),
@@ -2853,25 +2853,25 @@ VOID EtSMBIOSCoolingDevice(
 
     static const PH_KEY_VALUE_PAIR deviceStatus[] =
     {
-        SIP(L"Other", SMBIOS_COOLING_DEVICE_STATUS_OTHER),
-        SIP(L"Unknown", SMBIOS_COOLING_DEVICE_STATUS_UNKNOWN),
-        SIP(L"Ok", SMBIOS_COOLING_DEVICE_STATUS_OK),
-        SIP(L"Non-critical", SMBIOS_COOLING_DEVICE_STATUS_NON_CRITICAL),
-        SIP(L"Critical", SMBIOS_COOLING_DEVICE_STATUS_CRITICAL),
-        SIP(L"Non-recoverable", SMBIOS_COOLING_DEVICE_STATUS_NON_RECOVERABLE),
+        SIP(L"其他", SMBIOS_COOLING_DEVICE_STATUS_OTHER),
+        SIP(L"未知", SMBIOS_COOLING_DEVICE_STATUS_UNKNOWN),
+        SIP(L"就绪", SMBIOS_COOLING_DEVICE_STATUS_OK),
+        SIP(L"非关键", SMBIOS_COOLING_DEVICE_STATUS_NON_CRITICAL),
+        SIP(L"关键", SMBIOS_COOLING_DEVICE_STATUS_CRITICAL),
+        SIP(L"不可恢复", SMBIOS_COOLING_DEVICE_STATUS_NON_RECOVERABLE),
     };
 
     ET_SMBIOS_GROUP(L"Cooling device");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, CoolingDevice, TemperatureProbeHandle))
         ET_SMBIOS_UINT32IX(L"Temperature probe handle", Entry->CoolingDevice.TemperatureProbeHandle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, CoolingDevice, DeviceTypeAndStatus))
     {
-        ET_SMBIOS_ENUM(L"Type", Entry->CoolingDevice.DeviceTypeAndStatus.DeviceType, types);
-        ET_SMBIOS_ENUM(L"Status", Entry->CoolingDevice.DeviceTypeAndStatus.Status, deviceStatus);
+        ET_SMBIOS_ENUM(L"类型", Entry->CoolingDevice.DeviceTypeAndStatus.DeviceType, types);
+        ET_SMBIOS_ENUM(L"状态", Entry->CoolingDevice.DeviceTypeAndStatus.Status, deviceStatus);
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, CoolingDevice, CoolingUnitGroup) &&
@@ -2881,7 +2881,7 @@ VOID EtSMBIOSCoolingDevice(
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, CoolingDevice, OEMDefined))
-        ET_SMBIOS_UINT32IX(L"OEM defined", Entry->CoolingDevice.OEMDefined);
+        ET_SMBIOS_UINT32IX(L"OEM 已定义", Entry->CoolingDevice.OEMDefined);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, CoolingDevice, NominalSpeed) &&
         Entry->CoolingDevice.NominalSpeed != 0x8000)
@@ -2901,15 +2901,15 @@ VOID EtSMBIOSTemperatureProbe(
 {
     static const PH_KEY_VALUE_PAIR locations[] =
     {
-        SIP(L"Other", SMBIOS_TEMPERATURE_PROBE_LOCATION_OTHER),
-        SIP(L"Unknown", SMBIOS_TEMPERATURE_PROBE_LOCATION_UNKNOWN),
-        SIP(L"Processor", SMBIOS_TEMPERATURE_PROBE_LOCATION_PROCESSOR),
+        SIP(L"其他", SMBIOS_TEMPERATURE_PROBE_LOCATION_OTHER),
+        SIP(L"未知", SMBIOS_TEMPERATURE_PROBE_LOCATION_UNKNOWN),
+        SIP(L"处理器", SMBIOS_TEMPERATURE_PROBE_LOCATION_PROCESSOR),
         SIP(L"Disk", SMBIOS_TEMPERATURE_PROBE_LOCATION_DISK),
         SIP(L"Peripheral bay", SMBIOS_TEMPERATURE_PROBE_LOCATION_PERIPHERAL_BAY),
-        SIP(L"System management module", SMBIOS_TEMPERATURE_PROBE_LOCATION_SYSTEM_MANAGEMENT_MODULE),
-        SIP(L"Motherboard", SMBIOS_TEMPERATURE_PROBE_LOCATION_MOTHERBOARD),
-        SIP(L"Memory module", SMBIOS_TEMPERATURE_PROBE_LOCATION_MEMORY_MODULE),
-        SIP(L"Processor module", SMBIOS_TEMPERATURE_PROBE_LOCATION_PROCESSOR_MODULE),
+        SIP(L"系统管理模块", SMBIOS_TEMPERATURE_PROBE_LOCATION_SYSTEM_MANAGEMENT_MODULE),
+        SIP(L"母板", SMBIOS_TEMPERATURE_PROBE_LOCATION_MOTHERBOARD),
+        SIP(L"内存模块", SMBIOS_TEMPERATURE_PROBE_LOCATION_MEMORY_MODULE),
+        SIP(L"处理器模块", SMBIOS_TEMPERATURE_PROBE_LOCATION_PROCESSOR_MODULE),
         SIP(L"Power unit", SMBIOS_TEMPERATURE_PROBE_LOCATION_POWER_UNIT),
         SIP(L"Add-in card", SMBIOS_TEMPERATURE_PROBE_LOCATION_ADD_IN_CARD),
         SIP(L"Front panel board", SMBIOS_TEMPERATURE_PROBE_LOCATION_FRONT_PANEL_BOARD),
@@ -2920,15 +2920,15 @@ VOID EtSMBIOSTemperatureProbe(
 
     ET_SMBIOS_GROUP(L"Temperature probe");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, TemperatureProbe, Description))
         ET_SMBIOS_STRING(L"Description", Entry->TemperatureProbe.Description);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, TemperatureProbe, LocationAndStatus))
     {
-        ET_SMBIOS_ENUM(L"Location", Entry->TemperatureProbe.LocationAndStatus.Location, locations);
-        ET_SMBIOS_ENUM(L"Status", Entry->TemperatureProbe.LocationAndStatus.Status, EtSMBIOSProbeStatus);
+        ET_SMBIOS_ENUM(L"位置", Entry->TemperatureProbe.LocationAndStatus.Location, locations);
+        ET_SMBIOS_ENUM(L"状态", Entry->TemperatureProbe.LocationAndStatus.Status, EtSMBIOSProbeStatus);
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, TemperatureProbe, MaximumValue) &&
@@ -3029,30 +3029,30 @@ VOID EtSMBIOSElectricalCurrentProbe(
 {
     static const PH_KEY_VALUE_PAIR locations[] =
     {
-        SIP(L"Other", SMBIOS_ELECTRICAL_CURRENT_PROBE_LOCATION_OTHER),
-        SIP(L"Unknown", SMBIOS_ELECTRICAL_CURRENT_PROBE_LOCATION_UNKNOWN),
-        SIP(L"Processor", SMBIOS_ELECTRICAL_CURRENT_PROBE_LOCATION_PROCESSOR),
+        SIP(L"其他", SMBIOS_ELECTRICAL_CURRENT_PROBE_LOCATION_OTHER),
+        SIP(L"未知", SMBIOS_ELECTRICAL_CURRENT_PROBE_LOCATION_UNKNOWN),
+        SIP(L"处理器", SMBIOS_ELECTRICAL_CURRENT_PROBE_LOCATION_PROCESSOR),
         SIP(L"Disk", SMBIOS_ELECTRICAL_CURRENT_PROBE_LOCATION_DISK),
         SIP(L"Peripheral bay", SMBIOS_ELECTRICAL_CURRENT_PROBE_LOCATION_PERIPHERAL_BAY),
-        SIP(L"System management module", SMBIOS_ELECTRICAL_CURRENT_PROBE_LOCATION_SYSTEM_MANAGEMENT_MODULE),
-        SIP(L"Motherboard", SMBIOS_ELECTRICAL_CURRENT_PROBE_LOCATION_MOTHERBOARD),
-        SIP(L"Memory module", SMBIOS_ELECTRICAL_CURRENT_PROBE_LOCATION_MEMORY_MODULE),
-        SIP(L"Processor module", SMBIOS_ELECTRICAL_CURRENT_PROBE_LOCATION_PROCESSOR_MODULE),
+        SIP(L"系统管理模块", SMBIOS_ELECTRICAL_CURRENT_PROBE_LOCATION_SYSTEM_MANAGEMENT_MODULE),
+        SIP(L"母板", SMBIOS_ELECTRICAL_CURRENT_PROBE_LOCATION_MOTHERBOARD),
+        SIP(L"内存模块", SMBIOS_ELECTRICAL_CURRENT_PROBE_LOCATION_MEMORY_MODULE),
+        SIP(L"处理器模块", SMBIOS_ELECTRICAL_CURRENT_PROBE_LOCATION_PROCESSOR_MODULE),
         SIP(L"Power unit", SMBIOS_ELECTRICAL_CURRENT_PROBE_LOCATION_POWER_UNIT),
         SIP(L"Add-in card", SMBIOS_ELECTRICAL_CURRENT_PROBE_LOCATION_ADD_IN_CARD),
     };
 
     ET_SMBIOS_GROUP(L"Electrical current probe");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, ElectricalCurrentProbe, Description))
         ET_SMBIOS_STRING(L"Description", Entry->ElectricalCurrentProbe.Description);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, ElectricalCurrentProbe, LocationAndStatus))
     {
-        ET_SMBIOS_ENUM(L"Location", Entry->ElectricalCurrentProbe.LocationAndStatus.Location, locations);
-        ET_SMBIOS_ENUM(L"Status", Entry->ElectricalCurrentProbe.LocationAndStatus.Status, EtSMBIOSProbeStatus);
+        ET_SMBIOS_ENUM(L"位置", Entry->ElectricalCurrentProbe.LocationAndStatus.Location, locations);
+        ET_SMBIOS_ENUM(L"状态", Entry->ElectricalCurrentProbe.LocationAndStatus.Status, EtSMBIOSProbeStatus);
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, ElectricalCurrentProbe, MaximumValue) &&
@@ -3112,7 +3112,7 @@ VOID EtSMBIOSElectricalCurrentProbe(
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, ElectricalCurrentProbe, OEMDefined))
-        ET_SMBIOS_UINT64IX(L"OEM defined", Entry->ElectricalCurrentProbe.OEMDefined);
+        ET_SMBIOS_UINT64IX(L"OEM 已定义", Entry->ElectricalCurrentProbe.OEMDefined);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, ElectricalCurrentProbe, NominalValue) &&
         Entry->ElectricalCurrentProbe.NominalValue != 0x8000)
@@ -3129,10 +3129,10 @@ VOID EtSMBIOSOutOfBandRemoteAccess(
 {
     ET_SMBIOS_GROUP(L"Out-of-band remote access");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, OutOfBandRemoteAccess, Manufacturer))
-        ET_SMBIOS_STRING(L"Manufacturer", Entry->OutOfBandRemoteAccess.Manufacturer);
+        ET_SMBIOS_STRING(L"制造商", Entry->OutOfBandRemoteAccess.Manufacturer);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, OutOfBandRemoteAccess, Connections))
     {
@@ -3162,7 +3162,7 @@ VOID EtSMBIOSSystemBoot(
 
     ET_SMBIOS_GROUP(L"System boot");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, SystemBoot, BootStatus))
         ET_SMBIOS_ENUM(L"Boot status", Entry->SystemBoot.BootStatus, bootStatus);
@@ -3176,10 +3176,10 @@ VOID EtSMBIOS64BitMemoryError(
 {
     ET_SMBIOS_GROUP(L"64-bit memory error");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryError64, Type))
-        ET_SMBIOS_ENUM(L"Type", Entry->MemoryError32.Type, EtSMBIOSMemoryErrorTypes);
+        ET_SMBIOS_ENUM(L"类型", Entry->MemoryError32.Type, EtSMBIOSMemoryErrorTypes);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryError64, Granularity))
         ET_SMBIOS_ENUM(L"Granularity", Entry->MemoryError64.Granularity, EtSMBIOSMemoryErrorGranularities);
@@ -3221,8 +3221,8 @@ VOID EtSMBIOSManagementDevice(
 {
     static const PH_KEY_VALUE_PAIR deviceTypes[] =
     {
-        SIP(L"Other", SMBIOS_MANAGEMENT_DEVICE_TYPE_OTHER),
-        SIP(L"Unknown", SMBIOS_MANAGEMENT_DEVICE_TYPE_UNKNOWN),
+        SIP(L"其他", SMBIOS_MANAGEMENT_DEVICE_TYPE_OTHER),
+        SIP(L"未知", SMBIOS_MANAGEMENT_DEVICE_TYPE_UNKNOWN),
         SIP(L"LM75", SMBIOS_MANAGEMENT_DEVICE_TYPE_LM75),
         SIP(L"LM78", SMBIOS_MANAGEMENT_DEVICE_TYPE_LM78),
         SIP(L"LM79", SMBIOS_MANAGEMENT_DEVICE_TYPE_LM79),
@@ -3238,8 +3238,8 @@ VOID EtSMBIOSManagementDevice(
 
     static const PH_KEY_VALUE_PAIR addressTypes[] =
     {
-        SIP(L"Other", SMBIOS_MANAGEMENT_DEVICE_ADDRESS_TYPE_OTHER),
-        SIP(L"Unknown", SMBIOS_MANAGEMENT_DEVICE_ADDRESS_TYPE_UNKNOWN),
+        SIP(L"其他", SMBIOS_MANAGEMENT_DEVICE_ADDRESS_TYPE_OTHER),
+        SIP(L"未知", SMBIOS_MANAGEMENT_DEVICE_ADDRESS_TYPE_UNKNOWN),
         SIP(L"I/O port", SMBIOS_MANAGEMENT_DEVICE_ADDRESS_TYPE_IO_PORT),
         SIP(L"Memory", SMBIOS_MANAGEMENT_DEVICE_ADDRESS_TYPE_MEMORY),
         SIP(L"SM bus", SMBIOS_MANAGEMENT_DEVICE_ADDRESS_TYPE_SMBUS),
@@ -3247,7 +3247,7 @@ VOID EtSMBIOSManagementDevice(
 
     ET_SMBIOS_GROUP(L"Management device");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, ManagementDevice, Description))
         ET_SMBIOS_STRING(L"Description", Entry->ManagementDevice.Description);
@@ -3270,7 +3270,7 @@ VOID EtSMBIOSManagementDeviceComponent(
 {
     ET_SMBIOS_GROUP(L"Management device component");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, ManagementDeviceComponent, Description))
         ET_SMBIOS_STRING(L"Description", Entry->ManagementDeviceComponent.Description);
@@ -3293,7 +3293,7 @@ VOID EtSMBIOSManagementDeviceThreshold(
 {
     ET_SMBIOS_GROUP(L"Management device threshold");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, ManagementDeviceThreshold, LowerThresholdNonCritical))
         ET_SMBIOS_UINT32(L"Lower threshold non-critical", Entry->ManagementDeviceThreshold.LowerThresholdNonCritical);
@@ -3322,18 +3322,18 @@ VOID EtSMBIOSMemoryChannel(
 {
     static const PH_KEY_VALUE_PAIR types[] =
     {
-        SIP(L"Other", SMBIOS_MEMORY_CHANNEL_TYPE_OTHER),
-        SIP(L"Unknown", SMBIOS_MEMORY_CHANNEL_TYPE_UNKNOWN),
+        SIP(L"其他", SMBIOS_MEMORY_CHANNEL_TYPE_OTHER),
+        SIP(L"未知", SMBIOS_MEMORY_CHANNEL_TYPE_UNKNOWN),
         SIP(L"Rambus", SMBIOS_MEMORY_CHANNEL_TYPE_RAMBUS),
         SIP(L"SyncLink", SMBIOS_MEMORY_CHANNEL_TYPE_SYNC_LINK),
     };
 
     ET_SMBIOS_GROUP(L"Memory channel");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryChannel, Type))
-        ET_SMBIOS_ENUM(L"Type", Entry->MemoryChannel.Type, types);
+        ET_SMBIOS_ENUM(L"类型", Entry->MemoryChannel.Type, types);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MemoryChannel, MaximumLoad))
         ET_SMBIOS_UINT32(L"Maximum load", Entry->MemoryChannel.MaximumLoad);
@@ -3369,7 +3369,7 @@ VOID EtSMBIOSIPMIDevice(
 {
     static const PH_KEY_VALUE_PAIR types[] =
     {
-        SIP(L"Unknown", SMBIOS_IPMI_INTERFACE_TYPE_UNKONWN),
+        SIP(L"未知", SMBIOS_IPMI_INTERFACE_TYPE_UNKONWN),
         SIP(L"KCS", SMBIOS_IPMI_INTERFACE_TYPE_KCS),
         SIP(L"SMIC", SMBIOS_IPMI_INTERFACE_TYPE_SMIC),
         SIP(L"BT", SMBIOS_IPMI_INTERFACE_TYPE_BT),
@@ -3385,10 +3385,10 @@ VOID EtSMBIOSIPMIDevice(
 
     ET_SMBIOS_GROUP(L"IPMI device");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, IPMIDevice, Type))
-        ET_SMBIOS_ENUM(L"Type", Entry->IPMIDevice.Type, types);
+        ET_SMBIOS_ENUM(L"类型", Entry->IPMIDevice.Type, types);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, IPMIDevice, SpecificationRevision))
     {
@@ -3431,7 +3431,7 @@ VOID EtSMBIOSIPMIDevice(
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, IPMIDevice, Info))
     {
-        EtAddSMBIOSItem(Context, group, L"Trigger mode", Entry->IPMIDevice.Info.InterruptTriggerMode ? L"Level" : L"Edge");
+        EtAddSMBIOSItem(Context, group, L"Trigger mode", Entry->IPMIDevice.Info.InterruptTriggerMode ? L"级别" : L"Edge");
         EtAddSMBIOSItem(Context, group, L"Polarity", Entry->IPMIDevice.Info.InterruptPolarity ? L"Active high" : L"Active low");
         EtAddSMBIOSItem(Context, group, L"Interrupt info", Entry->IPMIDevice.Info.InterruptInfo ? L"Specified" : L"Not specified");
         EtAddSMBIOSItem(Context, group, L"LS-bit for address", Entry->IPMIDevice.Info.LSBAddress ? L"1" : L"0");
@@ -3450,8 +3450,8 @@ VOID EtSMBIOSSystemPowerSupply(
 {
     static const PH_KEY_VALUE_PAIR rangeSwitching[] =
     {
-        SIP(L"Other", SMBIOS_POWER_SUPPLY_RANGE_SWITCHING_OTHER),
-        SIP(L"Unknown", SMBIOS_POWER_SUPPLY_RANGE_SWITCHING_UNKNOWN),
+        SIP(L"其他", SMBIOS_POWER_SUPPLY_RANGE_SWITCHING_OTHER),
+        SIP(L"未知", SMBIOS_POWER_SUPPLY_RANGE_SWITCHING_UNKNOWN),
         SIP(L"Manual", SMBIOS_POWER_SUPPLY_RANGE_SWITCHING_MANUAL),
         SIP(L"Auto-switch", SMBIOS_POWER_SUPPLY_RANGE_SWITCHING_AUTO_SWITCH),
         SIP(L"Wide range", SMBIOS_POWER_SUPPLY_RANGE_SWITCHING_WIDE_RANGE),
@@ -3460,17 +3460,17 @@ VOID EtSMBIOSSystemPowerSupply(
 
     static const PH_KEY_VALUE_PAIR powerSupplyStatus[] =
     {
-        SIP(L"Other", SMBIOS_POWER_SUPPLY_STATUS_OTHER),
-        SIP(L"Unknown", SMBIOS_POWER_SUPPLY_STATUS_UNKNOWN),
-        SIP(L"Ok", SMBIOS_POWER_SUPPLY_STATUS_OK),
-        SIP(L"Non-critical", SMBIOS_POWER_SUPPLY_STATUS_NON_CRITICAL),
-        SIP(L"Critical", SMBIOS_POWER_SUPPLY_STATUS_CRITICAL),
+        SIP(L"其他", SMBIOS_POWER_SUPPLY_STATUS_OTHER),
+        SIP(L"未知", SMBIOS_POWER_SUPPLY_STATUS_UNKNOWN),
+        SIP(L"就绪", SMBIOS_POWER_SUPPLY_STATUS_OK),
+        SIP(L"非关键", SMBIOS_POWER_SUPPLY_STATUS_NON_CRITICAL),
+        SIP(L"关键", SMBIOS_POWER_SUPPLY_STATUS_CRITICAL),
     };
 
     static const PH_KEY_VALUE_PAIR types[] =
     {
-        SIP(L"Other", SMBIOS_POWER_SUPPLY_TYPE_OTHER),
-        SIP(L"Unknown", SMBIOS_POWER_SUPPLY_TYPE_UNKNOWN),
+        SIP(L"其他", SMBIOS_POWER_SUPPLY_TYPE_OTHER),
+        SIP(L"未知", SMBIOS_POWER_SUPPLY_TYPE_UNKNOWN),
         SIP(L"Linear", SMBIOS_POWER_SUPPLY_TYPE_LINEAR),
         SIP(L"Switching", SMBIOS_POWER_SUPPLY_TYPE_SWITCHING),
         SIP(L"Battery", SMBIOS_POWER_SUPPLY_TYPE_BATTERY),
@@ -3481,7 +3481,7 @@ VOID EtSMBIOSSystemPowerSupply(
 
     ET_SMBIOS_GROUP(L"System power supply");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, SystemPowerSupply, PowerUnitGroup) &&
         Entry->SystemPowerSupply.PowerUnitGroup != 0)
@@ -3490,19 +3490,19 @@ VOID EtSMBIOSSystemPowerSupply(
     }
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, SystemPowerSupply, Location))
-        ET_SMBIOS_STRING(L"Location", Entry->SystemPowerSupply.Location);
+        ET_SMBIOS_STRING(L"位置", Entry->SystemPowerSupply.Location);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, SystemPowerSupply, DeviceName))
         ET_SMBIOS_STRING(L"Device name", Entry->SystemPowerSupply.DeviceName);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, SystemPowerSupply, Manufacturer))
-        ET_SMBIOS_STRING(L"Manufacturer", Entry->SystemPowerSupply.Manufacturer);
+        ET_SMBIOS_STRING(L"制造商", Entry->SystemPowerSupply.Manufacturer);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, SystemPowerSupply, SerialNumber))
-        ET_SMBIOS_STRING(L"Serial number", Entry->SystemPowerSupply.SerialNumber);
+        ET_SMBIOS_STRING(L"序列号", Entry->SystemPowerSupply.SerialNumber);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, SystemPowerSupply, AssetTag))
-        ET_SMBIOS_STRING(L"Asset tag", Entry->SystemPowerSupply.AssetTag);
+        ET_SMBIOS_STRING(L"资产标签", Entry->SystemPowerSupply.AssetTag);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, SystemPowerSupply, ModelPartNumber))
         ET_SMBIOS_STRING(L"Model part number", Entry->SystemPowerSupply.ModelPartNumber);
@@ -3521,8 +3521,8 @@ VOID EtSMBIOSSystemPowerSupply(
         ET_SMBIOS_BOOLEAN(L"Hot-swappable", !!Entry->SystemPowerSupply.Characteristics.HostSwappable);
         ET_SMBIOS_BOOLEAN(L"Present", !!Entry->SystemPowerSupply.Characteristics.Present);
         ET_SMBIOS_ENUM(L"Range switching", Entry->SystemPowerSupply.Characteristics.RangeSwitching, rangeSwitching);
-        ET_SMBIOS_ENUM(L"Status", Entry->SystemPowerSupply.Characteristics.Status, powerSupplyStatus);
-        ET_SMBIOS_ENUM(L"Type", Entry->SystemPowerSupply.Characteristics.Type, types);
+        ET_SMBIOS_ENUM(L"状态", Entry->SystemPowerSupply.Characteristics.Status, powerSupplyStatus);
+        ET_SMBIOS_ENUM(L"类型", Entry->SystemPowerSupply.Characteristics.Type, types);
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, SystemPowerSupply, InputVoltageProbeHandle))
@@ -3543,7 +3543,7 @@ VOID EtSMBIOSAdditionalInformation(
 {
     ET_SMBIOS_GROUP(L"Additional information");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, AdditionalInformation, Count))
     {
@@ -3607,9 +3607,9 @@ VOID EtSMBIOSOnboardDevice(
 {
     static const PH_KEY_VALUE_PAIR types[] =
     {
-        SIP(L"Other", SMBIOS_ONBOARD_DEVICE_TYPE_OTHER),
-        SIP(L"Unknown", SMBIOS_ONBOARD_DEVICE_TYPE_UNKNOWN),
-        SIP(L"Video", SMBIOS_ONBOARD_DEVICE_TYPE_VIDEO),
+        SIP(L"其他", SMBIOS_ONBOARD_DEVICE_TYPE_OTHER),
+        SIP(L"未知", SMBIOS_ONBOARD_DEVICE_TYPE_UNKNOWN),
+        SIP(L"视频", SMBIOS_ONBOARD_DEVICE_TYPE_VIDEO),
         SIP(L"SCSI", SMBIOS_ONBOARD_DEVICE_TYPE_SCSI),
         SIP(L"Ethernet", SMBIOS_ONBOARD_DEVICE_TYPE_ETHERNET),
         SIP(L"Token ring", SMBIOS_ONBOARD_DEVICE_TYPE_TOKEN_RING),
@@ -3627,15 +3627,15 @@ VOID EtSMBIOSOnboardDevice(
 
     ET_SMBIOS_GROUP(L"Onboard device");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, OnboardDevice, ReferenceDesignation))
         ET_SMBIOS_STRING(L"Reference designation", Entry->OnboardDevice.ReferenceDesignation);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, OnboardDevice, DeviceType))
     {
-        ET_SMBIOS_ENUM(L"Type", Entry->OnboardDevice.DeviceType.Type, types);
-        ET_SMBIOS_BOOLEAN(L"Enabled", !!Entry->OnboardDevice.DeviceType.Enabled);
+        ET_SMBIOS_ENUM(L"类型", Entry->OnboardDevice.DeviceType.Type, types);
+        ET_SMBIOS_BOOLEAN(L"已启用", !!Entry->OnboardDevice.DeviceType.Enabled);
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, OnboardDevice, DeviceTypeInstance))
@@ -3663,7 +3663,7 @@ VOID EtSMBIOSMCHInterface(
     static const PH_KEY_VALUE_PAIR interfaceTypes[] =
     {
         SIP(L"Network interface", SMBIOS_MCHI_TYPE_NETWORK_INTERFACE),
-        SIP(L"OEM defined", SMBIOS_MCHI_TYPE_OEM_DEFINED)
+        SIP(L"OEM 已定义", SMBIOS_MCHI_TYPE_OEM_DEFINED)
     };
 
     static const PH_KEY_VALUE_PAIR protocolTypes[] =
@@ -3673,22 +3673,22 @@ VOID EtSMBIOSMCHInterface(
         SIP(L"IPMI", SMBIOS_MCHI_PROTOCOL_TYPE_IPMI),
         SIP(L"MCTP", SMBIOS_MCHI_PROTOCOL_TYPE_MCTP),
         SIP(L"Refresh over IP", SMBIOS_MCHI_PROTOCOL_TYPE_REFRESH_OVER_IP),
-        SIP(L"OEM defined", SMBIOS_MCHI_PROTOCOL_TYPE_OEM_DEFINED),
+        SIP(L"OEM 已定义", SMBIOS_MCHI_PROTOCOL_TYPE_OEM_DEFINED),
     };
 
     ET_SMBIOS_GROUP(L"Management controller host interface");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MCHInterface, Type))
-        ET_SMBIOS_ENUM(L"Type", Entry->MCHInterface.Type, interfaceTypes);
+        ET_SMBIOS_ENUM(L"类型", Entry->MCHInterface.Type, interfaceTypes);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, MCHInterface, Length))
     {
         PPH_STRING data;
 
         data = PhBufferToHexString(Entry->MCHInterface.Data, Entry->MCHInterface.Length);
-        EtAddSMBIOSItem(Context, group, L"Data", PhGetString(data));
+        EtAddSMBIOSItem(Context, group, L"数据", PhGetString(data));
         PhDereferenceObject(data);
     }
 
@@ -3764,7 +3764,7 @@ VOID EtSMBIOSTPMDevice(
 
     ET_SMBIOS_GROUP(L"TPM device");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, TPMDevice, VendorID))
     {
@@ -3811,10 +3811,10 @@ VOID EtSMBIOSTPMDevice(
         ET_SMBIOS_STRING(L"Description", Entry->TPMDevice.Description);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, TPMDevice, Characteristics))
-        ET_SMBIOS_FLAGS(L"Characteristics", (ULONG)Entry->TPMDevice.Characteristics, characteristics);
+        ET_SMBIOS_FLAGS(L"特性", (ULONG)Entry->TPMDevice.Characteristics, characteristics);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, TPMDevice, OEMDefined))
-        ET_SMBIOS_UINT32IX(L"OEM defined", Entry->TPMDevice.OEMDefined);
+        ET_SMBIOS_UINT32IX(L"OEM 已定义", Entry->TPMDevice.OEMDefined);
 }
 
 VOID EtSMBIOSProcessorAdditional(
@@ -3839,7 +3839,7 @@ VOID EtSMBIOSProcessorAdditional(
 
     ET_SMBIOS_GROUP(L"Processor additional");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, ProcessorAdditional, Handle))
         ET_SMBIOS_UINT32IX(L"Associated handle", Entry->ProcessorAdditional.Handle);
@@ -3902,10 +3902,10 @@ VOID EtSMBIOSFirmwareInventory(
 
     static const PH_KEY_VALUE_PAIR states[] =
     {
-        SIP(L"Other", SMBIOS_FIRMWARE_INVENTORY_STATE_OTHER),
-        SIP(L"Unknown", SMBIOS_FIRMWARE_INVENTORY_STATE_UNKNOWN),
+        SIP(L"其他", SMBIOS_FIRMWARE_INVENTORY_STATE_OTHER),
+        SIP(L"未知", SMBIOS_FIRMWARE_INVENTORY_STATE_UNKNOWN),
         SIP(L"Disabled", SMBIOS_FIRMWARE_INVENTORY_STATE_DISABLED),
-        SIP(L"Enabled", SMBIOS_FIRMWARE_INVENTORY_STATE_ENABLED),
+        SIP(L"已启用", SMBIOS_FIRMWARE_INVENTORY_STATE_ENABLED),
         SIP(L"Absent", SMBIOS_FIRMWARE_INVENTORY_STATE_ABSENT),
         SIP(L"Standby (offline)", SMBIOS_FIRMWARE_INVENTORY_STATE_STANDBY_OFFLINE),
         SIP(L"Standby (spare)", SMBIOS_FIRMWARE_INVENTORY_STATE_STANDBY_SPARE),
@@ -3914,28 +3914,28 @@ VOID EtSMBIOSFirmwareInventory(
 
     ET_SMBIOS_GROUP(L"Firmware inventory");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, FirmwareInventory, ComponentName))
         ET_SMBIOS_STRING(L"Component name", Entry->FirmwareInventory.ComponentName);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, FirmwareInventory, Version))
-        ET_SMBIOS_STRING(L"Version", Entry->FirmwareInventory.Version);
+        ET_SMBIOS_STRING(L"版本", Entry->FirmwareInventory.Version);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, FirmwareInventory, VersionFormat))
         ET_SMBIOS_UINT32(L"Version format", Entry->FirmwareInventory.VersionFormat);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, FirmwareInventory, Identifier))
-        ET_SMBIOS_STRING(L"Identifier", Entry->FirmwareInventory.Identifier);
+        ET_SMBIOS_STRING(L"标识符", Entry->FirmwareInventory.Identifier);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, FirmwareInventory, IdentifierFormat))
         ET_SMBIOS_UINT32(L"Version format", Entry->FirmwareInventory.VersionFormat);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, FirmwareInventory, ReleaseDate))
-        ET_SMBIOS_STRING(L"Release date", Entry->FirmwareInventory.ReleaseDate);
+        ET_SMBIOS_STRING(L"发行日期", Entry->FirmwareInventory.ReleaseDate);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, FirmwareInventory, Manufacturer))
-        ET_SMBIOS_STRING(L"Manufacturer", Entry->FirmwareInventory.Manufacturer);
+        ET_SMBIOS_STRING(L"制造商", Entry->FirmwareInventory.Manufacturer);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, FirmwareInventory, LowestSupportedVersion))
         ET_SMBIOS_STRING(L"Lowest supported version", Entry->FirmwareInventory.LowestSupportedVersion);
@@ -3947,7 +3947,7 @@ VOID EtSMBIOSFirmwareInventory(
     }
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, FirmwareInventory, Characteristics))
-        ET_SMBIOS_FLAGS(L"Characteristics", Entry->FirmwareInventory.Characteristics, flags);
+        ET_SMBIOS_FLAGS(L"特性", Entry->FirmwareInventory.Characteristics, flags);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, FirmwareInventory, State))
         ET_SMBIOS_ENUM(L"State", Entry->FirmwareInventory.State, states);
@@ -3989,22 +3989,22 @@ VOID EtSMBIOSStringProperty(
 {
     static const PH_KEY_VALUE_PAIR identifiers[] =
     {
-        SIP(L"Reserved", SMBIOS_STRING_PROPERTY_ID_RESERVED),
-        SIP(L"UEFI device path", SMBIOS_STRING_PROPERTY_ID_UEIF_DEVICE_PATH),
+        SIP(L"保留", SMBIOS_STRING_PROPERTY_ID_RESERVED),
+        SIP(L"UEFI 设备路径", SMBIOS_STRING_PROPERTY_ID_UEIF_DEVICE_PATH),
     };
 
-    ET_SMBIOS_GROUP(L"String property");
+    ET_SMBIOS_GROUP(L"字符串属性");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, StringProperty, Identifier))
-        ET_SMBIOS_UINT32(L"Identifier", Entry->StringProperty.Identifier);
+        ET_SMBIOS_UINT32(L"标识符", Entry->StringProperty.Identifier);
 
     if (PH_SMBIOS_CONTAINS_STRING(Entry, StringProperty, String))
-        ET_SMBIOS_STRING(L"String", Entry->StringProperty.String);
+        ET_SMBIOS_STRING(L"字符串", Entry->StringProperty.String);
 
     if (PH_SMBIOS_CONTAINS_FIELD(Entry, StringProperty, ParentHandle))
-        ET_SMBIOS_UINT32IX(L"Parent handle", Entry->StringProperty.ParentHandle);
+        ET_SMBIOS_UINT32IX(L"父句柄", Entry->StringProperty.ParentHandle);
 }
 
 VOID EtSMBIOSInactive(
@@ -4013,9 +4013,9 @@ VOID EtSMBIOSInactive(
     _In_ PSMBIOS_WINDOW_CONTEXT Context
     )
 {
-    ET_SMBIOS_GROUP(L"Inactive");
+    ET_SMBIOS_GROUP(L"不活动");
 
-    ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
+    ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
 }
 
 VOID EtSMBIOSUndefinedType(
@@ -4029,13 +4029,13 @@ VOID EtSMBIOSUndefinedType(
         PH_FORMAT format[2];
         PPH_STRING type;
 
-        PhInitFormatS(&format[0], L"Type ");
+        PhInitFormatS(&format[0], L"类型 ");
         PhInitFormatU(&format[1], Entry->Header.Type);
         type = PhFormat(format, 2, 10);
 
         ET_SMBIOS_GROUP(PhGetString(type));
-        ET_SMBIOS_UINT32IX(L"Handle", Entry->Header.Handle);
-        ET_SMBIOS_UINT32(L"Length", Entry->Header.Length);
+        ET_SMBIOS_UINT32IX(L"句柄", Entry->Header.Handle);
+        ET_SMBIOS_UINT32(L"长度", Entry->Header.Length);
 
         PhDereferenceObject(type);
     }
@@ -4259,8 +4259,8 @@ INT_PTR CALLBACK EtSMBIOSDlgProc(
 
             PhSetListViewStyle(context->ListViewHandle, FALSE, TRUE);
             PhSetControlTheme(context->ListViewHandle, L"explorer");
-            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 160, L"Name");
-            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 300, L"Value");
+            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 160, L"名称");
+            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 300, L"值");
             PhSetExtendedListView(context->ListViewHandle);
 
             PhInitializeLayoutManager(&context->LayoutManager, hwndDlg);
@@ -4334,7 +4334,7 @@ INT_PTR CALLBACK EtSMBIOSDlgProc(
                 if (numberOfItems != 0)
                 {
                     menu = PhCreateEMenu();
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_IDC_COPY, L"&Copy", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_IDC_COPY, L"复制(&C)", NULL, NULL), ULONG_MAX);
                     PhInsertCopyListViewEMenuItem(menu, PHAPP_IDC_COPY, context->ListViewHandle);
 
                     item = PhShowEMenu(
