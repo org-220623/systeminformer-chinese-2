@@ -171,20 +171,20 @@ LONG SetupShowMessagePromptForLegacyVersion(
     config.pszMainIcon = TD_INFORMATION_ICON;
     config.pszMainInstruction = L"Hey there, before we continue...";
     config.pszContent =
-        L"- Process Hacker was renamed System Informer.\n"
-        L"- Process Hacker does not support Windows 10 or 11.\n"
-        L"- Process Hacker will not be updated.\n"
-        L"- Process Hacker will not be uninstalled.\n\n"
-        L"This update will now install System Informer.\n\nPlease remember to uninstall Process Hacker. Thanks <3";
+        L"- Process Hacker 已更名为 System Informer\n"
+        L"- Process Hacker 不支持 Windows 10/11\n"
+        L"- Process Hacker 不会获得最新更新\n"
+        L"- Process Hacker 将不会被卸载\n\n"
+        L"本次更新将安装 System Informer。\n\n建议在安装完成后卸载 Process Hacker。";
     config.cxWidth = 200;
 
     //PhShowInformation2(
     //    NULL,
     //    L"Process Hacker",
     //    L"%s",
-    //    L"Process Hacker was renamed System Informer.\n"
-    //    L"The legacy version of Process Hacker is no longer maintained and will not receive updates.\r\n\r\n"
-    //    L"The updater is now installing System Informer. The Process Hacker installation must be manually uninstalled"
+    //    L"Process Hacker 已更名为 System Informer\n"
+    //    L"Process Hacker 已停止维护，不会再收到最新更新。\r\n\r\n"
+    //    L"更新程序正在安装 System Informer，Process Hacker 需用户手动卸载"
     //    );
 
     if (SUCCEEDED(TaskDialogIndirect(
@@ -223,7 +223,7 @@ VOID SetupShowDialog(
     config.cbSize = sizeof(TASKDIALOGCONFIG);
     config.dwFlags = TDF_ALLOW_DIALOG_CANCELLATION | TDF_CAN_BE_MINIMIZED;
     config.hInstance = PhInstanceHandle;
-    config.pszContent = L"Initializing...";
+    config.pszContent = L"正在初始化...";
     config.pfCallback = SetupTaskDialogBootstrapCallback;
     config.lpCallbackData = (LONG_PTR)Context;
 
@@ -534,7 +534,7 @@ INT WINAPI wWinMain(
 {
     PPH_SETUP_CONTEXT context;
 
-    if (!NT_SUCCESS(PhInitializePhLib(L"System Informer - Setup")))
+    if (!NT_SUCCESS(PhInitializePhLib(L"System Informer 安装程序")))
         return EXIT_FAILURE;
     if (!HR_SUCCESS(CoInitializeEx(NULL, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE)))
         return EXIT_FAILURE;

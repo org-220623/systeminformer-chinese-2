@@ -154,7 +154,7 @@ static BOOLEAN PhpShowProcessErrorAffinity(
     return PhShowContinueStatus(
         hWnd,
         PhaFormatString(
-        L"Unable to change affinity of process %lu",
+        L"无法更改进程 %lu 的处理器相关性",
         HandleToUlong(Process->ProcessId)
         )->Buffer,
         Status,
@@ -172,7 +172,7 @@ static BOOLEAN PhpShowThreadErrorAffinity(
     return PhShowContinueStatus(
         hWnd,
         PhaFormatString(
-        L"Unable to change affinity of thread %lu",
+        L"无法更改线程 %lu 的处理器相关性",
         HandleToUlong(Thread->ThreadId)
         )->Buffer,
         Status,
@@ -194,7 +194,7 @@ VOID PhpShowThreadErrorAffinityList(
         PhAppendFormatStringBuilder(
             &stringBuilder,
             L"%s\n",
-            PhGetStringOrDefault(AffinityErrorsList->Items[i], L"An unknown error occurred.")
+            PhGetStringOrDefault(AffinityErrorsList->Items[i], L"出现未知错误。")
             );
     }
 
@@ -203,8 +203,8 @@ VOID PhpShowThreadErrorAffinityList(
 
     PhShowInformation2(
         Context->WindowHandle,
-        L"Unable to update affinity for thread(s)",
-        L"Unable to update affinity for thread(s):\r\n%s",
+        L"无法为线程更新处理器相关性",
+        L"无法为线程更新处理器相关性: \r\n%s",
         PhGetString(PhFinalStringBuilderString(&stringBuilder))
         );
 
@@ -300,7 +300,7 @@ INT_PTR CALLBACK PhpProcessAffinityDlgProc(
 
                 for (USHORT processorGroup = 0; processorGroup < PhSystemProcessorInformation.NumberOfProcessorGroups; processorGroup++)
                 {
-                    ComboBox_AddString(context->GroupComboHandle, PhaFormatString(L"Group %hu", processorGroup)->Buffer);
+                    ComboBox_AddString(context->GroupComboHandle, PhaFormatString(L"组 %hu", processorGroup)->Buffer);
                 }
 
                 ShowWindow(context->GroupComboHandle, SW_SHOW);
@@ -396,7 +396,7 @@ INT_PTR CALLBACK PhpProcessAffinityDlgProc(
 
                 windowText = PH_AUTO(PhGetWindowText(hwndDlg));
                 PhSetWindowText(hwndDlg, PhaFormatString(
-                    L"%s (%lu threads)",
+                    L"%s (%lu 个线程)",
                     windowText->Buffer,
                     context->NumberOfThreads
                     )->Buffer);
@@ -471,7 +471,7 @@ INT_PTR CALLBACK PhpProcessAffinityDlgProc(
 
             if (!NT_SUCCESS(status))
             {
-                PhShowStatus(hwndDlg, L"Unable to query the current affinity.", status, 0);
+                PhShowStatus(hwndDlg, L"无法查询当前处理器相关性。", status, 0);
                 EndDialog(hwndDlg, IDCANCEL);
                 break;
             }
@@ -552,7 +552,7 @@ INT_PTR CALLBACK PhpProcessAffinityDlgProc(
 
                     if (affinityMask == 0)
                     {
-                        PhShowError2(hwndDlg, L"Unable to change affinity settings.", L"%s", L"You must select at least one CPU.");
+                        PhShowError2(hwndDlg, L"无法更改处理器相关性设置。", L"%s", L"您必须至少选择一个 CPU。");
                         break;
                     }
 

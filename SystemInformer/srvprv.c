@@ -607,7 +607,7 @@ VOID PhpFillServiceItemStage1(
     PPH_SERVICE_ITEM serviceItem = Data->Header.ServiceItem;
     PPH_STRING fileName = Data->Header.FileName;
 
-    PhTrace("Service query stage 1: %ls", PhGetString(serviceItem->Name));
+    PhTrace("服务查询阶段 1: %ls", PhGetString(serviceItem->Name));
 
     serviceItem->IconEntry = Data->IconEntry;
     //memcpy(&processItem->VersionInfo, &Data->VersionInfo, sizeof(PH_IMAGE_VERSION_INFO));
@@ -627,7 +627,7 @@ VOID PhpFillServiceItemStage2(
 {
     PPH_SERVICE_ITEM serviceItem = Data->Header.ServiceItem;
 
-    PhTrace("Service query stage 2: %ls", PhGetString(serviceItem->Name));
+    PhTrace("服务查询阶段 2: %ls", PhGetString(serviceItem->Name));
 
     serviceItem->VerifyResult = Data->VerifyResult;
     PhMoveReference(&serviceItem->VerifySignerName, Data->VerifySignerName);
@@ -758,7 +758,7 @@ VOID PhServiceProviderUpdate(
     ULONG i;
     PPH_HASH_ENTRY hashEntry;
 
-    PhTraceFuncEnter("Service provider run count: %lu", runCount);
+    PhTraceFuncEnter("服务提供程序运行计数: %lu", runCount);
 
     // We always execute the first run, and we only initialize non-polling after the first run.
     if (PhEnableServiceNonPoll && runCount != 0)
@@ -786,7 +786,7 @@ UpdateStart:
 
     if (!NT_SUCCESS(status = PhEnumServices(&services, &numberOfServices)))
     {
-        PhTraceFuncExit("Failed to enumerate services: %lu %!STATUS!", runCount, status);
+        PhTraceFuncExit("无法枚举服务: %lu %!STATUS!", runCount, status);
         return;
     }
 
@@ -1101,7 +1101,7 @@ UpdateStart:
 UpdateEnd:
     PhInvokeCallback(PhGetGeneralCallback(GeneralCallbackServiceProviderUpdatedEvent), UlongToPtr(runCount));
 
-    PhTraceFuncExit("Service provider run count: %lu", runCount);
+    PhTraceFuncExit("服务提供程序运行计数: %lu", runCount);
 
     runCount++;
 }

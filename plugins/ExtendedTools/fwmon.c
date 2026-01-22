@@ -1169,37 +1169,37 @@ BOOLEAN EtFwLookupAddressClass(
 
             if (IN4_IS_ADDR_UNSPECIFIED(inAddr))
             {
-                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Unspecified");
+                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"未指定");
                 *ClassString = string;
                 return TRUE;
             }
             else if (IN4_IS_ADDR_LOOPBACK(inAddr))
             {
-                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Loopback");
+                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"环回");
                 *ClassString = string;
                 return TRUE;
             }
             else if (IN4_IS_ADDR_BROADCAST(inAddr))
             {
-                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Broadcast");
+                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"广播");
                 *ClassString = string;
                 return TRUE;
             }
             else if (IN4_IS_ADDR_MULTICAST(inAddr))
             {
-                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Multicast");
+                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"多播");
                 *ClassString = string;
                 return TRUE;
             }
             else if (IN4_IS_ADDR_LINKLOCAL(inAddr))
             {
-                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Linklocal");
+                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"链路本地");
                 *ClassString = string;
                 return TRUE;
             }
             else if (IN4_IS_ADDR_MC_LINKLOCAL(inAddr))
             {
-                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Multicast-Linklocal");
+                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"多播-链路本地");
                 *ClassString = string;
                 return TRUE;
             }
@@ -1211,7 +1211,7 @@ BOOLEAN EtFwLookupAddressClass(
             }
             else
             {
-                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Unicast");
+                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"单播");
                 *ClassString = string;
                 return TRUE;
             }
@@ -1223,37 +1223,37 @@ BOOLEAN EtFwLookupAddressClass(
 
             if (IN6_IS_ADDR_UNSPECIFIED(inAddr6))
             {
-                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Unspecified");
+                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"未指定");
                 *ClassString = string;
                 return TRUE;
             }
             else if (IN6_IS_ADDR_LOOPBACK(inAddr6))
             {
-                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Loopback");
+                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"环回");
                 *ClassString = string;
                 return TRUE;
             }
             else if (IN6_IS_ADDR_MULTICAST(inAddr6))
             {
-                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Multicast");
+                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"多播");
                 *ClassString = string;
                 return TRUE;
             }
             else if (IN6_IS_ADDR_LINKLOCAL(inAddr6))
             {
-                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Linklocal");
+                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"链路本地");
                 *ClassString = string;
                 return TRUE;
             }
             else if (IN6_IS_ADDR_MC_LINKLOCAL(inAddr6))
             {
-                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Multicast-Linklocal");
+                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"多播-链路本地");
                 *ClassString = string;
                 return TRUE;
             }
             else
             {
-                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Unicast");
+                static const PH_STRINGREF string = PH_STRINGREF_INIT(L"单播");
                 *ClassString = string;
                 return TRUE;
             }
@@ -1278,43 +1278,43 @@ BOOLEAN EtFwLookupAddressScope(
             {
             case ScopeLevelInterface:
                 {
-                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Interface");
+                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"接口");
                     *ScopeString = string;
                 }
                 return TRUE;
             case ScopeLevelLink:
                 {
-                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Link");
+                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"链接");
                     *ScopeString = string;
                 }
                 return TRUE;
             case ScopeLevelSubnet:
                 {
-                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Subnet");
+                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"子网");
                     *ScopeString = string;
                 }
                 return TRUE;
             case ScopeLevelAdmin:
                 {
-                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Admin");
+                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"管理员");
                     *ScopeString = string;
                 }
                 return TRUE;
             case ScopeLevelSite:
                 {
-                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Site");
+                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"站点");
                     *ScopeString = string;
                 }
                 return TRUE;
             case ScopeLevelOrganization:
                 {
-                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Organization");
+                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"组织");
                     *ScopeString = string;
                 }
                 return TRUE;
             case ScopeLevelGlobal:
                 {
-                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Global");
+                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"全局");
                     *ScopeString = string;
                 }
                 return TRUE;
@@ -1327,43 +1327,43 @@ BOOLEAN EtFwLookupAddressScope(
             {
             case ScopeLevelInterface:
                 {
-                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Interface");
+                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"接口");
                     *ScopeString = string;
                 }
                 return TRUE;
             case ScopeLevelLink:
                 {
-                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Link");
+                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"链接");
                     *ScopeString = string;
                 }
                 return TRUE;
             case ScopeLevelSubnet:
                 {
-                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Subnet");
+                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"子网");
                     *ScopeString = string;
                 }
                 return TRUE;
             case ScopeLevelAdmin:
                 {
-                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Admin");
+                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"管理员");
                     *ScopeString = string;
                 }
                 return TRUE;
             case ScopeLevelSite:
                 {
-                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Site");
+                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"站点");
                     *ScopeString = string;
                 }
                 return TRUE;
             case ScopeLevelOrganization:
                 {
-                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Organization");
+                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"组织");
                     *ScopeString = string;
                 }
                 return TRUE;
             case ScopeLevelGlobal:
                 {
-                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"Global");
+                    static const PH_STRINGREF string = PH_STRINGREF_INIT(L"全局");
                     *ScopeString = string;
                 }
                 return TRUE;

@@ -131,28 +131,28 @@ VOID EtEnumerateNamedPipeDirectory(
                 switch (pipeLocalInfo.NamedPipeType & ~FILE_PIPE_REJECT_REMOTE_CLIENTS)
                 {
                 case FILE_PIPE_BYTE_STREAM_TYPE:
-                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 3, L"Stream");
+                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 3, L"流");
                     break;
                 case FILE_PIPE_MESSAGE_TYPE:
-                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 3, L"Message");
+                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 3, L"消息");
                     break;
                 }
 
                 switch (pipeLocalInfo.NamedPipeConfiguration)
                 {
                 case FILE_PIPE_INBOUND:
-                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 4, L"Inbound");
+                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 4, L"入站");
                     break;
                 case FILE_PIPE_OUTBOUND:
-                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 4, L"Outbound");
+                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 4, L"出站");
                     break;
                 case FILE_PIPE_FULL_DUPLEX:
-                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 4, L"Duplex");
+                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 4, L"双向");
                     break;
                 }
 
                 if (pipeLocalInfo.MaximumInstances == FILE_PIPE_UNLIMITED_INSTANCES)
-                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 5, L"Unlimited");
+                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 5, L"未限制");
                 else
                     PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 5, PhaFormatUInt64(pipeLocalInfo.MaximumInstances, FALSE)->Buffer);
                 PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 6, PhaFormatUInt64(pipeLocalInfo.CurrentInstances, FALSE)->Buffer);
@@ -162,23 +162,23 @@ VOID EtEnumerateNamedPipeDirectory(
                 switch (pipeLocalInfo.NamedPipeState)
                 {
                 case FILE_PIPE_DISCONNECTED_STATE:
-                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 9, L"Disconnected");
+                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 9, L"已断开连接");
                     break;
                 case FILE_PIPE_LISTENING_STATE:
-                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 9, L"Listening");
+                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 9, L"正在监听");
                     break;
                 case FILE_PIPE_CONNECTED_STATE:
-                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 9, L"Connected");
+                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 9, L"已连接");
                     break;
                 case FILE_PIPE_CLOSING_STATE:
-                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 9, L"Closing");
+                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 9, L"正在关闭");
                     break;
                 }
 
                 if (pipeLocalInfo.NamedPipeType & FILE_PIPE_REJECT_REMOTE_CLIENTS)
-                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 10, L"Reject");
+                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 10, L"拒绝");
                 else
-                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 10, L"Accept");
+                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 10, L"允许");
             }
 
             if (NT_SUCCESS(NtQueryInformationFile(pipeHandle, &isb, &pipeInfo, sizeof(pipeInfo), FilePipeInformation)))
@@ -186,20 +186,20 @@ VOID EtEnumerateNamedPipeDirectory(
                 switch (pipeInfo.ReadMode)
                 {
                 case FILE_PIPE_BYTE_STREAM_MODE:
-                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 11, L"Stream");
+                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 11, L"流");
                     break;
                 case FILE_PIPE_MESSAGE_MODE:
-                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 11, L"Message");
+                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 11, L"消息");
                     break;
                 }
 
                 switch (pipeInfo.CompletionMode)
                 {
                 case FILE_PIPE_QUEUE_OPERATION:
-                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 12, L"Queue");
+                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 12, L"队列");
                     break;
                 case FILE_PIPE_COMPLETE_OPERATION:
-                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 12, L"Complete");
+                    PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 12, L"完成");
                     break;
                 }
             }
@@ -247,9 +247,9 @@ VOID EtAddNamedPipeHandleToListView(
     }
 
     if (pipeLocalInfo.NamedPipeEnd == FILE_PIPE_CLIENT_END)
-        lvItemIndex = PhAddListViewItem(Context->ListViewWndHandle, MAXINT, L"Client", NULL);
+        lvItemIndex = PhAddListViewItem(Context->ListViewWndHandle, MAXINT, L"客户端", NULL);
     else if (pipeLocalInfo.NamedPipeEnd == FILE_PIPE_SERVER_END)
-        lvItemIndex = PhAddListViewItem(Context->ListViewWndHandle, MAXINT, L"Server", NULL);
+        lvItemIndex = PhAddListViewItem(Context->ListViewWndHandle, MAXINT, L"服务端", NULL);
     else
         lvItemIndex = PhAddListViewItem(Context->ListViewWndHandle, MAXINT, L"", NULL);
 
@@ -292,28 +292,28 @@ VOID EtAddNamedPipeHandleToListView(
         switch (pipeLocalInfo.NamedPipeType & ~FILE_PIPE_REJECT_REMOTE_CLIENTS)
         {
             case FILE_PIPE_BYTE_STREAM_TYPE:
-                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 5, L"Stream");
+                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 5, L"流");
                 break;
             case FILE_PIPE_MESSAGE_TYPE:
-                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 5, L"Message");
+                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 5, L"消息");
                 break;
         }
 
         switch (pipeLocalInfo.NamedPipeConfiguration)
         {
             case FILE_PIPE_INBOUND:
-                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 6, L"Inbound");
+                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 6, L"入站");
                 break;
             case FILE_PIPE_OUTBOUND:
-                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 6, L"Outbound");
+                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 6, L"出站");
                 break;
             case FILE_PIPE_FULL_DUPLEX:
-                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 6, L"Duplex");
+                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 6, L"双向");
                 break;
         }
 
         if (pipeLocalInfo.MaximumInstances == FILE_PIPE_UNLIMITED_INSTANCES)
-            PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 7, L"Unlimited");
+            PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 7, L"未限制");
         else
             PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 7, PhaFormatUInt64(pipeLocalInfo.MaximumInstances, FALSE)->Buffer);
 
@@ -324,23 +324,23 @@ VOID EtAddNamedPipeHandleToListView(
         switch (pipeLocalInfo.NamedPipeState)
         {
             case FILE_PIPE_DISCONNECTED_STATE:
-                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 11, L"Disconnected");
+                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 11, L"已断开连接");
                 break;
             case FILE_PIPE_LISTENING_STATE:
-                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 11, L"Listening");
+                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 11, L"正在监听");
                 break;
             case FILE_PIPE_CONNECTED_STATE:
-                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 11, L"Connected");
+                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 11, L"已连接");
                 break;
             case FILE_PIPE_CLOSING_STATE:
-                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 11, L"Closing");
+                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 11, L"正在关闭");
                 break;
         }
 
         if (pipeLocalInfo.NamedPipeType & FILE_PIPE_REJECT_REMOTE_CLIENTS)
-            PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 12, L"Reject");
+            PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 12, L"拒绝");
         else
-            PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 12, L"Accept");
+            PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 12, L"允许");
     }
 
     if (NT_SUCCESS(PhCallKphQueryFileInformationWithTimeout(
@@ -354,20 +354,20 @@ VOID EtAddNamedPipeHandleToListView(
         switch (pipeInfo.ReadMode)
         {
             case FILE_PIPE_BYTE_STREAM_MODE:
-                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 13, L"Stream");
+                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 13, L"流");
                 break;
             case FILE_PIPE_MESSAGE_MODE:
-                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 13, L"Message");
+                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 13, L"消息");
                 break;
         }
 
         switch (pipeInfo.CompletionMode)
         {
             case FILE_PIPE_QUEUE_OPERATION:
-                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 14, L"Queue");
+                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 14, L"队列");
                 break;
             case FILE_PIPE_COMPLETE_OPERATION:
-                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 14, L"Complete");
+                PhSetListViewSubItem(Context->ListViewWndHandle, lvItemIndex, 14, L"完成");
                 break;
         }
     }
@@ -498,21 +498,21 @@ INT_PTR CALLBACK EtPipeEnumDlgProc(
 
             if (context->UseKph)
             {
-                PhAddListViewColumn(context->ListViewWndHandle, 0, 0, 0, LVCFMT_LEFT, 40, L"End");
-                PhAddListViewColumn(context->ListViewWndHandle, 1, 1, 1, LVCFMT_LEFT, 200, L"Name");
-                PhAddListViewColumn(context->ListViewWndHandle, 2, 2, 2, LVCFMT_LEFT, 200, L"Process");
-                PhAddListViewColumn(context->ListViewWndHandle, 3, 3, 3, LVCFMT_LEFT, 200, L"Handle");
-                PhAddListViewColumn(context->ListViewWndHandle, 4, 4, 4, LVCFMT_LEFT, 50, L"Granted access");
-                PhAddListViewColumn(context->ListViewWndHandle, 5, 5, 5, LVCFMT_LEFT, 80, L"Type");
-                PhAddListViewColumn(context->ListViewWndHandle, 6, 6, 6, LVCFMT_LEFT, 80, L"Configuration");
-                PhAddListViewColumn(context->ListViewWndHandle, 7, 7, 7, LVCFMT_LEFT, 80, L"Max instances");
-                PhAddListViewColumn(context->ListViewWndHandle, 8, 8, 8, LVCFMT_LEFT, 80, L"Current instances");
-                PhAddListViewColumn(context->ListViewWndHandle, 9, 9, 9, LVCFMT_LEFT, 80, L"Read data available");
-                PhAddListViewColumn(context->ListViewWndHandle, 10, 10, 10, LVCFMT_LEFT, 80, L"Outbound quota");
-                PhAddListViewColumn(context->ListViewWndHandle, 11, 11, 11, LVCFMT_LEFT, 80, L"State");
-                PhAddListViewColumn(context->ListViewWndHandle, 12, 12, 12, LVCFMT_LEFT, 80, L"Remote clients");
-                PhAddListViewColumn(context->ListViewWndHandle, 13, 13, 13, LVCFMT_LEFT, 80, L"Read mode");
-                PhAddListViewColumn(context->ListViewWndHandle, 14, 14, 14, LVCFMT_LEFT, 80, L"Completion mode");
+                PhAddListViewColumn(context->ListViewWndHandle, 0, 0, 0, LVCFMT_LEFT, 40, L"末尾");
+                PhAddListViewColumn(context->ListViewWndHandle, 1, 1, 1, LVCFMT_LEFT, 200, L"名称");
+                PhAddListViewColumn(context->ListViewWndHandle, 2, 2, 2, LVCFMT_LEFT, 200, L"进程");
+                PhAddListViewColumn(context->ListViewWndHandle, 3, 3, 3, LVCFMT_LEFT, 200, L"句柄");
+                PhAddListViewColumn(context->ListViewWndHandle, 4, 4, 4, LVCFMT_LEFT, 50, L"已授予权限");
+                PhAddListViewColumn(context->ListViewWndHandle, 5, 5, 5, LVCFMT_LEFT, 80, L"类型");
+                PhAddListViewColumn(context->ListViewWndHandle, 6, 6, 6, LVCFMT_LEFT, 80, L"配置");
+                PhAddListViewColumn(context->ListViewWndHandle, 7, 7, 7, LVCFMT_LEFT, 80, L"最大实例数");
+                PhAddListViewColumn(context->ListViewWndHandle, 8, 8, 8, LVCFMT_LEFT, 80, L"当前实例数");
+                PhAddListViewColumn(context->ListViewWndHandle, 9, 9, 9, LVCFMT_LEFT, 80, L"可用读取数据");
+                PhAddListViewColumn(context->ListViewWndHandle, 10, 10, 10, LVCFMT_LEFT, 80, L"出站配额");
+                PhAddListViewColumn(context->ListViewWndHandle, 11, 11, 11, LVCFMT_LEFT, 80, L"状态");
+                PhAddListViewColumn(context->ListViewWndHandle, 12, 12, 12, LVCFMT_LEFT, 80, L"远程客户端");
+                PhAddListViewColumn(context->ListViewWndHandle, 13, 13, 13, LVCFMT_LEFT, 80, L"读取模式");
+                PhAddListViewColumn(context->ListViewWndHandle, 14, 14, 14, LVCFMT_LEFT, 80, L"完成模式");
                 PhSetExtendedListView(context->ListViewWndHandle);
                 PhLoadListViewColumnsFromSetting(SETTING_NAME_PIPE_ENUM_LISTVIEW_COLUMNS_WITH_KSI, context->ListViewWndHandle);
 
@@ -523,18 +523,18 @@ INT_PTR CALLBACK EtPipeEnumDlgProc(
             else
             {
                 PhAddListViewColumn(context->ListViewWndHandle, 0, 0, 0, LVCFMT_LEFT, 40, L"#");
-                PhAddListViewColumn(context->ListViewWndHandle, 1, 1, 1, LVCFMT_LEFT, 200, L"Name");
-                PhAddListViewColumn(context->ListViewWndHandle, 2, 2, 2, LVCFMT_LEFT, 50, L"Server");
-                PhAddListViewColumn(context->ListViewWndHandle, 3, 3, 3, LVCFMT_LEFT, 80, L"Type");
-                PhAddListViewColumn(context->ListViewWndHandle, 4, 4, 4, LVCFMT_LEFT, 80, L"Configuration");
-                PhAddListViewColumn(context->ListViewWndHandle, 5, 5, 5, LVCFMT_LEFT, 80, L"Max instances");
-                PhAddListViewColumn(context->ListViewWndHandle, 6, 6, 6, LVCFMT_LEFT, 80, L"Current instances");
-                PhAddListViewColumn(context->ListViewWndHandle, 7, 7, 7, LVCFMT_LEFT, 80, L"Read data available");
-                PhAddListViewColumn(context->ListViewWndHandle, 8, 8, 8, LVCFMT_LEFT, 80, L"Outbound quota");
-                PhAddListViewColumn(context->ListViewWndHandle, 9, 9, 9, LVCFMT_LEFT, 80, L"State");
-                PhAddListViewColumn(context->ListViewWndHandle, 10, 10, 10, LVCFMT_LEFT, 80, L"Remote clients");
-                PhAddListViewColumn(context->ListViewWndHandle, 11, 11, 11, LVCFMT_LEFT, 80, L"Read mode");
-                PhAddListViewColumn(context->ListViewWndHandle, 12, 12, 12, LVCFMT_LEFT, 80, L"Completion mode");
+                PhAddListViewColumn(context->ListViewWndHandle, 1, 1, 1, LVCFMT_LEFT, 200, L"名称");
+                PhAddListViewColumn(context->ListViewWndHandle, 2, 2, 2, LVCFMT_LEFT, 50, L"服务端");
+                PhAddListViewColumn(context->ListViewWndHandle, 3, 3, 3, LVCFMT_LEFT, 80, L"类型");
+                PhAddListViewColumn(context->ListViewWndHandle, 4, 4, 4, LVCFMT_LEFT, 80, L"配置");
+                PhAddListViewColumn(context->ListViewWndHandle, 5, 5, 5, LVCFMT_LEFT, 80, L"最大实例数");
+                PhAddListViewColumn(context->ListViewWndHandle, 6, 6, 6, LVCFMT_LEFT, 80, L"当前实例数");
+                PhAddListViewColumn(context->ListViewWndHandle, 7, 7, 7, LVCFMT_LEFT, 80, L"可用读取数据");
+                PhAddListViewColumn(context->ListViewWndHandle, 8, 8, 8, LVCFMT_LEFT, 80, L"出站配额");
+                PhAddListViewColumn(context->ListViewWndHandle, 9, 9, 9, LVCFMT_LEFT, 80, L"状态");
+                PhAddListViewColumn(context->ListViewWndHandle, 10, 10, 10, LVCFMT_LEFT, 80, L"远程客户端");
+                PhAddListViewColumn(context->ListViewWndHandle, 11, 11, 11, LVCFMT_LEFT, 80, L"读取模式");
+                PhAddListViewColumn(context->ListViewWndHandle, 12, 12, 12, LVCFMT_LEFT, 80, L"完成模式");
                 PhSetExtendedListView(context->ListViewWndHandle);
                 PhLoadListViewColumnsFromSetting(SETTING_NAME_PIPE_ENUM_LISTVIEW_COLUMNS, context->ListViewWndHandle);
 

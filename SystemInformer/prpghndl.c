@@ -31,7 +31,7 @@
 #include <proctree.h>
 #include <secedit.h>
 
-static CONST PH_STRINGREF EmptyHandlesText = PH_STRINGREF_INIT(L"There are no handles to display.");
+static CONST PH_STRINGREF EmptyHandlesText = PH_STRINGREF_INIT(L"没有要显示的句柄。");
 
 _Function_class_(PH_CALLBACK_FUNCTION)
 static VOID NTAPI HandleAddedHandler(
@@ -159,15 +159,15 @@ VOID PhShowHandleContextMenu(
         PH_PLUGIN_MENU_INFORMATION menuInfo;
 
         menu = PhCreateEMenu();
-        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_HANDLE_CLOSE, L"C&lose\bDel", NULL, NULL), ULONG_MAX);
-        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_HANDLE_PROTECTED, L"&Protected", NULL, NULL), ULONG_MAX);
-        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_HANDLE_INHERIT, L"&Inherit", NULL, NULL), ULONG_MAX);
+        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_HANDLE_CLOSE, L"关闭(&L)\bDel", NULL, NULL), ULONG_MAX);
+        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_HANDLE_PROTECTED, L"保护(&P)", NULL, NULL), ULONG_MAX);
+        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_HANDLE_INHERIT, L"继承(&I)", NULL, NULL), ULONG_MAX);
         PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_HANDLE_SECURITY, L"Secu&rity", NULL, NULL), ULONG_MAX);
+        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_HANDLE_SECURITY, L"安全(&R)", NULL, NULL), ULONG_MAX);
         PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_HANDLE_PROPERTIES, L"Prope&rties\bEnter", NULL, NULL), ULONG_MAX);
+        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_HANDLE_PROPERTIES, L"属性(&T)\bEnter", NULL, NULL), ULONG_MAX);
         PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_HANDLE_COPY, L"&Copy\bCtrl+C", NULL, NULL), ULONG_MAX);
+        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_HANDLE_COPY, L"复制(&C)\bCtrl+C", NULL, NULL), ULONG_MAX);
         PhSetFlagsEMenuItem(menu, ID_HANDLE_PROPERTIES, PH_EMENU_DEFAULT, PH_EMENU_DEFAULT);
         PhpInitializeHandleMenu(menu, ProcessItem->ProcessId, handles, numberOfHandles, Context);
         PhInsertCopyCellEMenuItem(menu, ID_HANDLE_COPY, Context->ListContext.TreeNewHandle, ContextMenu->Column);
@@ -504,7 +504,7 @@ INT_PTR CALLBACK PhpProcessHandlesDlgProc(
             PhCreateSearchControl(
                 hwndDlg,
                 handlesContext->SearchWindowHandle,
-                L"Search Handles (Ctrl+K)",
+                L"搜索句柄 (Ctrl+K)",
                 PhpProcessHandlessSearchControlCallback,
                 handlesContext
                 );
@@ -712,7 +712,7 @@ INT_PTR CALLBACK PhpProcessHandlesDlgProc(
                                     }
                                     else
                                     {
-                                        PhShowStatus(hwndDlg, L"The process does not exist.", STATUS_INVALID_CID, 0);
+                                        PhShowStatus(hwndDlg, L"进程不存在。", STATUS_INVALID_CID, 0);
                                     }
                                 }
 
@@ -724,7 +724,7 @@ INT_PTR CALLBACK PhpProcessHandlesDlgProc(
 
                          if (!NT_SUCCESS(status))
                         {
-                            PhShowStatus(hwndDlg, L"Unable to query the process.", status, 0);
+                            PhShowStatus(hwndDlg, L"无法查询进程。", status, 0);
                         }
                     }
                 }
@@ -787,15 +787,15 @@ INT_PTR CALLBACK PhpProcessHandlesDlgProc(
                         break;
 
                     menu = PhCreateEMenu();
-                    PhInsertEMenuItem(menu, protectedMenuItem = PhCreateEMenuItem(0, PH_HANDLE_TREE_MENUITEM_HIDE_PROTECTED_HANDLES, L"Hide protected handles", NULL, NULL), ULONG_MAX);
-                    PhInsertEMenuItem(menu, inheritMenuItem = PhCreateEMenuItem(0, PH_HANDLE_TREE_MENUITEM_HIDE_INHERIT_HANDLES, L"Hide inherit handles", NULL, NULL), ULONG_MAX);
-                    PhInsertEMenuItem(menu, unnamedMenuItem = PhCreateEMenuItem(0, PH_HANDLE_TREE_MENUITEM_HIDE_UNNAMED_HANDLES, L"Hide unnamed handles", NULL, NULL), ULONG_MAX);
-                    PhInsertEMenuItem(menu, etwMenuItem = PhCreateEMenuItem(0, PH_HANDLE_TREE_MENUITEM_HIDE_ETW_HANDLES, L"Hide etw handles", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, protectedMenuItem = PhCreateEMenuItem(0, PH_HANDLE_TREE_MENUITEM_HIDE_PROTECTED_HANDLES, L"隐藏受保护句柄", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, inheritMenuItem = PhCreateEMenuItem(0, PH_HANDLE_TREE_MENUITEM_HIDE_INHERIT_HANDLES, L"隐藏继承句柄", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, unnamedMenuItem = PhCreateEMenuItem(0, PH_HANDLE_TREE_MENUITEM_HIDE_UNNAMED_HANDLES, L"隐藏未命名句柄", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, etwMenuItem = PhCreateEMenuItem(0, PH_HANDLE_TREE_MENUITEM_HIDE_ETW_HANDLES, L"隐藏 ETW 句柄", NULL, NULL), ULONG_MAX);
                     PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-                    PhInsertEMenuItem(menu, protectedHighlightMenuItem = PhCreateEMenuItem(0, PH_HANDLE_TREE_MENUITEM_HIGHLIGHT_PROTECTED_HANDLES, L"Highlight protected handles", NULL, NULL), ULONG_MAX);
-                    PhInsertEMenuItem(menu, inheritHighlightMenuItem = PhCreateEMenuItem(0, PH_HANDLE_TREE_MENUITEM_HIGHLIGHT_INHERIT_HANDLES, L"Highlight inherit handles", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, protectedHighlightMenuItem = PhCreateEMenuItem(0, PH_HANDLE_TREE_MENUITEM_HIGHLIGHT_PROTECTED_HANDLES, L"高亮显示受保护句柄", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, inheritHighlightMenuItem = PhCreateEMenuItem(0, PH_HANDLE_TREE_MENUITEM_HIGHLIGHT_INHERIT_HANDLES, L"高亮显示继承句柄", NULL, NULL), ULONG_MAX);
                     PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PH_HANDLE_TREE_MENUITEM_HANDLESTATS, L"Statistics", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PH_HANDLE_TREE_MENUITEM_HANDLESTATS, L"统计数据", NULL, NULL), ULONG_MAX);
 
                     if (handlesContext->ListContext.HideProtectedHandles)
                         protectedMenuItem->Flags |= PH_EMENU_CHECKED;
@@ -939,7 +939,7 @@ INT_PTR CALLBACK PhpProcessHandlesDlgProc(
                 else
                 {
                     message = PhGetStatusMessage(status, 0);
-                    PhMoveReference(&handlesContext->ErrorMessage, PhFormatString(L"Unable to query handle information:\n%s", PhGetStringOrDefault(message, L"Unknown error.")));
+                    PhMoveReference(&handlesContext->ErrorMessage, PhFormatString(L"无法查询句柄信息:\n%s", PhGetStringOrDefault(message, L"未知错误。")));
                     PhClearReference(&message);
                     TreeNew_SetEmptyText(handlesContext->TreeNewHandle, &handlesContext->ErrorMessage->sr, 0);
                 }
