@@ -934,7 +934,7 @@ VOID PhNetworkProviderUpdate(
     ULONG numberOfConnections;
     ULONG i;
 
-    PhTraceFuncEnter("Network provider run count: %lu", runCount);
+    PhTraceFuncEnter("网络提供程序运行次数: %lu", runCount);
 
     if (!NetworkImportDone)
     {
@@ -953,7 +953,7 @@ VOID PhNetworkProviderUpdate(
 
     if (!PhGetNetworkConnections(&connections, &numberOfConnections))
     {
-        PhTraceFuncExit("Failed to get network connections: %lu", runCount);
+        PhTraceFuncExit("获取网络连接失败: %lu", runCount);
         return;
     }
 
@@ -1273,7 +1273,7 @@ VOID PhNetworkProviderUpdate(
 
     PhInvokeCallback(PhGetGeneralCallback(GeneralCallbackNetworkProviderUpdatedEvent), UlongToPtr(runCount));
 
-    PhTraceFuncExit("Network provider run count: %lu", runCount);
+    PhTraceFuncExit("网络提供程序运行次数: %lu", runCount);
 
     runCount++;
 }
@@ -1900,7 +1900,7 @@ BOOLEAN PhGetNetworkConnections(
 
 static CONST PH_KEY_VALUE_PAIR PhProtocolTypeStrings[] =
 {
-    SIP(SREF(L"Unknown"), 0),
+    SIP(SREF(L"未知"), 0),
     SIP(SREF(L"TCP"), PH_NETWORK_PROTOCOL_TCP4),
     SIP(SREF(L"TCP6"), PH_NETWORK_PROTOCOL_TCP6),
     SIP(SREF(L"UDP"), PH_NETWORK_PROTOCOL_UDP4),
@@ -1910,20 +1910,20 @@ static CONST PH_KEY_VALUE_PAIR PhProtocolTypeStrings[] =
 
 static CONST PH_KEY_VALUE_PAIR PhTcpStateStrings[] =
 {
-    SIP(SREF(L"Unknown"), 0),
-    SIP(SREF(L"Closed"), MIB_TCP_STATE_CLOSED),
-    SIP(SREF(L"Listen"), MIB_TCP_STATE_LISTEN),
-    SIP(SREF(L"SYN sent"), MIB_TCP_STATE_SYN_SENT),
-    SIP(SREF(L"SYN received"), MIB_TCP_STATE_SYN_RCVD),
-    SIP(SREF(L"Established"), MIB_TCP_STATE_ESTAB),
-    SIP(SREF(L"FIN wait 1"), MIB_TCP_STATE_FIN_WAIT1),
-    SIP(SREF(L"FIN wait 2"), MIB_TCP_STATE_FIN_WAIT2),
-    SIP(SREF(L"Close wait"), MIB_TCP_STATE_CLOSE_WAIT),
-    SIP(SREF(L"Closing"), MIB_TCP_STATE_CLOSING),
-    SIP(SREF(L"Last ACK"), MIB_TCP_STATE_LAST_ACK),
-    SIP(SREF(L"Time wait"), MIB_TCP_STATE_TIME_WAIT),
-    SIP(SREF(L"Delete TCB"), MIB_TCP_STATE_DELETE_TCB),
-    SIP(SREF(L"Bound"), MIB_TCP_STATE_RESERVED),
+    SIP(SREF(L"未知"), 0),
+    SIP(SREF(L"已关闭"), MIB_TCP_STATE_CLOSED),
+    SIP(SREF(L"监听"), MIB_TCP_STATE_LISTEN),
+    SIP(SREF(L"SYN 已发送"), MIB_TCP_STATE_SYN_SENT),
+    SIP(SREF(L"SYN 已接收"), MIB_TCP_STATE_SYN_RCVD),
+    SIP(SREF(L"已建立连接"), MIB_TCP_STATE_ESTAB),
+    SIP(SREF(L"FIN 等待状态 1"), MIB_TCP_STATE_FIN_WAIT1),
+    SIP(SREF(L"FIN 等待状态 2"), MIB_TCP_STATE_FIN_WAIT2),
+    SIP(SREF(L"关闭等待"), MIB_TCP_STATE_CLOSE_WAIT),
+    SIP(SREF(L"正在关闭"), MIB_TCP_STATE_CLOSING),
+    SIP(SREF(L"最后 ACK"), MIB_TCP_STATE_LAST_ACK),
+    SIP(SREF(L"时间等待"), MIB_TCP_STATE_TIME_WAIT),
+    SIP(SREF(L"删除 TCB"), MIB_TCP_STATE_DELETE_TCB),
+    SIP(SREF(L"已绑定"), MIB_TCP_STATE_RESERVED),
 };
 
 PCPH_STRINGREF PhGetProtocolTypeName(
