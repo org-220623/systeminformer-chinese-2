@@ -1931,7 +1931,7 @@ VOID PvScanImageForPage(
                                 argument,
                                 RTL_NUMBER_OF(argument),
                                 _TRUNCATE,
-                                L"<ordinal:%llu>",
+                                L"<序数:%llu>",
                                 value.U
                                 );
                         }
@@ -1950,7 +1950,7 @@ VOID PvScanImageForPage(
                                 RTL_NUMBER_OF(argument)
                                 ))
                             {
-                                wcscpy_s(argument, RTL_NUMBER_OF(argument), L"<unknown>");
+                                wcscpy_s(argument, RTL_NUMBER_OF(argument), L"<未知>");
                             }
                         }
                         else if (value.Kind == PvValImport)
@@ -1958,9 +1958,9 @@ VOID PvScanImageForPage(
                             PCWSTR importName = PvFindIatName(&Context->IatMap, value.U);
 
                             if (importName)
-                                _snwprintf_s(argument, RTL_NUMBER_OF(argument), _TRUNCATE, L"<result of %s>", importName);
+                                _snwprintf_s(argument, RTL_NUMBER_OF(argument), _TRUNCATE, L"<%s 的结果>", importName);
                             else
-                                _snwprintf_s(argument, RTL_NUMBER_OF(argument), _TRUNCATE, L"<result of 0x%llx>", value.U);
+                                _snwprintf_s(argument, RTL_NUMBER_OF(argument), _TRUNCATE, L"<0x%llx 的结果>", value.U);
                         }
                         else if ((value.Kind == PvValAddr || value.Kind == PvValConst) && value.U)
                         {
@@ -1968,7 +1968,7 @@ VOID PvScanImageForPage(
                             {
                                 if (!PvReadAnsiStringStructAtVa(value.U, argument, RTL_NUMBER_OF(argument)))
                                 {
-                                    wcscpy_s(argument, RTL_NUMBER_OF(argument), L"<unknown>");
+                                    wcscpy_s(argument, RTL_NUMBER_OF(argument), L"<未知>");
                                 }
                             }
                             else
@@ -1977,13 +1977,13 @@ VOID PvScanImageForPage(
 
                                 if (argument[0] == UNICODE_NULL)
                                 {
-                                    wcscpy_s(argument, RTL_NUMBER_OF(argument), L"<unknown>");
+                                    wcscpy_s(argument, RTL_NUMBER_OF(argument), L"<未知>");
                                 }
                             }
                         }
                         else
                         {
-                            wcscpy_s(argument, RTL_NUMBER_OF(argument), L"<unknown>");
+                            wcscpy_s(argument, RTL_NUMBER_OF(argument), L"<未知>");
                         }
                     }
                     else
@@ -2023,7 +2023,7 @@ VOID PvScanImageForPage(
                                 RTL_NUMBER_OF(argument)
                                 ))
                             {
-                                wcscpy_s(argument, RTL_NUMBER_OF(argument), L"<unknown>");
+                                wcscpy_s(argument, RTL_NUMBER_OF(argument), L"<未知>");
                             }
                         }
                         else if (value.Kind == PvValImport)
@@ -2031,9 +2031,9 @@ VOID PvScanImageForPage(
                             PCWSTR importName = PvFindIatName(&Context->IatMap, value.U);
 
                             if (importName)
-                                _snwprintf_s(argument, RTL_NUMBER_OF(argument), _TRUNCATE, L"<result of %s>", importName);
+                                _snwprintf_s(argument, RTL_NUMBER_OF(argument), _TRUNCATE, L"<%s 的结果>", importName);
                             else
-                                _snwprintf_s(argument, RTL_NUMBER_OF(argument), _TRUNCATE, L"<result of 0x%llx>", value.U);
+                                _snwprintf_s(argument, RTL_NUMBER_OF(argument), _TRUNCATE, L"<0x%llx 的结果>", value.U);
                         }
                         else if ((value.Kind == PvValAddr || value.Kind == PvValConst) && value.U)
                         {
@@ -2041,7 +2041,7 @@ VOID PvScanImageForPage(
                             {
                                 if (!PvReadUnicodeStringStructAtVa(value.U, argument, RTL_NUMBER_OF(argument)))
                                 {
-                                    wcscpy_s(argument, RTL_NUMBER_OF(argument), L"<unknown>");
+                                    wcscpy_s(argument, RTL_NUMBER_OF(argument), L"<未知>");
                                 }
                             }
                             else
@@ -2050,13 +2050,13 @@ VOID PvScanImageForPage(
 
                                 if (argument[0] == UNICODE_NULL)
                                 {
-                                    wcscpy_s(argument, RTL_NUMBER_OF(argument), L"<unknown>");
+                                    wcscpy_s(argument, RTL_NUMBER_OF(argument), L"<未知>");
                                 }
                             }
                         }
                         else
                         {
-                            wcscpy_s(argument, RTL_NUMBER_OF(argument), L"<unknown>");
+                            wcscpy_s(argument, RTL_NUMBER_OF(argument), L"<未知>");
                         }
                     }
 
@@ -2146,7 +2146,7 @@ static VOID PvBuildIatMapForPage(
 
             if (!NT_SUCCESS(status))
             {
-                wcscpy_s(dllName, RTL_NUMBER_OF(dllName), L"<invalid>");
+                wcscpy_s(dllName, RTL_NUMBER_OF(dllName), L"无效");
             }
 
             status = PhCopyStringZFromUtf8(
@@ -2159,7 +2159,7 @@ static VOID PvBuildIatMapForPage(
 
             if (!NT_SUCCESS(status))
             {
-                wcscpy_s(functionName, RTL_NUMBER_OF(functionName), L"<invalid>");
+                wcscpy_s(functionName, RTL_NUMBER_OF(functionName), L"无效");
             }
 
             _snwprintf_s(
@@ -2228,10 +2228,10 @@ VOID PvInitCommonListView(
     PhSetExtendedListView(Context->ListViewHandle);
     PvConfigTreeBorders(Context->ListViewHandle);
 
-    PhAddListViewColumn(Context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 120, L"Call VA");
-    PhAddListViewColumn(Context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 240, L"Target");
-    PhAddListViewColumn(Context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 280, L"String/Ordinal");
-    PhAddListViewColumn(Context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 120, L"IAT Slot");
+    PhAddListViewColumn(Context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 120, L"调用 VA");
+    PhAddListViewColumn(Context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 240, L"目标");
+    PhAddListViewColumn(Context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 280, L"字符串/序数");
+    PhAddListViewColumn(Context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 120, L"IAT 槽");
 
     PhInitializeLayoutManager(&Context->LayoutManager, WindowHandle);
     PhAddLayoutItem(&Context->LayoutManager, Context->ListViewHandle, NULL, PH_ANCHOR_ALL);

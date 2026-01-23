@@ -328,40 +328,40 @@ VOID PhShowKsiStatus(
 
         if (!BooleanFlagOn(processState, KPH_PROCESS_SECURELY_CREATED))
         {
-            PhAppendStringBuilder2(&stringBuilder, L"    - not securely created\r\n");
+            PhAppendStringBuilder2(&stringBuilder, L"    - 未安全创建\r\n");
         }
         if (!BooleanFlagOn(processState, KPH_PROCESS_VERIFIED_PROCESS))
         {
-            PhAppendStringBuilder2(&stringBuilder, L"    - unverified primary image\r\n");
+            PhAppendStringBuilder2(&stringBuilder, L"    - 未验证主要映像\r\n");
         }
         if (!BooleanFlagOn(processState, KPH_PROCESS_PROTECTED_PROCESS))
         {
-            PhAppendStringBuilder2(&stringBuilder, L"    - inactive protections\r\n");
+            PhAppendStringBuilder2(&stringBuilder, L"    - 未激活保护\r\n");
         }
         if (!BooleanFlagOn(processState, KPH_PROCESS_NO_UNTRUSTED_IMAGES))
         {
-            PhAppendStringBuilder2(&stringBuilder, L"    - unsigned images (likely an unsigned plugin)\r\n");
+            PhAppendStringBuilder2(&stringBuilder, L"    - 未签名映像 (可能是未签名插件)\r\n");
         }
         if (!BooleanFlagOn(processState, KPH_PROCESS_NOT_BEING_DEBUGGED))
         {
-            PhAppendStringBuilder2(&stringBuilder, L"    - process is being debugged\r\n");
+            PhAppendStringBuilder2(&stringBuilder, L"    - 进程正在被调试\r\n");
         }
         if ((processState & KPH_PROCESS_STATE_MINIMUM) != KPH_PROCESS_STATE_MINIMUM)
         {
-            PhAppendStringBuilder2(&stringBuilder, L"    - tampered primary image\r\n");
+            PhAppendStringBuilder2(&stringBuilder, L"    - 已修改主要映像\r\n");
         }
 
         if (PhEndsWithString2(stringBuilder.String, L"\r\n", FALSE))
             PhRemoveEndStringBuilder(&stringBuilder, 2);
         PhAppendStringBuilder2(&stringBuilder, L"\r\n\r\n"); // String interning optimization (dmex)
-        PhAppendStringBuilder2(&stringBuilder, L"You will be unable to use more advanced features, view details about system processes or terminate malicious software.");
+        PhAppendStringBuilder2(&stringBuilder, L"您将无法使用更高级的功能，查看系统进程的详细信息或终止恶意软件。");
         infoString = PhFinalStringBuilderString(&stringBuilder);
 
         if (PhShowMessageOneTime(
             NULL,
             TD_OK_BUTTON,
             TD_SHIELD_ERROR_ICON,
-            L"Access to the kernel driver is restricted.",
+            L"内核驱动程序的访问权限已受到限制。",
             L"%s",
             PhGetString(infoString)
             ))
@@ -437,7 +437,7 @@ PPH_STRING PhpGetKsiMessage(
         }
         else
         {
-            PhAppendStringBuilder2(&stringBuilder, L"Unknown error.");
+            PhAppendStringBuilder2(&stringBuilder, L"未知错误。");
         }
 
         PhAppendFormatStringBuilder(&stringBuilder, L" (0x%08x)", Status);
@@ -451,8 +451,8 @@ PPH_STRING PhpGetKsiMessage(
         PhGetString(buildString)
         );
 
-    PhAppendStringBuilder2(&stringBuilder, L"Windows Kernel ");
-    PhAppendStringBuilder2(&stringBuilder, PhGetStringOrDefault(kernelVersion, L"Unknown"));
+    PhAppendStringBuilder2(&stringBuilder, L"Windows 内核 ");
+    PhAppendStringBuilder2(&stringBuilder, PhGetStringOrDefault(kernelVersion, L"未知"));
     PhAppendStringBuilder2(&stringBuilder, L"\r\n");
     PhAppendStringBuilder(&stringBuilder, &versionString->sr);
     PhAppendStringBuilder2(&stringBuilder, L"\r\n");
@@ -460,14 +460,14 @@ PPH_STRING PhpGetKsiMessage(
     processState = KphGetCurrentProcessState();
     if (processState != 0)
     {
-        PhAppendStringBuilder2(&stringBuilder, L"Process State ");
+        PhAppendStringBuilder2(&stringBuilder, L"进程状态 ");
         PhAppendFormatStringBuilder(&stringBuilder, L"0x%08x", processState);
         PhAppendStringBuilder2(&stringBuilder, L"\r\n");
     }
 
     if (!PhEnableKsiWarnings)
     {
-        PhAppendStringBuilder2(&stringBuilder, L"Driver warnings are disabled.");
+        PhAppendStringBuilder2(&stringBuilder, L"驱动程序警告已禁用。");
         PhAppendStringBuilder2(&stringBuilder, L"\r\n");
     }
 
@@ -533,7 +533,7 @@ PPH_STRING PhpGetKsiMessage2(
         }
         else
         {
-            PhAppendStringBuilder2(&stringBuilder, L"Unknown error.");
+            PhAppendStringBuilder2(&stringBuilder, L"未知错误。");
         }
 
         PhAppendFormatStringBuilder(&stringBuilder, L" (0x%08x)", Status);
@@ -547,8 +547,8 @@ PPH_STRING PhpGetKsiMessage2(
         PhGetString(buildString)
         );
 
-    PhAppendStringBuilder2(&stringBuilder, L"Windows Kernel ");
-    PhAppendStringBuilder2(&stringBuilder, PhGetStringOrDefault(kernelVersion, L"Unknown"));
+    PhAppendStringBuilder2(&stringBuilder, L"Windows 内核 ");
+    PhAppendStringBuilder2(&stringBuilder, PhGetStringOrDefault(kernelVersion, L"未知"));
     PhAppendStringBuilder2(&stringBuilder, L"\r\n");
     PhAppendStringBuilder(&stringBuilder, &versionString->sr);
     PhAppendStringBuilder2(&stringBuilder, L"\r\n");
@@ -556,14 +556,14 @@ PPH_STRING PhpGetKsiMessage2(
     processState = KphGetCurrentProcessState();
     if (processState != 0)
     {
-        PhAppendStringBuilder2(&stringBuilder, L"Process State ");
+        PhAppendStringBuilder2(&stringBuilder, L"进程状态 ");
         PhAppendFormatStringBuilder(&stringBuilder, L"0x%08x", processState);
         PhAppendStringBuilder2(&stringBuilder, L"\r\n");
     }
 
     if (!PhEnableKsiWarnings)
     {
-        PhAppendStringBuilder2(&stringBuilder, L"Driver warnings are disabled.");
+        PhAppendStringBuilder2(&stringBuilder, L"驱动程序警告已禁用。");
         PhAppendStringBuilder2(&stringBuilder, L"\r\n");
     }
 
@@ -1310,10 +1310,8 @@ NTSTATUS KsiConnect(
                 TD_SHIELD_ERROR_ICON,
                 0,
                 FALSE,
-                L"Unable to load kernel driver",
-                L"The kernel driver is not yet supported on this kernel "
-                L"version. For the latest kernel support switch to the Canary "
-                L"update channel (Help > Check for updates > Canary > Check)."
+                L"无法加载内核驱动程序",
+                L"此内核版本尚不支持内核驱动程序。要获得最新的内核支持，请切换到 Canary 更新通道（帮助 > 检查更新 > Canary > 检查）。"
                 );
         }
         else
@@ -1323,10 +1321,8 @@ NTSTATUS KsiConnect(
                 TD_SHIELD_ERROR_ICON,
                 0,
                 FALSE,
-                L"Unable to load kernel driver",
-                L"The kernel driver is not yet supported on this kernel "
-                L"version. Request support by submitting a GitHub issue with "
-                L"the Windows Kernel version."
+                L"无法加载内核驱动程序",
+                L"此内核版本尚不支持内核驱动程序。请提交 GitHub issue 并注明 Windows 内核版本，以请求支持。"
                 );
         }
         goto CleanupExit;
@@ -1340,8 +1336,8 @@ NTSTATUS KsiConnect(
             TD_SHIELD_ERROR_ICON,
             0,
             FALSE,
-            L"Unable to load kernel driver",
-            L"The dynamic configuration was not found."
+            L"无法加载内核驱动程序",
+            L"未找到动态配置。"
             );
         goto CleanupExit;
     }
@@ -1353,8 +1349,8 @@ NTSTATUS KsiConnect(
             TD_SHIELD_ERROR_ICON,
             status,
             FALSE,
-            L"Unable to load kernel driver",
-            L"Failed to access the dynamic configuration."
+            L"无法加载内核驱动程序",
+            L"访问动态配置时出现错误。"
             );
 
         goto CleanupExit;
@@ -1367,8 +1363,8 @@ NTSTATUS KsiConnect(
             TD_SHIELD_ERROR_ICON,
             0,
             FALSE,
-            L"Unable to load kernel driver",
-            L"The kernel driver was not found."
+            L"无法加载内核驱动程序",
+            L"未找到内核驱动程序。"
             );
         goto CleanupExit;
     }
@@ -1473,8 +1469,8 @@ NTSTATUS KsiConnect(
             TD_SHIELD_ERROR_ICON,
             status,
             FALSE,
-            L"Unable to load kernel driver",
-            L"Try again with alternate driver load method?"
+            L"无法加载内核驱动程序",
+            L"请尝试使用其他驱动程序加载方式?"
             ) != IDYES)
         {
             goto CleanupExit;
@@ -1515,10 +1511,8 @@ NTSTATUS KsiConnect(
             PhShowKsiMessage(
                 WindowHandle,
                 TD_INFORMATION_ICON,
-                L"Kernel driver loaded",
-                L"The kernel driver was successfully loaded using an alternate "
-                L"method. The settings used to load the driver have been saved. "
-                L"You can revert these settings in the advanced options."
+                L"已加载内核驱动程序",
+                L"内核驱动程序已使用备用方法成功加载。用于加载驱动程序的设置已保存。您可以在高级选项中恢复这些设置。"
                 );
         }
 
@@ -1534,8 +1528,8 @@ NTSTATUS KsiConnect(
             TD_SHIELD_ERROR_ICON,
             status,
             FALSE,
-            L"Unable to load kernel driver",
-            L"Unable to load the kernel driver service."
+            L"无法加载内核驱动程序",
+            L"无法加载内核驱动程序服务。"
             );
         goto CleanupExit;
     }
@@ -1568,8 +1562,8 @@ NTSTATUS KsiConnect(
                 TD_ERROR_ICON,
                 status,
                 FALSE,
-                L"Unable to load kernel driver",
-                L"Unable to restart."
+                L"无法加载内核驱动程序",
+                L"无法重新启动。"
                 );
             goto CleanupExit;
         }
@@ -1688,7 +1682,7 @@ static HRESULT CALLBACK KsiSplashScreenDialogCallbackProc(
             }
             else
             {
-                PhShowStatus(WindowHandle, L"Unable to create the window.", status, 0);
+                PhShowStatus(WindowHandle, L"无法创建窗口。", status, 0);
             }
         }
         break;
@@ -1735,7 +1729,7 @@ VOID KsiShowInitializingSplashScreen(
     config.hMainIcon = PhGetApplicationIcon(FALSE);
     config.pfCallback = KsiSplashScreenDialogCallbackProc;
     config.pszWindowTitle = PhApplicationName;
-    config.pszMainInstruction = L"Initializing System Informer kernel driver...";
+    config.pszMainInstruction = L"正在初始化 System Informer 内核驱动程序...";
     config.pszContent = L"0 ms...";
     config.cxWidth = 200;
 
@@ -1764,9 +1758,8 @@ VOID PhInitializeKsi(
             TD_SHIELD_ERROR_ICON,
             0,
             FALSE,
-            L"Unable to load kernel driver",
-            L"The kernel driver is not supported on this Windows version, the "
-            L"minimum supported version is Windows 10."
+            L"无法加载内核驱动程序",
+            L"此 Windows 版本不支持内核驱动程序，最低支持版本为 Windows 10。"
             );
         return;
     }
@@ -1778,8 +1771,8 @@ VOID PhInitializeKsi(
             TD_SHIELD_ERROR_ICON,
             STATUS_PENDING,
             FALSE,
-            L"Unable to load kernel driver",
-            L"The last System Informer update requires a reboot."
+            L"无法加载内核驱动程序",
+            L"需重新启动 System Informer 以应用最新更新。"
             );
         return;
     }
@@ -1791,9 +1784,8 @@ VOID PhInitializeKsi(
             TD_SHIELD_ERROR_ICON,
             0,
             FALSE,
-            L"Unable to load kernel driver",
-            L"The kernel driver is not supported under Wow64, use the native "
-            "binary instead."
+            L"无法加载内核驱动程序",
+            L"Wow64 不支持内核驱动程序，请改用本地二进制文件。"
             );
         return;
     }
@@ -1806,8 +1798,8 @@ VOID PhInitializeKsi(
             TD_SHIELD_ERROR_ICON,
             0,
             FALSE,
-            L"Unable to load kernel driver",
-            L"The kernel driver is not supported on this architecture."
+            L"无法加载内核驱动程序",
+            L"内核驱动程序不支持此架构。"
             );
         return;
     }
@@ -2461,24 +2453,20 @@ HRESULT CALLBACK KsiKernelSupportCheckDialogCallbackProc(
 
                 if (ReadBooleanAcquire(&context->IsSupported))
                 {
-                    config.pszMainInstruction = L"Platform support pending review.";
-                    config.pszContent = L"Your kernel version is pending review on the development branch. "
-                        L"Your kernel will be supported in the next build!";
+                    config.pszMainInstruction = L"平台支持待审核。";
+                    config.pszContent = L"您的内核版本正在开发分支上等待审核。您的内核将在下一个版本中得到支持！";
                 }
                 else
                 {
                     if (context->IsCanaryChannel)
                     {
-                        config.pszMainInstruction = L"Kernel version not supported";
-                        config.pszContent = L"This kernel version is not yet supported. "
-                            L"Your kernel version is pending review review on the development branch.";
+                        config.pszMainInstruction = L"内核版本不受支持";
+                        config.pszContent = L"此内核版本尚不受支持。您的内核版本正在开发分支上等待审核。";
                     }
                     else
                     {
-                        config.pszMainInstruction = L"Kernel version not supported";
-                        config.pszContent = L"This kernel version is not yet supported. "
-                            L"For the latest kernel support switch to the Canary update channel "
-                            L"(Help > Check for updates > Canary > Check).";
+                        config.pszMainInstruction = L"内核版本不受支持";
+                        config.pszContent = L"此内核版本尚不受支持。要获得最新的内核支持，请切换到 Canary 更新通道（帮助 > 检查更新 > Canary > 检查）。";
                     }
                 }
 
@@ -2501,7 +2489,7 @@ VOID KsiShowKernelSupportCheckDialog(
     statusMessage = PhpGetKsiMessage2(
         STATUS_SI_DYNDATA_UNSUPPORTED_KERNEL,
         FALSE,
-        L"Checking for pending platform update...",
+        L"正在检查待处理的平台更新...",
         NULL
         );
 
@@ -2515,7 +2503,7 @@ VOID KsiShowKernelSupportCheckDialog(
     config.dwCommonButtons = TDCBF_CANCEL_BUTTON;
     config.pszWindowTitle = PhApplicationName;
     config.pszMainIcon = TD_SHIELD_WARNING_ICON;
-    config.pszMainInstruction = L"Checking for pending platform update...";
+    config.pszMainInstruction = L"正在检查待处理的平台更新...";
     config.pszContent = PhGetString(statusMessage);
     config.lpCallbackData = (LONG_PTR)&context;
     config.pfCallback = KsiKernelSupportCheckDialogCallbackProc;

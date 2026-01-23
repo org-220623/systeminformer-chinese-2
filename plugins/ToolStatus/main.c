@@ -133,13 +133,13 @@ VOID ShowCustomizeMenu(
         return;
 
     menu = PhCreateEMenu();
-    PhInsertEMenuItem(menu, mainMenuItem = PhCreateEMenuItem(0, COMMAND_ID_ENABLE_MENU, L"Main menu (auto-hide)", NULL, NULL), ULONG_MAX);
-    PhInsertEMenuItem(menu, searchMenuItem = PhCreateEMenuItem(0, COMMAND_ID_ENABLE_SEARCHBOX, L"Search box", NULL, NULL), ULONG_MAX);
+    PhInsertEMenuItem(menu, mainMenuItem = PhCreateEMenuItem(0, COMMAND_ID_ENABLE_MENU, L"主菜单 (自动隐藏)", NULL, NULL), ULONG_MAX);
+    PhInsertEMenuItem(menu, searchMenuItem = PhCreateEMenuItem(0, COMMAND_ID_ENABLE_SEARCHBOX, L"搜索框", NULL, NULL), ULONG_MAX);
     PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
     ToolbarGraphCreateMenu(menu, COMMAND_ID_GRAPHS_CUSTOMIZE);
     PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-    PhInsertEMenuItem(menu, lockMenuItem = PhCreateEMenuItem(0, COMMAND_ID_TOOLBAR_LOCKUNLOCK, L"Lock the toolbar", NULL, NULL), ULONG_MAX);
-    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, COMMAND_ID_TOOLBAR_CUSTOMIZE, L"Customize...", NULL, NULL), ULONG_MAX);
+    PhInsertEMenuItem(menu, lockMenuItem = PhCreateEMenuItem(0, COMMAND_ID_TOOLBAR_LOCKUNLOCK, L"锁定工具栏", NULL, NULL), ULONG_MAX);
+    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, COMMAND_ID_TOOLBAR_CUSTOMIZE, L"自定义...", NULL, NULL), ULONG_MAX);
 
     if (ToolStatusConfig.AutoHideMenu)
         mainMenuItem->Flags |= PH_EMENU_CHECKED;
@@ -277,13 +277,13 @@ VOID NTAPI TabPageUpdatedCallback(
     switch (tabIndex)
     {
     case 0:
-        Edit_SetCueBannerText(SearchboxHandle, L"Search Processes (Ctrl+K)");
+        Edit_SetCueBannerText(SearchboxHandle, L"搜索进程 (Ctrl+K)");
         break;
     case 1:
-        Edit_SetCueBannerText(SearchboxHandle, L"Search Services (Ctrl+K)");
+        Edit_SetCueBannerText(SearchboxHandle, L"搜索服务 (Ctrl+K)");
         break;
     case 2:
-        Edit_SetCueBannerText(SearchboxHandle, L"Search Network (Ctrl+K)");
+        Edit_SetCueBannerText(SearchboxHandle, L"搜索网络 (Ctrl+K)");
         break;
     default:
         {
@@ -291,7 +291,7 @@ VOID NTAPI TabPageUpdatedCallback(
             PPH_STRING text;
 
             text = PH_AUTO_T(PH_STRING, GetTabIndexBannerText(tabIndex, &string));
-            Edit_SetCueBannerText(SearchboxHandle, PhGetStringOrDefault(text, L"Search disabled"));
+            Edit_SetCueBannerText(SearchboxHandle, PhGetStringOrDefault(text, L"搜索已禁用"));
         }
         break;
     }
@@ -987,22 +987,22 @@ LRESULT CALLBACK MainWindowCallbackProc(
                                 case TIDC_POWERMENUDROPDOWN:
                                     {
                                         // Create the sub-menu...
-                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_LOCK, L"&Lock", NULL, NULL), ULONG_MAX);
-                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_LOGOFF, L"Log o&ff", NULL, NULL), ULONG_MAX);
+                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_LOCK, L"锁定(&L)", NULL, NULL), ULONG_MAX);
+                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_LOGOFF, L"登出(&F)", NULL, NULL), ULONG_MAX);
                                         PhInsertEMenuItem(menuItem, PhCreateEMenuSeparator(), ULONG_MAX);
-                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_SLEEP, L"&Sleep", NULL, NULL), ULONG_MAX);
-                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_HIBERNATE, L"&Hibernate", NULL, NULL), ULONG_MAX);
+                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_SLEEP, L"睡眠(&S)", NULL, NULL), ULONG_MAX);
+                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_HIBERNATE, L"休眠(&H)", NULL, NULL), ULONG_MAX);
                                         PhInsertEMenuItem(menuItem, PhCreateEMenuSeparator(), ULONG_MAX);
-                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_RESTART_UPDATE, L"Update and restart", NULL, NULL), ULONG_MAX);
-                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_SHUTDOWN_UPDATE, L"Update and shut down", NULL, NULL), ULONG_MAX);
+                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_RESTART_UPDATE, L"更新并重启", NULL, NULL), ULONG_MAX);
+                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_SHUTDOWN_UPDATE, L"更新并关机", NULL, NULL), ULONG_MAX);
                                         PhInsertEMenuItem(menuItem, PhCreateEMenuSeparator(), ULONG_MAX);
-                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_RESTART, L"R&estart", NULL, NULL), ULONG_MAX);
-                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_RESTARTADVOPTIONS, L"Restart to advanced options", NULL, NULL), ULONG_MAX);
-                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_RESTARTBOOTOPTIONS, L"Restart to boot &options", NULL, NULL), ULONG_MAX);
-                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(PhGetOwnTokenAttributes().Elevated ? 0 : PH_EMENU_DISABLED, PHAPP_ID_COMPUTER_RESTARTFWOPTIONS, L"Restart to firmware options", NULL, NULL), ULONG_MAX);
+                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_RESTART, L"重启(&R)", NULL, NULL), ULONG_MAX);
+                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_RESTARTADVOPTIONS, L"重启至高级选项", NULL, NULL), ULONG_MAX);
+                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_RESTARTBOOTOPTIONS, L"重启至引导菜单(&O)", NULL, NULL), ULONG_MAX);
+                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(PhGetOwnTokenAttributes().Elevated ? 0 : PH_EMENU_DISABLED, PHAPP_ID_COMPUTER_RESTARTFWOPTIONS, L"重启至固件菜单", NULL, NULL), ULONG_MAX);
                                         PhInsertEMenuItem(menuItem, PhCreateEMenuSeparator(), ULONG_MAX);
-                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_SHUTDOWN, L"Shu&t down", NULL, NULL), ULONG_MAX);
-                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_SHUTDOWNHYBRID, L"H&ybrid shut down", NULL, NULL), ULONG_MAX);
+                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_SHUTDOWN, L"关机(&T)", NULL, NULL), ULONG_MAX);
+                                        PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_SHUTDOWNHYBRID, L"混合关机(&Y)", NULL, NULL), ULONG_MAX);
 
                                         if (PhWindowsVersion < WINDOWS_8)
                                         {
@@ -1124,22 +1124,22 @@ LRESULT CALLBACK MainWindowCallbackProc(
                             break;
 
                         menu = PhCreateEMenu();
-                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_LOCK, L"&Lock", NULL, NULL), ULONG_MAX);
-                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_LOGOFF, L"Log o&ff", NULL, NULL), ULONG_MAX);
+                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_LOCK, L"锁定(&L)", NULL, NULL), ULONG_MAX);
+                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_LOGOFF, L"登出(&F)", NULL, NULL), ULONG_MAX);
                         PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_SLEEP, L"&Sleep", NULL, NULL), ULONG_MAX);
-                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_HIBERNATE, L"&Hibernate", NULL, NULL), ULONG_MAX);
+                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_SLEEP, L"睡眠(&S)", NULL, NULL), ULONG_MAX);
+                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_HIBERNATE, L"休眠(&H)", NULL, NULL), ULONG_MAX);
                         PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_RESTART_UPDATE, L"Update and restart", NULL, NULL), ULONG_MAX);
-                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_SHUTDOWN_UPDATE, L"Update and shut down", NULL, NULL), ULONG_MAX);
+                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_RESTART_UPDATE, L"更新并重启", NULL, NULL), ULONG_MAX);
+                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_SHUTDOWN_UPDATE, L"更新并关机", NULL, NULL), ULONG_MAX);
                         PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_RESTART, L"R&estart", NULL, NULL), ULONG_MAX);
-                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_RESTARTADVOPTIONS, L"Restart to advanced options", NULL, NULL), ULONG_MAX);
-                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_RESTARTBOOTOPTIONS, L"Restart to boot &options", NULL, NULL), ULONG_MAX);
-                        PhInsertEMenuItem(menu, PhCreateEMenuItem(PhGetOwnTokenAttributes().Elevated ? 0 : PH_EMENU_DISABLED, PHAPP_ID_COMPUTER_RESTARTFWOPTIONS, L"Restart to firmware options", NULL, NULL), ULONG_MAX);
+                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_RESTART, L"重启(&R)", NULL, NULL), ULONG_MAX);
+                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_RESTARTADVOPTIONS, L"重启至高级选项", NULL, NULL), ULONG_MAX);
+                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_RESTARTBOOTOPTIONS, L"重启至引导菜单(&O)", NULL, NULL), ULONG_MAX);
+                        PhInsertEMenuItem(menu, PhCreateEMenuItem(PhGetOwnTokenAttributes().Elevated ? 0 : PH_EMENU_DISABLED, PHAPP_ID_COMPUTER_RESTARTFWOPTIONS, L"重启至固件菜单", NULL, NULL), ULONG_MAX);
                         PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_SHUTDOWN, L"Shu&t down", NULL, NULL), ULONG_MAX);
-                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_SHUTDOWNHYBRID, L"H&ybrid shut down", NULL, NULL), ULONG_MAX);
+                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_SHUTDOWN, L"关机(&T)", NULL, NULL), ULONG_MAX);
+                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_ID_COMPUTER_SHUTDOWNHYBRID, L"混合关机(&Y)", NULL, NULL), ULONG_MAX);
 
                         if (PhWindowsVersion < WINDOWS_8)
                         {
@@ -1257,7 +1257,7 @@ LRESULT CALLBACK MainWindowCallbackProc(
                                     PhShowSystemInformationDialog(L"CPU");
                                     break;
                                 case ID_STATUS_PHYSICALMEMORY:
-                                    PhShowSystemInformationDialog(L"Memory");
+                                    PhShowSystemInformationDialog(L"内存");
                                     break;
                                 case ID_STATUS_IO_RO:
                                 case ID_STATUS_IO_W:
@@ -1408,7 +1408,7 @@ LRESULT CALLBACK MainWindowCallbackProc(
                                 }
                                 else
                                 {
-                                    PhShowError2(WindowHandle, SystemInformer_GetWindowName(), L"The process (PID %lu) does not exist.", HandleToUlong(clientId.UniqueProcess));
+                                    PhShowError2(WindowHandle, SystemInformer_GetWindowName(), L"进程 (PID %lu) 不存在。", HandleToUlong(clientId.UniqueProcess));
                                 }
                             }
                             break;
@@ -1423,7 +1423,7 @@ LRESULT CALLBACK MainWindowCallbackProc(
                                 }
                                 else
                                 {
-                                    PhShowError2(WindowHandle, SystemInformer_GetWindowName(), L"The process (PID %lu) does not exist.", HandleToUlong(clientId.UniqueProcess));
+                                    PhShowError2(WindowHandle, SystemInformer_GetWindowName(), L"进程 (PID %lu) 不存在。", HandleToUlong(clientId.UniqueProcess));
                                 }
                             }
                             break;
@@ -1719,14 +1719,14 @@ VOID NTAPI MainMenuInitializingCallback(
     else
         insertIndex = ULONG_MAX;
 
-    menu = PhPluginCreateEMenuItem(PluginInstance, 0, 0, L"Toolbar", NULL);
-    PhInsertEMenuItem(menu, mainMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, COMMAND_ID_ENABLE_MENU, L"Main menu (auto-hide)", NULL), ULONG_MAX);
-    PhInsertEMenuItem(menu, searchMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, COMMAND_ID_ENABLE_SEARCHBOX, L"Search box", NULL), ULONG_MAX);
+    menu = PhPluginCreateEMenuItem(PluginInstance, 0, 0, L"工具栏", NULL);
+    PhInsertEMenuItem(menu, mainMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, COMMAND_ID_ENABLE_MENU, L"主菜单 (自动隐藏)", NULL), ULONG_MAX);
+    PhInsertEMenuItem(menu, searchMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, COMMAND_ID_ENABLE_SEARCHBOX, L"搜索框", NULL), ULONG_MAX);
     PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
     ToolbarGraphCreatePluginMenu(menu, COMMAND_ID_GRAPHS_CUSTOMIZE);
     PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-    PhInsertEMenuItem(menu, lockMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, COMMAND_ID_TOOLBAR_LOCKUNLOCK, L"Lock the toolbar", NULL), ULONG_MAX);
-    PhInsertEMenuItem(menu, PhPluginCreateEMenuItem(PluginInstance, 0, COMMAND_ID_TOOLBAR_CUSTOMIZE, L"Customize...", NULL), ULONG_MAX);
+    PhInsertEMenuItem(menu, lockMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, COMMAND_ID_TOOLBAR_LOCKUNLOCK, L"锁定工具栏", NULL), ULONG_MAX);
+    PhInsertEMenuItem(menu, PhPluginCreateEMenuItem(PluginInstance, 0, COMMAND_ID_TOOLBAR_CUSTOMIZE, L"自定义...", NULL), ULONG_MAX);
 
     if (ToolStatusConfig.AutoHideMenu)
         mainMenuItem->Flags |= PH_EMENU_CHECKED;
@@ -1940,8 +1940,8 @@ LOGICAL DllMain(
             if (!PluginInstance)
                 return FALSE;
 
-            info->DisplayName = L"Toolbar and Status Bar";
-            info->Description = L"Adds a Toolbar, Status Bar and Search box.";
+            info->DisplayName = L"工具栏和状态栏";
+            info->Description = L"添加工具栏、状态栏和搜索框。";
             info->Interface = (PVOID)&PluginInterface;
 
             PhRegisterCallback(

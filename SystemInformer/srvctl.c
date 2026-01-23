@@ -127,24 +127,24 @@ VOID PhpFixProcessServicesControls(
         {
         case SERVICE_RUNNING:
             {
-                PhSetWindowText(startButton, L"S&top");
-                PhSetWindowText(pauseButton, L"&Pause");
+                PhSetWindowText(startButton, L"停止(&T)");
+                PhSetWindowText(pauseButton, L"暂停(&P)");
                 EnableWindow(startButton, ServiceItem->ControlsAccepted & SERVICE_ACCEPT_STOP);
                 EnableWindow(pauseButton, ServiceItem->ControlsAccepted & SERVICE_ACCEPT_PAUSE_CONTINUE);
             }
             break;
         case SERVICE_PAUSED:
             {
-                PhSetWindowText(startButton, L"S&top");
-                PhSetWindowText(pauseButton, L"C&ontinue");
+                PhSetWindowText(startButton, L"停止(&T)");
+                PhSetWindowText(pauseButton, L"继续(&O)");
                 EnableWindow(startButton, ServiceItem->ControlsAccepted & SERVICE_ACCEPT_STOP);
                 EnableWindow(pauseButton, ServiceItem->ControlsAccepted & SERVICE_ACCEPT_PAUSE_CONTINUE);
             }
             break;
         case SERVICE_STOPPED:
             {
-                PhSetWindowText(startButton, L"&Start");
-                PhSetWindowText(pauseButton, L"&Pause");
+                PhSetWindowText(startButton, L"启动(&S)");
+                PhSetWindowText(pauseButton, L"暂停(&P)");
                 EnableWindow(startButton, TRUE);
                 EnableWindow(pauseButton, FALSE);
             }
@@ -154,8 +154,8 @@ VOID PhpFixProcessServicesControls(
         case SERVICE_PAUSE_PENDING:
         case SERVICE_STOP_PENDING:
             {
-                PhSetWindowText(startButton, L"&Start");
-                PhSetWindowText(pauseButton, L"&Pause");
+                PhSetWindowText(startButton, L"启动(&S)");
+                PhSetWindowText(pauseButton, L"暂停(&P)");
                 EnableWindow(startButton, FALSE);
                 EnableWindow(pauseButton, FALSE);
             }
@@ -175,8 +175,8 @@ VOID PhpFixProcessServicesControls(
     }
     else
     {
-        PhSetWindowText(startButton, L"&Start");
-        PhSetWindowText(pauseButton, L"&Pause");
+        PhSetWindowText(startButton, L"启动(&S)");
+        PhSetWindowText(pauseButton, L"暂停(&P)");
         EnableWindow(startButton, FALSE);
         EnableWindow(pauseButton, FALSE);
         PhSetWindowText(descriptionLabel, L"");
@@ -220,9 +220,9 @@ INT_PTR CALLBACK PhpServicesPageProc(
 
             PhSetListViewStyle(context->ListViewHandle, TRUE, TRUE);
             PhSetControlTheme(context->ListViewHandle, L"explorer");
-            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 120, L"Name");
-            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 220, L"Display name");
-            PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 220, L"File name");
+            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 120, L"名称");
+            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 220, L"显示名称");
+            PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 220, L"文件名");
             PhSetExtendedListView(context->ListViewHandle);
 
             for (ULONG i = 0; i < context->NumberOfServices; i++)
@@ -444,10 +444,10 @@ INT_PTR CALLBACK PhpServicesPageProc(
                 if (numberOfItems != 0)
                 {
                     menu = PhCreateEMenu();
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 1, L"Go to service", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 1, L"转到服务", NULL, NULL), ULONG_MAX);
                     PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
                     PhServiceListInsertContextMenu(hwndDlg, menu, (PPH_SERVICE_ITEM*)listviewItems, numberOfItems);
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, IDC_COPY, L"&Copy", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, IDC_COPY, L"复制(&C)", NULL, NULL), ULONG_MAX);
                     PhInsertCopyListViewEMenuItem(menu, IDC_COPY, context->ListViewHandle);
 
                     item = PhShowEMenu(
@@ -502,7 +502,7 @@ INT_PTR CALLBACK PhpServicesPageProc(
                                         }
                                         else
                                         {
-                                            PhShowStatus(hwndDlg, L"The process does not exist.", STATUS_INVALID_CID, 0);
+                                            PhShowStatus(hwndDlg, L"进程不存在。", STATUS_INVALID_CID, 0);
                                         }
                                     }
                                 }
@@ -597,14 +597,14 @@ INT_PTR CALLBACK PhpServicesPageProc(
                                             }
                                             else
                                             {
-                                                PhShowStatus(hwndDlg, L"The service does not exist.", STATUS_OBJECT_NAME_NOT_FOUND, 0);
+                                                PhShowStatus(hwndDlg, L"服务不存在。", STATUS_OBJECT_NAME_NOT_FOUND, 0);
                                             }
 
                                             NtClose(keyHandle);
                                         }
                                         else
                                         {
-                                            PhShowStatus(hwndDlg, L"The service does not exist.", STATUS_OBJECT_NAME_NOT_FOUND, 0);
+                                            PhShowStatus(hwndDlg, L"服务不存在。", STATUS_OBJECT_NAME_NOT_FOUND, 0);
                                         }
                                     }
                                 }
@@ -632,20 +632,20 @@ INT_PTR CALLBACK PhpServicesPageProc(
                                                     SETTING_FILE_BROWSE_EXECUTABLE,
                                                     PhGetString(fileName),
                                                     FALSE,
-                                                    L"Make sure the Explorer executable file is present."
+                                                    L"请确保资源管理器可执行文件存在。"
                                                     );
                                                 PhDereferenceObject(fileName);
                                             }
                                             else
                                             {
-                                                PhShowStatus(hwndDlg, L"Unable to locate the file.", status, 0);
+                                                PhShowStatus(hwndDlg, L"无法定位文件。", status, 0);
                                             }
 
                                             PhCloseServiceHandle(serviceHandle);
                                         }
                                         else
                                         {
-                                            PhShowStatus(hwndDlg, L"Unable to locate the file.", status, 0);
+                                            PhShowStatus(hwndDlg, L"无法定位文件。", status, 0);
                                         }
                                     }
                                 }

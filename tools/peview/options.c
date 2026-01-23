@@ -131,15 +131,15 @@ VOID PvLoadGeneralPage(
 {
     PhSetDialogItemText(Context->WindowHandle, IDC_DBGHELPSEARCHPATH, PhaGetStringSetting(L"DbgHelpSearchPath")->Buffer);
 
-    //PhAddListViewItem(Context->ListViewHandle, PHP_OPTIONS_INDEX_ENABLE_WARNINGS, L"Enable warnings", NULL);
-    //PhAddListViewItem(Context->ListViewHandle, PHP_OPTIONS_INDEX_ENABLE_PLUGINS, L"Enable plugins", NULL);
-    //PhAddListViewItem(Context->ListViewHandle, PHP_OPTIONS_INDEX_ENABLE_UNDECORATE_SYMBOLS, L"Enable undecorated symbols", NULL);
-    PhAddListViewItem(Context->ListViewHandle, PHP_OPTIONS_INDEX_ENABLE_THEME_SUPPORT, L"Enable theme support", NULL);
-    //PhAddListViewItem(Context->ListViewHandle, PHP_OPTIONS_INDEX_ENABLE_START_ASADMIN, L"Enable start as admin", NULL);
-    //PhAddListViewItem(Context->ListViewHandle, PHP_OPTIONS_INDEX_SHOW_ADVANCED_OPTIONS, L"Show advanced options", NULL);
-    PhAddListViewItem(Context->ListViewHandle, PHP_OPTIONS_INDEX_ENABLE_LEGACY_TABS, L"Enable legacy properties window", NULL);
-    PhAddListViewItem(Context->ListViewHandle, PHP_OPTIONS_INDEX_ENABLE_THEME_BORDER, L"Enable view borders", NULL);
-    PhAddListViewItem(Context->ListViewHandle, PHP_OPTIONS_INDEX_ENABLE_LASTTAB_SUPPORT, L"Remember last selected window", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, PHP_OPTIONS_INDEX_ENABLE_WARNINGS, L"启用警告", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, PHP_OPTIONS_INDEX_ENABLE_PLUGINS, L"启用插件", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, PHP_OPTIONS_INDEX_ENABLE_UNDECORATE_SYMBOLS, L"启用未修饰符号", NULL);
+    PhAddListViewItem(Context->ListViewHandle, PHP_OPTIONS_INDEX_ENABLE_THEME_SUPPORT, L"启用主题支持", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, PHP_OPTIONS_INDEX_ENABLE_START_ASADMIN, L"启用 \"以管理员身份运行\" 选项", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, PHP_OPTIONS_INDEX_SHOW_ADVANCED_OPTIONS, L"显示高级选项", NULL);
+    PhAddListViewItem(Context->ListViewHandle, PHP_OPTIONS_INDEX_ENABLE_LEGACY_TABS, L"启用旧版属性窗口", NULL);
+    PhAddListViewItem(Context->ListViewHandle, PHP_OPTIONS_INDEX_ENABLE_THEME_BORDER, L"启用视图边框", NULL);
+    PhAddListViewItem(Context->ListViewHandle, PHP_OPTIONS_INDEX_ENABLE_LASTTAB_SUPPORT, L"记住上次选择的窗口", NULL);
 
     //SetLvItemCheckForSetting(Context->ListViewHandle, PHP_OPTIONS_INDEX_ENABLE_WARNINGS, L"EnableWarnings");
     //SetLvItemCheckForSetting(Context->ListViewHandle, PHP_OPTIONS_INDEX_ENABLE_PLUGINS, L"EnablePlugins");
@@ -187,8 +187,8 @@ VOID PvGeneralPageSave(
             Context->WindowHandle,
             TD_YES_BUTTON | TD_NO_BUTTON,
             TD_INFORMATION_ICON,
-            L"One or more options you have changed requires a restart of PE Viewer.",
-            L"Do you want to restart PE Viewer now?"
+            L"您更改的一个或多个选项需要重启 PE Viewer。",
+            L"您现在要重启 PE Viewer 吗?"
             ) == IDYES)
         {
             if (PvShellExecuteRestart(Context->WindowHandle))
@@ -295,7 +295,7 @@ INT_PTR CALLBACK PvOptionsWndProc(
                         hwndDlg,
                         TD_YES_BUTTON | TD_NO_BUTTON,
                         TD_WARNING_ICON,
-                        L"Do you want to reset all settings and restart PE Viewer?",
+                        L"您要重置所有设置并重启 PE Viewer 吗?",
                         L""
                         ) == IDYES)
                     {
@@ -316,7 +316,7 @@ INT_PTR CALLBACK PvOptionsWndProc(
                         hwndDlg,
                         TD_YES_BUTTON | TD_NO_BUTTON,
                         TD_INFORMATION_ICON,
-                        L"Do you want to clean up unused settings?",
+                        L"是否要清除未使用的设置?",
                         L""
                         ) == IDYES)
                     {

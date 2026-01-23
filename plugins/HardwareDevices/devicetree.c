@@ -59,8 +59,8 @@ static ULONG DeviceDisabledInterfaceColor = 0;
 static ULONG DeviceArrivedColor = 0;
 static ULONG DeviceHighlightingDuration = 0;
 
-static CONST PH_STRINGREF DevicePageText = PH_STRINGREF_INIT(L"Devices");
-static CONST PH_STRINGREF DeviceBannerText = PH_STRINGREF_INIT(L"Search Devices");
+static CONST PH_STRINGREF DevicePageText = PH_STRINGREF_INIT(L"设备");
+static CONST PH_STRINGREF DeviceBannerText = PH_STRINGREF_INIT(L"搜索设备");
 static PPH_OBJECT_TYPE DeviceTreeType = NULL;
 static BOOLEAN DeviceTabCreated = FALSE;
 static HWND DeviceTreeHandle = NULL;
@@ -254,7 +254,7 @@ PDEVICE_TREE DeviceTreeCreate(
 {
     PDEVICE_TREE tree;
 
-    PhTrace("Creating device tree...");
+    PhTrace("正在创建设备树...");
 
     tree = PhCreateObject(sizeof(DEVICE_TREE), DeviceTreeType);
     tree->Nodes = PhCreateList(Tree->DeviceList->AllocatedCount);
@@ -283,7 +283,7 @@ PDEVICE_TREE DeviceTreeCreate(
 
     tree->Tree = PhReferenceObject(Tree);
 
-    PhTrace("Created device tree with %lu nodes", tree->Nodes->Count);
+    PhTrace("创建了包含 %lu 个节点的设备树", tree->Nodes->Count);
 
     return tree;
 }
@@ -838,23 +838,23 @@ BOOLEAN NTAPI DeviceTreeCallback(
             node = (PDEVICE_NODE)contextMenuEvent->Node;
 
             menu = PhCreateEMenu();
-            PhInsertEMenuItem(menu, gotoServiceItem = PhCreateEMenuItem(0, 108, L"Go to service...", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(menu, gotoServiceItem = PhCreateEMenuItem(0, 108, L"转到服务...", NULL, NULL), ULONG_MAX);
             PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-            PhInsertEMenuItem(menu, enable = PhCreateEMenuItem(0, 0, L"Enable", NULL, NULL), ULONG_MAX);
-            PhInsertEMenuItem(menu, disable = PhCreateEMenuItem(0, 1, L"Disable", NULL, NULL), ULONG_MAX);
-            PhInsertEMenuItem(menu, restart = PhCreateEMenuItem(0, 2, L"Restart", NULL, NULL), ULONG_MAX);
-            PhInsertEMenuItem(menu, uninstall = PhCreateEMenuItem(0, 3, L"Uninstall", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(menu, enable = PhCreateEMenuItem(0, 0, L"启用", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(menu, disable = PhCreateEMenuItem(0, 1, L"禁用", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(menu, restart = PhCreateEMenuItem(0, 2, L"重新启动", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(menu, uninstall = PhCreateEMenuItem(0, 3, L"卸载", NULL, NULL), ULONG_MAX);
             PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-            subMenu = PhCreateEMenuItem(0, 0, L"Open key", NULL, NULL);
-            PhInsertEMenuItem(subMenu, PhCreateEMenuItem(0, HW_KEY_INDEX_HARDWARE, L"Hardware", NULL, NULL), ULONG_MAX);
-            PhInsertEMenuItem(subMenu, PhCreateEMenuItem(0, HW_KEY_INDEX_SOFTWARE, L"Software", NULL, NULL), ULONG_MAX);
-            PhInsertEMenuItem(subMenu, PhCreateEMenuItem(0, HW_KEY_INDEX_USER, L"User", NULL, NULL), ULONG_MAX);
-            PhInsertEMenuItem(subMenu, PhCreateEMenuItem(0, HW_KEY_INDEX_CONFIG, L"Config", NULL, NULL), ULONG_MAX);
+            subMenu = PhCreateEMenuItem(0, 0, L"转到注册表键", NULL, NULL);
+            PhInsertEMenuItem(subMenu, PhCreateEMenuItem(0, HW_KEY_INDEX_HARDWARE, L"硬件", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(subMenu, PhCreateEMenuItem(0, HW_KEY_INDEX_SOFTWARE, L"软件", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(subMenu, PhCreateEMenuItem(0, HW_KEY_INDEX_USER, L"用户", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(subMenu, PhCreateEMenuItem(0, HW_KEY_INDEX_CONFIG, L"配置信息", NULL, NULL), ULONG_MAX);
             PhInsertEMenuItem(menu, subMenu, ULONG_MAX);
             PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-            PhInsertEMenuItem(menu, properties = PhCreateEMenuItem(0, 10, L"Properties", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(menu, properties = PhCreateEMenuItem(0, 10, L"属性", NULL, NULL), ULONG_MAX);
             PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 11, L"Copy", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 11, L"复制", NULL, NULL), ULONG_MAX);
             PhInsertCopyCellEMenuItem(menu, 11, DeviceTreeHandle, contextMenuEvent->Column);
             PhSetFlagsEMenuItem(menu, 10, PH_EMENU_DEFAULT, PH_EMENU_DEFAULT);
 
@@ -1079,122 +1079,122 @@ VOID DevicesTreeImageListInitialize(
 
 const DEVICE_PROPERTY_TABLE_ENTRY DeviceItemPropertyTable[] =
 {
-    { PhDevicePropertyName, L"Name", TRUE, 400, 0 },
-    { PhDevicePropertyManufacturer, L"Manufacturer", TRUE, 180, 0 },
-    { PhDevicePropertyService, L"Service", TRUE, 120, 0 },
-    { PhDevicePropertyClass, L"Class", TRUE, 120, 0 },
-    { PhDevicePropertyEnumeratorName, L"Enumerator", TRUE, 80, 0 },
-    { PhDevicePropertyInstallDate, L"Installed", TRUE, 160, 0 },
+    { PhDevicePropertyName, L"名称", TRUE, 400, 0 },
+    { PhDevicePropertyManufacturer, L"制造商", TRUE, 180, 0 },
+    { PhDevicePropertyService, L"服务", TRUE, 120, 0 },
+    { PhDevicePropertyClass, L"类", TRUE, 120, 0 },
+    { PhDevicePropertyEnumeratorName, L"枚举器", TRUE, 80, 0 },
+    { PhDevicePropertyInstallDate, L"已安装", TRUE, 160, 0 },
 
-    { PhDevicePropertyFirstInstallDate, L"First installed", FALSE, 160, 0 },
-    { PhDevicePropertyLastArrivalDate, L"Last arrival", FALSE, 160, 0 },
-    { PhDevicePropertyLastRemovalDate, L"Last removal", FALSE, 160, 0 },
-    { PhDevicePropertyDeviceDesc, L"Description", FALSE, 280, 0 },
-    { PhDevicePropertyFriendlyName, L"Friendly name", FALSE, 220, 0 },
-    { PhDevicePropertyInstanceId, L"Instance ID", FALSE, 240, DT_PATH_ELLIPSIS },
-    { PhDevicePropertyParentInstanceId, L"Parent instance ID", FALSE, 240, DT_PATH_ELLIPSIS },
-    { PhDevicePropertyPDOName, L"PDO name", FALSE, 180, DT_PATH_ELLIPSIS },
-    { PhDevicePropertyLocationInfo, L"Location info", FALSE, 180, DT_PATH_ELLIPSIS },
-    { PhDevicePropertyClassGuid, L"Class GUID", FALSE, 80, 0 },
-    { PhDevicePropertyDriver, L"Driver", FALSE, 180, DT_PATH_ELLIPSIS },
-    { PhDevicePropertyDriverVersion, L"Driver version", FALSE, 80, 0 },
-    { PhDevicePropertyDriverDate, L"Driver date", FALSE, 80, 0 },
-    { PhDevicePropertyFirmwareDate, L"Firmware date", FALSE, 80, 0 },
-    { PhDevicePropertyFirmwareVersion, L"Firmware version", FALSE, 80, 0 },
-    { PhDevicePropertyFirmwareRevision, L"Firmware revision", FALSE, 80, 0 },
-    { PhDevicePropertyHasProblem, L"Has problem", FALSE, 80, 0 },
-    { PhDevicePropertyProblemCode, L"Problem code", FALSE, 80, 0 },
-    { PhDevicePropertyProblemStatus, L"Problem status", FALSE, 80, 0 },
-    { PhDevicePropertyDevNodeStatus, L"Node status flags", FALSE, 80, 0 },
-    { PhDevicePropertyDevCapabilities, L"Capabilities", FALSE, 80, 0 },
-    { PhDevicePropertyUpperFilters, L"Upper filters", FALSE, 80, 0 },
-    { PhDevicePropertyLowerFilters, L"Lower filters", FALSE, 80, 0 },
-    { PhDevicePropertyHardwareIds, L"Hardware IDs ", FALSE, 80, 0 },
-    { PhDevicePropertyCompatibleIds, L"Compatible IDs", FALSE, 80, 0 },
-    { PhDevicePropertyConfigFlags, L"Configuration flags", FALSE, 80, 0 },
-    { PhDevicePropertyUINumber, L"Number", FALSE, 80, 0 },
-    { PhDevicePropertyBusTypeGuid, L"Bus type GUID", FALSE, 80, 0 },
-    { PhDevicePropertyLegacyBusType, L"Legacy bus type", FALSE, 80, 0 },
-    { PhDevicePropertyBusNumber, L"Bus number", FALSE, 80, 0 },
-    { PhDevicePropertySecurity, L"Security descriptor (binary)", FALSE, 80, 0 },
-    { PhDevicePropertySecuritySDS, L"Security descriptor", FALSE, 80, 0 },
-    { PhDevicePropertyDevType, L"Type", FALSE, 80, 0 },
-    { PhDevicePropertyExclusive, L"Exclusive", FALSE, 80, 0 },
-    { PhDevicePropertyCharacteristics, L"Characteristics", FALSE, 80, 0 },
-    { PhDevicePropertyAddress, L"Address", FALSE, 80, 0 },
-    { PhDevicePropertyPowerData, L"Power data", FALSE, 80, 0 },
-    { PhDevicePropertyRemovalPolicy, L"Removal policy", FALSE, 80, 0 },
-    { PhDevicePropertyRemovalPolicyDefault, L"Removal policy default", FALSE, 80, 0 },
-    { PhDevicePropertyRemovalPolicyOverride, L"Removal policy override", FALSE, 80, 0 },
-    { PhDevicePropertyInstallState, L"Install state", FALSE, 80, 0 },
-    { PhDevicePropertyLocationPaths, L"Location paths", FALSE, 80, 0 },
-    { PhDevicePropertyBaseContainerId, L"Base container ID", FALSE, 80, 0 },
-    { PhDevicePropertyEjectionRelations, L"Ejection relations", FALSE, 80, 0 },
-    { PhDevicePropertyRemovalRelations, L"Removal relations", FALSE, 80, 0 },
-    { PhDevicePropertyPowerRelations, L"Power relations", FALSE, 80, 0 },
-    { PhDevicePropertyBusRelations, L"Bus relations", FALSE, 80, 0 },
-    { PhDevicePropertyChildren, L"Children", FALSE, 80, 0 },
-    { PhDevicePropertySiblings, L"Siblings", FALSE, 80, 0 },
-    { PhDevicePropertyTransportRelations, L"Transport relations", FALSE, 80, 0 },
-    { PhDevicePropertyReported, L"Reported", FALSE, 80, 0 },
-    { PhDevicePropertyLegacy, L"Legacy", FALSE, 80, 0 },
-    { PhDevicePropertyContainerId, L"Container ID", FALSE, 80, 0 },
-    { PhDevicePropertyInLocalMachineContainer, L"Local machine container", FALSE, 80, 0 },
-    { PhDevicePropertyModel, L"Model", FALSE, 80, 0 },
-    { PhDevicePropertyModelId, L"Model ID", FALSE, 80, 0 },
-    { PhDevicePropertyFriendlyNameAttributes, L"Friendly name attributes", FALSE, 80, 0 },
-    { PhDevicePropertyManufacturerAttributes, L"Manufacture attributes", FALSE, 80, 0 },
-    { PhDevicePropertyPresenceNotForDevice, L"Presence not for device", FALSE, 80, 0 },
-    { PhDevicePropertySignalStrength, L"Signal strength", FALSE, 80, 0 },
-    { PhDevicePropertyIsAssociateableByUserAction, L"Associateable by user action", FALSE, 80, 0 },
-    { PhDevicePropertyShowInUninstallUI, L"Show uninstall UI", FALSE, 80, 0 },
-    { PhDevicePropertyNumaProximityDomain, L"Numa proximity default", FALSE, 80, 0 },
-    { PhDevicePropertyDHPRebalancePolicy, L"DHP rebalance policy", FALSE, 80, 0 },
-    { PhDevicePropertyNumaNode, L"Numa Node", FALSE, 80, 0 },
-    { PhDevicePropertyBusReportedDeviceDesc, L"Bus reported description", FALSE, 80, 0 },
-    { PhDevicePropertyIsPresent, L"Present", FALSE, 80, 0 },
-    { PhDevicePropertyConfigurationId, L"Configuration ID", FALSE, 80, 0 },
-    { PhDevicePropertyReportedDeviceIdsHash, L"Reported IDs hash", FALSE, 80, 0 },
-    { PhDevicePropertyPhysicalDeviceLocation, L"Physical location", FALSE, 80, 0 },
-    { PhDevicePropertyBiosDeviceName, L"BIOS name", FALSE, 80, 0 },
-    { PhDevicePropertyDriverProblemDesc, L"Problem description", FALSE, 80, 0 },
-    { PhDevicePropertyDebuggerSafe, L"Debugger safe", FALSE, 80, 0 },
-    { PhDevicePropertyPostInstallInProgress, L"Post install in progress", FALSE, 80, 0 },
-    { PhDevicePropertyStack, L"Stack", FALSE, 80, 0 },
-    { PhDevicePropertyExtendedConfigurationIds, L"Extended configuration IDs", FALSE, 80, 0 },
-    { PhDevicePropertyIsRebootRequired, L"Reboot required", FALSE, 80, 0 },
-    { PhDevicePropertyDependencyProviders, L"Dependency providers", FALSE, 80, 0 },
-    { PhDevicePropertyDependencyDependents, L"Dependency dependents", FALSE, 80, 0 },
-    { PhDevicePropertySoftRestartSupported, L"Soft restart supported", FALSE, 80, 0 },
-    { PhDevicePropertyExtendedAddress, L"Extended address", FALSE, 80, 0 },
-    { PhDevicePropertyAssignedToGuest, L"Assigned to guest", FALSE, 80, 0 },
-    { PhDevicePropertyCreatorProcessId, L"Creator process ID", FALSE, 80, 0 },
-    { PhDevicePropertyFirmwareVendor, L"Firmware vendor", FALSE, 80, 0 },
-    { PhDevicePropertySessionId, L"Session ID", FALSE, 80, 0 },
-    { PhDevicePropertyDriverDesc, L"Driver description", FALSE, 80, 0 },
-    { PhDevicePropertyDriverInfPath, L"Driver INF path", FALSE, 80, 0 },
-    { PhDevicePropertyDriverInfSection, L"Driver INF section", FALSE, 80, 0 },
-    { PhDevicePropertyDriverInfSectionExt, L"Driver INF section extended", FALSE, 80, 0 },
-    { PhDevicePropertyMatchingDeviceId, L"Matching ID", FALSE, 80, 0 },
-    { PhDevicePropertyDriverProvider, L"Driver provider", FALSE, 80, 0 },
-    { PhDevicePropertyDriverPropPageProvider, L"Driver property page provider", FALSE, 80, 0 },
-    { PhDevicePropertyDriverCoInstallers, L"Driver co-installers", FALSE, 80, 0 },
-    { PhDevicePropertyResourcePickerTags, L"Resource picker tags", FALSE, 80, 0 },
-    { PhDevicePropertyResourcePickerExceptions, L"Resource picker exceptions", FALSE, 80, 0 },
-    { PhDevicePropertyDriverRank, L"Driver rank", FALSE, 80, 0 },
-    { PhDevicePropertyDriverLogoLevel, L"Driver LOGO level", FALSE, 80, 0 },
-    { PhDevicePropertyNoConnectSound, L"No connect sound", FALSE, 80, 0 },
-    { PhDevicePropertyGenericDriverInstalled, L"Generic driver installed", FALSE, 80, 0 },
-    { PhDevicePropertyAdditionalSoftwareRequested, L"Additional software requested", FALSE, 80, 0 },
-    { PhDevicePropertySafeRemovalRequired, L"Safe removal required", FALSE, 80, 0 },
-    { PhDevicePropertySafeRemovalRequiredOverride, L"Save removal required override", FALSE, 80, 0 },
+    { PhDevicePropertyFirstInstallDate, L"初次安装", FALSE, 160, 0 },
+    { PhDevicePropertyLastArrivalDate, L"最近设备到达时间", FALSE, 160, 0 },
+    { PhDevicePropertyLastRemovalDate, L"最近设备移除时间", FALSE, 160, 0 },
+    { PhDevicePropertyDeviceDesc, L"描述", FALSE, 280, 0 },
+    { PhDevicePropertyFriendlyName, L"显示名称", FALSE, 220, 0 },
+    { PhDevicePropertyInstanceId, L"实例 ID", FALSE, 240, DT_PATH_ELLIPSIS },
+    { PhDevicePropertyParentInstanceId, L"父实例 ID", FALSE, 240, DT_PATH_ELLIPSIS },
+    { PhDevicePropertyPDOName, L"物理设备对象名称", FALSE, 180, DT_PATH_ELLIPSIS },
+    { PhDevicePropertyLocationInfo, L"位置信息", FALSE, 180, DT_PATH_ELLIPSIS },
+    { PhDevicePropertyClassGuid, L"类 GUID", FALSE, 80, 0 },
+    { PhDevicePropertyDriver, L"驱动程序", FALSE, 180, DT_PATH_ELLIPSIS },
+    { PhDevicePropertyDriverVersion, L"驱动程序版本", FALSE, 80, 0 },
+    { PhDevicePropertyDriverDate, L"驱动程序日期", FALSE, 80, 0 },
+    { PhDevicePropertyFirmwareDate, L"固件日期", FALSE, 80, 0 },
+    { PhDevicePropertyFirmwareVersion, L"固件版本", FALSE, 80, 0 },
+    { PhDevicePropertyFirmwareRevision, L"固件修订信息", FALSE, 80, 0 },
+    { PhDevicePropertyHasProblem, L"存在问题", FALSE, 80, 0 },
+    { PhDevicePropertyProblemCode, L"问题代码", FALSE, 80, 0 },
+    { PhDevicePropertyProblemStatus, L"问题状态", FALSE, 80, 0 },
+    { PhDevicePropertyDevNodeStatus, L"节点状态标志", FALSE, 80, 0 },
+    { PhDevicePropertyDevCapabilities, L"功能", FALSE, 80, 0 },
+    { PhDevicePropertyUpperFilters, L"上层过滤器", FALSE, 80, 0 },
+    { PhDevicePropertyLowerFilters, L"下层过滤器", FALSE, 80, 0 },
+    { PhDevicePropertyHardwareIds, L"硬件 ID", FALSE, 80, 0 },
+    { PhDevicePropertyCompatibleIds, L"兼容 ID", FALSE, 80, 0 },
+    { PhDevicePropertyConfigFlags, L"配置标志", FALSE, 80, 0 },
+    { PhDevicePropertyUINumber, L"编号", FALSE, 80, 0 },
+    { PhDevicePropertyBusTypeGuid, L"总线类型 GUID", FALSE, 80, 0 },
+    { PhDevicePropertyLegacyBusType, L"传统总线类型", FALSE, 80, 0 },
+    { PhDevicePropertyBusNumber, L"总线编号", FALSE, 80, 0 },
+    { PhDevicePropertySecurity, L"安全描述符 (二进制)", FALSE, 80, 0 },
+    { PhDevicePropertySecuritySDS, L"安全描述符", FALSE, 80, 0 },
+    { PhDevicePropertyDevType, L"类型", FALSE, 80, 0 },
+    { PhDevicePropertyExclusive, L"独占", FALSE, 80, 0 },
+    { PhDevicePropertyCharacteristics, L"特性", FALSE, 80, 0 },
+    { PhDevicePropertyAddress, L"地址", FALSE, 80, 0 },
+    { PhDevicePropertyPowerData, L"电源数据", FALSE, 80, 0 },
+    { PhDevicePropertyRemovalPolicy, L"移除策略", FALSE, 80, 0 },
+    { PhDevicePropertyRemovalPolicyDefault, L"默认移除策略", FALSE, 80, 0 },
+    { PhDevicePropertyRemovalPolicyOverride, L"覆盖移除策略", FALSE, 80, 0 },
+    { PhDevicePropertyInstallState, L"安装状态", FALSE, 80, 0 },
+    { PhDevicePropertyLocationPaths, L"位置路径", FALSE, 80, 0 },
+    { PhDevicePropertyBaseContainerId, L"基础容器 ID", FALSE, 80, 0 },
+    { PhDevicePropertyEjectionRelations, L"弹出关系", FALSE, 80, 0 },
+    { PhDevicePropertyRemovalRelations, L"移除关系", FALSE, 80, 0 },
+    { PhDevicePropertyPowerRelations, L"电源关系", FALSE, 80, 0 },
+    { PhDevicePropertyBusRelations, L"总线关系", FALSE, 80, 0 },
+    { PhDevicePropertyChildren, L"子对象", FALSE, 80, 0 },
+    { PhDevicePropertySiblings, L"同级设备", FALSE, 80, 0 },
+    { PhDevicePropertyTransportRelations, L"传输关系", FALSE, 80, 0 },
+    { PhDevicePropertyReported, L"已报告", FALSE, 80, 0 },
+    { PhDevicePropertyLegacy, L"传统版本", FALSE, 80, 0 },
+    { PhDevicePropertyContainerId, L"容器 ID", FALSE, 80, 0 },
+    { PhDevicePropertyInLocalMachineContainer, L"本机容器", FALSE, 80, 0 },
+    { PhDevicePropertyModel, L"模型", FALSE, 80, 0 },
+    { PhDevicePropertyModelId, L"模型 ID", FALSE, 80, 0 },
+    { PhDevicePropertyFriendlyNameAttributes, L"显示名称属性", FALSE, 80, 0 },
+    { PhDevicePropertyManufacturerAttributes, L"制造商属性", FALSE, 80, 0 },
+    { PhDevicePropertyPresenceNotForDevice, L"设备不存在", FALSE, 80, 0 },
+    { PhDevicePropertySignalStrength, L"信号强度", FALSE, 80, 0 },
+    { PhDevicePropertyIsAssociateableByUserAction, L"可通过用户操作关联", FALSE, 80, 0 },
+    { PhDevicePropertyShowInUninstallUI, L"显示卸载界面", FALSE, 80, 0 },
+    { PhDevicePropertyNumaProximityDomain, L"NUMA 邻近性默认值", FALSE, 80, 0 },
+    { PhDevicePropertyDHPRebalancePolicy, L"DHP 重新平衡策略", FALSE, 80, 0 },
+    { PhDevicePropertyNumaNode, L"NUMA 节点", FALSE, 80, 0 },
+    { PhDevicePropertyBusReportedDeviceDesc, L"总线报告描述", FALSE, 80, 0 },
+    { PhDevicePropertyIsPresent, L"存在状况", FALSE, 80, 0 },
+    { PhDevicePropertyConfigurationId, L"配置 ID", FALSE, 80, 0 },
+    { PhDevicePropertyReportedDeviceIdsHash, L"报告的 ID 哈希值", FALSE, 80, 0 },
+    { PhDevicePropertyPhysicalDeviceLocation, L"物理位置", FALSE, 80, 0 },
+    { PhDevicePropertyBiosDeviceName, L"BIOS 名称", FALSE, 80, 0 },
+    { PhDevicePropertyDriverProblemDesc, L"问题描述", FALSE, 80, 0 },
+    { PhDevicePropertyDebuggerSafe, L"调试器安全", FALSE, 80, 0 },
+    { PhDevicePropertyPostInstallInProgress, L"安装后处理进行中", FALSE, 80, 0 },
+    { PhDevicePropertyStack, L"栈", FALSE, 80, 0 },
+    { PhDevicePropertyExtendedConfigurationIds, L"扩展配置 ID", FALSE, 80, 0 },
+    { PhDevicePropertyIsRebootRequired, L"需要重启", FALSE, 80, 0 },
+    { PhDevicePropertyDependencyProviders, L"依赖项提供程序", FALSE, 80, 0 },
+    { PhDevicePropertyDependencyDependents, L"依赖项被依赖项", FALSE, 80, 0 },
+    { PhDevicePropertySoftRestartSupported, L"支持软重启", FALSE, 80, 0 },
+    { PhDevicePropertyExtendedAddress, L"扩展地址", FALSE, 80, 0 },
+    { PhDevicePropertyAssignedToGuest, L"已分配给来宾", FALSE, 80, 0 },
+    { PhDevicePropertyCreatorProcessId, L"创建进程 ID", FALSE, 80, 0 },
+    { PhDevicePropertyFirmwareVendor, L"固件供应商", FALSE, 80, 0 },
+    { PhDevicePropertySessionId, L"会话 ID", FALSE, 80, 0 },
+    { PhDevicePropertyDriverDesc, L"驱动程序描述", FALSE, 80, 0 },
+    { PhDevicePropertyDriverInfPath, L"驱动程序 INF 文件路径", FALSE, 80, 0 },
+    { PhDevicePropertyDriverInfSection, L"驱动程序 INF 节点", FALSE, 80, 0 },
+    { PhDevicePropertyDriverInfSectionExt, L"驱动程序 INF 扩展节", FALSE, 80, 0 },
+    { PhDevicePropertyMatchingDeviceId, L"匹配 ID", FALSE, 80, 0 },
+    { PhDevicePropertyDriverProvider, L"驱动程序提供商", FALSE, 80, 0 },
+    { PhDevicePropertyDriverPropPageProvider, L"驱动程序属性页提供程序", FALSE, 80, 0 },
+    { PhDevicePropertyDriverCoInstallers, L"驱动程序协同安装程序", FALSE, 80, 0 },
+    { PhDevicePropertyResourcePickerTags, L"资源选择器标签", FALSE, 80, 0 },
+    { PhDevicePropertyResourcePickerExceptions, L"资源选择器异常", FALSE, 80, 0 },
+    { PhDevicePropertyDriverRank, L"驱动程序等级", FALSE, 80, 0 },
+    { PhDevicePropertyDriverLogoLevel, L"驱动程序 LOGO 级别", FALSE, 80, 0 },
+    { PhDevicePropertyNoConnectSound, L"无连接声音", FALSE, 80, 0 },
+    { PhDevicePropertyGenericDriverInstalled, L"已安装通用驱动程序", FALSE, 80, 0 },
+    { PhDevicePropertyAdditionalSoftwareRequested, L"请求的其他软件", FALSE, 80, 0 },
+    { PhDevicePropertySafeRemovalRequired, L"需要安全移除", FALSE, 80, 0 },
+    { PhDevicePropertySafeRemovalRequiredOverride, L"保存移除需要覆盖", FALSE, 80, 0 },
 
-    { PhDevicePropertyPkgModel, L"Package model", FALSE, 80, 0 },
-    { PhDevicePropertyPkgVendorWebSite, L"Package vendor website", FALSE, 80, 0 },
-    { PhDevicePropertyPkgDetailedDescription, L"Package description", FALSE, 80, 0 },
-    { PhDevicePropertyPkgDocumentationLink, L"Package documentation", FALSE, 80, 0 },
-    { PhDevicePropertyPkgIcon, L"Package icon", FALSE, 80, 0 },
-    { PhDevicePropertyPkgBrandingIcon, L"Package branding icon", FALSE, 80, 0 },
+    { PhDevicePropertyPkgModel, L"程序包模型", FALSE, 80, 0 },
+    { PhDevicePropertyPkgVendorWebSite, L"程序包供应商网站", FALSE, 80, 0 },
+    { PhDevicePropertyPkgDetailedDescription, L"程序包描述", FALSE, 80, 0 },
+    { PhDevicePropertyPkgDocumentationLink, L"程序包文档", FALSE, 80, 0 },
+    { PhDevicePropertyPkgIcon, L"程序包图标", FALSE, 80, 0 },
+    { PhDevicePropertyPkgBrandingIcon, L"程序包品牌图标", FALSE, 80, 0 },
 
     { PhDevicePropertyClassUpperFilters, L"Class upper filters", FALSE, 80, 0 },
     { PhDevicePropertyClassLowerFilters, L"Class lower filters", FALSE, 80, 0 },
@@ -1204,7 +1204,7 @@ const DEVICE_PROPERTY_TABLE_ENTRY DeviceItemPropertyTable[] =
     { PhDevicePropertyClassExclusive, L"Class exclusive", FALSE, 80, 0 },
     { PhDevicePropertyClassCharacteristics, L"Class characteristics", FALSE, 80, 0 },
     { PhDevicePropertyClassName, L"Class device name", FALSE, 80, 0 },
-    { PhDevicePropertyClassClassName, L"Class name", FALSE, 80, 0 },
+    { PhDevicePropertyClassClassName, L"类名称", FALSE, 80, 0 },
     { PhDevicePropertyClassIcon, L"Class icon", FALSE, 80, 0 },
     { PhDevicePropertyClassClassInstaller, L"Class installer", FALSE, 80, 0 },
     { PhDevicePropertyClassPropPageProvider, L"Class property page provider", FALSE, 80, 0 },
@@ -1313,7 +1313,7 @@ const DEVICE_PROPERTY_TABLE_ENTRY DeviceItemPropertyTable[] =
     { PhDevicePropertyStoragePartitionNumber, L"Storage disk partition number", FALSE, 80, 0 },
 
     { PhDevicePropertyGpuLuid, L"GPU LUID", FALSE, 80, 0 },
-    { PhDevicePropertyGpuPhysicalAdapterIndex, L"GPU physical adapter index", FALSE, 80, 0 },
+    { PhDevicePropertyGpuPhysicalAdapterIndex, L"GPU 物理适配器索引", FALSE, 80, 0 },
 };
 C_ASSERT(RTL_NUMBER_OF(DeviceItemPropertyTable) == PhMaxDeviceProperty);
 const ULONG DeviceItemPropertyTableCount = RTL_NUMBER_OF(DeviceItemPropertyTable);
@@ -1534,7 +1534,7 @@ BOOLEAN DevicesTabPageCallback(
 
             assert(menuInfo);
 
-            menu = PhCreateEMenuItem(0, 0, L"Devices", NULL, NULL);
+            menu = PhCreateEMenuItem(0, 0, L"设备", NULL, NULL);
             PhInsertEMenuItem(menuInfo->Menu, menu, menuInfo->StartIndex);
 
             PhInsertEMenuItem(menu, PhPluginCreateEMenuItem(PluginInstance, 0, 98, L"Collapse all", NULL), ULONG_MAX);

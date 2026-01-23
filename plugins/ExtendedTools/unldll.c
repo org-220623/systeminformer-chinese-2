@@ -56,7 +56,7 @@ VOID EtShowUnloadedDllsDialog(
 
     if (!NT_SUCCESS(status))
     {
-        PhShowStatus(ParentWindowHandle, L"Unable to open the process.", status, 0);
+        PhShowStatus(ParentWindowHandle, L"无法打开进程。", status, 0);
         return;
     }
 
@@ -486,13 +486,13 @@ INT_PTR CALLBACK EtpUnloadedDllsDlgProc(
 
             PhSetListViewStyle(lvHandle, TRUE, TRUE);
             PhSetControlTheme(lvHandle, L"explorer");
-            PhAddListViewColumn(lvHandle, 0, 0, 0, LVCFMT_LEFT, 40, L"No.");
-            PhAddListViewColumn(lvHandle, 1, 1, 1, LVCFMT_LEFT, 120, L"Name");
-            PhAddListViewColumn(lvHandle, 2, 2, 2, LVCFMT_LEFT, 100, L"Base Address");
-            PhAddListViewColumn(lvHandle, 3, 3, 3, LVCFMT_LEFT, 60, L"Size");
-            PhAddListViewColumn(lvHandle, 4, 4, 4, LVCFMT_LEFT, 120, L"Time Stamp");
-            PhAddListViewColumn(lvHandle, 5, 5, 5, LVCFMT_LEFT, 65, L"Checksum");
-            PhAddListViewColumn(lvHandle, 6, 6, 6, LVCFMT_LEFT, 100, L"Version");
+            PhAddListViewColumn(lvHandle, 0, 0, 0, LVCFMT_LEFT, 40, L"编号");
+            PhAddListViewColumn(lvHandle, 1, 1, 1, LVCFMT_LEFT, 120, L"名称");
+            PhAddListViewColumn(lvHandle, 2, 2, 2, LVCFMT_LEFT, 100, L"基址");
+            PhAddListViewColumn(lvHandle, 3, 3, 3, LVCFMT_LEFT, 60, L"大小");
+            PhAddListViewColumn(lvHandle, 4, 4, 4, LVCFMT_LEFT, 120, L"时间戳");
+            PhAddListViewColumn(lvHandle, 5, 5, 5, LVCFMT_LEFT, 65, L"校验和");
+            PhAddListViewColumn(lvHandle, 6, 6, 6, LVCFMT_LEFT, 100, L"版本");
 
             PhSetExtendedListView(lvHandle);
             ExtendedListView_SetCompareFunction(lvHandle, 0, EtpNumberCompareFunction);
@@ -516,7 +516,7 @@ INT_PTR CALLBACK EtpUnloadedDllsDlgProc(
 
             if (!NT_SUCCESS(status = EtpRefreshUnloadedDlls(hwndDlg, context)))
             {
-                PhShowStatus(context->ParentWindowHandle, L"Unable to retrieve unload event trace information.", status, 0);
+                PhShowStatus(context->ParentWindowHandle, L"无法检索卸载事件跟踪信息。", status, 0);
                 EndDialog(hwndDlg, IDCANCEL);
                 return FALSE;
             }
@@ -591,7 +591,7 @@ INT_PTR CALLBACK EtpUnloadedDllsDlgProc(
                 if (numberOfItems != 0)
                 {
                     menu = PhCreateEMenu();
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_IDC_COPY, L"&Copy", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_IDC_COPY, L"复制(&C)", NULL, NULL), ULONG_MAX);
                     PhInsertCopyListViewEMenuItem(menu, PHAPP_IDC_COPY, context->ListViewHandle);
 
                     item = PhShowEMenu(

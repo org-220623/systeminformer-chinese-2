@@ -56,9 +56,9 @@ INT_PTR CALLBACK PhpCreateServiceDlgProc(
             PhAddComboBoxStringRefs(GetDlgItem(hwndDlg, IDC_STARTTYPE), PhServiceStartTypeStrings, RTL_NUMBER_OF(PhServiceStartTypeStrings));
             PhAddComboBoxStringRefs(GetDlgItem(hwndDlg, IDC_ERRORCONTROL), PhServiceErrorControlStrings, RTL_NUMBER_OF(PhServiceErrorControlStrings));
 
-            PhSelectComboBoxString(GetDlgItem(hwndDlg, IDC_TYPE), L"Own Process", FALSE);
-            PhSelectComboBoxString(GetDlgItem(hwndDlg, IDC_STARTTYPE), L"Demand Start", FALSE);
-            PhSelectComboBoxString(GetDlgItem(hwndDlg, IDC_ERRORCONTROL), L"Ignore", FALSE);
+            PhSelectComboBoxString(GetDlgItem(hwndDlg, IDC_TYPE), L"当前用户进程", FALSE);
+            PhSelectComboBoxString(GetDlgItem(hwndDlg, IDC_STARTTYPE), L"请求启动", FALSE);
+            PhSelectComboBoxString(GetDlgItem(hwndDlg, IDC_ERRORCONTROL), L"忽略", FALSE);
 
             if (!PhGetOwnTokenAttributes().Elevated)
             {
@@ -106,7 +106,7 @@ INT_PTR CALLBACK PhpCreateServiceDlgProc(
 
                     if (PhIsNullOrEmptyString(serviceBinaryPath))
                     {
-                        PhShowError2(hwndDlg, L"Unable to create the service.", L"%s", L"The binary path is empty.");
+                        PhShowError2(hwndDlg, L"无法创建服务。", L"%s", L"可执行文件路径为空。");
                         break;
                     }
 
@@ -173,15 +173,15 @@ INT_PTR CALLBACK PhpCreateServiceDlgProc(
                     }
 
                     if (!NT_SUCCESS(status))
-                        PhShowStatus(hwndDlg, L"Unable to create the service.", status, 0);
+                        PhShowStatus(hwndDlg, L"无法创建服务。", status, 0);
                 }
                 break;
             case IDC_BROWSE:
                 {
                     static PH_FILETYPE_FILTER filters[] =
                     {
-                        { L"Executable files (*.exe;*.sys)", L"*.exe;*.sys" },
-                        { L"All files (*.*)", L"*.*" }
+                        { L"可执行文件 (*.exe;*.sys)", L"*.exe;*.sys" },
+                        { L"所有文件 (*.*)", L"*.*" }
                     };
                     PVOID fileDialog;
                     PPH_STRING fileName;

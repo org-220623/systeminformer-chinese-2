@@ -141,17 +141,17 @@ PPH_STRING PvVersionInfoFlagsToString(
     PhInitializeStringBuilder(&stringBuilder, 10);
 
     if (BooleanFlagOn(Flags, VS_FF_DEBUG))
-        PhAppendStringBuilder2(&stringBuilder, L"Debug, ");
+        PhAppendStringBuilder2(&stringBuilder, L"调试版本, ");
     if (BooleanFlagOn(Flags, VS_FF_PRERELEASE))
-        PhAppendStringBuilder2(&stringBuilder, L"Pre-release, ");
+        PhAppendStringBuilder2(&stringBuilder, L"预览版本, ");
     if (BooleanFlagOn(Flags, VS_FF_PATCHED))
-        PhAppendStringBuilder2(&stringBuilder, L"Patched, ");
+        PhAppendStringBuilder2(&stringBuilder, L"已修改, ");
     if (BooleanFlagOn(Flags, VS_FF_PRIVATEBUILD))
-        PhAppendStringBuilder2(&stringBuilder, L"Private build, ");
+        PhAppendStringBuilder2(&stringBuilder, L"私有构建, ");
     if (BooleanFlagOn(Flags, VS_FF_INFOINFERRED))
-        PhAppendStringBuilder2(&stringBuilder, L"INFOINFERRED, ");
+        PhAppendStringBuilder2(&stringBuilder, L"信息已推断, ");
     if (BooleanFlagOn(Flags, VS_FF_SPECIALBUILD))
-        PhAppendStringBuilder2(&stringBuilder, L"Special build, ");
+        PhAppendStringBuilder2(&stringBuilder, L"特殊版本, ");
 
     if (PhEndsWithString2(stringBuilder.String, L", ", FALSE))
         PhRemoveEndStringBuilder(&stringBuilder, 2);
@@ -174,7 +174,7 @@ static PCWSTR PvVersionInfoFileOSHostToString(
     case 3:  return L"32-bit OS/2";
     case 4:  return L"Windows NT";
     case 5:  return L"Windows CE";
-    default: return L"Unknown";
+    default: return L"未知";
     }
 }
 
@@ -186,10 +186,10 @@ static PCWSTR PvVersionInfoFileOSGuestToString(
     {
     case 0:  return L"";
     case 1:  return L"16-bit Windows";
-    case 2:  return L"16-bit Presentation Manager";
-    case 3:  return L"32-bit Presentation Manager";
+    case 2:  return L"16 位演示管理器";
+    case 3:  return L"32 位演示管理器";
     case 4:  return L"32-bit Windows";
-    default: return L"Unknown";
+    default: return L"未知";
     }
 }
 
@@ -315,7 +315,7 @@ PPH_STRING PvVersionInfoFileOSToString(
     WCHAR pointer[PH_PTR_STR_LEN_1];
 
     if (FileOS == 0)
-        return PhCreateString(L"Unknown (0)");
+        return PhCreateString(L"未知 (0)");
 
     PhInitializeStringBuilder(&stringBuilder, 10);
 
@@ -323,7 +323,7 @@ PPH_STRING PvVersionInfoFileOSToString(
     {
         PhAppendStringBuilder2(&stringBuilder, PvVersionInfoFileOSGuestToString(FileOS));
         if (HIWORD(FileOS))
-            PhAppendStringBuilder2(&stringBuilder, L" on ");
+            PhAppendStringBuilder2(&stringBuilder, L" 对于 ");
     }
 
     PhAppendStringBuilder2(&stringBuilder, PvVersionInfoFileOSHostToString(FileOS));
@@ -347,19 +347,19 @@ PPH_STRING PvVersionInfoFileTypeToString(
     PhInitializeStringBuilder(&stringBuilder, 10);
 
     if (Flags == VFT_UNKNOWN)
-        PhAppendStringBuilder2(&stringBuilder, L"Unknown, ");
+        PhAppendStringBuilder2(&stringBuilder, L"未知, ");
     if (Flags == VFT_APP)
-        PhAppendStringBuilder2(&stringBuilder, L"Application, ");
+        PhAppendStringBuilder2(&stringBuilder, L"应用程序, ");
     if (Flags == VFT_DLL)
         PhAppendStringBuilder2(&stringBuilder, L"DLL, ");
     if (Flags == VFT_DRV)
-        PhAppendStringBuilder2(&stringBuilder, L"Driver, ");
+        PhAppendStringBuilder2(&stringBuilder, L"驱动程序, ");
     if (Flags == VFT_FONT)
-        PhAppendStringBuilder2(&stringBuilder, L"Font, ");
+        PhAppendStringBuilder2(&stringBuilder, L"字体, ");
     if (Flags == VFT_VXD)
         PhAppendStringBuilder2(&stringBuilder, L"VXD, ");
     if (Flags == VFT_STATIC_LIB)
-        PhAppendStringBuilder2(&stringBuilder, L"Static library, ");
+        PhAppendStringBuilder2(&stringBuilder, L"静态库, ");
 
     if (PhEndsWithString2(stringBuilder.String, L", ", FALSE))
         PhRemoveEndStringBuilder(&stringBuilder, 2);
@@ -458,16 +458,16 @@ VOID PvEnumVersionInfo(
 
     if (rootBlock = PhGetFileVersionFixedInfo(versionInfo))
     {
-        PvAddVersionInfoItem(ListViewHandle, &count, 0, L"Signature", PhaFormatString(L"0x%lx", rootBlock->dwSignature)->Buffer);
-        PvAddVersionInfoItem(ListViewHandle, &count, 0, L"Struct version", PhaFormatString(L"%lu.%lu", HIWORD(rootBlock->dwStrucVersion), LOWORD(rootBlock->dwStrucVersion))->Buffer);
-        PvAddVersionInfoItem(ListViewHandle, &count, 0, L"File version", PhaFormatString(L"%lu.%lu.%lu.%lu", HIWORD(rootBlock->dwFileVersionMS), LOWORD(rootBlock->dwFileVersionMS), HIWORD(rootBlock->dwFileVersionLS), LOWORD(rootBlock->dwFileVersionLS))->Buffer);
-        PvAddVersionInfoItem(ListViewHandle, &count, 0, L"Product version", PhaFormatString(L"%lu.%lu.%lu.%lu", HIWORD(rootBlock->dwProductVersionMS), LOWORD(rootBlock->dwProductVersionMS), HIWORD(rootBlock->dwProductVersionLS), LOWORD(rootBlock->dwProductVersionLS))->Buffer);
-        PvAddVersionInfoItem(ListViewHandle, &count, 0, L"FileFlagsMask", PhaFormatString(L"0x%lx", rootBlock->dwFileFlagsMask)->Buffer);
-        PvAddVersionInfoItem(ListViewHandle, &count, 0, L"FileFlags", PH_AUTO_T(PH_STRING, PvVersionInfoFlagsToString(rootBlock->dwFileFlags))->Buffer);
-        PvAddVersionInfoItem(ListViewHandle, &count, 0, L"FileOS", PH_AUTO_T(PH_STRING, PvVersionInfoFileOSToString(rootBlock->dwFileOS))->Buffer);
-        PvAddVersionInfoItem(ListViewHandle, &count, 0, L"FileType", PH_AUTO_T(PH_STRING, PvVersionInfoFileTypeToString(rootBlock->dwFileType))->Buffer);
-        PvAddVersionInfoItem(ListViewHandle, &count, 0, L"FileSubtype", PhaFormatString(L"%lu", rootBlock->dwFileSubtype)->Buffer); // VFT2_DRV_KEYBOARD
-        PvAddVersionInfoItem(ListViewHandle, &count, 0, L"FileDate", PhaFormatString(L"%lu.%lu.%lu.%lu", HIWORD(rootBlock->dwFileDateMS), LOWORD(rootBlock->dwFileDateMS), HIWORD(rootBlock->dwFileDateLS), LOWORD(rootBlock->dwFileDateLS))->Buffer);
+        PvAddVersionInfoItem(ListViewHandle, &count, 0, L"签名", PhaFormatString(L"0x%lx", rootBlock->dwSignature)->Buffer);
+        PvAddVersionInfoItem(ListViewHandle, &count, 0, L"结构版本", PhaFormatString(L"%lu.%lu", HIWORD(rootBlock->dwStrucVersion), LOWORD(rootBlock->dwStrucVersion))->Buffer);
+        PvAddVersionInfoItem(ListViewHandle, &count, 0, L"文件版本", PhaFormatString(L"%lu.%lu.%lu.%lu", HIWORD(rootBlock->dwFileVersionMS), LOWORD(rootBlock->dwFileVersionMS), HIWORD(rootBlock->dwFileVersionLS), LOWORD(rootBlock->dwFileVersionLS))->Buffer);
+        PvAddVersionInfoItem(ListViewHandle, &count, 0, L"产品版本", PhaFormatString(L"%lu.%lu.%lu.%lu", HIWORD(rootBlock->dwProductVersionMS), LOWORD(rootBlock->dwProductVersionMS), HIWORD(rootBlock->dwProductVersionLS), LOWORD(rootBlock->dwProductVersionLS))->Buffer);
+        PvAddVersionInfoItem(ListViewHandle, &count, 0, L"文件标志掩码", PhaFormatString(L"0x%lx", rootBlock->dwFileFlagsMask)->Buffer);
+        PvAddVersionInfoItem(ListViewHandle, &count, 0, L"文件标志", PH_AUTO_T(PH_STRING, PvVersionInfoFlagsToString(rootBlock->dwFileFlags))->Buffer);
+        PvAddVersionInfoItem(ListViewHandle, &count, 0, L"文件 OS", PH_AUTO_T(PH_STRING, PvVersionInfoFileOSToString(rootBlock->dwFileOS))->Buffer);
+        PvAddVersionInfoItem(ListViewHandle, &count, 0, L"文件类型", PH_AUTO_T(PH_STRING, PvVersionInfoFileTypeToString(rootBlock->dwFileType))->Buffer);
+        PvAddVersionInfoItem(ListViewHandle, &count, 0, L"文件子类型", PhaFormatString(L"%lu", rootBlock->dwFileSubtype)->Buffer); // VFT2_DRV_KEYBOARD
+        PvAddVersionInfoItem(ListViewHandle, &count, 0, L"文件日期", PhaFormatString(L"%lu.%lu.%lu.%lu", HIWORD(rootBlock->dwFileDateMS), LOWORD(rootBlock->dwFileDateMS), HIWORD(rootBlock->dwFileDateLS), LOWORD(rootBlock->dwFileDateLS))->Buffer);
     }
 
     static PH_STRINGREF blockStringInfoName = PH_STRINGREF_INIT(L"StringFileInfo");
@@ -503,7 +503,7 @@ VOID PvEnumVersionInfo(
 
                 if (PhFormatToBuffer(format, 1, langNameString, sizeof(langNameString), &returnLength))
                 {
-                    PvAddVersionInfoItem(ListViewHandle, &count, 2, L"Translation", langNameString);
+                    PvAddVersionInfoItem(ListViewHandle, &count, 2, L"翻译", langNameString);
                 }
             }
         }
@@ -552,8 +552,8 @@ INT_PTR CALLBACK PvpPeVersionInfoDlgProc(
             PhSetListViewStyle(context->ListViewHandle, TRUE, TRUE);
             PhSetControlTheme(context->ListViewHandle, L"explorer");
             PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 40, L"#");
-            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 200, L"Name");
-            PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 250, L"Value");
+            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 200, L"名称");
+            PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 250, L"值");
             PhSetExtendedListView(context->ListViewHandle);
             PhLoadListViewColumnsFromSetting(L"ImageVersionInfoListViewColumns", context->ListViewHandle);
             PvConfigTreeBorders(context->ListViewHandle);
@@ -562,10 +562,10 @@ INT_PTR CALLBACK PvpPeVersionInfoDlgProc(
             PhAddLayoutItem(&context->LayoutManager, context->ListViewHandle, NULL, PH_ANCHOR_ALL);
 
             ListView_EnableGroupView(context->ListViewHandle, TRUE);
-            PhAddListViewGroup(context->ListViewHandle, 0, L"FixedFileInfo");
-            PhAddListViewGroup(context->ListViewHandle, 1, L"StringFileInfo");
-            PhAddListViewGroup(context->ListViewHandle, 2, L"VarFileInfo");
-            PhAddListViewGroup(context->ListViewHandle, 3, L"AppxManifest");
+            PhAddListViewGroup(context->ListViewHandle, 0, L"文件信息 (已固定)");
+            PhAddListViewGroup(context->ListViewHandle, 1, L"文件信息 (字符串)");
+            PhAddListViewGroup(context->ListViewHandle, 2, L"文件信息 (变量)");
+            PhAddListViewGroup(context->ListViewHandle, 3, L"UWP 程序包清单");
 
             PvEnumVersionInfo(context->ListViewHandle);
 
