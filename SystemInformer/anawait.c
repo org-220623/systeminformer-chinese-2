@@ -109,7 +109,7 @@ VOID PhUiAnalyzeWaitThread(
 
     if (!NT_SUCCESS(status = PhOpenProcess(&processHandle, PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, ProcessId)))
     {
-        PhShowStatus(WindowHandle, L"Unable to open the process.", status, 0);
+        PhShowStatus(WindowHandle, L"无法打开进程。", status, 0);
         return;
     }
 
@@ -131,7 +131,7 @@ VOID PhUiAnalyzeWaitThread(
         ThreadId
         )))
     {
-        PhShowStatus(WindowHandle, L"Unable to open the thread.", status, 0);
+        PhShowStatus(WindowHandle, L"无法打开线程。", status, 0);
         NtClose(processHandle);
         return;
     }
@@ -166,7 +166,7 @@ VOID PhUiAnalyzeWaitThread(
     }
     else
     {
-        PhShowInformation2(WindowHandle, L"Unable to analyze the thread.", L"%s", L"The thread does not appear to be waiting.");
+        PhShowInformation2(WindowHandle, L"无法分析线程。", L"%s", L"线程似乎没有处于等待状态。");
     }
 
     PhDeleteStringBuilder(&context.StringBuilder);
@@ -188,19 +188,19 @@ VOID PhpAnalyzeWaitPassive(
 
     if (!NT_SUCCESS(status = PhOpenProcess(&processHandle, PROCESS_DUP_HANDLE, ProcessId)))
     {
-        PhShowStatus(WindowHandle, L"Unable to open the process.", status, 0);
+        PhShowStatus(WindowHandle, L"无法打开进程。", status, 0);
         goto CleanupExit;
     }
 
     if (!NT_SUCCESS(status = PhOpenThread(&threadHandle, THREAD_GET_CONTEXT, ThreadId)))
     {
-        PhShowStatus(WindowHandle, L"Unable to open the thread.", status, 0);
+        PhShowStatus(WindowHandle, L"无法打开线程。", status, 0);
         return;
     }
 
     if (!NT_SUCCESS(status = PhGetThreadLastSystemCall(threadHandle, &lastSystemCall)))
     {
-        PhShowStatus(WindowHandle, L"Unable to determine whether the thread is waiting.", status, 0);
+        PhShowStatus(WindowHandle, L"无法确定线程是否处于等待状态。", status, 0);
         goto CleanupExit;
     }
 
@@ -210,7 +210,7 @@ VOID PhpAnalyzeWaitPassive(
 
     if (!PhIsNullOrEmptyString(lastSystemCallName))
     {
-        PhAppendStringBuilder2(&stringBuilder, L"Thread is waiting on system call: ");
+        PhAppendStringBuilder2(&stringBuilder, L"线程正在等待系统调用: ");
         PhAppendStringBuilder(&stringBuilder, &lastSystemCallName->sr);
         PhAppendStringBuilder2(&stringBuilder, L"\r\n");
 
@@ -219,7 +219,7 @@ VOID PhpAnalyzeWaitPassive(
             )
         {
             string = PhpaGetHandleString(processHandle, lastSystemCall.FirstArgument);
-            PhAppendFormatStringBuilder(&stringBuilder, L"Thread is waiting for:\r\n");
+            PhAppendFormatStringBuilder(&stringBuilder, L"线程正在等待:\r\n");
             PhAppendStringBuilder(&stringBuilder, &string->sr);
         }
         else if (
@@ -228,7 +228,7 @@ VOID PhpAnalyzeWaitPassive(
             PhEqualString2(lastSystemCallName, L"NtUserMsgWaitForMultipleObjectsEx", TRUE)
             )
         {
-            PhAppendFormatStringBuilder(&stringBuilder, L"Thread is waiting for multiple (%lu) objects.", PtrToUlong(lastSystemCall.FirstArgument));
+            PhAppendFormatStringBuilder(&stringBuilder, L"线程正在等待多个 (%lu) 个对象。", PtrToUlong(lastSystemCall.FirstArgument));
         }
         else if (
             PhEqualString2(lastSystemCallName, L"NtReadFile", TRUE) ||
@@ -236,7 +236,7 @@ VOID PhpAnalyzeWaitPassive(
             )
         {
             string = PhpaGetHandleString(processHandle, lastSystemCall.FirstArgument);
-            PhAppendFormatStringBuilder(&stringBuilder, L"Thread is waiting for file I/O:\r\n");
+            PhAppendFormatStringBuilder(&stringBuilder, L"线程正在等待文件 I/O:\r\n");
             PhAppendStringBuilder(&stringBuilder, &string->sr);
         }
         else
@@ -245,7 +245,7 @@ VOID PhpAnalyzeWaitPassive(
 
             if (string)
             {
-                PhAppendStringBuilder2(&stringBuilder, L"Thread is sending a USER message:\r\n");
+                PhAppendStringBuilder2(&stringBuilder, L"线程正在发送用户消息:\r\n");
                 PhAppendStringBuilder(&stringBuilder, &string->sr);
             }
             else
@@ -254,7 +254,7 @@ VOID PhpAnalyzeWaitPassive(
 
                 if (string)
                 {
-                    PhAppendStringBuilder2(&stringBuilder, L"Thread is waiting for an ALPC port:\r\n");
+                    PhAppendStringBuilder2(&stringBuilder, L"线程正在等待 ALPC 端口:\r\n");
                     PhAppendStringBuilder(&stringBuilder, &string->sr);
                 }
             }
@@ -268,18 +268,18 @@ VOID PhpAnalyzeWaitPassive(
         {
             string = PhpaGetHandleString(processHandle, lastSystemCall.FirstArgument);
 
-            PhAppendFormatStringBuilder(&stringBuilder, L"Thread is waiting for:\r\n");
+            PhAppendFormatStringBuilder(&stringBuilder, L"线程正在等待:\r\n");
             PhAppendStringBuilder(&stringBuilder, &string->sr);
         }
         else if (lastSystemCall.SystemCallNumber == NumberForWfmo)
         {
-            PhAppendFormatStringBuilder(&stringBuilder, L"Thread is waiting for multiple (%lu) objects.", PtrToUlong(lastSystemCall.FirstArgument));
+            PhAppendFormatStringBuilder(&stringBuilder, L"线程正在等待多个 (%lu) 个对象。", PtrToUlong(lastSystemCall.FirstArgument));
         }
         else if (lastSystemCall.SystemCallNumber == NumberForRf)
         {
             string = PhpaGetHandleString(processHandle, lastSystemCall.FirstArgument);
 
-            PhAppendFormatStringBuilder(&stringBuilder, L"Thread is waiting for file I/O:\r\n");
+            PhAppendFormatStringBuilder(&stringBuilder, L"线程正在等待文件 I/O:\r\n");
             PhAppendStringBuilder(&stringBuilder, &string->sr);
         }
         else
@@ -288,7 +288,7 @@ VOID PhpAnalyzeWaitPassive(
 
             if (string)
             {
-                PhAppendStringBuilder2(&stringBuilder, L"Thread is sending a USER message:\r\n");
+                PhAppendStringBuilder2(&stringBuilder, L"线程正在发送用户消息:\r\n");
                 PhAppendStringBuilder(&stringBuilder, &string->sr);
             }
             else
@@ -297,7 +297,7 @@ VOID PhpAnalyzeWaitPassive(
 
                 if (string)
                 {
-                    PhAppendStringBuilder2(&stringBuilder, L"Thread is waiting for an ALPC port:\r\n");
+                    PhAppendStringBuilder2(&stringBuilder, L"线程正在等待 ALPC 端口:\r\n");
                     PhAppendStringBuilder(&stringBuilder, &string->sr);
                 }
             }
@@ -305,7 +305,7 @@ VOID PhpAnalyzeWaitPassive(
     }
 
     if (stringBuilder.String->Length == 0)
-        PhAppendStringBuilder2(&stringBuilder, L"Unable to determine why the thread is waiting.");
+        PhAppendStringBuilder2(&stringBuilder, L"无法确定线程为何处于等待状态。");
 
     PhShowInformationDialog(WindowHandle, stringBuilder.String->Buffer, 0);
     PhDeleteStringBuilder(&stringBuilder);
@@ -360,7 +360,7 @@ BOOLEAN NTAPI PhpWalkThreadStackAnalyzeCallback(
     {
         PhAppendFormatStringBuilder(
             &context->StringBuilder,
-            L"Thread is sleeping. Timeout: %lu milliseconds.",
+            L"线程正在休眠。超时时间: %lu 毫秒。",
             PtrToUlong(StackFrame->Params[0])
             );
     }
@@ -382,7 +382,7 @@ BOOLEAN NTAPI PhpWalkThreadStackAnalyzeCallback(
             {
                 PhAppendFormatStringBuilder(
                     &context->StringBuilder,
-                    L"Thread is sleeping. Timeout: %llu milliseconds.",
+                    L"线程正在休眠。超时时间: %llu 毫秒。",
                     -timeout / PH_TIMEOUT_MS
                     );
             }
@@ -395,7 +395,7 @@ BOOLEAN NTAPI PhpWalkThreadStackAnalyzeCallback(
         {
             PhAppendStringBuilder2(
                 &context->StringBuilder,
-                L"Thread is sleeping."
+                L"线程正在休眠。"
                 );
         }
     }
@@ -405,7 +405,7 @@ BOOLEAN NTAPI PhpWalkThreadStackAnalyzeCallback(
 
         PhAppendStringBuilder2(
             &context->StringBuilder,
-            L"Thread is waiting for an I/O control request:\r\n"
+            L"线程正在等待 I/O 控制请求:\r\n"
             );
         PhAppendStringBuilder(
             &context->StringBuilder,
@@ -418,7 +418,7 @@ BOOLEAN NTAPI PhpWalkThreadStackAnalyzeCallback(
 
         PhAppendStringBuilder2(
             &context->StringBuilder,
-            L"Thread is waiting for a FS control request:\r\n"
+            L"线程正在等待文件系统控制请求:\r\n"
             );
         PhAppendStringBuilder(
             &context->StringBuilder,
@@ -435,7 +435,7 @@ BOOLEAN NTAPI PhpWalkThreadStackAnalyzeCallback(
 
         PhAppendStringBuilder2(
             &context->StringBuilder,
-            L"Thread is querying an object:\r\n"
+            L"线程正在查询对象\r\n"
             );
         PhAppendStringBuilder(
             &context->StringBuilder,
@@ -448,7 +448,7 @@ BOOLEAN NTAPI PhpWalkThreadStackAnalyzeCallback(
 
         PhAppendStringBuilder2(
             &context->StringBuilder,
-            L"Thread is waiting for file I/O:\r\n"
+            L"线程正在等待文件 I/O:\r\n"
             );
         PhAppendStringBuilder(
             &context->StringBuilder,
@@ -461,7 +461,7 @@ BOOLEAN NTAPI PhpWalkThreadStackAnalyzeCallback(
 
         PhAppendStringBuilder2(
             &context->StringBuilder,
-            L"Thread is waiting for an I/O completion port:\r\n"
+            L"线程正在等待 I/O 完成端口:\r\n"
             );
         PhAppendStringBuilder(
             &context->StringBuilder,
@@ -479,7 +479,7 @@ BOOLEAN NTAPI PhpWalkThreadStackAnalyzeCallback(
 
         PhAppendStringBuilder2(
             &context->StringBuilder,
-            L"Thread is waiting for an ALPC port:\r\n"
+            L"线程正在等待 ALPC 端口:\r\n"
             );
         PhAppendStringBuilder(
             &context->StringBuilder,
@@ -512,7 +512,7 @@ BOOLEAN NTAPI PhpWalkThreadStackAnalyzeCallback(
 
         PhAppendFormatStringBuilder(
             &context->StringBuilder,
-            L"Thread is waiting (%s) for an event pair:\r\n",
+            L"线程正在等待 (%s) 事件对:\r\n",
             name->Buffer
             );
         PhAppendStringBuilder(
@@ -527,7 +527,7 @@ BOOLEAN NTAPI PhpWalkThreadStackAnalyzeCallback(
     {
         PhAppendStringBuilder2(
             &context->StringBuilder,
-            L"Thread is waiting for a USER message.\r\n"
+            L"线程正在等待用户消息。\r\n"
             );
     }
     else if (FUNC_MATCH("user32.dll!NtUserMessageCall"))
@@ -536,7 +536,7 @@ BOOLEAN NTAPI PhpWalkThreadStackAnalyzeCallback(
 
         PhAppendStringBuilder2(
             &context->StringBuilder,
-            L"Thread is sending a USER message:\r\n"
+            L"线程正在发送用户消息:\r\n"
             );
 
         receiverString = PhpaGetSendMessageReceiver(context->ThreadId);
@@ -557,7 +557,7 @@ BOOLEAN NTAPI PhpWalkThreadStackAnalyzeCallback(
 
         PhAppendStringBuilder2(
             &context->StringBuilder,
-            L"Thread is waiting for a debug event:\r\n"
+            L"线程正在等待调试事件:\r\n"
             );
         PhAppendStringBuilder(
             &context->StringBuilder,
@@ -574,7 +574,7 @@ BOOLEAN NTAPI PhpWalkThreadStackAnalyzeCallback(
 
         PhAppendFormatStringBuilder(
             &context->StringBuilder,
-            L"Thread is waiting (%s) for a keyed event (key 0x%Ix):\r\n",
+            L"线程正在等待 (%s) 键控事件 (键 0x%Ix):\r\n",
             name->Buffer,
             key
             );
@@ -627,8 +627,8 @@ BOOLEAN NTAPI PhpWalkThreadStackAnalyzeCallback(
 
         PhAppendFormatStringBuilder(
             &context->StringBuilder,
-            L"Thread is waiting (%s) for:\r\n",
-            alertable ? L"alertable" : L"non-alertable"
+            L"线程正在等待 (%s):\r\n",
+            alertable ? L"可提醒" : L"不可提醒"
             );
         PhAppendStringBuilder(
             &context->StringBuilder,
@@ -641,7 +641,7 @@ BOOLEAN NTAPI PhpWalkThreadStackAnalyzeCallback(
 
         PhAppendStringBuilder2(
             &context->StringBuilder,
-            L"Thread is waiting for work from a worker factory:\r\n"
+            L"线程正在等待工作者工厂:\r\n"
             );
         PhAppendStringBuilder(
             &context->StringBuilder,
@@ -718,7 +718,7 @@ VOID PhpAnalyzeWaitFallbacks(
     {
         PhAppendStringBuilder2(
             &Context->StringBuilder,
-            L"Thread is sending a USER message:\r\n"
+            L"线程正在发送用户消息:\r\n"
             );
         PhAppendStringBuilder(&Context->StringBuilder, &info->sr);
         PhAppendStringBuilder2(&Context->StringBuilder, L"\r\n");
@@ -731,7 +731,7 @@ VOID PhpAnalyzeWaitFallbacks(
     {
         PhAppendStringBuilder2(
             &Context->StringBuilder,
-            L"Thread is waiting for an ALPC port:\r\n"
+            L"线程正在等待 ALPC 端口:\r\n"
             );
         PhAppendStringBuilder(&Context->StringBuilder, &info->sr);
         PhAppendStringBuilder2(&Context->StringBuilder, L"\r\n");
@@ -965,16 +965,16 @@ PPH_STRING PhpaGetHandleString(
     if (typeName && name)
     {
         result = PhaFormatString(
-            L"Handle 0x%lx (%s): %s",
+            L"句柄 0x%lx (%s): %s",
             HandleToUlong(Handle),
             typeName->Buffer,
-            !PhIsNullOrEmptyString(name) ? name->Buffer : L"(unnamed object)"
+            !PhIsNullOrEmptyString(name) ? name->Buffer : L"(未命名对象)"
             );
     }
     else
     {
         result = PhaFormatString(
-            L"Handle 0x%lx: (error querying handle)",
+            L"句柄 0x%lx: (无法查询句柄)",
             HandleToUlong(Handle)
             );
     }
@@ -1040,9 +1040,9 @@ VOID PhpGetWfmoInformation(
         {
             PhAppendFormatStringBuilder(
                 StringBuilder,
-                L"Thread is waiting (%s, %s) for:\r\n",
-                Alertable ? L"alertable" : L"non-alertable",
-                WaitType == WaitAll ? L"wait all" : L"wait any"
+                L"线程正在等待 (%s, %s):\r\n",
+                Alertable ? L"可提醒" : L"不可提醒",
+                WaitType == WaitAll ? L"等待全部" : L"等待其中一个"
                 );
 
             for (i = 0; i < NumberOfHandles; i++)
@@ -1063,7 +1063,7 @@ VOID PhpGetWfmoInformation(
     {
         PhAppendStringBuilder2(
             StringBuilder,
-            L"Thread is waiting for multiple objects."
+            L"线程正在等待多个对象。"
             );
     }
 }
@@ -1091,7 +1091,7 @@ PPH_STRING PhpaGetSendMessageReceiver(
 
     windowText = PH_AUTO(PhGetWindowText(windowHandle));
 
-    return PhaFormatString(L"Window 0x%Ix (%s): %s \"%s\"", (ULONG_PTR)windowHandle, clientIdName->Buffer, windowClass, PhGetStringOrEmpty(windowText));
+    return PhaFormatString(L"窗口 0x%Ix (%s): %s \"%s\"", (ULONG_PTR)windowHandle, clientIdName->Buffer, windowClass, PhGetStringOrEmpty(windowText));
 }
 
 PPH_STRING PhpaGetAlpcInformation(
@@ -1131,7 +1131,7 @@ PPH_STRING PhpaGetAlpcInformation(
         clientId.UniqueThread = NULL;
         clientIdName = PH_AUTO(PhGetClientIdName(&clientId));
 
-        string = PhaFormatString(L"ALPC Port: %.*s (%s)", serverInfo->Out.ConnectionPortName.Length / sizeof(WCHAR), serverInfo->Out.ConnectionPortName.Buffer, clientIdName->Buffer);
+        string = PhaFormatString(L"ALPC 端口: %.*s (%s)", serverInfo->Out.ConnectionPortName.Length / sizeof(WCHAR), serverInfo->Out.ConnectionPortName.Buffer, clientIdName->Buffer);
     }
 
     PhFree(serverInfo);

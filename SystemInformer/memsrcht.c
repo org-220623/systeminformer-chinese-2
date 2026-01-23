@@ -28,8 +28,8 @@
 #define PH_MEMSEARCH_STATE_SEARCHING 1
 #define PH_MEMSEARCH_STATE_FINISHED  2
 
-static CONST PH_STRINGREF EmptyStringsText = PH_STRINGREF_INIT(L"There are no strings to display.");
-static CONST PH_STRINGREF LoadingStringsText = PH_STRINGREF_INIT(L"Loading strings...");
+static CONST PH_STRINGREF EmptyStringsText = PH_STRINGREF_INIT(L"没有要显示的字符串。");
+static CONST PH_STRINGREF LoadingStringsText = PH_STRINGREF_INIT(L"正在加载字符串...");
 
 typedef struct _PH_MEMSTRINGS_SETTINGS
 {
@@ -624,7 +624,7 @@ VOID PhpSearchMemoryStrings(
             Context->ProcessItem->ProcessId
             )))
         {
-            PhShowStatus(Context->WindowHandle, L"Unable to clone the process", status, 0);
+            PhShowStatus(Context->WindowHandle, L"无法克隆进程", status, 0);
             return;
         }
     }
@@ -912,13 +912,13 @@ VOID PhpInitializeMemoryStringsTree(
     TreeNew_SetRedraw(TreeNewHandle, FALSE);
 
     PhAddTreeNewColumnEx2(TreeNewHandle, PH_MEMSTRINGS_TREE_COLUMN_ITEM_INDEX, TRUE, L"#", 40, PH_ALIGN_LEFT, PH_MEMSTRINGS_TREE_COLUMN_ITEM_INDEX, 0, 0);
-    PhAddTreeNewColumnEx2(TreeNewHandle, PH_MEMSTRINGS_TREE_COLUMN_ITEM_BASE_ADDRESS, TRUE, L"Base address", 80, PH_ALIGN_LEFT | (enableMonospaceFont ? PH_ALIGN_MONOSPACE_FONT : 0), PH_MEMSTRINGS_TREE_COLUMN_ITEM_BASE_ADDRESS, 0, 0);
-    PhAddTreeNewColumnEx2(TreeNewHandle, PH_MEMSTRINGS_TREE_COLUMN_ITEM_ADDRESS, TRUE, L"Address", 80, PH_ALIGN_LEFT | (enableMonospaceFont ? PH_ALIGN_MONOSPACE_FONT : 0), PH_MEMSTRINGS_TREE_COLUMN_ITEM_ADDRESS, 0, 0);
-    PhAddTreeNewColumnEx2(TreeNewHandle, PH_MEMSTRINGS_TREE_COLUMN_ITEM_TYPE, TRUE, L"Type", 80, PH_ALIGN_LEFT, PH_MEMSTRINGS_TREE_COLUMN_ITEM_TYPE, 0, 0);
-    PhAddTreeNewColumnEx2(TreeNewHandle, PH_MEMSTRINGS_TREE_COLUMN_ITEM_LENGTH, TRUE, L"Length", 80, PH_ALIGN_LEFT, PH_MEMSTRINGS_TREE_COLUMN_ITEM_LENGTH, 0, 0);
-    PhAddTreeNewColumnEx2(TreeNewHandle, PH_MEMSTRINGS_TREE_COLUMN_ITEM_STRING, TRUE, L"String", 600, PH_ALIGN_LEFT, PH_MEMSTRINGS_TREE_COLUMN_ITEM_STRING, 0, 0);
-    PhAddTreeNewColumnEx2(TreeNewHandle, PH_MEMSTRINGS_TREE_COLUMN_ITEM_PROTECTION, FALSE, L"Protection", 80, PH_ALIGN_LEFT, PH_MEMSTRINGS_TREE_COLUMN_ITEM_PROTECTION, 0, 0);
-    PhAddTreeNewColumnEx2(TreeNewHandle, PH_MEMSTRINGS_TREE_COLUMN_ITEM_MEMORY_TYPE, FALSE, L"Memory type", 80, PH_ALIGN_LEFT, PH_MEMSTRINGS_TREE_COLUMN_ITEM_MEMORY_TYPE, 0, 0);
+    PhAddTreeNewColumnEx2(TreeNewHandle, PH_MEMSTRINGS_TREE_COLUMN_ITEM_BASE_ADDRESS, TRUE, L"基址", 80, PH_ALIGN_LEFT | (enableMonospaceFont ? PH_ALIGN_MONOSPACE_FONT : 0), PH_MEMSTRINGS_TREE_COLUMN_ITEM_BASE_ADDRESS, 0, 0);
+    PhAddTreeNewColumnEx2(TreeNewHandle, PH_MEMSTRINGS_TREE_COLUMN_ITEM_ADDRESS, TRUE, L"地址", 80, PH_ALIGN_LEFT | (enableMonospaceFont ? PH_ALIGN_MONOSPACE_FONT : 0), PH_MEMSTRINGS_TREE_COLUMN_ITEM_ADDRESS, 0, 0);
+    PhAddTreeNewColumnEx2(TreeNewHandle, PH_MEMSTRINGS_TREE_COLUMN_ITEM_TYPE, TRUE, L"类型", 80, PH_ALIGN_LEFT, PH_MEMSTRINGS_TREE_COLUMN_ITEM_TYPE, 0, 0);
+    PhAddTreeNewColumnEx2(TreeNewHandle, PH_MEMSTRINGS_TREE_COLUMN_ITEM_LENGTH, TRUE, L"长度", 80, PH_ALIGN_LEFT, PH_MEMSTRINGS_TREE_COLUMN_ITEM_LENGTH, 0, 0);
+    PhAddTreeNewColumnEx2(TreeNewHandle, PH_MEMSTRINGS_TREE_COLUMN_ITEM_STRING, TRUE, L"字符串", 600, PH_ALIGN_LEFT, PH_MEMSTRINGS_TREE_COLUMN_ITEM_STRING, 0, 0);
+    PhAddTreeNewColumnEx2(TreeNewHandle, PH_MEMSTRINGS_TREE_COLUMN_ITEM_PROTECTION, FALSE, L"保护", 80, PH_ALIGN_LEFT, PH_MEMSTRINGS_TREE_COLUMN_ITEM_PROTECTION, 0, 0);
+    PhAddTreeNewColumnEx2(TreeNewHandle, PH_MEMSTRINGS_TREE_COLUMN_ITEM_MEMORY_TYPE, FALSE, L"内存类型", 80, PH_ALIGN_LEFT, PH_MEMSTRINGS_TREE_COLUMN_ITEM_MEMORY_TYPE, 0, 0);
 
     TreeNew_SetRedraw(TreeNewHandle, TRUE);
     TreeNew_SetSort(TreeNewHandle, PH_MEMSTRINGS_TREE_COLUMN_ITEM_INDEX, AscendingSortOrder);
@@ -986,7 +986,7 @@ INT_PTR CALLBACK PhpMemoryStringsMinimumLengthDlgProc(
 
                     if (!minimumLength || minimumLength > MAXULONG32)
                     {
-                        PhShowError2(hwndDlg, L"Unable to update the length.", L"%s", L"The minimum length is invalid.");
+                        PhShowError2(hwndDlg, L"无法更新长度。", L"%s", L"最小长度无效。");
                         break;
                     }
 
@@ -1045,7 +1045,7 @@ VOID PhpMemoryStringsSetWindowTitle(
 
     clientId.UniqueProcess = Context->ProcessItem->ProcessId;
     clientId.UniqueThread = NULL;
-    title = PhaConcatStrings2(PhGetStringOrEmpty(PH_AUTO(PhGetClientIdName(&clientId))), L" Strings");
+    title = PhaConcatStrings2(PhGetStringOrEmpty(PH_AUTO(PhGetClientIdName(&clientId))), L" 个字符串");
     SetWindowTextW(Context->WindowHandle, title->Buffer);
 }
 
@@ -1086,7 +1086,7 @@ VOID PhpShowMemoryEditor(
     }
     else
     {
-        PhShowStatus(context->WindowHandle, L"Unable to edit memory", status, 0);
+        PhShowStatus(context->WindowHandle, L"无法编辑内存", status, 0);
     }
 }
 
@@ -1128,7 +1128,7 @@ INT_PTR CALLBACK PhpMemoryStringsDlgProc(
             PhCreateSearchControl(
                 hwndDlg,
                 context->SearchHandle,
-                L"Search Strings (Ctrl+K)",
+                L"搜索字符串 (Ctrl+K)",
                 PvpStringsSearchControlCallback,
                 context
                 );
@@ -1241,10 +1241,10 @@ INT_PTR CALLBACK PhpMemoryStringsDlgProc(
                 PhpAddPendingMemoryStringsNodes(context);
 
                 if (context->State == PH_MEMSEARCH_STATE_SEARCHING)
-                    PhInitFormatS(&format[count++], L"Searching... ");
+                    PhInitFormatS(&format[count++], L"正在搜索... ");
 
                 PhInitFormatU(&format[count++], context->StringsCount);
-                PhInitFormatS(&format[count++], L" strings");
+                PhInitFormatS(&format[count++], L" 个字符串");
 
                 message = PhFormat(format, count, 80);
 
@@ -1293,11 +1293,11 @@ INT_PTR CALLBACK PhpMemoryStringsDlgProc(
 
                 menu = PhCreateEMenu();
 
-                readWrite = PhCreateEMenuItem(0, IDC_SHOW, L"Read/Write memory", NULL, NULL);
+                readWrite = PhCreateEMenuItem(0, IDC_SHOW, L"读取/写入内存", NULL, NULL);
                 readWrite->Flags |= PH_EMENU_DEFAULT;
                 PhInsertEMenuItem(menu, readWrite, ULONG_MAX);
                 PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, IDC_COPY, L"Copy", NULL, NULL), ULONG_MAX);
+                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, IDC_COPY, L"复制", NULL, NULL), ULONG_MAX);
                 PhInsertCopyCellEMenuItem(menu, IDC_COPY, context->TreeNewHandle, contextMenuEvent->Column);
 
                 if (numberOfNodes != 1)
@@ -1367,13 +1367,13 @@ INT_PTR CALLBACK PhpMemoryStringsDlgProc(
 
                     ansi = PhCreateEMenuItem(0, 1, L"ANSI", NULL, NULL);
                     unicode = PhCreateEMenuItem(0, 2, L"Unicode", NULL, NULL);
-                    extendedUnicode = PhCreateEMenuItem(0, 3, L"Extended character set", NULL, NULL);
-                    private = PhCreateEMenuItem(0, 4, L"Private", NULL, NULL);
-                    image = PhCreateEMenuItem(0, 5, L"Image", NULL, NULL);
-                    mapped = PhCreateEMenuItem(0, 6, L"Mapped", NULL, NULL);
-                    minimumLength = PhCreateEMenuItem(0, 7, L"Minimum length...", NULL, NULL);
-                    zeroPad = PhCreateEMenuItem(0, 8, L"Zero pad addresses", NULL, NULL);
-                    refresh = PhCreateEMenuItem(0, 9, L"Refresh\bF5", NULL, NULL);
+                    extendedUnicode = PhCreateEMenuItem(0, 3, L"扩展字符集", NULL, NULL);
+                    private = PhCreateEMenuItem(0, 4, L"私有", NULL, NULL);
+                    image = PhCreateEMenuItem(0, 5, L"映像", NULL, NULL);
+                    mapped = PhCreateEMenuItem(0, 6, L"已映射", NULL, NULL);
+                    minimumLength = PhCreateEMenuItem(0, 7, L"最小长度...", NULL, NULL);
+                    zeroPad = PhCreateEMenuItem(0, 8, L"地址补零", NULL, NULL);
+                    refresh = PhCreateEMenuItem(0, 9, L"刷新\bF5", NULL, NULL);
 
                     menu = PhCreateEMenu();
                     PhInsertEMenuItem(menu, ansi, ULONG_MAX);
@@ -1582,7 +1582,7 @@ BOOLEAN PhpShowMemoryStringTreeDialog(
         ProcessItem->ProcessId
         )))
     {
-        PhShowStatus(ParentWindowHandle, L"Unable to open the process", status, 0);
+        PhShowStatus(ParentWindowHandle, L"无法打开进程", status, 0);
         return FALSE;
     }
 
@@ -1598,7 +1598,7 @@ BOOLEAN PhpShowMemoryStringTreeDialog(
         NtClose(context->ProcessHandle);
         PhFree(context);
 
-        PhShowStatus(ParentWindowHandle, L"Unable to create the window.", status, 0);
+        PhShowStatus(ParentWindowHandle, L"无法创建窗口。", status, 0);
         return FALSE;
     }
 

@@ -929,7 +929,7 @@ BOOLEAN PhpShowMessageOneTime(
     config.pszMainIcon = Icon;
     config.pszMainInstruction = Title;
     config.pszContent = PhGetString(message);
-    config.pszVerificationText = L"Don't show this message again";
+    config.pszVerificationText = L"不要再显示此消息";
     config.cxWidth = 200;
 
     if (PhShowTaskDialog(
@@ -1081,16 +1081,16 @@ VOID PhShowStatus(
         if (Message)
             PhShowError2(WindowHandle, Message, L"%s", PhGetString(statusMessage));
         else
-            PhShowError2(WindowHandle, L"Unable to perform the operation.", L"%s", PhGetString(statusMessage));
+            PhShowError2(WindowHandle, L"无法执行操作。", L"%s", PhGetString(statusMessage));
 
         PhDereferenceObject(statusMessage);
     }
     else
     {
         if (Message)
-            PhShowError2(WindowHandle, L"Unable to perform the operation.", L"%s", Message);
+            PhShowError2(WindowHandle, L"无法执行操作。", L"%s", Message);
         else
-            PhShowStatus(WindowHandle, L"Unable to perform the operation.", STATUS_UNSUCCESSFUL, 0);
+            PhShowStatus(WindowHandle, L"无法执行操作。", STATUS_UNSUCCESSFUL, 0);
     }
 }
 
@@ -1119,11 +1119,11 @@ BOOLEAN PhShowContinueStatus(
     if (Message && statusMessage)
         result = PhShowMessage2(WindowHandle, TD_OK_BUTTON | TD_CLOSE_BUTTON, TD_ERROR_ICON, Message, L"%s", PhGetString(statusMessage));
     else if (Message)
-        result = PhShowMessage2(WindowHandle, TD_OK_BUTTON | TD_CANCEL_BUTTON, TD_ERROR_ICON, L"Unable to perform the operation.", L"%s", Message);
+        result = PhShowMessage2(WindowHandle, TD_OK_BUTTON | TD_CANCEL_BUTTON, TD_ERROR_ICON, L"无法执行操作。", L"%s", Message);
     else if (statusMessage)
-        result = PhShowMessage2(WindowHandle, TD_OK_BUTTON | TD_CANCEL_BUTTON, TD_ERROR_ICON, L"Unable to perform the operation.", L"%s", PhGetString(statusMessage));
+        result = PhShowMessage2(WindowHandle, TD_OK_BUTTON | TD_CANCEL_BUTTON, TD_ERROR_ICON, L"无法执行操作。", L"%s", PhGetString(statusMessage));
     else
-        result = PhShowMessage2(WindowHandle, TD_OK_BUTTON | TD_CANCEL_BUTTON, TD_ERROR_ICON, L"Unable to perform the operation.", L"");
+        result = PhShowMessage2(WindowHandle, TD_OK_BUTTON | TD_CANCEL_BUTTON, TD_ERROR_ICON, L"无法执行操作。", L"");
 
     if (statusMessage) PhDereferenceObject(statusMessage);
 
@@ -1174,13 +1174,13 @@ BOOLEAN PhShowConfirmMessage(
         config.dwFlags = TDF_ALLOW_DIALOG_CANCELLATION | ((WindowHandle && IsWindowVisible(WindowHandle) && !IsMinimized(WindowHandle)) ? TDF_POSITION_RELATIVE_TO_WINDOW : 0);
         config.pszWindowTitle = PhApplicationName;
         config.pszMainIcon = Warning ? TD_WARNING_ICON : TD_INFORMATION_ICON;
-        config.pszMainInstruction = PhaConcatStrings(3, L"Do you want to ", action->Buffer, L"?")->Buffer;
-        if (Message) config.pszContent = PhaConcatStrings2(Message, L" Are you sure you want to continue?")->Buffer;
+        config.pszMainInstruction = PhaConcatStrings(3, L"你确定要", action->Buffer, L"?")->Buffer;
+        if (Message) config.pszContent = PhaConcatStrings2(Message, L" 你确定要继续吗?")->Buffer;
 
         buttons[0].nButtonID = IDYES;
         buttons[0].pszButtonText = verbCaps->Buffer;
         buttons[1].nButtonID = IDNO;
-        buttons[1].pszButtonText = L"Cancel";
+        buttons[1].pszButtonText = L"取消";
 
         config.cButtons = 2;
         config.pButtons = buttons;
@@ -1200,7 +1200,7 @@ BOOLEAN PhShowConfirmMessage(
         if (PhShowMessage(
             WindowHandle,
             MB_YESNO | MB_ICONWARNING | MB_DEFBUTTON2,
-            L"Are you sure you want to %s?",
+            L"你确定要 %s 吗?",
             action->Buffer
             ) == IDYES)
         {
@@ -2020,23 +2020,23 @@ PPH_STRING PhFormatTimeSpanRelative(
 
     if (centuries >= 1)
     {
-        string = PhFormatString(L"%u %s", (ULONG)centuries, (ULONG)centuries == 1 ? L"century" : L"centuries");
+        string = PhFormatString(L"%u %s", (ULONG)centuries, (ULONG)centuries == 1 ? L"世纪" : L"世纪");
     }
     else if (years >= 1)
     {
-        string = PhFormatString(L"%u %s", (ULONG)years, (ULONG)years == 1 ? L"year" : L"years");
+        string = PhFormatString(L"%u %s", (ULONG)years, (ULONG)years == 1 ? L"年" : L"年");
     }
     else if (months >= 1)
     {
-        string = PhFormatString(L"%u %s", (ULONG)months, (ULONG)months == 1 ? L"month" : L"months");
+        string = PhFormatString(L"%u %s", (ULONG)months, (ULONG)months == 1 ? L"个月" : L"个月");
     }
     else if (fortnights >= 1)
     {
-        string = PhFormatString(L"%u %s", (ULONG)fortnights, (ULONG)fortnights == 1 ? L"fortnight" : L"fortnights");
+        string = PhFormatString(L"%u %s", (ULONG)fortnights, (ULONG)fortnights == 1 ? L"两星期" : L"两星期");
     }
     else if (weeks >= 1)
     {
-        string = PhFormatString(L"%u %s", (ULONG)weeks, (ULONG)weeks == 1 ? L"week" : L"weeks");
+        string = PhFormatString(L"%u %s", (ULONG)weeks, (ULONG)weeks == 1 ? L"周" : L"周");
     }
     else
     {
@@ -2060,16 +2060,16 @@ PPH_STRING PhFormatTimeSpanRelative(
             if (hoursPartial >= 1)
             {
                 string = PhFormatString(
-                    L"%u %s and %u %s",
+                    L"%u %s %u %s",
                     (ULONG)days,
-                    (ULONG)days == 1 ? L"day" : L"days",
+                    (ULONG)days == 1 ? L"天" : L"天",
                     hoursPartial,
-                    hoursPartial == 1 ? L"hour" : L"hours"
+                    hoursPartial == 1 ? L"小时" : L"小时"
                     );
             }
             else
             {
-                string = PhFormatString(L"%u %s", (ULONG)days, (ULONG)days == 1 ? L"day" : L"days");
+                string = PhFormatString(L"%u %s", (ULONG)days, (ULONG)days == 1 ? L"天" : L"天");
             }
         }
         else if (hours >= 1)
@@ -2079,16 +2079,16 @@ PPH_STRING PhFormatTimeSpanRelative(
             if (minutesPartial >= 1)
             {
                 string = PhFormatString(
-                    L"%u %s and %u %s",
+                    L"%u %s %u %s",
                     (ULONG)hours,
-                    (ULONG)hours == 1 ? L"hour" : L"hours",
+                    (ULONG)hours == 1 ? L"小时" : L"小时",
                     (ULONG)minutesPartial,
-                    (ULONG)minutesPartial == 1 ? L"minute" : L"minutes"
+                    (ULONG)minutesPartial == 1 ? L"分钟" : L"分钟"
                     );
             }
             else
             {
-                string = PhFormatString(L"%u %s", (ULONG)hours, (ULONG)hours == 1 ? L"hour" : L"hours");
+                string = PhFormatString(L"%u %s", (ULONG)hours, (ULONG)hours == 1 ? L"小时" : L"小时");
             }
         }
         else if (minutes >= 1)
@@ -2098,29 +2098,29 @@ PPH_STRING PhFormatTimeSpanRelative(
             if (secondsPartial >= 1)
             {
                 string = PhFormatString(
-                    L"%u %s and %u %s",
+                    L"%u %s %u %s",
                     (ULONG)minutes,
-                    (ULONG)minutes == 1 ? L"minute" : L"minutes",
+                    (ULONG)minutes == 1 ? L"分钟" : L"分钟",
                     (ULONG)secondsPartial,
-                    (ULONG)secondsPartial == 1 ? L"second" : L"seconds"
+                    (ULONG)secondsPartial == 1 ? L"秒" : L"秒"
                     );
             }
             else
             {
-                string = PhFormatString(L"%u %s", (ULONG)minutes, (ULONG)minutes == 1 ? L"minute" : L"minutes");
+                string = PhFormatString(L"%u %s", (ULONG)minutes, (ULONG)minutes == 1 ? L"分钟" : L"分钟");
             }
         }
         else if (seconds >= 1)
         {
-            string = PhFormatString(L"%u %s", (ULONG)seconds, (ULONG)seconds == 1 ? L"second" : L"seconds");
+            string = PhFormatString(L"%u %s", (ULONG)seconds, (ULONG)seconds == 1 ? L"秒" : L"秒");
         }
         else if (milliseconds >= 1)
         {
-            string = PhFormatString(L"%u %s", (ULONG)milliseconds, (ULONG)milliseconds == 1 ? L"millisecond" : L"milliseconds");
+            string = PhFormatString(L"%u %s", (ULONG)milliseconds, (ULONG)milliseconds == 1 ? L"毫秒" : L"毫秒");
         }
         else
         {
-            string = PhCreateString(L"a very short time");
+            string = PhCreateString(L"非常短的时间");
         }
     }
 
