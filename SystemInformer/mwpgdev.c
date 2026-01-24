@@ -71,21 +71,21 @@ VOID PhpNotifyForDevice(
 
     classification = PhpNotifyDeviceGetString(Item, PhDevicePropertyClass, TRUE);
     if (!classification)
-        classification = PhCreateString(L"Unclassified");
+        classification = PhCreateString(L"未分类");
 
     name = PhpNotifyDeviceGetString(Item, PhDevicePropertyName, FALSE);
     if (!name)
-        name = PhCreateString(L"Unnamed");
+        name = PhCreateString(L"未命名");
 
     if (Type == PH_NOTIFY_DEVICE_REMOVED)
     {
         PhLogDeviceEntry(PH_LOG_ENTRY_DEVICE_REMOVED, classification, name);
-        title = PhConcatStringRefZ(&classification->sr, L" Device Removed");
+        title = PhConcatStringRefZ(&classification->sr, L" 设备已移除");
     }
     else
     {
         PhLogDeviceEntry(PH_LOG_ENTRY_DEVICE_ARRIVED, classification, name);
-        title = PhConcatStringRefZ(&classification->sr, L" Device Arrived");
+        title = PhConcatStringRefZ(&classification->sr, L" 设备已到达");
     }
 
     if ((PhMwpNotifyIconNotifyMask & Type))

@@ -954,182 +954,182 @@ PCWSTR SmartAttributeGetText(
     switch (AttributeId)
     {
     case SMART_ATTRIBUTE_ID_READ_ERROR_RATE:
-        return L"Read error rate";
+        return L"读取错误率";
     case SMART_ATTRIBUTE_ID_THROUGHPUT_PERFORMANCE:
-        return L"Throughput performance";
+        return L"吞吐量性能";
     case SMART_ATTRIBUTE_ID_SPIN_UP_TIME:
-        return L"Spin up time";
+        return L"启动时间";
     case SMART_ATTRIBUTE_ID_START_STOP_COUNT:
-        return L"Start stop count";
+        return L"启动/停止次数";
     case SMART_ATTRIBUTE_ID_REALLOCATED_SECTORS_COUNT:
-        return L"Reallocated sensors count";
+        return L"重新分配传感器计数";
     case SMART_ATTRIBUTE_ID_READ_CHANNEL_MARGIN:
-        return L"Read channel margin";
+        return L"读取通道裕量";
     case SMART_ATTRIBUTE_ID_SEEK_ERROR_RATE:
-        return L"Seek error rate";
+        return L"寻道错误率";
     case SMART_ATTRIBUTE_ID_SEEK_TIME_PERFORMANCE:
-        return L"Seek time performance";
+        return L"寻道时间性能";
     case SMART_ATTRIBUTE_ID_POWER_ON_HOURS:
-        return L"Power on hours";
+        return L"通电时间";
     case SMART_ATTRIBUTE_ID_SPIN_RETRY_COUNT:
-        return L"Spin retry count";
+        return L"自旋重试次数";
     case SMART_ATTRIBUTE_ID_CALIBRATION_RETRY_COUNT:
-        return L"Calibration retry count";
+        return L"校准重试次数";
     case SMART_ATTRIBUTE_ID_POWER_CYCLE_COUNT:
-        return L"Power cycle count";
+        return L"电源循环次数";
     case SMART_ATTRIBUTE_ID_SOFT_READ_ERROR_RATE:
-        return L"Soft read error rate";
+        return L"软读取错误率";
     case SMART_ATTRIBUTE_ID_CURRENT_HELIUM_LEVEL:
-        return L"Current helium level";
+        return L"当前 Helium 等级";
     case SMART_ATTRIBUTE_ID_HELIUM_CONDITION_LOWER:
-        return L"Helium condition lower";
+        return L"Helium 条件下限";
     case SMART_ATTRIBUTE_ID_HELIUM_CONDITION_UPPER:
-        return L"Helium condition upper";
+        return L"Helium 条件上限";
     case SMART_ATTRIBUTE_ID_AVAILABLE_RESERVED_SPACE:
-        return L"Available reserved space";
+        return L"可用预留空间";
     case SMART_ATTRIBUTE_ID_SSD_PROGRAM_FAIL_COUNT:
-        return L"SSD program fail count";
+        return L"SSD 程序失败次数";
     case SMART_ATTRIBUTE_ID_SSD_ERASE_FAIL_COUNT:
-        return L"SSD erase fail count";
+        return L"SSD 擦除失败次数";
     case SMART_ATTRIBUTE_ID_SSD_WEAR_LEVELING_COUNT:
-        return L"SSD wear leveling count";
+        return L"SSD 磨损均衡次数";
     case SMART_ATTRIBUTE_ID_UNEXPECTED_POWER_LOSS:
-        return L"Unexpected power loss";
+        return L"意外断电";
     case SMART_ATTRIBUTE_ID_POWER_LOSS_PROTECTION_FAILURE:
-        return L"Power loss protection failure";
+        return L"断电保护失效";
     case SMART_ATTRIBUTE_ID_ERASE_FAIL_COUNT:
-        return L"Erase fail count";
+        return L"擦除故障次数";
     case SMART_ATTRIBUTE_ID_WEAR_RANGE_DELTA:
-        return L"Wear range delta";
+        return L"磨损范围增量";
     case SMART_ATTRIBUTE_ID_USED_RESERVED_BLOCK_COUNT:
-        return L"Used reserved block count";
+        return L"已用保留块数";
     case SMART_ATTRIBUTE_ID_USED_RESERVED_BLOCK_TOTAL:
-        return L"Used reserved block total";
+        return L"已用保留块总数";
     case SMART_ATTRIBUTE_ID_UNUSED_RESERVED_BLOCK_TOTAL:
-        return L"Unused reserved block total";
+        return L"未使用保留块总数";
     case SMART_ATTRIBUTE_ID_SSD_PROGRAM_FAIL_COUNT_TOTAL:
-        return L"SSD program fail count total";
+        return L"SSD 程序故障总数";
     case SMART_ATTRIBUTE_ID_ERASE_FAIL_COUNT_SAMSUNG:
-        return L"Erase fail count (Samsung)";
+        return L"擦除失败次数 (三星)";
     case SMART_ATTRIBUTE_ID_SATA_DOWNSHIFT_ERROR_COUNT:
-        return L"SATA downshift error count";
+        return L"SATA 降级错误次数";
     case SMART_ATTRIBUTE_ID_END_TO_END_ERROR:
-        return L"End to end error";
+        return L"端到端错误";
     case SMART_ATTRIBUTE_ID_HEAD_STABILITY:
-        return L"Head stability";
+        return L"头部稳定性";
     case SMART_ATTRIBUTE_ID_INDUCED_OP_VIBRATION_DETECTION:
-        return L"Induced OP-vibration detection";
+        return L"诱发操作振动检测";
     case SMART_ATTRIBUTE_ID_REPORTED_UNCORRECTABLE_ERRORS:
-        return L"Reported uncorrectable errors";
+        return L"已报告不可纠正错误";
     case SMART_ATTRIBUTE_ID_COMMAND_TIMEOUT:
-        return L"Command timeout";
+        return L"命令超时";
     case SMART_ATTRIBUTE_ID_HIGH_FLY_WRITES:
-        return L"High fly writes";
+        return L"高速写入";
     case SMART_ATTRIBUTE_ID_TEMPERATURE_DIFFERENCE_FROM_100:
-        return L"Airflow temperature";
+        return L"气流温度";
     case SMART_ATTRIBUTE_ID_GSENSE_ERROR_RATE:
-        return L"GSense error rate";
+        return L"GSense 错误率";
     case SMART_ATTRIBUTE_ID_POWER_OFF_RETRACT_COUNT:
-        return L"Power off retract count";
+        return L"断电回弹次数";
     case SMART_ATTRIBUTE_ID_LOAD_CYCLE_COUNT:
-        return L"Load cycle count";
+        return L"负载循环次数";
     case SMART_ATTRIBUTE_ID_TEMPERATURE:
-        return L"Temperature";
+        return L"温度";
     case SMART_ATTRIBUTE_ID_HARDWARE_ECC_RECOVERED:
-        return L"Hardware ECC recovered";
+        return L"硬件 ECC 恢复情况";
     case SMART_ATTRIBUTE_ID_REALLOCATION_EVENT_COUNT:
-        return L"Reallocation event count";
+        return L"重新分配事件次数";
     case SMART_ATTRIBUTE_ID_CURRENT_PENDING_SECTOR_COUNT:
-        return L"Current pending sector count";
+        return L"当前待处理扇区数";
     case SMART_ATTRIBUTE_ID_UNCORRECTABLE_SECTOR_COUNT:
-        return L"Uncorrectable sector count";
+        return L"不可纠正扇区数";
     case SMART_ATTRIBUTE_ID_ULTRADMA_CRC_ERROR_COUNT:
-        return L"UltraDMA CRC error count";
+        return L"UltraDMA CRC 错误次数";
     case SMART_ATTRIBUTE_ID_MULTI_ZONE_ERROR_RATE:
-        return L"Multi zone error rate";
+        return L"多区域错误率";
     case SMART_ATTRIBUTE_ID_OFFTRACK_SOFT_READ_ERROR_RATE:
-        return L"Offtrack soft read error rate";
+        return L"Offtrack 软读取错误率";
     case SMART_ATTRIBUTE_ID_DATA_ADDRESS_MARK_ERRORS:
-        return L"Data address mark errors";
+        return L"数据地址标记错误";
     case SMART_ATTRIBUTE_ID_RUN_OUT_CANCEL:
-        return L"Run out cancel";
+        return L"耗尽取消";
     case SMART_ATTRIBUTE_ID_SOFT_ECC_CORRECTION:
-        return L"Soft ECC correction";
+        return L"软 ECC 纠错";
     case SMART_ATTRIBUTE_ID_THERMAL_ASPERITY_RATE_TAR:
-        return L"Thermal asperity rate";
+        return L"热膨胀系数";
     case SMART_ATTRIBUTE_ID_FLYING_HEIGHT:
-        return L"Flying height";
+        return L"飞行高度";
     case SMART_ATTRIBUTE_ID_SPIN_HIGH_CURRENT:
-        return L"Spin high current";
+        return L"自旋高电流";
     case SMART_ATTRIBUTE_ID_SPIN_BUZZ:
-        return L"Spin buzz";
+        return L"自旋噪声";
     case SMART_ATTRIBUTE_ID_OFFLINE_SEEK_PERFORMANCE:
-        return L"Offline seek performance";
+        return L"离线寻道性能";
     case SMART_ATTRIBUTE_ID_VIBRATION_DURING_WRITE:
-        return L"Vibration during write";
+        return L"写入过程振动";
     case SMART_ATTRIBUTE_ID_SHOCK_DURING_WRITE:
-        return L"Shock during write";
+        return L"写入过程冲击";
     case SMART_ATTRIBUTE_ID_DISK_SHIFT:
-        return L"Disk shift";
+        return L"磁盘偏移";
     case SMART_ATTRIBUTE_ID_GSENSE_ERROR_RATE_ALT:
-        return L"GSense error rate";
+        return L"GSense 错误率";
     case SMART_ATTRIBUTE_ID_LOADED_HOURS:
-        return L"Loaded hours";
+        return L"负载时间";
     case SMART_ATTRIBUTE_ID_LOAD_UNLOAD_RETRY_COUNT:
-        return L"Load/unload retry count";
+        return L"加载/卸载重试次数";
     case SMART_ATTRIBUTE_ID_LOAD_FRICTION:
-        return L"Load friction count";
+        return L"负载摩擦次数";
     case SMART_ATTRIBUTE_ID_LOAD_UNLOAD_CYCLE_COUNT:
-        return L"Load/unload cycle count";
+        return L"加载/卸载循环次数";
     case SMART_ATTRIBUTE_ID_LOAD_IN_TIME:
-        return L"Load in time";
+        return L"加载时间";
     case SMART_ATTRIBUTE_ID_TORQUE_AMPLIFICATION_COUNT:
-        return L"Torque amplification count";
+        return L"扭矩放大次数";
     case SMART_ATTRIBUTE_ID_POWER_OFF_RETRACT_CYCLE:
-        return L"Power off retract cycle";
+        return L"断电回抽周期";
     case SMART_ATTRIBUTE_ID_GMR_HEAD_AMPLITUDE:
-        return L"GMR head amplitude";
+        return L"GMR 磁头振幅";
     case SMART_ATTRIBUTE_ID_DRIVE_TEMPERATURE:
-        return L"Drive temperature";
+        return L"驱动器温度";
     case SMART_ATTRIBUTE_ID_ENDURANCE_REMAINING:
-        return L"Endurance remaining";
+        return L"剩余耐久度";
     case SMART_ATTRIBUTE_ID_SSD_MEDIA_WEAROUT_INDICATOR:
-        return L"SSD media wearout indicator";
+        return L"SSD 介质损耗指示器";
     case SMART_ATTRIBUTE_ID_SSD_ERASE_COUNT:
-        return L"SSD erase count";
+        return L"SSD 擦除次数";
     case SMART_ATTRIBUTE_ID_GOOD_BLOCK_COUNT_AND_SYSTEM_BLOCK_COUNT:
-        return L"Good block count and system(free) block count";
+        return L"有效块数和系统 (空闲) 块数";
     case SMART_ATTRIBUTE_ID_HEAD_FLYING_HOURS:
-        return L"Head flying hours";
+        return L"磁头飞行小时数";
     case SMART_ATTRIBUTE_ID_TOTAL_HOST_WRITES:
-        return L"Total host writes";
+        return L"主机总写入次数";
     case SMART_ATTRIBUTE_ID_TOTAL_HOST_READS:
-        return L"Total host reads";
+        return L"主机总读取次数";
     case SMART_ATTRIBUTE_ID_TOTAL_HOST_WRITES_EXPANDED:
-        return L"Total host writes expanded";
+        return L"主机写入总数 (已扩展)";
     case SMART_ATTRIBUTE_ID_TOTAL_HOST_READS_EXPANDED:
-        return L"Total host reads expanded";
+        return L"主机总读取次数 (已扩展)";
     case SMART_ATTRIBUTE_ID_REMAINING_RATED_WRITE_ENDURANCE:
-        return L"Remaining rated write endurance";
+        return L"剩余额定写入寿命";
     case SMART_ATTRIBUTE_ID_CUMULATIVE_HOST_SECTORS_WRITTEN:
-        return L"Cumulative host sectors written";
+        return L"累计写入主机扇区数";
     case SMART_ATTRIBUTE_ID_HOST_PROGRAM_PAGE_COUNT:
-        return L"Host program page count";
+        return L"主机程序页数";
     case SMART_ATTRIBUTE_ID_BACKGROUND_PROGRAM_PAGE_COUNT:
-        return L"Background program page count";
+        return L"后台程序页数";
     case SMART_ATTRIBUTE_ID_NAND_WRITES:
-        return L"NAND writes";
+        return L"NAND 写入";
     case SMART_ATTRIBUTE_ID_READ_ERROR_RETY_RATE:
-        return L"Read error retry rate";
+        return L"读取错误重试率";
     case SMART_ATTRIBUTE_ID_MIN_SPARES_REMAINING:
-        return L"Minimum spares remaining";
+        return L"剩余最小备用容量";
     case SMART_ATTRIBUTE_ID_NEWLY_ADDED_BAD_FLASH_BLOCK:
-        return L"Newly added bad flash block";
+        return L"新增坏闪存块";
     case SMART_ATTRIBUTE_ID_FREE_FALL_PROTECTION:
-        return L"Free fall protection";
+        return L"自由落体保护";
     }
 
-    return L"Unknown";
+    return L"未知";
 }
 
 NTSTATUS DiskDriveQueryUniqueId(

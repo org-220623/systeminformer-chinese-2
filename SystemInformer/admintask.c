@@ -355,7 +355,7 @@ HRESULT PhRunAsAdminTask(
     IRegisteredTask* taskRegisteredTask = NULL;
     IRunningTask* taskRunningTask = NULL;
 
-    PhTraceFuncEnter("Run as admin task");
+    PhTraceFuncEnter("以管理员身份运行任务");
 
     status = PhGetClassObject(
         L"taskschd.dll",
@@ -440,7 +440,7 @@ CleanupExit:
     if (taskNameString)
         SysFreeString(taskNameString);
 
-    PhTraceFuncExit("Run as admin task: %!STATUS!", status);
+    PhTraceFuncExit("以管理员身份运行任务: %!STATUS!", status);
 
     return status;
 }
@@ -455,7 +455,7 @@ NTSTATUS PhRunAsAdminTaskUIAccess(
     CLIENT_ID desktopId;
     PPH_STRING fileName = NULL;
 
-    PhTraceFuncEnter("Run as admin task UI access");
+    PhTraceFuncEnter("以管理员身份运行任务 UI 访问权限");
 
     if (!PhGetOwnTokenAttributes().Elevated)
     {
@@ -512,7 +512,7 @@ CleanupExit:
 
     PhClearReference(&fileName);
 
-    PhTraceFuncExit("Run as admin task UI access: %!STATUS!", status);
+    PhTraceFuncExit("以管理员身份运行任务 UI 访问权限: %!STATUS!", status);
 
     return status;
 }

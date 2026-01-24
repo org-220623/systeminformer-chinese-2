@@ -82,11 +82,9 @@ PhShowKsiNotConnected(
     PhShowKsiMessage(
         WindowHandle,
         TD_INFORMATION_ICON,
-        L"Kernel driver not connected",
+        L"内核驱动程序未连接",
         L"%s\r\n\r\n"
-        L"System Informer is not connected to the kernel driver or lacks the required state "
-        L"necessary for this feature. Make sure that the \"Enable kernel-mode driver\" option is "
-        L"enabled and that System Informer is running with administrator privileges.",
+        L"System Informer 未连接到内核驱动程序，或缺少此功能所需的必要状态。请确保已启用“启用内核模式驱动程序”选项，并且 System Informer 以管理员权限运行。",
         Message
         );
 }
@@ -101,10 +99,8 @@ PhGetKsiNotConnectedString(
         0,
         FALSE,
         L"%s\r\n\r\n%s\r\n\r\n%s",
-        L"Kernel driver not connected",
-        L"System Informer is not connected to the kernel driver or lacks the required state "
-        L"necessary for this feature. Make sure that the \"Enable kernel-mode driver\" option is "
-        L"enabled and that System Informer is running with administrator privileges.",
+        L"内核驱动程序未连接",
+        L"System Informer 未连接到内核驱动程序，或缺少此功能所需的必要状态。请确保已启用“启用内核模式驱动程序”选项，并且 System Informer 以管理员权限运行。",
         Message
         );
 }

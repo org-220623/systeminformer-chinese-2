@@ -79,7 +79,7 @@ VOID GraphicsDeviceShowNodesDialog(
 {
     if (Context->DeviceEntry->NumberOfNodes == 0)
     {
-        PhShowError2(ParentWindowHandle, L"There are no graphics nodes to display.", L"%s", L"");
+        PhShowError2(ParentWindowHandle, L"没有要显示的 GPU 节点。", L"%s", L"");
         return;
     }
 
@@ -89,7 +89,7 @@ VOID GraphicsDeviceShowNodesDialog(
 
         if (!NT_SUCCESS(PhCreateThreadEx(&Context->NodeWindowThreadHandle, EtpGpuNodesDialogThreadStart, Context)))
         {
-            PhShowError2(ParentWindowHandle, L"Unable to create the window.", L"%s", L"");
+            PhShowError2(ParentWindowHandle, L"无法创建窗口。", L"%s", L"");
             PhDereferenceObject(Context);
             return;
         }
@@ -476,7 +476,7 @@ INT_PTR CALLBACK GraphicsDeviceNodesDlgProc(
 
                                     // %.2f%% (Node %lu)
                                     PhInitFormatF(&format[0], gpu * 100, 2);
-                                    PhInitFormatS(&format[1], L"% (Node ");
+                                    PhInitFormatS(&format[1], L"% (节点 ");
                                     PhInitFormatU(&format[2], i);
                                     PhInitFormatC(&format[3], L')');
 
@@ -546,11 +546,11 @@ INT_PTR CALLBACK GraphicsDeviceNodesDlgProc(
 
                                         // %.2f%%\nNode %lu (%s) on %s\n%s
                                         PhInitFormatF(&format[0], gpu * 100, 2);
-                                        PhInitFormatS(&format[1], L"%\nNode ");
+                                        PhInitFormatS(&format[1], L"%\n节点 ");
                                         PhInitFormatU(&format[2], i);
                                         PhInitFormatS(&format[3], L" (");
                                         PhInitFormatSR(&format[4], engineName->sr);
-                                        PhInitFormatS(&format[5], L") on ");
+                                        PhInitFormatS(&format[5], L") 位于 ");
                                         PhInitFormatSR(&format[6], context->Description->sr);
                                         PhInitFormatC(&format[7], L'\n');
                                         PhInitFormatSR(&format[8], PH_AUTO_T(PH_STRING, PhGetStatisticsTimeString(NULL, getTooltipText->Index))->sr);
@@ -563,7 +563,7 @@ INT_PTR CALLBACK GraphicsDeviceNodesDlgProc(
 
                                         // %.2f%%\nNode %lu on %s\n%s
                                         PhInitFormatF(&format[0], gpu * 100, 2);
-                                        PhInitFormatS(&format[1], L"%\nNode ");
+                                        PhInitFormatS(&format[1], L"%\n节点 ");
                                         PhInitFormatU(&format[2], i);
                                         PhInitFormatC(&format[3], L'\n');
                                         PhInitFormatSR(&format[4], PH_AUTO_T(PH_STRING, PhGetStatisticsTimeString(NULL, getTooltipText->Index))->sr);

@@ -171,7 +171,7 @@ static HWND PvpCreateOptionsButton(
         OptionsButton = CreateWindowEx(
             WS_EX_NOPARENTNOTIFY,
             WC_BUTTON,
-            L"Options",
+            L"选项",
             WS_CHILD | WS_VISIBLE | WS_TABSTOP,
             clientRect.right - rect.right,
             rect.top,
@@ -210,7 +210,7 @@ static HWND PvpCreateSecurityButton(
         SecurityButton = CreateWindowEx(
             WS_EX_NOPARENTNOTIFY,
             WC_BUTTON,
-            L"Permissions",
+            L"权限",
             WS_CHILD | WS_VISIBLE | WS_TABSTOP,
             rect.right + 3,
             rect.top,
@@ -457,8 +457,8 @@ BOOLEAN PhpInitializePropSheetLayoutStage1(
 
         // Hide the OK button.
         ShowWindow(GetDlgItem(hwnd, IDOK), SW_HIDE);
-        // Set the Cancel button's text to "Close".
-        PhSetDialogItemText(hwnd, IDCANCEL, L"Close");
+        // Set the Cancel button's text to "关闭".
+        PhSetDialogItemText(hwnd, IDCANCEL, L"关闭");
 
         PropSheetContext->LayoutInitialized = TRUE;
 

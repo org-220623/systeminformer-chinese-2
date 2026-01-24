@@ -251,7 +251,7 @@ VOID EtRegisterNotifyIcons(
         ETP_TRAY_ICON_ID_GPU,
         EtpTrayIconGuids[ETP_TRAY_ICON_GUID_GPU],
         NULL,
-        L"&GPU history",
+        L"GPU 历史(&G)",
         EtGpuEnabled ? 0 : PH_NF_ICON_UNAVAILABLE,
         &data
         );
@@ -263,7 +263,7 @@ VOID EtRegisterNotifyIcons(
         ETP_TRAY_ICON_ID_NPU,
         EtpTrayIconGuids[ETP_TRAY_ICON_GUID_NPU],
         NULL,
-        L"&NPU history",
+        L"NPU 历史(&N)",
         EtNpuEnabled ? 0 : PH_NF_ICON_UNAVAILABLE,
         &data
         );
@@ -275,7 +275,7 @@ VOID EtRegisterNotifyIcons(
         ETP_TRAY_ICON_ID_DISK,
         EtpTrayIconGuids[ETP_TRAY_ICON_GUID_DISK],
         NULL,
-        L"&Disk history",
+        L"磁盘历史(&D)",
         EtEtwEnabled ? 0 : PH_NF_ICON_UNAVAILABLE,
         &data
         );
@@ -287,7 +287,7 @@ VOID EtRegisterNotifyIcons(
         ETP_TRAY_ICON_ID_NETWORK,
         EtpTrayIconGuids[ETP_TRAY_ICON_GUID_NETWORK],
         NULL,
-        L"&Network history",
+        L"网络历史(&N)",
         EtEtwEnabled ? 0 : PH_NF_ICON_UNAVAILABLE,
         &data
         );
@@ -299,7 +299,7 @@ VOID EtRegisterNotifyIcons(
         ETP_TRAY_ICON_ID_GPUTEXT,
         EtpTrayIconGuids[ETP_TRAY_ICON_GUID_GPUTEXT],
         NULL,
-        L"&GPU usage (text)",
+        L"GPU 用量 (文本)(&G)",
         EtGpuEnabled ? 0 : PH_NF_ICON_UNAVAILABLE,
         &data
         );
@@ -311,7 +311,7 @@ VOID EtRegisterNotifyIcons(
         ETP_TRAY_ICON_ID_DISKTEXT,
         EtpTrayIconGuids[ETP_TRAY_ICON_GUID_DISKTEXT],
         NULL,
-        L"&Disk usage (text)",
+        L"磁盘用量 (文本)(&D)",
         EtEtwEnabled ? 0 : PH_NF_ICON_UNAVAILABLE,
         &data
         );
@@ -323,7 +323,7 @@ VOID EtRegisterNotifyIcons(
         ETP_TRAY_ICON_ID_NETWORKTEXT,
         EtpTrayIconGuids[ETP_TRAY_ICON_GUID_NETWORKTEXT],
         NULL,
-        L"&Network usage (text)",
+        L"网络用量 (文本)(&N)",
         EtEtwEnabled ? 0 : PH_NF_ICON_UNAVAILABLE,
         &data
         );
@@ -335,7 +335,7 @@ VOID EtRegisterNotifyIcons(
         ETP_TRAY_ICON_ID_GPUMEM,
         EtpTrayIconGuids[ETP_TRAY_ICON_GUID_GPUMEM],
         NULL,
-        L"&GPU memory history",
+        L"显存历史(&G)",
         EtGpuEnabled ? 0 : PH_NF_ICON_UNAVAILABLE,
         &data
         );
@@ -347,7 +347,7 @@ VOID EtRegisterNotifyIcons(
         ETP_TRAY_ICON_ID_GPUMEMTEXT,
         EtpTrayIconGuids[ETP_TRAY_ICON_GUID_GPUMEMTEXT],
         NULL,
-        L"&GPU memory usage (text)",
+        L"显存用量 (文本)(&G)",
         EtGpuEnabled ? 0 : PH_NF_ICON_UNAVAILABLE,
         &data
         );
@@ -361,7 +361,7 @@ VOID EtRegisterNotifyIcons(
             ETP_TRAY_ICON_ID_GPUTEMP,
             EtpTrayIconGuids[ETP_TRAY_ICON_GUID_GPUTEMP],
             NULL,
-            L"&GPU temperature history",
+            L"GPU 温度历史(&G)",
             EtGpuEnabled ? 0 : PH_NF_ICON_UNAVAILABLE,
             &data
             );
@@ -373,7 +373,7 @@ VOID EtRegisterNotifyIcons(
             ETP_TRAY_ICON_ID_GPUTEMPTEXT,
             EtpTrayIconGuids[ETP_TRAY_ICON_GUID_GPUTEMPTEXT],
             NULL,
-            L"&GPU temperature (text)",
+            L"GPU 温度 (文本)(&G)",
             EtGpuEnabled ? 0 : PH_NF_ICON_UNAVAILABLE,
             &data
             );
@@ -460,7 +460,7 @@ VOID EtpGpuIconUpdateCallback(
     else
         maxGpuProcessItem = NULL;
 
-    PhInitFormatS(&format[0], L"GPU usage: ");
+    PhInitFormatS(&format[0], L"GPU 用量: ");
     PhInitFormatFD(&format[1], EtGpuNodeUsage * 100, EtMaxPrecisionUnit);
     PhInitFormatC(&format[2], '%');
 
@@ -580,7 +580,7 @@ VOID EtpNpuIconUpdateCallback(
     else
         maxNpuProcessItem = NULL;
 
-    PhInitFormatS(&format[0], L"NPU usage: ");
+    PhInitFormatS(&format[0], L"NPU 用量: ");
     PhInitFormatF(&format[1], EtNpuNodeUsage * 100, EtMaxPrecisionUnit);
     PhInitFormatC(&format[2], '%');
 
@@ -719,7 +719,7 @@ VOID EtpDiskIconUpdateCallback(
     else
         maxDiskProcessItem = NULL;
 
-    PhInitFormatS(&format[0], L"Disk\nR: ");
+    PhInitFormatS(&format[0], L"磁盘\nR: ");
     PhInitFormatSize(&format[1], EtDiskReadDelta.Delta);
     PhInitFormatS(&format[2], L"\nW: ");
     PhInitFormatSize(&format[3], EtDiskWriteDelta.Delta);
@@ -750,7 +750,7 @@ BOOLEAN EtpDiskIconMessageCallback(
         {
             PPH_NF_MSG_SHOWMINIINFOSECTION_DATA data = (PVOID)WParam;
 
-            data->SectionName = L"Disk";
+            data->SectionName = L"磁盘";
         }
         return TRUE;
     }
@@ -874,7 +874,7 @@ VOID EtpNetworkIconUpdateCallback(
     else
         maxNetworkProcessItem = NULL;
 
-    PhInitFormatS(&format[0], L"Network\nR: ");
+    PhInitFormatS(&format[0], L"网络\nR: ");
     PhInitFormatSize(&format[1], EtNetworkReceiveDelta.Delta);
     PhInitFormatS(&format[2], L"\nS: ");
     PhInitFormatSize(&format[3], EtNetworkSendDelta.Delta);
@@ -905,7 +905,7 @@ BOOLEAN EtpNetworkIconMessageCallback(
         {
             PPH_NF_MSG_SHOWMINIINFOSECTION_DATA data = (PVOID)WParam;
 
-            data->SectionName = L"Network";
+            data->SectionName = L"网络";
         }
         return TRUE;
     }
@@ -980,7 +980,7 @@ VOID EtpGpuTextIconUpdateCallback(
     else
         maxGpuProcessItem = NULL;
 
-    PhInitFormatS(&format[0], L"GPU usage: ");
+    PhInitFormatS(&format[0], L"GPU 用量: ");
     PhInitFormatFD(&format[1], EtGpuNodeUsage * 100, EtMaxPrecisionUnit);
     PhInitFormatC(&format[2], '%');
 
@@ -1066,7 +1066,7 @@ VOID EtpDiskTextIconUpdateCallback(
     else
         maxDiskProcessItem = NULL;
 
-    PhInitFormatS(&format[0], L"Disk\nR: ");
+    PhInitFormatS(&format[0], L"磁盘\nR: ");
     PhInitFormatSize(&format[1], EtDiskReadDelta.Delta);
     PhInitFormatS(&format[2], L"\nW: ");
     PhInitFormatSize(&format[3], EtDiskWriteDelta.Delta);
@@ -1150,7 +1150,7 @@ VOID EtpNetworkTextIconUpdateCallback(
     else
         maxNetworkProcessItem = NULL;
 
-    PhInitFormatS(&format[0], L"Network\nR: ");
+    PhInitFormatS(&format[0], L"网络\nR: ");
     PhInitFormatSize(&format[1], EtNetworkReceiveDelta.Delta);
     PhInitFormatS(&format[2], L"\nS: ");
     PhInitFormatSize(&format[3], EtNetworkSendDelta.Delta);
@@ -1239,7 +1239,7 @@ VOID EtpGpuMemoryIconUpdateCallback(
 
     // Text
 
-    PhInitFormatS(&format[0], L"GPU memory usage: ");
+    PhInitFormatS(&format[0], L"显存用量: ");
     PhInitFormatSize(&format[1], EtGpuDedicatedUsage);
 
     *NewText = PhFormat(format, 2, 0);
@@ -1300,7 +1300,7 @@ VOID EtpGpuMemoryTextIconUpdateCallback(
 
     // Text
 
-    PhInitFormatS(&format[0], L"GPU memory usage: ");
+    PhInitFormatS(&format[0], L"显存用量: ");
     PhInitFormatSize(&format[1], EtGpuDedicatedUsage);
 
     *NewText = PhFormat(format, 2, 0);
@@ -1377,7 +1377,7 @@ VOID EtpGpuTemperatureIconUpdateCallback(
 
     // Text
 
-    PhInitFormatS(&format[0], L"GPU temperature: ");
+    PhInitFormatS(&format[0], L"GPU 温度: ");
     if (EtGpuFahrenheitEnabled)
     {
         PhInitFormatF(&format[1], (EtGpuTemperature * 1.8f + 32), 1);
@@ -1450,7 +1450,7 @@ VOID EtpGpuTemperatureTextIconUpdateCallback(
 
     // Text
 
-    PhInitFormatS(&format[0], L"GPU temperature: ");
+    PhInitFormatS(&format[0], L"GPU 温度: ");
     if (EtGpuFahrenheitEnabled)
     {
         PhInitFormatF(&format[1], (EtGpuTemperature * 1.8f + 32), 1);
@@ -1799,7 +1799,7 @@ BOOLEAN EtpToolbarDiskHistoryGraphMessageCallback(
             {
                 if (PhGetIntegerSetting(SETTING_NAME_SHOWSYSINFOGRAPH))
                 {
-                    PhShowSystemInformationDialog(L"Disk");
+                    PhShowSystemInformationDialog(L"磁盘");
                 }
                 else
                 {
@@ -1954,7 +1954,7 @@ BOOLEAN EtpToolbarNetworkHistoryGraphMessageCallback(
             {
                 if (PhGetIntegerSetting(SETTING_NAME_SHOWSYSINFOGRAPH))
                 {
-                    PhShowSystemInformationDialog(L"Network");
+                    PhShowSystemInformationDialog(L"网络");
                 }
                 else
                 {
@@ -1988,7 +1988,7 @@ VOID EtRegisterToolbarGraphs(
         ToolStatusInterface->RegisterToolbarGraph(
             PluginInstance,
             5,
-            L"GPU history",
+            L"GPU 历史",
             EtGpuEnabled ? 0 : TOOLSTATUS_GRAPH_UNAVAILABLE,
             NULL,
             EtpToolbarGpuHistoryGraphMessageCallback
@@ -1997,7 +1997,7 @@ VOID EtRegisterToolbarGraphs(
         ToolStatusInterface->RegisterToolbarGraph(
             PluginInstance,
             6,
-            L"NPU history",
+            L"NPU 历史",
             EtNpuEnabled ? 0 : TOOLSTATUS_GRAPH_UNAVAILABLE,
             NULL,
             EtpToolbarNpuHistoryGraphMessageCallback
@@ -2006,7 +2006,7 @@ VOID EtRegisterToolbarGraphs(
         ToolStatusInterface->RegisterToolbarGraph(
             PluginInstance,
             7,
-            L"Disk history",
+            L"磁盘历史",
             EtEtwEnabled ? 0 : TOOLSTATUS_GRAPH_UNAVAILABLE,
             NULL,
             EtpToolbarDiskHistoryGraphMessageCallback
@@ -2015,7 +2015,7 @@ VOID EtRegisterToolbarGraphs(
         ToolStatusInterface->RegisterToolbarGraph(
             PluginInstance,
             8,
-            L"Network history",
+            L"网络历史",
             EtEtwEnabled ? 0 : TOOLSTATUS_GRAPH_UNAVAILABLE,
             NULL,
             EtpToolbarNetworkHistoryGraphMessageCallback

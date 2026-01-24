@@ -129,11 +129,11 @@ INT WINAPI wWinMain(
         PvInitializeSuperclassControls();
         PhShowWarning2(
             NULL,
-            L"Warning.",
+            L"警告",
             L"%s",
-            L"You are attempting to run the 32-bit version of PE Viewer on 64-bit Windows. "
-            L"Most features will not work correctly.\n\n"
-            L"Please run the 64-bit version of PE Viewer instead."
+            L"您尝试在 64 位 Windows 系统上运行 32 位版本的 PE Viewer。"
+            L"大多数功能将无法正常工作。\n\n"
+            L"请改用 64 位版本的 PE Viewer。"
             );
         PhExitApplication(STATUS_IMAGE_SUBSYSTEM_NOT_PRESENT);
     }
@@ -163,8 +163,8 @@ INT WINAPI wWinMain(
     {
         static PH_FILETYPE_FILTER filters[] =
         {
-            { L"Supported files (*.exe;*.dll;*.com;*.ocx;*.sys;*.scr;*.cpl;*.ax;*.acm;*.lib;*.winmd;*.mui;*.mun;*.efi;*.pdb)", L"*.exe;*.dll;*.com;*.ocx;*.sys;*.scr;*.cpl;*.ax;*.acm;*.lib;*.winmd;*.mui;*.mun;*.efi;*.pdb" },
-            { L"All files (*.*)", L"*.*" }
+            { L"所有支持的文件 (*.exe;*.dll;*.com;*.ocx;*.sys;*.scr;*.cpl;*.ax;*.acm;*.lib;*.winmd;*.mui;*.mun;*.efi;*.pdb)", L"*.exe;*.dll;*.com;*.ocx;*.sys;*.scr;*.cpl;*.ax;*.acm;*.lib;*.winmd;*.mui;*.mun;*.efi;*.pdb" },
+            { L"所有文件 (*.*)", L"*.*" }
         };
         PVOID fileDialog;
 
@@ -317,9 +317,9 @@ INT WINAPI wWinMain(
         if (!NT_SUCCESS(status))
         {
             if (status == STATUS_IMAGE_SUBSYSTEM_NOT_PRESENT)
-                PhShowError2(NULL, L"Unable to load the file.", L"%s", L"PE Viewer does not support this image type.");
+                PhShowError2(NULL, L"无法加载文件。", L"%s", L"PE Viewer 不支持此类文件。");
             else
-                PhShowStatus(NULL, L"Unable to load the file.", status, 0);
+                PhShowStatus(NULL, L"无法加载文件。", status, 0);
         }
     }
 
@@ -350,7 +350,7 @@ ULONG CALLBACK PvUnhandledExceptionCallback(
     PhShowMessage(
         NULL,
         MB_OK | MB_ICONWARNING,
-        L"PE Viewer has crashed :(\r\n\r\n%s",
+        L"PE Viewer 已崩溃 :(\r\n\r\n%s",
         PhGetStringOrEmpty(message)
         );
 
