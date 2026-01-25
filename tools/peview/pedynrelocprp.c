@@ -52,16 +52,16 @@ VOID PvEnumerateDynamicRelocationEntries(
                     switch (entry->ARM64X.RecordFixup.Size)
                     {
                     case IMAGE_DVRT_ARM64X_FIXUP_SIZE_2BYTES:
-                        PhSetListViewSubItem(ListViewHandle, lvItemIndex, 3, L"Zero 2 bytes");
+                        PhSetListViewSubItem(ListViewHandle, lvItemIndex, 3, L"零化 2 字节");
                         break;
                     case IMAGE_DVRT_ARM64X_FIXUP_SIZE_4BYTES:
-                        PhSetListViewSubItem(ListViewHandle, lvItemIndex, 3, L"Zero 4 bytes");
+                        PhSetListViewSubItem(ListViewHandle, lvItemIndex, 3, L"零化 4 字节");
                         break;
                     case IMAGE_DVRT_ARM64X_FIXUP_SIZE_8BYTES:
-                        PhSetListViewSubItem(ListViewHandle, lvItemIndex, 3, L"Zero 8 bytes");
+                        PhSetListViewSubItem(ListViewHandle, lvItemIndex, 3, L"零化 8 字节");
                         break;
                     default:
-                        PhSetListViewSubItem(ListViewHandle, lvItemIndex, 3, L"UNKNOWN");
+                        PhSetListViewSubItem(ListViewHandle, lvItemIndex, 3, L"未知");
                         break;
                     }
                     break;
@@ -78,7 +78,7 @@ VOID PvEnumerateDynamicRelocationEntries(
                         PhSetListViewSubItem(ListViewHandle, lvItemIndex, 3, PhFormatString(L"0x%016llx", entry->ARM64X.Value8)->Buffer);
                         break;
                     default:
-                        PhSetListViewSubItem(ListViewHandle, lvItemIndex, 3, L"UNKNOWN");
+                        PhSetListViewSubItem(ListViewHandle, lvItemIndex, 3, L"未知");
                         break;
                     }
                     break;
@@ -91,7 +91,7 @@ VOID PvEnumerateDynamicRelocationEntries(
                     }
                     break;
                 default:
-                    PhSetListViewSubItem(ListViewHandle, lvItemIndex, 3, L"UNKNOWN");
+                    PhSetListViewSubItem(ListViewHandle, lvItemIndex, 3, L"未知");
                     break;
                 }
             }
@@ -100,19 +100,19 @@ VOID PvEnumerateDynamicRelocationEntries(
                 ULONG iatIndex = entry->ImportControl.Record.IATIndex;
                 PhPrintPointer(value, UlongToPtr(entry->ImportControl.BlockRva + entry->ImportControl.Record.PageRelativeOffset));
                 PhSetListViewSubItem(ListViewHandle, lvItemIndex, 1, value);
-                PhSetListViewSubItem(ListViewHandle, lvItemIndex, 2, L"IMPORT");
+                PhSetListViewSubItem(ListViewHandle, lvItemIndex, 2, L"导入");
                 PhSetListViewSubItem(ListViewHandle, lvItemIndex, 3,
                                      PhFormatString(
-                                         L"IAT index %05x%ls",
+                                         L"IAT 索引 %05x%ls",
                                          iatIndex,
-                                         (entry->ImportControl.Record.IndirectCall ? L" call" : L" branch")
+                                         (entry->ImportControl.Record.IndirectCall ? L" 调用" : L" 分支")
                                          )->Buffer);
             }
             else if (entry->Symbol == IMAGE_DYNAMIC_RELOCATION_GUARD_INDIR_CONTROL_TRANSFER)
             {
                 PhPrintPointer(value, UlongToPtr(entry->IndirControl.BlockRva + entry->IndirControl.Record.PageRelativeOffset));
                 PhSetListViewSubItem(ListViewHandle, lvItemIndex, 1, value);
-                PhSetListViewSubItem(ListViewHandle, lvItemIndex, 2, L"INDIRECT");
+                PhSetListViewSubItem(ListViewHandle, lvItemIndex, 2, L"间接");
                 PhSetListViewSubItem(ListViewHandle, lvItemIndex, 3,
                                      PhFormatString(
                                          L"%ls%ls%ls",
@@ -125,15 +125,15 @@ VOID PvEnumerateDynamicRelocationEntries(
             {
                 PhPrintPointer(value, UlongToPtr(entry->SwitchBranch.BlockRva + entry->SwitchBranch.Record.PageRelativeOffset));
                 PhSetListViewSubItem(ListViewHandle, lvItemIndex, 1, value);
-                PhSetListViewSubItem(ListViewHandle, lvItemIndex, 2, L"BRANCH");
+                PhSetListViewSubItem(ListViewHandle, lvItemIndex, 2, L"分支");
                 // TODO(jxy-s) map register numbers to names
-                PhSetListViewSubItem(ListViewHandle, lvItemIndex, 3, PhFormatString(L"Register %u", entry->SwitchBranch.Record.RegisterNumber)->Buffer);
+                PhSetListViewSubItem(ListViewHandle, lvItemIndex, 3, PhFormatString(L"寄存器 %u", entry->SwitchBranch.Record.RegisterNumber)->Buffer);
             }
             else if (entry->Symbol == IMAGE_DYNAMIC_RELOCATION_FUNCTION_OVERRIDE)
             {
                 PhPrintPointer(value, UlongToPtr(entry->FuncOverride.BlockRva + entry->FuncOverride.Record.Offset));
                 PhSetListViewSubItem(ListViewHandle, lvItemIndex, 1, value);
-                PhSetListViewSubItem(ListViewHandle, lvItemIndex, 2, L"FUNCTION");
+                PhSetListViewSubItem(ListViewHandle, lvItemIndex, 2, L"函数");
                 switch (entry->FuncOverride.Record.Type)
                 {
                 case IMAGE_FUNCTION_OVERRIDE_X64_REL32:
@@ -146,7 +146,7 @@ VOID PvEnumerateDynamicRelocationEntries(
                     PhSetListViewSubItem(ListViewHandle, lvItemIndex, 3, L"ARM64 THUNK");
                     break;
                 default:
-                    PhSetListViewSubItem(ListViewHandle, lvItemIndex, 3, L"UNKNOWN");
+                    PhSetListViewSubItem(ListViewHandle, lvItemIndex, 3, L"未知");
                     break;
                 }
             }
@@ -262,10 +262,10 @@ INT_PTR CALLBACK PvpPeDynamicRelocationDlgProc(
             PhSetControlTheme(context->ListViewHandle, L"explorer");
             PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 50, L"#");
             PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 100, L"RVA");
-            PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 100, L"Type");
-            PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 160, L"Info");
-            PhAddListViewColumn(context->ListViewHandle, 4, 4, 4, LVCFMT_LEFT, 100, L"Section");
-            PhAddListViewColumn(context->ListViewHandle, 5, 5, 5, LVCFMT_LEFT, 300, L"Symbol");
+            PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 100, L"类型");
+            PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 160, L"信息");
+            PhAddListViewColumn(context->ListViewHandle, 4, 4, 4, LVCFMT_LEFT, 100, L"节区");
+            PhAddListViewColumn(context->ListViewHandle, 5, 5, 5, LVCFMT_LEFT, 300, L"符号");
             PhSetExtendedListView(context->ListViewHandle);
             //PhLoadListViewColumnsFromSetting(L"ImageDynamicRelocationsListViewColumns", context->ListViewHandle);
             PvConfigTreeBorders(context->ListViewHandle);

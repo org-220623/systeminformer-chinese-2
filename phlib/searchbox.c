@@ -969,14 +969,14 @@ LRESULT CALLBACK PhpSearchWndSubclassProc(
             CallWindowProc(oldWndProc, WindowHandle, EM_GETSEL, (WPARAM)&selStart, (LPARAM)&selEnd);
 
             menu = PhCreateEMenu();
-            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 1, L"Undo", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 1, L"撤销", NULL, NULL), ULONG_MAX);
             PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 2, L"Cut", NULL, NULL), ULONG_MAX);
-            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 3, L"Copy", NULL, NULL), ULONG_MAX);
-            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 4, L"Paste", NULL, NULL), ULONG_MAX);
-            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 5, L"Delete", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 2, L"剪切", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 3, L"复制", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 4, L"粘贴", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 5, L"删除", NULL, NULL), ULONG_MAX);
             PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 6, L"Select All", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 6, L"全选", NULL, NULL), ULONG_MAX);
 
             if (selStart == selEnd)
             {
@@ -1119,7 +1119,7 @@ LRESULT CALLBACK PhpSearchWndSubclassProc(
 
             if (context->RegexButton.Hot)
             {
-                PhpSearchControlCreateTooltip(context, &context->RegexButton, WindowHandle, &buttonRect, L"Regular Expression");
+                PhpSearchControlCreateTooltip(context, &context->RegexButton, WindowHandle, &buttonRect, L"使用正则表达式");
             }
 
             PhpSearchControlButtonRect(context, &context->CaseButton, &windowRect, &buttonRect);
@@ -1127,7 +1127,7 @@ LRESULT CALLBACK PhpSearchWndSubclassProc(
 
             if (context->CaseButton.Hot)
             {
-                PhpSearchControlCreateTooltip(context, &context->CaseButton, WindowHandle, &buttonRect, L"Match Case");
+                PhpSearchControlCreateTooltip(context, &context->CaseButton, WindowHandle, &buttonRect, L"区分大小写");
             }
 
             PhpSearchControlButtonRect(context, &context->SearchButton, &windowRect, &buttonRect);
@@ -1135,7 +1135,7 @@ LRESULT CALLBACK PhpSearchWndSubclassProc(
 
             if (context->SearchButton.Hot)
             {
-                PhpSearchControlCreateTooltip(context, &context->SearchButton, WindowHandle, &buttonRect, L"Clear Search");
+                PhpSearchControlCreateTooltip(context, &context->SearchButton, WindowHandle, &buttonRect, L"清空搜索框内容");
             }
 
             // Check that the mouse is within the inserted button.

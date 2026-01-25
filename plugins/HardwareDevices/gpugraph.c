@@ -668,11 +668,11 @@ VOID GraphicsDeviceNotifySharedGraph(
                     commit = PhGetItemCircularBuffer_ULONG64(&Context->DeviceEntry->CommitHistory, getTooltipText->Index);
 
                     // Shared Memory: %s\n%s
-                    PhInitFormatS(&format[0], L"Shared: ");
+                    PhInitFormatS(&format[0], L"已共享: ");
                     PhInitFormatSize(&format[1], shared);
-                    PhInitFormatS(&format[2], L"\nCommit: ");
+                    PhInitFormatS(&format[2], L"\n提交: ");
                     PhInitFormatSize(&format[3], commit);
-                    PhInitFormatS(&format[4], L"\nTotal: ");
+                    PhInitFormatS(&format[4], L"\n总计: ");
                     PhInitFormatSize(&format[5], shared + commit);
                     PhInitFormatC(&format[6], L'\n');
                     PhInitFormatSR(&format[7], PH_AUTO_T(PH_STRING, PhGetStatisticsTimeString(NULL, getTooltipText->Index))->sr);

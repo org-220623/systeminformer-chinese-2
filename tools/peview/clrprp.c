@@ -127,26 +127,26 @@ PPH_STRING PvpPeGetClrFlagsText(
     PhInitializeStringBuilder(&stringBuilder, 256);
 
     if (PvImageCor20Header->Flags & COMIMAGE_FLAGS_ILONLY)
-        PhAppendStringBuilder2(&stringBuilder, L"IL only, ");
+        PhAppendStringBuilder2(&stringBuilder, L"仅 IL, ");
     if (PvImageCor20Header->Flags & COMIMAGE_FLAGS_32BITREQUIRED)
-        PhAppendStringBuilder2(&stringBuilder, L"32-bit only, ");
+        PhAppendStringBuilder2(&stringBuilder, L"仅 32 位, ");
     if (PvImageCor20Header->Flags & COMIMAGE_FLAGS_32BITPREFERRED)
-        PhAppendStringBuilder2(&stringBuilder, L"32-bit preferred, ");
+        PhAppendStringBuilder2(&stringBuilder, L"首选 32 位, ");
     if (PvImageCor20Header->Flags & COMIMAGE_FLAGS_IL_LIBRARY)
-        PhAppendStringBuilder2(&stringBuilder, L"IL library, ");
+        PhAppendStringBuilder2(&stringBuilder, L"IL 库, ");
 
     if (PvImageCor20Header->StrongNameSignature.VirtualAddress != 0 && PvImageCor20Header->StrongNameSignature.Size != 0)
     {
         if (PvImageCor20Header->Flags & COMIMAGE_FLAGS_STRONGNAMESIGNED)
-            PhAppendStringBuilder2(&stringBuilder, L"Strong-name signed, ");
+            PhAppendStringBuilder2(&stringBuilder, L"强名称签名, ");
         else
-            PhAppendStringBuilder2(&stringBuilder, L"Strong-name delay signed, ");
+            PhAppendStringBuilder2(&stringBuilder, L"强名延迟签署, ");
     }
 
     if (PvImageCor20Header->Flags & COMIMAGE_FLAGS_NATIVE_ENTRYPOINT)
-        PhAppendStringBuilder2(&stringBuilder, L"Native entry-point, ");
+        PhAppendStringBuilder2(&stringBuilder, L"原生入口点, ");
     if (PvImageCor20Header->Flags & COMIMAGE_FLAGS_TRACKDEBUGDATA)
-        PhAppendStringBuilder2(&stringBuilder, L"Track debug data, ");
+        PhAppendStringBuilder2(&stringBuilder, L"跟踪调试数据, ");
 
     if (PhEndsWithString2(stringBuilder.String, L", ", FALSE))
         PhRemoveEndStringBuilder(&stringBuilder, 2);
@@ -232,7 +232,7 @@ PPH_STRING PvpPeClrGetMvid(
                 hash = PhBufferToHexStringEx(PTR_ADD_OFFSET(ClrMetaData, streamHeader->Offset), sizeof(GUID), FALSE);
 
                 guidMvidString = PhFormatString(
-                    L"%s (%s) (deterministic)",
+                    L"%s (%s) (确定的)",
                     PhGetStringOrEmpty(string),
                     PhGetStringOrEmpty(hash)
                     );
@@ -467,11 +467,11 @@ INT_PTR CALLBACK PvpPeClrDlgProc(
             PhSetListViewStyle(context->ListViewHandle, TRUE, TRUE);
             PhSetControlTheme(context->ListViewHandle, L"explorer");
             PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 40, L"#");
-            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 80, L"Name");
-            PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 100, L"RVA (start)");
-            PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 100, L"RVA (end)");
-            PhAddListViewColumn(context->ListViewHandle, 4, 4, 4, LVCFMT_LEFT, 100, L"Size");
-            PhAddListViewColumn(context->ListViewHandle, 5, 5, 5, LVCFMT_LEFT, 80, L"Hash");
+            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 80, L"名称");
+            PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 100, L"RVA (起始)");
+            PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 100, L"RVA (结束)");
+            PhAddListViewColumn(context->ListViewHandle, 4, 4, 4, LVCFMT_LEFT, 100, L"大小");
+            PhAddListViewColumn(context->ListViewHandle, 5, 5, 5, LVCFMT_LEFT, 80, L"哈希");
             PhSetExtendedListView(context->ListViewHandle);
             PhLoadListViewColumnsFromSetting(L"ImageClrListViewColumns", context->ListViewHandle);
             PvSetListViewImageList(context->WindowHandle, context->ListViewHandle);

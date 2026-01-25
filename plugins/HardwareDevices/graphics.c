@@ -272,7 +272,7 @@ PPH_STRING GraphicsQueryDeviceDescription(
     _In_ DEVINST DeviceHandle
     )
 {
-    static const PH_STRINGREF defaultName = PH_STRINGREF_INIT(L"Unknown Adapter");
+    static const PH_STRINGREF defaultName = PH_STRINGREF_INIT(L"未知适配器");
     PPH_STRING string;
 
     string = GraphicsQueryDevicePropertyString(
@@ -314,7 +314,7 @@ PPH_STRING GraphicsQueryDeviceInterfaceDescription(
     }
 
     {
-        static const PH_STRINGREF defaultName = PH_STRINGREF_INIT(L"Unknown Adapter");
+        static const PH_STRINGREF defaultName = PH_STRINGREF_INIT(L"未知适配器");
         return PhCreateString2((PPH_STRINGREF)&defaultName);
     }
 }
@@ -811,7 +811,7 @@ BOOLEAN GraphicsQueryDeviceInterfaceAdapterIndex(
         if (!locationString)
             return FALSE;
 
-        if ((deviceIndex = PhFindStringInString(locationString, 0, L"device ")) == SIZE_MAX)
+        if ((deviceIndex = PhFindStringInString(locationString, 0, L"设备 ")) == SIZE_MAX)
             goto CleanupExit;
         if ((deviceIndexLength = PhFindStringInString(locationString, deviceIndex, L",")) == SIZE_MAX)
             goto CleanupExit;
@@ -820,8 +820,8 @@ BOOLEAN GraphicsQueryDeviceInterfaceAdapterIndex(
 
         deviceString = PhSubstring(
             locationString,
-            deviceIndex + (RTL_NUMBER_OF(L"device ") - 1),
-            deviceIndexLength - (RTL_NUMBER_OF(L"device ") - 1)
+            deviceIndex + (RTL_NUMBER_OF(L"设备 ") - 1),
+            deviceIndexLength - (RTL_NUMBER_OF(L"设备 ") - 1)
             );
 
         if (PhStringToInteger64(&deviceString->sr, 10, &index))
@@ -858,13 +858,13 @@ PPH_STRING GraphicsGetNodeEngineTypeString(
     if (PhBeginInitOnce(&initOnce))
     {
         static CONST PH_STRINGREF name3DString = PH_STRINGREF_INIT(L"3D");
-        static CONST PH_STRINGREF nameDecodeString = PH_STRINGREF_INIT(L"Video Decode");
-        static CONST PH_STRINGREF nameEncodeString = PH_STRINGREF_INIT(L"Video Encode");
-        static CONST PH_STRINGREF nameProcessingString = PH_STRINGREF_INIT(L"Video Processing");
-        static CONST PH_STRINGREF nameAssemblyString = PH_STRINGREF_INIT(L"Scene Assembly");
-        static CONST PH_STRINGREF nameCopyString = PH_STRINGREF_INIT(L"Copy");
-        static CONST PH_STRINGREF nameOverlayString = PH_STRINGREF_INIT(L"Overlay");
-        static CONST PH_STRINGREF nameCryptoString = PH_STRINGREF_INIT(L"Crypto");
+        static CONST PH_STRINGREF nameDecodeString = PH_STRINGREF_INIT(L"视频解码");
+        static CONST PH_STRINGREF nameEncodeString = PH_STRINGREF_INIT(L"视频编码");
+        static CONST PH_STRINGREF nameProcessingString = PH_STRINGREF_INIT(L"视频处理");
+        static CONST PH_STRINGREF nameAssemblyString = PH_STRINGREF_INIT(L"场景汇编");
+        static CONST PH_STRINGREF nameCopyString = PH_STRINGREF_INIT(L"复制");
+        static CONST PH_STRINGREF nameOverlayString = PH_STRINGREF_INIT(L"覆盖");
+        static CONST PH_STRINGREF nameCryptoString = PH_STRINGREF_INIT(L"加密");
 
         name3D = PhCreateString2(&name3DString);
         decode = PhCreateString2(&nameDecodeString);
@@ -899,7 +899,7 @@ PPH_STRING GraphicsGetNodeEngineTypeString(
     case DXGK_ENGINE_TYPE_CRYPTO:
         return PhReferenceObject(crypto);
     default:
-        return PhCreateString(L"ERROR");
+        return PhCreateString(L"错误");
     }
 }
 

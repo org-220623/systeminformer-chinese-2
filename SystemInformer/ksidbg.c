@@ -224,13 +224,13 @@ PPH_STRING KsiDebugLogProcessCreate(
     KphMsgDynGetUnicodeString(Message, KphMsgFieldCommandLine, &commandLine);
 
     return PhFormatString(
-        L"%04x:%04x:%016llx created process %lu (%016llx)%ls(parent %lu (%016llx)) \"%wZ\" \"%wZ\"",
+        L"%04x:%04x:%016llx 已创建进程 %lu (%016llx)%ls(父进程 %lu (%016llx)) \"%wZ\" \"%wZ\"",
         HandleToUlong(Message->Kernel.ProcessCreate.CreatingClientId.UniqueProcess),
         HandleToUlong(Message->Kernel.ProcessCreate.CreatingClientId.UniqueThread),
         Message->Kernel.ProcessCreate.CreatingProcessStartKey,
         HandleToUlong(Message->Kernel.ProcessCreate.TargetProcessId),
         Message->Kernel.ProcessCreate.TargetProcessStartKey,
-        Message->Kernel.ProcessCreate.IsSubsystemProcess ? L" subsystem process " : L" ",
+        Message->Kernel.ProcessCreate.IsSubsystemProcess ? L" 子系统进程 " : L" ",
         HandleToUlong(Message->Kernel.ProcessCreate.ParentProcessId),
         Message->Kernel.ProcessCreate.ParentProcessStartKey,
         &fileName,
@@ -248,11 +248,11 @@ PPH_STRING KsiDebugLogProcessExit(
     statusMessage = PhGetStatusMessage(Message->Kernel.ProcessExit.ExitStatus, 0);
 
     result = PhFormatString(
-        L"%04x:%04x:%016llx process exited with %ls (0x%08x)",
+        L"%04x:%04x:%016llx 进程已退出，退出代码 %ls (0x%08x)",
         HandleToUlong(Message->Kernel.ProcessExit.ClientId.UniqueProcess),
         HandleToUlong(Message->Kernel.ProcessExit.ClientId.UniqueThread),
         Message->Kernel.ProcessExit.ProcessStartKey,
-        PhGetStringOrDefault(statusMessage, L"UNKNOWN"),
+        PhGetStringOrDefault(statusMessage, L"未知"),
         Message->Kernel.ProcessExit.ExitStatus
         );
 
@@ -266,7 +266,7 @@ PPH_STRING KsiDebugLogThreadCreate(
     )
 {
     return PhFormatString(
-        L"%04x:%04x:%016llx thread %lu created in process %lu (%016llx)",
+        L"%04x:%04x:%016llx 线程 %lu 已创建于进程 %lu (%016llx)",
         HandleToUlong(Message->Kernel.ThreadCreate.CreatingClientId.UniqueProcess),
         HandleToUlong(Message->Kernel.ThreadCreate.CreatingClientId.UniqueThread),
         Message->Kernel.ThreadCreate.CreatingProcessStartKey,
@@ -281,7 +281,7 @@ PPH_STRING KsiDebugLogThreadExecute(
     )
 {
     return PhFormatString(
-        L"%04x:%04x:%016llx thread beginning execution",
+        L"%04x:%04x:%016llx 线程正在开始执行",
         HandleToUlong(Message->Kernel.ThreadExecute.ClientId.UniqueThread),
         HandleToUlong(Message->Kernel.ThreadExecute.ClientId.UniqueProcess),
         Message->Kernel.ThreadExecute.ProcessStartKey
@@ -298,11 +298,11 @@ PPH_STRING KsiDebugLogThreadExit(
     statusMessage = PhGetStatusMessage(Message->Kernel.ThreadExit.ExitStatus, 0);
 
     result = PhFormatString(
-        L"%04x:%04x:%016llx thread exited with %ls (0x%08x)",
+        L"%04x:%04x:%016llx 线程已退出，退出代码 %ls (0x%08x)",
         HandleToUlong(Message->Kernel.ThreadExit.ClientId.UniqueThread),
         HandleToUlong(Message->Kernel.ThreadExit.ClientId.UniqueProcess),
         Message->Kernel.ThreadExit.ProcessStartKey,
-        PhGetStringOrDefault(statusMessage, L"UNKNOWN"),
+        PhGetStringOrDefault(statusMessage, L"未知"),
         Message->Kernel.ThreadExit.ExitStatus
         );
 
@@ -320,7 +320,7 @@ PPH_STRING KsiDebugLogImageLoad(
     KphMsgDynGetUnicodeString(Message, KphMsgFieldFileName, &fileName);
 
     return PhFormatString(
-        L"%04x:%04x:%016llx image \"%wZ\" loaded into process %lu (%016llx) at %p",
+        L"%04x:%04x:%016llx 映像 \"%wZ\" 已加载至进程 %lu (%016llx) 的 %p 处",
         HandleToUlong(Message->Kernel.ImageLoad.LoadingClientId.UniqueProcess),
         HandleToUlong(Message->Kernel.ImageLoad.LoadingClientId.UniqueThread),
         Message->Kernel.ImageLoad.LoadingProcessStartKey,
@@ -372,7 +372,7 @@ PPH_STRING KsiDebugLogHandleProcess(
         if (Message->Kernel.Handle.Duplicate)
         {
             result = PhFormatString(
-                L"%04x:%04x:%016llx %c %p %llu granted 0x%08x (desired 0x%08x, original 0x%08x) to process %lu (duplicate %lu -> %lu) %llu %llu %ls (0x%08x)",
+                L"%04x:%04x:%016llx %c %p %llu 已授予 0x%08x (请求 0x%08x, 原始值 0x%08x) 进程 %lu (复制 %lu -> %lu) %llu %llu %ls (0x%08x)",
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueProcess),
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueThread),
                 Message->Kernel.Handle.ContextProcessStartKey,
@@ -387,14 +387,14 @@ PPH_STRING KsiDebugLogHandleProcess(
                 HandleToUlong(Message->Kernel.Handle.Post.Duplicate.TargetProcessId),
                 Message->Kernel.Handle.Post.PreSequence,
                 (ULONG64)(Message->Header.TimeStamp.QuadPart - Message->Kernel.Handle.Post.PreTimeStamp.QuadPart),
-                PhGetStringOrDefault(statusMessage, L"UNKNOWN"),
+                PhGetStringOrDefault(statusMessage, L"未知"),
                 Message->Kernel.Handle.Post.ReturnStatus
                 );
         }
         else
         {
             result = PhFormatString(
-                L"%04x:%04x:%016llx %c %p %llu granted 0x%08x (desired 0x%08x, original 0x%08x) to process %lu %llu %llu %ls (0x%08x)",
+                L"%04x:%04x:%016llx %c %p %llu 已授予 0x%08x (请求 0x%08x, 原始值 0x%08x) 进程 %lu %llu %llu %ls (0x%08x)",
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueProcess),
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueThread),
                 Message->Kernel.Handle.ContextProcessStartKey,
@@ -407,7 +407,7 @@ PPH_STRING KsiDebugLogHandleProcess(
                 HandleToUlong(Message->Kernel.Handle.Post.Create.Process.ProcessId),
                 Message->Kernel.Handle.Post.PreSequence,
                 (ULONG64)(Message->Header.TimeStamp.QuadPart - Message->Kernel.Handle.Post.PreTimeStamp.QuadPart),
-                PhGetStringOrDefault(statusMessage, L"UNKNOWN"),
+                PhGetStringOrDefault(statusMessage, L"未知"),
                 Message->Kernel.Handle.Post.ReturnStatus
                 );
         }
@@ -419,7 +419,7 @@ PPH_STRING KsiDebugLogHandleProcess(
         if (Message->Kernel.Handle.Duplicate)
         {
             result = PhFormatString(
-                L"%04x:%04x:%016llx %c %p desires 0x%08x (original 0x%08x) to process %lu (duplicate %lu -> %lu)",
+                L"%04x:%04x:%016llx %c %p 请求 0x%08x (原始值 0x%08x) 进程 %lu (复制 %lu -> %lu)",
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueProcess),
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueThread),
                 Message->Kernel.Handle.ContextProcessStartKey,
@@ -435,7 +435,7 @@ PPH_STRING KsiDebugLogHandleProcess(
         else
         {
             result = PhFormatString(
-                L"%04x:%04x:%016llx %c %p desires 0x%08x (original 0x%08x) to process %lu",
+                L"%04x:%04x:%016llx %c %p 请求 0x%08x (原始值 0x%08x) 给进程 %lu",
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueProcess),
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueThread),
                 Message->Kernel.Handle.ContextProcessStartKey,
@@ -466,7 +466,7 @@ PPH_STRING KsiDebugLogHandleThread(
         if (Message->Kernel.Handle.Duplicate)
         {
             result = PhFormatString(
-                L"%04x:%04x:%016llx %c %p %llu granted 0x%08x (desired 0x%08x, original 0x%08x) to thread %lu (process %lu, duplicate %lu -> %lu) %llu %llu %ls (0x%08x)",
+                L"%04x:%04x:%016llx %c %p %llu 已授予 0x%08x (请求 0x%08x, 原始值 0x%08x) 线程 %lu (进程 %lu, 复制 %lu -> %lu) %llu %llu %ls (0x%08x)",
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueProcess),
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueThread),
                 Message->Kernel.Handle.ContextProcessStartKey,
@@ -482,14 +482,14 @@ PPH_STRING KsiDebugLogHandleThread(
                 HandleToUlong(Message->Kernel.Handle.Post.Duplicate.TargetProcessId),
                 Message->Kernel.Handle.Post.PreSequence,
                 (ULONG64)(Message->Header.TimeStamp.QuadPart - Message->Kernel.Handle.Post.PreTimeStamp.QuadPart),
-                PhGetStringOrDefault(statusMessage, L"UNKNOWN"),
+                PhGetStringOrDefault(statusMessage, L"未知"),
                 Message->Kernel.Handle.Post.ReturnStatus
                 );
         }
         else
         {
             result = PhFormatString(
-                L"%04x:%04x:%016llx %c %p %llu granted 0x%08x (desired 0x%08x, original 0x%08x) to thread %lu (process %lu) %llu %llu %ls (0x%08x)",
+                L"%04x:%04x:%016llx %c %p %llu 已授予 0x%08x (请求 0x%08x, 原始值 0x%08x) 线程 %lu (进程 %lu) %llu %llu %ls (0x%08x)",
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueProcess),
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueThread),
                 Message->Kernel.Handle.ContextProcessStartKey,
@@ -503,7 +503,7 @@ PPH_STRING KsiDebugLogHandleThread(
                 HandleToUlong(Message->Kernel.Handle.Post.Create.Thread.ClientId.UniqueProcess),
                 Message->Kernel.Handle.Post.PreSequence,
                 (ULONG64)(Message->Header.TimeStamp.QuadPart - Message->Kernel.Handle.Post.PreTimeStamp.QuadPart),
-                PhGetStringOrDefault(statusMessage, L"UNKNOWN"),
+                PhGetStringOrDefault(statusMessage, L"未知"),
                 Message->Kernel.Handle.Post.ReturnStatus
                 );
         }
@@ -515,7 +515,7 @@ PPH_STRING KsiDebugLogHandleThread(
         if (Message->Kernel.Handle.Duplicate)
         {
             result = PhFormatString(
-                L"%04x:%04x:%016llx %c %p %llu desires 0x%08x (original 0x%08x) to thread %lu (process %lu, duplicate %lu -> %lu)",
+                L"%04x:%04x:%016llx %c %p %llu 请求 0x%08x (原始值 0x%08x) 线程 %lu (进程 %lu, 复制 %lu -> %lu)",
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueProcess),
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueThread),
                 Message->Kernel.Handle.ContextProcessStartKey,
@@ -533,7 +533,7 @@ PPH_STRING KsiDebugLogHandleThread(
         else
         {
             result = PhFormatString(
-                L"%04x:%04x:%016llx %c %p %llu desires 0x%08x (original 0x%08x) to thread %lu (process %lu)",
+                L"%04x:%04x:%016llx %c %p %llu 请求 0x%08x (原始值 0x%08x) 线程 %lu (进程 %lu)",
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueProcess),
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueThread),
                 Message->Kernel.Handle.ContextProcessStartKey,
@@ -569,7 +569,7 @@ PPH_STRING KsiDebugLogHandleDesktop(
         if (Message->Kernel.Handle.Duplicate)
         {
             result = PhFormatString(
-                L"%04x:%04x:%016llx %c %p %llu granted 0x%08x (desired 0x%08x, original 0x%08x) to desktop \"%wZ\" (duplicate %lu -> %lu) %llu %llu %ls (0x%08x)",
+                L"%04x:%04x:%016llx %c %p %llu 已授予 0x%08x (请求 0x%08x, 原始值 0x%08x) 桌面 \"%wZ\" (复制 %lu -> %lu) %llu %llu %ls (0x%08x)",
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueProcess),
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueThread),
                 Message->Kernel.Handle.ContextProcessStartKey,
@@ -584,14 +584,14 @@ PPH_STRING KsiDebugLogHandleDesktop(
                 HandleToUlong(Message->Kernel.Handle.Post.Duplicate.TargetProcessId),
                 Message->Kernel.Handle.Post.PreSequence,
                 (ULONG64)(Message->Header.TimeStamp.QuadPart - Message->Kernel.Handle.Post.PreTimeStamp.QuadPart),
-                PhGetStringOrDefault(statusMessage, L"UNKNOWN"),
+                PhGetStringOrDefault(statusMessage, L"未知"),
                 Message->Kernel.Handle.Post.ReturnStatus
                 );
         }
         else
         {
             result = PhFormatString(
-                L"%04x:%04x:%016llx %c %p %llu granted 0x%08x (desired 0x%08x, original 0x%08x) to desktop \"%wZ\" %llu %llu %ls (0x%08x)",
+                L"%04x:%04x:%016llx %c %p %llu 已授予 0x%08x (请求 0x%08x, 原始值 0x%08x) 桌面 \"%wZ\" %llu %llu %ls (0x%08x)",
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueProcess),
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueThread),
                 Message->Kernel.Handle.ContextProcessStartKey,
@@ -604,7 +604,7 @@ PPH_STRING KsiDebugLogHandleDesktop(
                 &objectName,
                 Message->Kernel.Handle.Post.PreSequence,
                 (ULONG64)(Message->Header.TimeStamp.QuadPart - Message->Kernel.Handle.Post.PreTimeStamp.QuadPart),
-                PhGetStringOrDefault(statusMessage, L"UNKNOWN"),
+                PhGetStringOrDefault(statusMessage, L"未知"),
                 Message->Kernel.Handle.Post.ReturnStatus
                 );
         }
@@ -616,7 +616,7 @@ PPH_STRING KsiDebugLogHandleDesktop(
         if (Message->Kernel.Handle.Duplicate)
         {
             result = PhFormatString(
-                L"%04x:%04x:%016llx %c %p %llu desires 0x%08x (original 0x%08x) to desktop \"%wZ\" (duplicate %lu -> %lu)",
+                L"%04x:%04x:%016llx %c %p %llu 请求 0x%08x (原始值 0x%08x) 桌面 \"%wZ\" (复制 %lu -> %lu)",
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueProcess),
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueThread),
                 Message->Kernel.Handle.ContextProcessStartKey,
@@ -633,7 +633,7 @@ PPH_STRING KsiDebugLogHandleDesktop(
         else
         {
             result = PhFormatString(
-                L"%04x:%04x:%016llx %c %p %llu desires 0x%08x (original 0x%08x) to desktop \"%wZ\"",
+                L"%04x:%04x:%016llx %c %p %llu 请求 0x%08x (原始值 0x%08x) 桌面 \"%wZ\"",
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueProcess),
                 HandleToUlong(Message->Kernel.Handle.ContextClientId.UniqueThread),
                 Message->Kernel.Handle.ContextProcessStartKey,
@@ -655,7 +655,7 @@ PPH_STRING KsiDebugLogRequiredStateFailure(
     )
 {
     return PhFormatString(
-        L"%04x:%04x required state failure, message %lu, state 0x%08x, required 0x%08x",
+        L"%04x:%04x 需要状态失败，消息 %lu，状态 0x%08x，需要 0x%08x",
         HandleToUlong(Message->Kernel.RequiredStateFailure.ClientId.UniqueProcess),
         HandleToUlong(Message->Kernel.RequiredStateFailure.ClientId.UniqueThread),
         (ULONG)Message->Kernel.RequiredStateFailure.MessageId,
@@ -690,7 +690,7 @@ PPH_STRING KsiDebugLogFileCommon(
             &fileName,
             (ULONG64)(Message->Header.TimeStamp.QuadPart - Message->Kernel.File.Post.PreTimeStamp.QuadPart),
             Message->Kernel.File.Post.PreSequence,
-            PhGetStringOrDefault(statusMessage, L"UNKNOWN"),
+            PhGetStringOrDefault(statusMessage, L"未知"),
             Message->Kernel.File.Post.IoStatus.Status
             );
 
@@ -711,43 +711,43 @@ PPH_STRING KsiDebugLogFileCommon(
     }
 
     if (Message->Kernel.File.IsPagingFile)
-        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", paging file"));
+        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", 分页文件"));
 
     if (Message->Kernel.File.IsSystemPagingFile)
-        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", system paging file"));
+        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", 系统分页文件"));
 
     if (Message->Kernel.File.OriginRemote)
-        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", remote origin"));
+        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", 远程原始数据"));
 
     if (Message->Kernel.File.IgnoringSharing)
-        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", ignoring sharing"));
+        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", 忽略共享"));
 
     if (Message->Kernel.File.InStackFileObject)
-        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", in stack file object"));
+        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", 位于栈文件对象"));
 
     if (Message->Kernel.File.DeletePending)
-        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", delete pending"));
+        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", 删除挂起"));
 
     if (!Message->Kernel.File.SharedRead && !Message->Kernel.File.SharedWrite && !Message->Kernel.File.SharedDelete)
-        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", opened exclusively"));
+        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", 独占打开"));
 
     if (Message->Kernel.File.Busy)
-        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", busy"));
+        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", 忙碌"));
 
     if (Message->Kernel.File.Waiters)
-        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", waiters"));
+        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", 等待器"));
 
     if (Message->Kernel.File.OplockKeyContext.Version)
-        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", oplock key"));
+        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", oplock 键"));
 
     if (Message->Kernel.File.Transaction)
-        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", transaction"));
+        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", 转换"));
 
     if (Message->Kernel.File.DataSectionObject)
-        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", data section"));
+        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", 数据节"));
 
     if (Message->Kernel.File.ImageSectionObject)
-        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", image section"));
+        PhMoveReference(&result, PhConcatStringRefZ(&result->sr, L", 映像节"));
 
     return result;
 }
@@ -778,7 +778,7 @@ PPH_STRING KsiDebugLogRegCommon(
             &objectName,
             (ULONG64)(Message->Header.TimeStamp.QuadPart - Message->Kernel.Reg.Post.PreTimeStamp.QuadPart),
             Message->Kernel.Reg.Post.PreSequence,
-            PhGetStringOrDefault(statusMessage, L"UNKNOWN"),
+            PhGetStringOrDefault(statusMessage, L"未知"),
             Message->Kernel.Reg.Post.Status
             );
 
@@ -830,7 +830,7 @@ PPH_STRING KsiDebugLogRegCommonWithValue(
             &valueName,
             (ULONG64)(Message->Header.TimeStamp.QuadPart - Message->Kernel.Reg.Post.PreTimeStamp.QuadPart),
             Message->Kernel.Reg.Post.PreSequence,
-            PhGetStringOrDefault(statusMessage, L"UNKNOWN"),
+            PhGetStringOrDefault(statusMessage, L"未知"),
             Message->Kernel.Reg.Post.Status
             );
 
@@ -914,10 +914,10 @@ PPH_STRING KsiDebugLogRegCommonWithMultipleValues(
             Message->Kernel.Reg.Object,
             Message->Kernel.Reg.Sequence,
             &objectName,
-            PhGetStringOrDefault(values, L"NULL"),
+            PhGetStringOrDefault(values, L"空"),
             (ULONG64)(Message->Header.TimeStamp.QuadPart - Message->Kernel.Reg.Post.PreTimeStamp.QuadPart),
             Message->Kernel.Reg.Post.PreSequence,
-            PhGetStringOrDefault(statusMessage, L"UNKNOWN"),
+            PhGetStringOrDefault(statusMessage, L"未知"),
             Message->Kernel.Reg.Post.Status
             );
 
@@ -934,7 +934,7 @@ PPH_STRING KsiDebugLogRegCommonWithMultipleValues(
             Message->Kernel.Reg.Object,
             Message->Kernel.Reg.Sequence,
             &objectName,
-            PhGetStringOrDefault(values, L"NULL")
+            PhGetStringOrDefault(values, L"空")
             );
     }
 
@@ -970,7 +970,7 @@ PPH_STRING KsiDebugLogRegSaveRestoreKey(
             &fileName,
             (ULONG64)(Message->Header.TimeStamp.QuadPart - Message->Kernel.Reg.Post.PreTimeStamp.QuadPart),
             Message->Kernel.Reg.Post.PreSequence,
-            PhGetStringOrDefault(statusMessage, L"UNKNOWN"),
+            PhGetStringOrDefault(statusMessage, L"未知"),
             Message->Kernel.Reg.Post.Status
             );
 
@@ -1026,7 +1026,7 @@ PPH_STRING KsiDebugLogRegReplaceKey(
             &destFileName,
             (ULONG64)(Message->Header.TimeStamp.QuadPart - Message->Kernel.Reg.Post.PreTimeStamp.QuadPart),
             Message->Kernel.Reg.Post.PreSequence,
-            PhGetStringOrDefault(statusMessage, L"UNKNOWN"),
+            PhGetStringOrDefault(statusMessage, L"未知"),
             Message->Kernel.Reg.Post.Status
             );
 
@@ -1083,7 +1083,7 @@ PPH_STRING KsiDebugLogSaveMergedKey(
             &fileName,
             (ULONG64)(Message->Header.TimeStamp.QuadPart - Message->Kernel.Reg.Post.PreTimeStamp.QuadPart),
             Message->Kernel.Reg.Post.PreSequence,
-            PhGetStringOrDefault(statusMessage, L"UNKNOWN"),
+            PhGetStringOrDefault(statusMessage, L"未知"),
             Message->Kernel.Reg.Post.Status
             );
 
@@ -1659,8 +1659,8 @@ VOID KsiDebugLogFinalize(
             NULL,
             MB_OK,
             IDI_INFORMATION,
-            L"Debug Log Finalize",
-            L"%llu messages totaling %.4f GB",
+            L"调试日志完成",
+            L"%llu 条消息总计 %.4f GB",
             messagesRecieved,
             (FLOAT)bytesReceived / (1024 * 1024 * 1024)
             );
