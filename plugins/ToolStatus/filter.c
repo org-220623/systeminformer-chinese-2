@@ -147,35 +147,35 @@ BOOLEAN ProcessTreeFilterCallback(
         switch (processNode->ProcessItem->VerifyResult)
         {
         case VrNoSignature:
-            if (PhSearchControlMatchZ(SearchMatchHandle, L"NoSignature"))
+            if (PhSearchControlMatchZ(SearchMatchHandle, L"无签名"))
                 return TRUE;
             break;
         case VrTrusted:
-            if (PhSearchControlMatchZ(SearchMatchHandle, L"Trusted"))
+            if (PhSearchControlMatchZ(SearchMatchHandle, L"受信任"))
                 return TRUE;
             break;
         case VrExpired:
-            if (PhSearchControlMatchZ(SearchMatchHandle, L"Expired"))
+            if (PhSearchControlMatchZ(SearchMatchHandle, L"已过期"))
                 return TRUE;
             break;
         case VrRevoked:
-            if (PhSearchControlMatchZ(SearchMatchHandle, L"Revoked"))
+            if (PhSearchControlMatchZ(SearchMatchHandle, L"已撤销"))
                 return TRUE;
             break;
         case VrDistrust:
-            if (PhSearchControlMatchZ(SearchMatchHandle, L"Distrust"))
+            if (PhSearchControlMatchZ(SearchMatchHandle, L"不受信任"))
                 return TRUE;
             break;
         case VrSecuritySettings:
-            if (PhSearchControlMatchZ(SearchMatchHandle, L"SecuritySettings"))
+            if (PhSearchControlMatchZ(SearchMatchHandle, L"安全设置"))
                 return TRUE;
             break;
         case VrBadSignature:
-            if (PhSearchControlMatchZ(SearchMatchHandle, L"BadSignature"))
+            if (PhSearchControlMatchZ(SearchMatchHandle, L"签名损坏"))
                 return TRUE;
             break;
         default:
-            if (PhSearchControlMatchZ(SearchMatchHandle, L"Unknown"))
+            if (PhSearchControlMatchZ(SearchMatchHandle, L"未知"))
                 return TRUE;
             break;
         }
@@ -186,15 +186,15 @@ BOOLEAN ProcessTreeFilterCallback(
         switch (processNode->ProcessItem->ElevationType)
         {
         case TokenElevationTypeLimited:
-            if (PhSearchControlMatchZ(SearchMatchHandle, L"Limited"))
+            if (PhSearchControlMatchZ(SearchMatchHandle, L"受限"))
                 return TRUE;
             break;
         case TokenElevationTypeFull:
-            if (PhSearchControlMatchZ(SearchMatchHandle, L"Full"))
+            if (PhSearchControlMatchZ(SearchMatchHandle, L"完全"))
                 return TRUE;
             break;
         default:
-            if (PhSearchControlMatchZ(SearchMatchHandle, L"Unknown"))
+            if (PhSearchControlMatchZ(SearchMatchHandle, L"未知"))
                 return TRUE;
             break;
         }
@@ -443,35 +443,35 @@ BOOLEAN ServiceTreeFilterCallback(
         switch (serviceNode->ServiceItem->VerifyResult)
         {
         case VrNoSignature:
-            if (PhSearchControlMatchZ(SearchMatchHandle, L"NoSignature"))
+            if (PhSearchControlMatchZ(SearchMatchHandle, L"无签名"))
                 return TRUE;
             break;
         case VrTrusted:
-            if (PhSearchControlMatchZ(SearchMatchHandle, L"Trusted"))
+            if (PhSearchControlMatchZ(SearchMatchHandle, L"受信任"))
                 return TRUE;
             break;
         case VrExpired:
-            if (PhSearchControlMatchZ(SearchMatchHandle, L"Expired"))
+            if (PhSearchControlMatchZ(SearchMatchHandle, L"已过期"))
                 return TRUE;
             break;
         case VrRevoked:
-            if (PhSearchControlMatchZ(SearchMatchHandle, L"Revoked"))
+            if (PhSearchControlMatchZ(SearchMatchHandle, L"已撤销"))
                 return TRUE;
             break;
         case VrDistrust:
-            if (PhSearchControlMatchZ(SearchMatchHandle, L"Distrust"))
+            if (PhSearchControlMatchZ(SearchMatchHandle, L"不受信任"))
                 return TRUE;
             break;
         case VrSecuritySettings:
-            if (PhSearchControlMatchZ(SearchMatchHandle, L"SecuritySettings"))
+            if (PhSearchControlMatchZ(SearchMatchHandle, L"安全设置"))
                 return TRUE;
             break;
         case VrBadSignature:
-            if (PhSearchControlMatchZ(SearchMatchHandle, L"BadSignature"))
+            if (PhSearchControlMatchZ(SearchMatchHandle, L"签名损坏"))
                 return TRUE;
             break;
         default:
-            if (PhSearchControlMatchZ(SearchMatchHandle, L"Unknown"))
+            if (PhSearchControlMatchZ(SearchMatchHandle, L"未知"))
                 return TRUE;
             break;
         }
