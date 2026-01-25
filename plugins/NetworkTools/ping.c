@@ -422,7 +422,7 @@ INT_PTR CALLBACK NetworkPingWndProc(
                 PhCenterWindow(hwndDlg, context->ParentWindowHandle);
 
             PhSetWindowText(hwndDlg, PhaFormatString(L"Ping %s", context->RemoteAddressString)->Buffer);
-            PhSetWindowText(context->StatusHandle, PhaFormatString(L"Pinging %s with %lu bytes of data...",
+            PhSetWindowText(context->StatusHandle, PhaFormatString(L"正在 Ping %s 具有 %lu 字节的数据...",
                 context->RemoteAddressString,
                 PhGetIntegerSetting(SETTING_NAME_PING_SIZE))->Buffer
                 );
@@ -523,27 +523,27 @@ INT_PTR CALLBACK NetworkPingWndProc(
             }
 
             PhSetDialogItemText(hwndDlg, IDC_ICMP_AVG, PhaFormatString(
-                L"Average: %.2f ms", pingAvgMeanValue)->Buffer);
+                L"平均延迟: %.2f ms", pingAvgMeanValue)->Buffer);
             PhSetDialogItemText(hwndDlg, IDC_ICMP_MIN, PhaFormatString(
-                L"Minimum: %.2f ms", context->PingMinMs)->Buffer);
+                L"最小值: %.2f ms", context->PingMinMs)->Buffer);
             PhSetDialogItemText(hwndDlg, IDC_ICMP_MAX, PhaFormatString(
-                L"Maximum: %.2f ms", context->PingMaxMs)->Buffer);
+                L"最大值: %.2f ms", context->PingMaxMs)->Buffer);
 
             PhSetDialogItemText(hwndDlg, IDC_PINGS_SENT, PhaFormatString(
-                L"Pings sent: %lu", context->PingSentCount)->Buffer);
+                L"已发送: %lu", context->PingSentCount)->Buffer);
             PhSetDialogItemText(hwndDlg, IDC_PINGS_LOST, PhaFormatString(
-                L"Pings lost: %lu (%.0f%%)", context->PingLossCount,
+                L"丢失: %lu (%.0f%%)", context->PingLossCount,
                 ((FLOAT)context->PingLossCount / context->PingSentCount * 100))->Buffer);
 
             PhSetDialogItemText(hwndDlg, IDC_ICMP_STDEV, PhaFormatString(
-                L"Deviation: %.2f ms", pingDeviationValue)->Buffer);
+                L"偏差: %.2f ms", pingDeviationValue)->Buffer);
             //PhSetDialogItemText(hwndDlg, IDC_ICMP_STVAR, PhaFormatString(
-            //    L"Variance: %.2f ms", pingVarianceValue)->Buffer);
+            //    L"偏差: %.2f ms", pingVarianceValue)->Buffer);
 
             PhSetDialogItemText(hwndDlg, IDC_BAD_HASH, PhaFormatString(
-                L"Bad replies: %lu", context->HashFailCount)->Buffer);
+                L"无效回复: %lu", context->HashFailCount)->Buffer);
             PhSetDialogItemText(hwndDlg, IDC_ANON_ADDR, PhaFormatString(
-                L"Anon replies: %lu", context->UnknownAddrCount)->Buffer);
+                L"匿名回复: %lu", context->UnknownAddrCount)->Buffer);
         }
         break;
     case WM_NOTIFY:

@@ -256,8 +256,8 @@ static VOID PhpSymbolProviderEventCallback(
                 PH_FORMAT format[3];
 
                 // Loading symbols for %s...
-                PhInitFormatS(&format[0], L"Loading symbols for ");
-                PhInitFormatS(&format[1], PhGetStringOrDefault(baseName, L"image"));
+                PhInitFormatS(&format[0], L"正在加载以下模块的符号: ");
+                PhInitFormatS(&format[1], PhGetStringOrDefault(baseName, L"映像"));
                 PhInitFormatS(&format[2], L"...");
                 PhMoveReference(&PhSymbolProviderEventMessageText, PhFormat(format, RTL_NUMBER_OF(format), 0));
 
@@ -271,8 +271,8 @@ static VOID PhpSymbolProviderEventCallback(
                 PH_FORMAT format[3];
 
                 // Loading symbols for %s...
-                PhInitFormatS(&format[0], L"Loading symbols for ");
-                PhInitFormatS(&format[1], L"image");
+                PhInitFormatS(&format[0], L"正在加载以下模块的符号: ");
+                PhInitFormatS(&format[1], L"映像");
                 PhInitFormatS(&format[2], L"...");
 
                 PhMoveReference(&PhSymbolProviderEventMessageText, PhFormat(format, RTL_NUMBER_OF(format), 0));
@@ -3460,7 +3460,7 @@ PPH_STRING PhGetDiaSymbolLineInformation(
     case CV_CFL_MSIL:
         return PhCreateString(L"MSIL");
     case CV_CFL_HLSL:
-        return PhCreateString(L"HLSL (High Level Shader Language)");
+        return PhCreateString(L"HLSL (高级着色器语言)");
     case CV_CFL_OBJC:
         return PhCreateString(L"Objective-C");
     case CV_CFL_OBJCXX:
@@ -3490,62 +3490,62 @@ PPH_STRING PhGetDiaSymbolExtraInformation(
 
     if (IDiaSymbol_get_isStripped(Symbol, &symbolBoolean) == S_OK && symbolBoolean)
     {
-        PhAppendStringBuilder2(&stringBuilder, L"Stripped, ");
+        PhAppendStringBuilder2(&stringBuilder, L"已剥离, ");
     }
 
     if (IDiaSymbol_get_isStatic(Symbol, &symbolBoolean) == S_OK && symbolBoolean)
     {
-        PhAppendStringBuilder2(&stringBuilder, L"Static, ");
+        PhAppendStringBuilder2(&stringBuilder, L"静态, ");
     }
 
     if (IDiaSymbol_get_inlSpec(Symbol, &symbolBoolean) == S_OK && symbolBoolean)
     {
-        PhAppendStringBuilder2(&stringBuilder, L"Inline, ");
+        PhAppendStringBuilder2(&stringBuilder, L"内联, ");
     }
 
     if (IDiaSymbol_get_isHotpatchable(Symbol, &symbolBoolean) == S_OK && symbolBoolean)
     {
-        PhAppendStringBuilder2(&stringBuilder, L"Hotpatchable, ");
+        PhAppendStringBuilder2(&stringBuilder, L"可热修复, ");
     }
 
     if (IDiaSymbol_get_hasAlloca(Symbol, &symbolBoolean) == S_OK && symbolBoolean)
     {
-        PhAppendStringBuilder2(&stringBuilder, L"Has Alloca, ");
+        PhAppendStringBuilder2(&stringBuilder, L"有 Alloca, ");
     }
 
     if (IDiaSymbol_get_hasInlAsm(Symbol, &symbolBoolean) == S_OK && symbolBoolean)
     {
-        PhAppendStringBuilder2(&stringBuilder, L"Has Inline ASM, ");
+        PhAppendStringBuilder2(&stringBuilder, L"有内联汇编, ");
     }
 
     if (IDiaSymbol_get_hasSetJump(Symbol, &symbolBoolean) == S_OK && symbolBoolean)
     {
-        PhAppendStringBuilder2(&stringBuilder, L"Has SetJump, ");
+        PhAppendStringBuilder2(&stringBuilder, L"有 SetJump, ");
     }
 
     if (IDiaSymbol_get_hasLongJump(Symbol, &symbolBoolean) == S_OK && symbolBoolean)
     {
-        PhAppendStringBuilder2(&stringBuilder, L"Has LongJump, ");
+        PhAppendStringBuilder2(&stringBuilder, L"有 LongJump, ");
     }
 
     if (IDiaSymbol_get_hasSEH(Symbol, &symbolBoolean) == S_OK && symbolBoolean)
     {
-        PhAppendStringBuilder2(&stringBuilder, L"Has SEH, ");
+        PhAppendStringBuilder2(&stringBuilder, L"有 SEH, ");
     }
 
     if (IDiaSymbol_get_hasSecurityChecks(Symbol, &symbolBoolean) == S_OK && symbolBoolean)
     {
-        PhAppendStringBuilder2(&stringBuilder, L"Has SecurityChecks, ");
+        PhAppendStringBuilder2(&stringBuilder, L"有安全检查, ");
     }
 
     if (IDiaSymbol_get_hasControlFlowCheck(Symbol, &symbolBoolean) == S_OK && symbolBoolean)
     {
-        PhAppendStringBuilder2(&stringBuilder, L"Has CFG, ");
+        PhAppendStringBuilder2(&stringBuilder, L"有 CFG, ");
     }
 
     if (IDiaSymbol_get_isOptimizedForSpeed(Symbol, &symbolBoolean) == S_OK && symbolBoolean)
     {
-        PhAppendStringBuilder2(&stringBuilder, L"OptimizedForSpeed, ");
+        PhAppendStringBuilder2(&stringBuilder, L"已针对速度优化, ");
     }
 
     if (IDiaSymbol_get_isPGO(Symbol, &symbolBoolean) == S_OK && symbolBoolean)
@@ -3555,7 +3555,7 @@ PPH_STRING PhGetDiaSymbolExtraInformation(
 
     if (IDiaSymbol_get_exceptionHandlerVirtualAddress(Symbol, &symbolValue) == S_OK && symbolValue)
     {
-        PhAppendFormatStringBuilder(&stringBuilder, L"Has exception handler (0x%p), ", (PVOID)symbolValue);
+        PhAppendFormatStringBuilder(&stringBuilder, L"有异常处理程序 (0x%p), ", (PVOID)symbolValue);
     }
 
     if (PhEndsWithString2(stringBuilder.String, L", ", FALSE))

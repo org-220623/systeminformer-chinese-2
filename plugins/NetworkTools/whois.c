@@ -715,24 +715,24 @@ NTSTATUS NetworkWhoisThreadStart(
 
     if (context->WindowHandle)
     {
-        SendMessage(context->WindowHandle, NTM_RECEIVEDWHOIS, 0, (LPARAM)PhCreateString(L"Connecting to whois.iana.org..."));
+        SendMessage(context->WindowHandle, NTM_RECEIVEDWHOIS, 0, (LPARAM)PhCreateString(L"正在连接到 whois.iana.org..."));
     }
 
     if (!WhoisQueryServer(L"whois.iana.org", IPPORT_WHOIS, context->RemoteAddressString, context->Ipv6Support, &whoisResponse))
     {
-        PhAppendFormatStringBuilder(&stringBuilder, L"Connection to whois.iana.org failed.\n");
+        PhAppendFormatStringBuilder(&stringBuilder, L"连接到 whois.iana.org 失败。\n");
         goto CleanupExit;
     }
 
     if (!WhoisExtractServerUrl(whoisResponse, &whoisServerName))
     {
-        PhAppendFormatStringBuilder(&stringBuilder, L"Error parsing whois.iana.org response:\n%s\n", whoisResponse->Buffer);
+        PhAppendFormatStringBuilder(&stringBuilder, L"解析 whois.iana.org 响应时出错:\n%s\n", whoisResponse->Buffer);
         goto CleanupExit;
     }
 
     if (context->WindowHandle)
     {
-        SendMessage(context->WindowHandle, NTM_RECEIVEDWHOIS, 0, (LPARAM)PhFormatString(L"Connecting to %s...", PhGetStringOrEmpty(whoisServerName)));
+        SendMessage(context->WindowHandle, NTM_RECEIVEDWHOIS, 0, (LPARAM)PhFormatString(L"正在连接到 %s...", PhGetStringOrEmpty(whoisServerName)));
     }
 
     if (WhoisQueryServer(
@@ -752,7 +752,7 @@ NTSTATUS NetworkWhoisThreadStart(
             if (context->WindowHandle)
             {
                 SendMessage(context->WindowHandle, NTM_RECEIVEDWHOIS, 0, (LPARAM)PhFormatString(
-                    L"%s referred the request to %s\n",
+                    L"%s 将请求转发至 %s\n",
                     PhGetString(whoisServerName),
                     PhGetString(whoisReferralServerName)
                     ));
@@ -760,7 +760,7 @@ NTSTATUS NetworkWhoisThreadStart(
 
             PhAppendFormatStringBuilder(
                 &stringBuilder,
-                L"%s referred the request to %s\n",
+                L"%s 将请求转发至 %s\n",
                 PhGetString(whoisServerName),
                 PhGetString(whoisReferralServerName)
                 );
@@ -774,14 +774,14 @@ NTSTATUS NetworkWhoisThreadStart(
                 ))
             {
                 PhAppendFormatStringBuilder(&stringBuilder, L"\n%s\n", PhGetString(whoisReferralResponse));
-                PhAppendFormatStringBuilder(&stringBuilder, L"\nOriginal request to %s:\n%s\n", PhGetString(whoisServerName), PhGetString(whoisResponse));
+                PhAppendFormatStringBuilder(&stringBuilder, L"\n发往 %s 的原始请求:\n%s\n", PhGetString(whoisServerName), PhGetString(whoisResponse));
                 goto CleanupExit;
             }
         }
     }
     else
     {
-        PhAppendFormatStringBuilder(&stringBuilder, L"Connection to %s failed.\n", PhGetStringOrEmpty(whoisServerName));
+        PhAppendFormatStringBuilder(&stringBuilder, L"连接到 %s 失败。\n", PhGetStringOrEmpty(whoisServerName));
         goto CleanupExit;
     }
 
@@ -1031,9 +1031,9 @@ INT_PTR CALLBACK WhoisDlgProc(
             point.y = GET_Y_LPARAM(lParam);
 
             menu = PhCreateEMenu();
-            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 10, L"&Copy", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 10, L"复制(&C)", NULL, NULL), ULONG_MAX);
             PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 11, L"&Select all", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 11, L"全选(&S)", NULL, NULL), ULONG_MAX);
 
             memset(&range, 0, sizeof(CHARRANGE));
             SendMessage(context->RichEditHandle, EM_EXGETSEL, 0, (LPARAM)&range);
@@ -1103,7 +1103,7 @@ NTSTATUS NetworkWhoisDialogThreadStart(
 
     if (!dllhandle)
     {
-        PhShowStatus(context->ParentWindowHandle, L"Unable to display the whois window.", 0, ERROR_MOD_NOT_FOUND);
+        PhShowStatus(context->ParentWindowHandle, L"无法显示 Whois 查询窗口。", 0, ERROR_MOD_NOT_FOUND);
         PhDereferenceObject(context);
         return STATUS_SUCCESS;
     }
