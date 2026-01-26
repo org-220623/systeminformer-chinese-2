@@ -266,7 +266,7 @@ VOID ThreadTreeNewInitializing(
         }
     }
 
-    AddTreeNewColumn(info, context, DNTHTNC_APPDOMAIN, FALSE, L"AppDomain", 120, PH_ALIGN_LEFT, 0, FALSE, ThreadTreeNewSortFunction);
+    AddTreeNewColumn(info, context, DNTHTNC_APPDOMAIN, FALSE, L"应用程序域", 120, PH_ALIGN_LEFT, 0, FALSE, ThreadTreeNewSortFunction);
 }
 
 VOID ThreadTreeNewUninitializing(

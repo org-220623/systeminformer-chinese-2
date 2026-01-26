@@ -566,25 +566,25 @@ PCWSTR MediumTypeToString(
     switch (MediumType)
     {
     case NdisPhysicalMediumWirelessLan:
-        return L"Wireless LAN";
+        return L"WLAN";
     case NdisPhysicalMediumCableModem:
-        return L"Cable Modem";
+        return L"有线调制解调器";
     case NdisPhysicalMediumPhoneLine:
-        return L"Phone Line";
+        return L"电话线";
     case NdisPhysicalMediumPowerLine:
-        return L"Power Line";
+        return L"电源线";
     case NdisPhysicalMediumDSL:      // includes ADSL and UADSL (G.Lite)
         return L"DSL";
     case NdisPhysicalMediumFibreChannel:
-        return L"Fibre";
+        return L"光纤";
     case NdisPhysicalMedium1394:
         return L"1394";
     case NdisPhysicalMediumWirelessWan:
-        return L"Wireless WAN";
+        return L"无线 WAN";
     case NdisPhysicalMediumNative802_11:
-        return L"Native802_11";
+        return L"原生 802.11";
     case NdisPhysicalMediumBluetooth:
-        return L"Bluetooth";
+        return L"蓝牙";
     case NdisPhysicalMediumInfiniband:
         return L"Infiniband";
     case NdisPhysicalMediumWiMax:
@@ -592,19 +592,19 @@ PCWSTR MediumTypeToString(
     case NdisPhysicalMediumUWB:
         return L"UWB";
     case NdisPhysicalMedium802_3:
-        return L"Ethernet";
+        return L"以太网";
     case NdisPhysicalMedium802_5:
         return L"802_5";
     case NdisPhysicalMediumIrda:
-        return L"Infrared";
+        return L"红外线";
     case NdisPhysicalMediumWiredWAN:
-        return L"Wired WAN";
+        return L"有线 WAN";
     case NdisPhysicalMediumWiredCoWan:
-        return L"Wired CoWan";
+        return L"有线 CoWan";
     case NdisPhysicalMediumOther:
-        return L"Other";
+        return L"其他";
     case NdisPhysicalMediumNative802_15_4:
-        return L"Native802_15_";
+        return L"原生 802.15_";
     }
 
     return L"N/A";

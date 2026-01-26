@@ -122,7 +122,7 @@ NTSTATUS UpdateShellExecute(
 
         if (status != STATUS_CANCELLED) // Ignore UAC decline.
         {
-            PhShowStatus(WindowHandle, L"Unable to execute the setup.", status, 0);
+            PhShowStatus(WindowHandle, L"无法执行安装程序。", status, 0);
 
             if (Context->StartupCheck)
                 ShowAvailableDialog(Context);
@@ -784,8 +784,8 @@ NTSTATUS UpdateCheckSilentThread(
                 if (PhGetIntegerSetting(SETTING_NAME_SHOW_NOTIFICATION))
                 {
                     if (!HR_SUCCESS(PhShowIconNotificationEx(
-                        L"New version of System Informer available",
-                        L"Help menu > Check for updates",
+                        L"有新版本的 System Informer 可用",
+                        L"帮助菜单 > 检查更新",
                         5000,
                         NULL,
                         NULL
@@ -913,12 +913,12 @@ NTSTATUS UpdateDownloadThread(
     PBYTE httpBuffer = NULL;
     ULONG httpBufferLength;
 
-    SendMessage(context->DialogHandle, TDM_UPDATE_ELEMENT_TEXT, TDE_MAIN_INSTRUCTION, (LPARAM)L"Initializing download request...");
+    SendMessage(context->DialogHandle, TDM_UPDATE_ELEMENT_TEXT, TDE_MAIN_INSTRUCTION, (LPARAM)L"初始化下载请求...");
 
     if (!NT_SUCCESS(status = PhHttpCrackUrl(context->SetupFileDownloadUrl, &downloadHostPath, &downloadUrlPath, &httpPort)))
         goto CleanupExit;
 
-    SendMessage(context->DialogHandle, TDM_UPDATE_ELEMENT_TEXT, TDE_MAIN_INSTRUCTION, (LPARAM)L"Connecting...");
+    SendMessage(context->DialogHandle, TDM_UPDATE_ELEMENT_TEXT, TDE_MAIN_INSTRUCTION, (LPARAM)L"正在连接...");
 
     if (!NT_SUCCESS(status = PhHttpInitialize(&httpContext)))
         goto CleanupExit;
@@ -932,12 +932,12 @@ NTSTATUS UpdateDownloadThread(
 
     PhHttpSetFeature(httpContext, PH_HTTP_FEATURE_KEEP_ALIVE, FALSE);
 
-    SendMessage(context->DialogHandle, TDM_UPDATE_ELEMENT_TEXT, TDE_MAIN_INSTRUCTION, (LPARAM)L"Sending download request...");
+    SendMessage(context->DialogHandle, TDM_UPDATE_ELEMENT_TEXT, TDE_MAIN_INSTRUCTION, (LPARAM)L"正在发送下载请求...");
 
     if (!NT_SUCCESS(status = PhHttpSendRequest(httpContext, PH_HTTP_NO_ADDITIONAL_HEADERS, 0, PH_HTTP_NO_REQUEST_DATA, 0, 0)))
         goto CleanupExit;
 
-    SendMessage(context->DialogHandle, TDM_UPDATE_ELEMENT_TEXT, TDE_MAIN_INSTRUCTION, (LPARAM)L"Waiting for response...");
+    SendMessage(context->DialogHandle, TDM_UPDATE_ELEMENT_TEXT, TDE_MAIN_INSTRUCTION, (LPARAM)L"等待响应...");
 
     if (!NT_SUCCESS(status = PhHttpReceiveResponse(httpContext)))
         goto CleanupExit;
@@ -955,9 +955,9 @@ NTSTATUS UpdateDownloadThread(
         goto CleanupExit;
     }
 
-    string = PhFormatString(L"Downloading release %s...", PhGetStringOrEmpty(context->Version));
+    string = PhFormatString(L"下载版本 %s...", PhGetStringOrEmpty(context->Version));
     SendMessage(context->DialogHandle, TDM_UPDATE_ELEMENT_TEXT, TDE_MAIN_INSTRUCTION, (LPARAM)string->Buffer);
-    SendMessage(context->DialogHandle, TDM_UPDATE_ELEMENT_TEXT, TDE_CONTENT, (LPARAM)L"Downloaded: ~ of ~ (0%)\r\nSpeed: ~ KB/s");
+    SendMessage(context->DialogHandle, TDM_UPDATE_ELEMENT_TEXT, TDE_CONTENT, (LPARAM)L"已下载: ~ 共 ~ (0%)\r\n速度: ~ KB/s");
     PhDereferenceObject(string);
 
     // Create temporary file.
@@ -1054,14 +1054,14 @@ NTSTATUS UpdateDownloadThread(
         PH_FORMAT format[9];
         WCHAR stringformat[MAX_PATH];
 
-        // L"Downloaded: %s / %s (%.0f%%)\r\nSpeed: %s/s"
-        PhInitFormatS(&format[0], L"Downloaded: ");
+        // L"已下载: %s / %s (%.0f%%)\r\n速度: %s/s"
+        PhInitFormatS(&format[0], L"已下载: ");
         PhInitFormatSize(&format[1], totalDownloaded);
         PhInitFormatS(&format[2], L" of ");
         PhInitFormatSize(&format[3], contentLength);
         PhInitFormatS(&format[4], L" (");
         PhInitFormatU(&format[5], percent);
-        PhInitFormatS(&format[6], L"%)\r\nSpeed: ");
+        PhInitFormatS(&format[6], L"%)\r\n速度: ");
         PhInitFormatSize(&format[7], timeBitsPerSecond);
         PhInitFormatS(&format[8], L"/s");
 
@@ -1216,14 +1216,14 @@ LRESULT CALLBACK TaskDialogSubclassProc(
                     PH_FORMAT format[9];
                     WCHAR string[MAX_PATH];
 
-                    // L"Downloaded: %s / %s (%.0f%%)\r\nSpeed: %s/s"
-                    PhInitFormatS(&format[0], L"Downloaded: ");
+                    // L"已下载: %s / %s (%.0f%%)\r\n速度: %s/s"
+                    PhInitFormatS(&format[0], L"已下载: ");
                     PhInitFormatSize(&format[1], context->ProgressDownloaded);
                     PhInitFormatS(&format[2], L" of ");
                     PhInitFormatSize(&format[3], context->ProgressTotal);
                     PhInitFormatS(&format[4], L" (");
                     PhInitFormatI64U(&format[5], percent);
-                    PhInitFormatS(&format[6], L"%)\r\nSpeed: ");
+                    PhInitFormatS(&format[6], L"%)\r\n速度: ");
                     PhInitFormatSize(&format[7], context->ProgressBitsPerSecond);
                     PhInitFormatS(&format[8], L"/s");
 
@@ -1366,7 +1366,7 @@ NTSTATUS ShowUpdateDialogThread(
     // Start TaskDialog bootstrap
     config.dwFlags = TDF_ALLOW_DIALOG_CANCELLATION | TDF_CAN_BE_MINIMIZED;
     config.hInstance = NtCurrentImageBase();
-    config.pszContent = L"Initializing...";
+    config.pszContent = L"初始化中...";
     config.lpCallbackData = (LONG_PTR)context;
     config.pfCallback = TaskDialogBootstrapCallback;
     PhShowTaskDialog(&config, NULL, NULL, NULL);
@@ -1393,7 +1393,7 @@ VOID ShowUpdateDialog(
     {
         if (!NT_SUCCESS(PhCreateThreadEx(&UpdateDialogThreadHandle, ShowUpdateDialogThread, Context)))
         {
-            PhShowError2(NULL, L"Unable to create the window.", L"%s", L"");
+            PhShowError2(NULL, L"无法创建窗口。", L"%s", L"");
             return;
         }
 
@@ -1481,8 +1481,8 @@ VOID ShowStartupUpdateDialog(
     if (PhGetIntegerSetting(SETTING_NAME_SHOW_NOTIFICATION))
     {
         if (HR_SUCCESS(PhShowIconNotificationEx(
-            L"New version of System Informer available",
-            L"Help menu > Check for updates",
+            L"有新版本的 System Informer 可用",
+            L"帮助菜单 > 检查更新",
             5000,
             NULL,
             NULL
@@ -1496,7 +1496,7 @@ VOID ShowStartupUpdateDialog(
         TASKDIALOGCONFIG config = { sizeof(TASKDIALOGCONFIG) };
         config.dwFlags = TDF_ALLOW_DIALOG_CANCELLATION | TDF_CAN_BE_MINIMIZED;
         config.hInstance = NtCurrentImageBase();
-        config.pszContent = L"Initializing...";
+        config.pszContent = L"初始化中...";
         config.lpCallbackData = (LONG_PTR)context;
         config.pfCallback = TaskDialogBootstrapCallback;
         PhShowTaskDialog(&config, NULL, NULL, NULL);

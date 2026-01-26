@@ -13,7 +13,7 @@
 
 static TASKDIALOG_BUTTON TaskDialogButtonArray[] =
 {
-    { IDOK, L"Download" }
+    { IDOK, L"下载" }
 };
 
 HRESULT CALLBACK ShowAvailableCallbackProc(
@@ -68,34 +68,34 @@ VOID ShowAvailableDialog(
     config.lpCallbackData = (LONG_PTR)Context;
     config.pfCallback = ShowAvailableCallbackProc;
 
-    config.pszWindowTitle = L"System Informer - Updater";
+    config.pszWindowTitle = L"System Informer - 更新程序";
     if (Context->SwitchingChannel)
     {
         switch (Context->Channel)
         {
         case PhReleaseChannel:
-            config.pszMainInstruction = L"Download the release channel?";
+            config.pszMainInstruction = L"从正式版通道下载最新版本?";
             break;
         //case PhPreviewChannel:
-        //    config.pszMainInstruction = L"Download the preview channel?";
+        //    config.pszMainInstruction = L"从预览版通道下载最新版本?";
         //    break;
         case PhCanaryChannel:
-            config.pszMainInstruction = L"Download the canary channel?";
+            config.pszMainInstruction = L"从测试版通道下载最新版本?";
             break;
         //case PhDeveloperChannel:
-        //    config.pszMainInstruction = L"Download the developer channel?";
+        //    config.pszMainInstruction = L"从开发者版通道下载最新版本?";
         //    break;
         default:
-            config.pszMainInstruction = L"Download the channel?";
+            config.pszMainInstruction = L"从更新通道下载最新版本?";
             break;
         }
     }
     else
     {
-        config.pszMainInstruction = L"A newer build of System Informer is available.";
+        config.pszMainInstruction = L"有更新的 System Informer 版本可用。";
     }
 
-    config.pszContent = PhaFormatString(L"Version: %s\r\nDownload size: %s\r\n\r\n<A HREF=\"changelog.txt\">View changelog</A>",
+    config.pszContent = PhaFormatString(L"版本: %s\r\n大小: %s\r\n\r\n<A HREF=\"changelog.txt\">查看更新日志</A>",
         PhGetStringOrEmpty(Context->Version),
         PhGetStringOrEmpty(Context->SetupFileLength)
         )->Buffer;

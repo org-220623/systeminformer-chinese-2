@@ -130,14 +130,14 @@ static INT_PTR CALLBACK PhpInformationDlgProc(
                 {
                     static PH_FILETYPE_FILTER filters[] =
                     {
-                        { L"Text files (*.txt)", L"*.txt" },
-                        { L"All files (*.*)", L"*.*" }
+                        { L"文本文档 (*.txt)", L"*.txt" },
+                        { L"所有文件 (*.*)", L"*.*" }
                     };
                     PVOID fileDialog;
 
                     fileDialog = PhCreateSaveFileDialog();
                     PhSetFileDialogFilter(fileDialog, filters, sizeof(filters) / sizeof(PH_FILETYPE_FILTER));
-                    PhSetFileDialogFileName(fileDialog, L"Information.txt");
+                    PhSetFileDialogFileName(fileDialog, L"信息.txt");
 
                     if (PhShowFileDialog(hwndDlg, fileDialog))
                     {
@@ -165,7 +165,7 @@ static INT_PTR CALLBACK PhpInformationDlgProc(
                         }
 
                         if (!NT_SUCCESS(status))
-                            PhShowStatus(hwndDlg, L"Unable to create the file", status, 0);
+                            PhShowStatus(hwndDlg, L"无法创建文件", status, 0);
                     }
 
                     PhFreeFileDialog(fileDialog);

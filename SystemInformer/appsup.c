@@ -89,13 +89,13 @@ BOOLEAN PhIsProcessBackground(
 
 static CONST PH_KEY_VALUE_PAIR ProcessPriorityClassTypePairs[] =
 {
-    SIP(SREF(L"Unknown"), PROCESS_PRIORITY_CLASS_UNKNOWN),
-    SIP(SREF(L"Idle"), PROCESS_PRIORITY_CLASS_IDLE),
-    SIP(SREF(L"Normal"), PROCESS_PRIORITY_CLASS_NORMAL),
-    SIP(SREF(L"High"), PROCESS_PRIORITY_CLASS_HIGH),
-    SIP(SREF(L"Real time"), PROCESS_PRIORITY_CLASS_REALTIME),
-    SIP(SREF(L"Below normal"), PROCESS_PRIORITY_CLASS_BELOW_NORMAL),
-    SIP(SREF(L"Above normal"), PROCESS_PRIORITY_CLASS_ABOVE_NORMAL),
+    SIP(SREF(L"未知"), PROCESS_PRIORITY_CLASS_UNKNOWN),
+    SIP(SREF(L"空闲"), PROCESS_PRIORITY_CLASS_IDLE),
+    SIP(SREF(L"正常"), PROCESS_PRIORITY_CLASS_NORMAL),
+    SIP(SREF(L"高"), PROCESS_PRIORITY_CLASS_HIGH),
+    SIP(SREF(L"实时"), PROCESS_PRIORITY_CLASS_REALTIME),
+    SIP(SREF(L"低于正常"), PROCESS_PRIORITY_CLASS_BELOW_NORMAL),
+    SIP(SREF(L"高于正常"), PROCESS_PRIORITY_CLASS_ABOVE_NORMAL),
 };
 
 PCPH_STRINGREF PhGetProcessPriorityClassString(
@@ -121,28 +121,28 @@ PCPH_STRINGREF PhGetProcessPriorityClassString(
     //switch (PriorityClass)
     //{
     //case PROCESS_PRIORITY_CLASS_REALTIME:
-    //    return L"Real time";
+    //    return L"实时";
     //case PROCESS_PRIORITY_CLASS_HIGH:
-    //    return L"High";
+    //    return L"高";
     //case PROCESS_PRIORITY_CLASS_ABOVE_NORMAL:
-    //    return L"Above normal";
+    //    return L"高于正常";
     //case PROCESS_PRIORITY_CLASS_NORMAL:
-    //    return L"Normal";
+    //    return L"正常";
     //case PROCESS_PRIORITY_CLASS_BELOW_NORMAL:
-    //    return L"Below normal";
+    //    return L"低于正常";
     //case PROCESS_PRIORITY_CLASS_IDLE:
-    //    return L"Idle";
+    //    return L"空闲";
     //case PROCESS_PRIORITY_CLASS_UNKNOWN:
     //default:
-    //    return L"Unknown";
+    //    return L"未知";
     //}
 }
 
 static CONST PH_KEY_VALUE_PAIR PhProtectedTypeStrings[] =
 {
-    SIP(L"None", NULL), // PsProtectedTypeNone
-    SIP(L"Light", PsProtectedTypeProtectedLight),
-    SIP(L"Full", PsProtectedTypeProtected),
+    SIP(L"无", NULL), // PsProtectedTypeNone
+    SIP(L"轻量", PsProtectedTypeProtectedLight),
+    SIP(L"完全", PsProtectedTypeProtected),
 };
 
 static CONST PH_KEY_VALUE_PAIR PhProtectedSignerStrings[] =
@@ -175,11 +175,11 @@ PPH_STRING PhGetProcessProtectionString(
         PCWSTR signer;
 
         if (!PhpProtectionNoneString)
-            PhpProtectionNoneString = PhCreateString(L"None");
+            PhpProtectionNoneString = PhCreateString(L"无");
 
         if (IsSecureProcess)
         {
-            PhInitFormatS(&format[count++], L"Secure ");
+            PhInitFormatS(&format[count++], L"安全");
         }
 
         if (PhIndexStringSiKeyValuePairs(
@@ -193,7 +193,7 @@ PPH_STRING PhGetProcessProtectionString(
         }
         else
         {
-            PhInitFormatS(&format[count++], L"Unknown");
+            PhInitFormatS(&format[count++], L"未知");
         }
 
         if (PhIndexStringSiKeyValuePairs(
@@ -210,13 +210,13 @@ PPH_STRING PhGetProcessProtectionString(
         else
         {
             PhInitFormatS(&format[count++], L" (");
-            PhInitFormatS(&format[count++], L"Unknown");
+            PhInitFormatS(&format[count++], L"未知");
             PhInitFormatS(&format[count++], L")");
         }
 
         if (Protection.Audit)
         {
-            PhInitFormatS(&format[count++], L" (Audit)");
+            PhInitFormatS(&format[count++], L" (审核)");
         }
 
         return PhFormat(format, count, 10);
@@ -226,7 +226,7 @@ PPH_STRING PhGetProcessProtectionString(
         static PPH_STRING PhpProtectionSecureIUMString = NULL;
 
         if (!PhpProtectionSecureIUMString)
-            PhpProtectionSecureIUMString = PhCreateString(L"Secure (IUM)");
+            PhpProtectionSecureIUMString = PhCreateString(L"安全 (IUM)");
 
         if (IsSecureProcess)
         {
@@ -996,7 +996,7 @@ VOID PhShellExecuteUserString(
     
     if (!(applicationDirectory = PhGetApplicationDirectoryWin32()))
     {
-        PhShowStatus(WindowHandle, L"Unable to locate the application directory.", STATUS_NOT_FOUND, 0);
+        PhShowStatus(WindowHandle, L"无法找到应用程序目录。", STATUS_NOT_FOUND, 0);
         return;
     }
 
@@ -1122,16 +1122,16 @@ VOID PhShellExecuteUserString(
                 ntMessage = PhGetNtMessage(status);
                 PhShowError2(
                     WindowHandle,
-                    L"Unable to execute the command.",
+                    L"无法执行命令。",
                     L"%s\n%s",
-                    PhGetStringOrDefault(ntMessage, L"An unknown error occurred."),
+                    PhGetStringOrDefault(ntMessage, L"发生未知错误。"),
                     ErrorMessage
                     );
                 PhDereferenceObject(ntMessage);
             }
             else
             {
-                PhShowStatus(WindowHandle, L"Unable to execute the command.", status, 0);
+                PhShowStatus(WindowHandle, L"无法执行命令。", status, 0);
             }
         }
     }
@@ -1382,16 +1382,16 @@ PCWSTR PhGetPhReleaseChannelString(
     switch (PhGetIntegerSetting(SETTING_RELEASE_CHANNEL))
     {
     case PhReleaseChannel:
-        return L"Release";
+        return L"正式版";
     case PhPreviewChannel:
-        return L"Preview";
+        return L"预览版";
     case PhCanaryChannel:
-        return L"Canary";
+        return L"测试版";
     case PhDeveloperChannel:
-        return L"Developer";
+        return L"开发者版";
     }
 
-    return L"Unknown";
+    return L"未知版本";
 }
 
 VOID PhWritePhTextHeader(
@@ -1417,9 +1417,9 @@ VOID PhWritePhTextHeader(
         PhWriteStringFormatAsUtf8FileStream(FileStream, L" %s", PhOsVersion.CSDVersion);
 
 #ifdef _WIN64
-    PhWriteStringAsUtf8FileStream2(FileStream, L" (64-bit)");
+    PhWriteStringAsUtf8FileStream2(FileStream, L" (64 位)");
 #else
-    PhWriteStringAsUtf8FileStream2(FileStream, L" (32-bit)");
+    PhWriteStringAsUtf8FileStream2(FileStream, L" (32 位)");
 #endif
 
     PhQuerySystemTime(&time);
@@ -1695,13 +1695,13 @@ VOID PhInitializeTreeNewColumnMenuEx(
     Data->Selection = NULL;
     Data->ProcessedId = 0;
 
-    sizeColumnToFitMenuItem = PhCreateEMenuItem(0, PH_TN_COLUMN_MENU_SIZE_COLUMN_TO_FIT_ID, L"Size column to fit", NULL, NULL);
-    sizeAllColumnsToFitMenuItem = PhCreateEMenuItem(0, PH_TN_COLUMN_MENU_SIZE_ALL_COLUMNS_TO_FIT_ID, L"Size all columns to fit", NULL, NULL);
+    sizeColumnToFitMenuItem = PhCreateEMenuItem(0, PH_TN_COLUMN_MENU_SIZE_COLUMN_TO_FIT_ID, L"调整列宽以适应屏幕", NULL, NULL);
+    sizeAllColumnsToFitMenuItem = PhCreateEMenuItem(0, PH_TN_COLUMN_MENU_SIZE_ALL_COLUMNS_TO_FIT_ID, L"调整所有列宽以适应屏幕", NULL, NULL);
 
     if (!(Flags & PH_TN_COLUMN_MENU_NO_VISIBILITY))
     {
-        hideColumnMenuItem = PhCreateEMenuItem(0, PH_TN_COLUMN_MENU_HIDE_COLUMN_ID, L"Hide column", NULL, NULL);
-        chooseColumnsMenuItem = PhCreateEMenuItem(0, PH_TN_COLUMN_MENU_CHOOSE_COLUMNS_ID, L"Choose columns...", NULL, NULL);
+        hideColumnMenuItem = PhCreateEMenuItem(0, PH_TN_COLUMN_MENU_HIDE_COLUMN_ID, L"隐藏列", NULL, NULL);
+        chooseColumnsMenuItem = PhCreateEMenuItem(0, PH_TN_COLUMN_MENU_CHOOSE_COLUMNS_ID, L"选择列...", NULL, NULL);
     }
 
     if (Flags & PH_TN_COLUMN_MENU_SHOW_RESET_SORT)
@@ -1712,7 +1712,7 @@ VOID PhInitializeTreeNewColumnMenuEx(
         TreeNew_GetSort(Data->TreeNewHandle, &sortColumn, &sortOrder);
 
         if (sortOrder != Data->DefaultSortOrder || (Data->DefaultSortOrder != NoSortOrder && sortColumn != Data->DefaultSortColumn))
-            resetSortMenuItem = PhCreateEMenuItem(0, PH_TN_COLUMN_MENU_RESET_SORT_ID, L"Reset sort", NULL, NULL);
+            resetSortMenuItem = PhCreateEMenuItem(0, PH_TN_COLUMN_MENU_RESET_SORT_ID, L"重置排序", NULL, NULL);
     }
 
     PhInsertEMenuItem(Data->Menu, sizeColumnToFitMenuItem, ULONG_MAX);
@@ -2046,7 +2046,7 @@ BOOLEAN PhInsertCopyCellEMenuItem(
 
     PhInitializeStringRefLongHint(&columnText, Column->Text);
     escapedText = PhEscapeStringForMenuPrefix(&columnText);
-    PhInitFormatS(&format[0], L"Copy \""); // Copy \"%s\"
+    PhInitFormatS(&format[0], L"复制 \""); // Copy \"%s\"
     PhInitFormatSR(&format[1], escapedText->sr);
     PhInitFormatS(&format[2], L"\"");
     menuItemText = PhFormat(format, RTL_NUMBER_OF(format), 0);
@@ -2180,7 +2180,7 @@ BOOLEAN PhInsertCopyListViewEMenuItem(
     indexInParent++;
 
     escapedText = PhEscapeStringForMenuPrefix(&columnText);
-    PhInitFormatS(&format[0], L"Copy \""); // Copy \"%s\"
+    PhInitFormatS(&format[0], L"复制 \""); // Copy \"%s\"
     PhInitFormatSR(&format[1], escapedText->sr);
     PhInitFormatS(&format[2], L"\"");
     menuItemText = PhFormat(format, RTL_NUMBER_OF(format), 0);
@@ -2364,7 +2364,7 @@ VOID PhShellOpenKey(
 
     if (!NT_SUCCESS(status))
     {
-        PhShowStatus(WindowHandle, L"Unable to execute the program.", status, 0);
+        PhShowStatus(WindowHandle, L"无法执行程序。", status, 0);
         return;
     }
 
@@ -2394,7 +2394,7 @@ VOID PhShellOpenKey(
 
         if (!NT_SUCCESS(status))
         {
-            PhShowStatus(WindowHandle, L"Unable to execute the program.", status, 0);
+            PhShowStatus(WindowHandle, L"无法执行程序。", status, 0);
         }
     }
     else
@@ -2412,7 +2412,7 @@ VOID PhShellOpenKey(
 
         if (!NT_SUCCESS(status))
         {
-            PhShowStatus(WindowHandle, L"Unable to execute the program.", status, 0);
+            PhShowStatus(WindowHandle, L"无法执行程序。", status, 0);
         }
     }
 

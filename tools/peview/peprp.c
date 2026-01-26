@@ -661,7 +661,7 @@ PPH_STRING PvGetRelativeTimeString(
     PhLargeIntegerToLocalSystemTime(&timeFields, &time);
     timeString = PhaFormatDateTime(&timeFields);
 
-    return PhFormatString(L"%s (%s ago)", timeString->Buffer, timeRelativeString->Buffer);
+    return PhFormatString(L"%s (%s 之前)", timeString->Buffer, timeRelativeString->Buffer);
 }
 
 _Success_(return == VrTrusted)
@@ -783,92 +783,92 @@ PPH_STRING PvpGetSectionCharacteristics(
     PhInitializeStringBuilder(&stringBuilder, 10);
 
     if (Characteristics & IMAGE_SCN_TYPE_NO_PAD)
-        PhAppendStringBuilder2(&stringBuilder, L"No Padding, ");
+        PhAppendStringBuilder2(&stringBuilder, L"未填充, ");
     if (Characteristics & IMAGE_SCN_CNT_CODE)
-        PhAppendStringBuilder2(&stringBuilder, L"Code, ");
+        PhAppendStringBuilder2(&stringBuilder, L"代码, ");
     if (Characteristics & IMAGE_SCN_CNT_INITIALIZED_DATA)
-        PhAppendStringBuilder2(&stringBuilder, L"Initialized data, ");
+        PhAppendStringBuilder2(&stringBuilder, L"已初始化数据, ");
     if (Characteristics & IMAGE_SCN_CNT_UNINITIALIZED_DATA)
-        PhAppendStringBuilder2(&stringBuilder, L"Uninitialized data, ");
+        PhAppendStringBuilder2(&stringBuilder, L"未初始化数据, ");
     if (Characteristics & IMAGE_SCN_LNK_INFO)
-        PhAppendStringBuilder2(&stringBuilder, L"Comments, ");
+        PhAppendStringBuilder2(&stringBuilder, L"注解, ");
     if (Characteristics & IMAGE_SCN_LNK_REMOVE)
-        PhAppendStringBuilder2(&stringBuilder, L"Excluded, ");
+        PhAppendStringBuilder2(&stringBuilder, L"已排除, ");
     if (Characteristics & IMAGE_SCN_LNK_COMDAT)
         PhAppendStringBuilder2(&stringBuilder, L"COMDAT, ");
     if (Characteristics & IMAGE_SCN_NO_DEFER_SPEC_EXC)
-        PhAppendStringBuilder2(&stringBuilder, L"Speculative exceptions, ");
+        PhAppendStringBuilder2(&stringBuilder, L"推测性异常, ");
     if (Characteristics & IMAGE_SCN_GPREL)
-        PhAppendStringBuilder2(&stringBuilder, L"GP relative, ");
+        PhAppendStringBuilder2(&stringBuilder, L"GP 相对, ");
     if (Characteristics & IMAGE_SCN_MEM_PURGEABLE)
-        PhAppendStringBuilder2(&stringBuilder, L"Purgeable, ");
+        PhAppendStringBuilder2(&stringBuilder, L"可清除, ");
     if (Characteristics & IMAGE_SCN_MEM_LOCKED)
-        PhAppendStringBuilder2(&stringBuilder, L"Locked, ");
+        PhAppendStringBuilder2(&stringBuilder, L"已锁定, ");
     if (Characteristics & IMAGE_SCN_MEM_PRELOAD)
-        PhAppendStringBuilder2(&stringBuilder, L"Preload, ");
+        PhAppendStringBuilder2(&stringBuilder, L"预加载, ");
 
     switch (Characteristics & IMAGE_SCN_ALIGN_MASK)
     {
     case IMAGE_SCN_ALIGN_1BYTES:
-        PhAppendStringBuilder2(&stringBuilder, L"1 alignment, ");
+        PhAppendStringBuilder2(&stringBuilder, L"1 字节对齐, ");
         break;
     case IMAGE_SCN_ALIGN_2BYTES:
-        PhAppendStringBuilder2(&stringBuilder, L"2 alignment, ");
+        PhAppendStringBuilder2(&stringBuilder, L"2 字节对齐, ");
         break;
     case IMAGE_SCN_ALIGN_4BYTES:
-        PhAppendStringBuilder2(&stringBuilder, L"4 alignment, ");
+        PhAppendStringBuilder2(&stringBuilder, L"4 字节对齐, ");
         break;
     case IMAGE_SCN_ALIGN_8BYTES:
-        PhAppendStringBuilder2(&stringBuilder, L"8 alignment, ");
+        PhAppendStringBuilder2(&stringBuilder, L"8 字节对齐, ");
         break;
     case IMAGE_SCN_ALIGN_16BYTES:
-        PhAppendStringBuilder2(&stringBuilder, L"16 alignment, ");
+        PhAppendStringBuilder2(&stringBuilder, L"16 字节对齐, ");
         break;
     case IMAGE_SCN_ALIGN_32BYTES:
-        PhAppendStringBuilder2(&stringBuilder, L"32 alignment, ");
+        PhAppendStringBuilder2(&stringBuilder, L"32 字节对齐, ");
         break;
     case IMAGE_SCN_ALIGN_64BYTES:
-        PhAppendStringBuilder2(&stringBuilder, L"64 alignment, ");
+        PhAppendStringBuilder2(&stringBuilder, L"64 字节对齐, ");
         break;
     case IMAGE_SCN_ALIGN_128BYTES:
-        PhAppendStringBuilder2(&stringBuilder, L"128 alignment, ");
+        PhAppendStringBuilder2(&stringBuilder, L"128 字节对齐, ");
         break;
     case IMAGE_SCN_ALIGN_256BYTES:
-        PhAppendStringBuilder2(&stringBuilder, L"256 alignment, ");
+        PhAppendStringBuilder2(&stringBuilder, L"256 字节对齐, ");
         break;
     case IMAGE_SCN_ALIGN_512BYTES:
-        PhAppendStringBuilder2(&stringBuilder, L"512 alignment, ");
+        PhAppendStringBuilder2(&stringBuilder, L"512 字节对齐, ");
         break;
     case IMAGE_SCN_ALIGN_1024BYTES:
-        PhAppendStringBuilder2(&stringBuilder, L"1024 alignment, ");
+        PhAppendStringBuilder2(&stringBuilder, L"1024 字节对齐, ");
         break;
     case IMAGE_SCN_ALIGN_2048BYTES:
-        PhAppendStringBuilder2(&stringBuilder, L"2048 alignment, ");
+        PhAppendStringBuilder2(&stringBuilder, L"2048 字节对齐, ");
         break;
     case IMAGE_SCN_ALIGN_4096BYTES:
-        PhAppendStringBuilder2(&stringBuilder, L"4096 alignment, ");
+        PhAppendStringBuilder2(&stringBuilder, L"4096 字节对齐, ");
         break;
     case IMAGE_SCN_ALIGN_8192BYTES:
-        PhAppendStringBuilder2(&stringBuilder, L"8192 alignment, ");
+        PhAppendStringBuilder2(&stringBuilder, L"8192 字节对齐, ");
         break;
     }
 
     if (Characteristics & IMAGE_SCN_LNK_NRELOC_OVFL)
-        PhAppendStringBuilder2(&stringBuilder, L"Extended relocations, ");
+        PhAppendStringBuilder2(&stringBuilder, L"扩展重定位, ");
     if (Characteristics & IMAGE_SCN_MEM_DISCARDABLE)
-        PhAppendStringBuilder2(&stringBuilder, L"Discardable, ");
+        PhAppendStringBuilder2(&stringBuilder, L"可丢弃, ");
     if (Characteristics & IMAGE_SCN_MEM_NOT_CACHED)
-        PhAppendStringBuilder2(&stringBuilder, L"Not cachable, ");
+        PhAppendStringBuilder2(&stringBuilder, L"不可缓存, ");
     if (Characteristics & IMAGE_SCN_MEM_NOT_PAGED)
-        PhAppendStringBuilder2(&stringBuilder, L"Not pageable, ");
+        PhAppendStringBuilder2(&stringBuilder, L"不可分页, ");
     if (Characteristics & IMAGE_SCN_MEM_SHARED)
-        PhAppendStringBuilder2(&stringBuilder, L"Shareable, ");
+        PhAppendStringBuilder2(&stringBuilder, L"可共享, ");
     if (Characteristics & IMAGE_SCN_MEM_EXECUTE)
-        PhAppendStringBuilder2(&stringBuilder, L"Executable, ");
+        PhAppendStringBuilder2(&stringBuilder, L"可执行, ");
     if (Characteristics & IMAGE_SCN_MEM_READ)
-        PhAppendStringBuilder2(&stringBuilder, L"Readable, ");
+        PhAppendStringBuilder2(&stringBuilder, L"可读, ");
     if (Characteristics & IMAGE_SCN_MEM_WRITE)
-        PhAppendStringBuilder2(&stringBuilder, L"Writeable, ");
+        PhAppendStringBuilder2(&stringBuilder, L"可写, ");
 
     if (PhEndsWithString2(stringBuilder.String, L", ", FALSE))
         PhRemoveEndStringBuilder(&stringBuilder, 2);
@@ -892,7 +892,7 @@ VOID PvpSetPeImageVersionInfo(
     //else
     PhInitializeImageVersionInfo(&PvImageVersionInfo, PvFileName->Buffer);
 
-    string = PhConcatStrings2(L"(Verifying...) ", PvpGetStringOrNa(PvImageVersionInfo.CompanyName));
+    string = PhConcatStrings2(L"(正在验证...) ", PvpGetStringOrNa(PvImageVersionInfo.CompanyName));
     PhSetDialogItemText(WindowHandle, IDC_NAME, PvpGetStringOrNa(PvImageVersionInfo.FileDescription));
     PhSetDialogItemText(WindowHandle, IDC_COMPANYNAME, string->Buffer);
     PhSetDialogItemText(WindowHandle, IDC_VERSION, PvpGetStringOrNa(PvImageVersionInfo.FileVersion));
@@ -932,7 +932,7 @@ VOID PvpSetPeImageMachineType(
         type = PhGetMappedImageCHPEVersion(&PvMappedImage) ? L"ARM64 (ARM64X)" : L"ARM64";
         break;
     default:
-        type = L"Unknown";
+        type = L"未知";
         break;
     }
 
@@ -962,7 +962,7 @@ VOID PvpSetPeImageTimeStamp(
         if (PvMappedImage.NtHeaders->FileHeader.TimeDateStamp)
         {
             PhMoveReference(&string, PhFormatString(
-                L"%s (0x%lx) (deterministic)",
+                L"%s (0x%lx) (确定)",
                 PhGetStringOrEmpty(string),
                 PvMappedImage.NtHeaders->FileHeader.TimeDateStamp
                 ));
@@ -970,7 +970,7 @@ VOID PvpSetPeImageTimeStamp(
         else
         {
             PhMoveReference(&string, PhFormatString(
-                L"%s (deterministic)",
+                L"%s (确定)",
                 PhGetStringOrEmpty(string)
                 ));
         }
@@ -1049,7 +1049,7 @@ VOID PvpSetPeImageSize(
             PhPrintPointer(pointer, UlongToPtr(lastRawDataAddress));
 
             string = PhFormatString(
-                L"%s (incorrect, %s) (overlay, %s - %s)",
+                L"%s (不正确, %s) (覆盖, %s - %s)",
                 PhaFormatSize(lastRawDataOffset, ULONG_MAX)->Buffer,
                 PhaFormatSize(PvMappedImage.ViewSize, ULONG_MAX)->Buffer,
                 pointer,
@@ -1106,7 +1106,7 @@ VOID PvpSetPeImageEntropy(
     _In_ HWND ListViewHandle
     )
 {
-    PhSetListViewSubItem(ListViewHandle, PVP_IMAGE_GENERAL_INDEX_ENTROPY, 1, L"Calculating...");
+    PhSetListViewSubItem(ListViewHandle, PVP_IMAGE_GENERAL_INDEX_ENTROPY, 1, L"正在计算...");
 
     PhQueueItemWorkQueue(PhGetGlobalWorkQueue(), PvpEntropyImageThreadStart, WindowHandle);
 }
@@ -1187,7 +1187,7 @@ VOID PvpSetPeImageEntryPoint(
     _In_ HWND ListViewHandle
     )
 {
-    PhSetListViewSubItem(ListViewHandle, PVP_IMAGE_GENERAL_INDEX_ENTRYPOINT, 1, L"Resolving...");
+    PhSetListViewSubItem(ListViewHandle, PVP_IMAGE_GENERAL_INDEX_ENTRYPOINT, 1, L"正在解析...");
 
     PhQueueItemWorkQueue(PhGetGlobalWorkQueue(), PvpEntryPointImageThreadStart, ListViewHandle);
 }
@@ -1199,7 +1199,7 @@ VOID PvpSetPeImageCheckSum(
 {
     PPH_STRING string;
 
-    string = PhFormatString(L"0x%I32x (verifying...)", PvMappedImage.NtHeaders->OptionalHeader.CheckSum); // same for 32-bit and 64-bit images
+    string = PhFormatString(L"0x%I32x (正在验证...)", PvMappedImage.NtHeaders->OptionalHeader.CheckSum); // same for 32-bit and 64-bit images
 
     PhSetListViewSubItem(ListViewHandle, PVP_IMAGE_GENERAL_INDEX_CHECKSUM, 1, string->Buffer);
 
@@ -1267,13 +1267,13 @@ VOID PvpSetPeImageSubsystem(
         type = L"Windows CE CUI";
         break;
     case IMAGE_SUBSYSTEM_EFI_APPLICATION:
-        type = L"EFI Application";
+        type = L"EFI 应用程序";
         break;
     case IMAGE_SUBSYSTEM_EFI_BOOT_SERVICE_DRIVER:
-        type = L"EFI Boot Service Driver";
+        type = L"EFI 引导服务驱动程序";
         break;
     case IMAGE_SUBSYSTEM_EFI_RUNTIME_DRIVER:
-        type = L"EFI Runtime Driver";
+        type = L"EFI 运行时驱动程序";
         break;
     case IMAGE_SUBSYSTEM_EFI_ROM:
         type = L"EFI ROM";
@@ -1282,10 +1282,10 @@ VOID PvpSetPeImageSubsystem(
         type = L"Xbox";
         break;
     case IMAGE_SUBSYSTEM_WINDOWS_BOOT_APPLICATION:
-        type = L"Windows Boot Application";
+        type = L"Windows 引导应用程序";
         break;
     default:
-        type = L"Unknown";
+        type = L"未知";
         break;
     }
 
@@ -1321,42 +1321,42 @@ VOID PvpSetPeImageCharacteristics(
     PhInitializeStringBuilder(&stringBuilder, 10);
 
     if (characteristics & IMAGE_FILE_EXECUTABLE_IMAGE)
-        PhAppendStringBuilder2(&stringBuilder, L"Executable, ");
+        PhAppendStringBuilder2(&stringBuilder, L"可执行, ");
     if (characteristics & IMAGE_FILE_DLL)
         PhAppendStringBuilder2(&stringBuilder, L"DLL, ");
     if (characteristics & IMAGE_FILE_LARGE_ADDRESS_AWARE)
-        PhAppendStringBuilder2(&stringBuilder, L"Large address aware, ");
+        PhAppendStringBuilder2(&stringBuilder, L"长地址感知, ");
     if (characteristics & IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP)
-        PhAppendStringBuilder2(&stringBuilder, L"Removable run from swap, ");
+        PhAppendStringBuilder2(&stringBuilder, L"可从 SWAP 移除运行, ");
     if (characteristics & IMAGE_FILE_NET_RUN_FROM_SWAP)
-        PhAppendStringBuilder2(&stringBuilder, L"Net run from swap, ");
+        PhAppendStringBuilder2(&stringBuilder, L"从 SWAP 运行网络");
     if (characteristics & IMAGE_FILE_SYSTEM)
-        PhAppendStringBuilder2(&stringBuilder, L"System, ");
+        PhAppendStringBuilder2(&stringBuilder, L"系统, ");
     if (characteristics & IMAGE_FILE_UP_SYSTEM_ONLY)
-        PhAppendStringBuilder2(&stringBuilder, L"Uni-processor only, ");
+        PhAppendStringBuilder2(&stringBuilder, L"仅单处理器, ");
 
     if (characteristicsDll & IMAGE_DLLCHARACTERISTICS_HIGH_ENTROPY_VA)
-        PhAppendStringBuilder2(&stringBuilder, L"High entropy VA, ");
+        PhAppendStringBuilder2(&stringBuilder, L"高熵 VA, ");
     if (characteristicsDll & IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE)
-        PhAppendStringBuilder2(&stringBuilder, L"Dynamic base, ");
+        PhAppendStringBuilder2(&stringBuilder, L"动态基址, ");
     if (characteristicsDll & IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY)
-        PhAppendStringBuilder2(&stringBuilder, L"Force integrity check, ");
+        PhAppendStringBuilder2(&stringBuilder, L"强制完整性检查, ");
     if (characteristicsDll & IMAGE_DLLCHARACTERISTICS_NX_COMPAT)
-        PhAppendStringBuilder2(&stringBuilder, L"NX compatible, ");
+        PhAppendStringBuilder2(&stringBuilder, L"NX 兼容, ");
     if (characteristicsDll & IMAGE_DLLCHARACTERISTICS_NO_ISOLATION)
-        PhAppendStringBuilder2(&stringBuilder, L"No isolation, ");
+        PhAppendStringBuilder2(&stringBuilder, L"无隔离, ");
     if (characteristicsDll & IMAGE_DLLCHARACTERISTICS_NO_SEH)
-        PhAppendStringBuilder2(&stringBuilder, L"No SEH, ");
+        PhAppendStringBuilder2(&stringBuilder, L"无 SEH, ");
     if (characteristicsDll & IMAGE_DLLCHARACTERISTICS_NO_BIND)
-        PhAppendStringBuilder2(&stringBuilder, L"Do not bind, ");
+        PhAppendStringBuilder2(&stringBuilder, L"不捆绑, ");
     if (characteristicsDll & IMAGE_DLLCHARACTERISTICS_APPCONTAINER)
         PhAppendStringBuilder2(&stringBuilder, L"AppContainer, ");
     if (characteristicsDll & IMAGE_DLLCHARACTERISTICS_WDM_DRIVER)
-        PhAppendStringBuilder2(&stringBuilder, L"WDM driver, ");
+        PhAppendStringBuilder2(&stringBuilder, L"WDM 驱动程序, ");
     if (characteristicsDll & IMAGE_DLLCHARACTERISTICS_GUARD_CF)
-        PhAppendStringBuilder2(&stringBuilder, L"Control Flow Guard, ");
+        PhAppendStringBuilder2(&stringBuilder, L"控制流防护, ");
     if (characteristicsDll & IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE)
-        PhAppendStringBuilder2(&stringBuilder, L"Terminal server aware, ");
+        PhAppendStringBuilder2(&stringBuilder, L"终端服务器感知, ");
 
     if (NT_SUCCESS(PhGetMappedImageDebugEntryByType(
         &PvMappedImage,
@@ -1373,17 +1373,17 @@ VOID PvpSetPeImageCharacteristics(
         if (characteristicsEx != ULONG_MAX)
         {
             if (characteristicsEx & IMAGE_DLLCHARACTERISTICS_EX_CET_COMPAT)
-                PhAppendStringBuilder2(&stringBuilder, L"CET compatible, ");
+                PhAppendStringBuilder2(&stringBuilder, L"CET 兼容, ");
             if (characteristicsEx & IMAGE_DLLCHARACTERISTICS_EX_CET_COMPAT_STRICT_MODE)
-                PhAppendStringBuilder2(&stringBuilder, L"CET compatible (Strict), ");
+                PhAppendStringBuilder2(&stringBuilder, L"CET 兼容 (严格), ");
             if (characteristicsEx & IMAGE_DLLCHARACTERISTICS_EX_CET_SET_CONTEXT_IP_VALIDATION_RELAXED_MODE)
-                PhAppendStringBuilder2(&stringBuilder, L"CET context validation (Relaxed), ");
+                PhAppendStringBuilder2(&stringBuilder, L"CET 上下文验证 (宽松), ");
             if (characteristicsEx & IMAGE_DLLCHARACTERISTICS_EX_CET_DYNAMIC_APIS_ALLOW_IN_PROC)
-                PhAppendStringBuilder2(&stringBuilder, L"CET dynamic APIs allowed, ");
+                PhAppendStringBuilder2(&stringBuilder, L"允许 CET 动态 API, ");
             if (characteristicsEx & IMAGE_DLLCHARACTERISTICS_EX_FORWARD_CFI_COMPAT)
-                PhAppendStringBuilder2(&stringBuilder, L"CFI shadow stack compatible, ");
+                PhAppendStringBuilder2(&stringBuilder, L"兼容 CFI 影子堆栈, ");
             if (characteristicsEx & IMAGE_DLLCHARACTERISTICS_EX_HOTPATCH_COMPATIBLE)
-                PhAppendStringBuilder2(&stringBuilder, L"Hotpatch compatible, ");
+                PhAppendStringBuilder2(&stringBuilder, L"兼容热修补, ");
         }
     }
 
@@ -1448,49 +1448,49 @@ VOID PvpSetPeImageFileProperties(
                 //PhInitializeStringBuilder(&stringBuilder, 0x100);
                 //
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_READONLY)
-                //    PhAppendStringBuilder2(&stringBuilder, L"Readonly, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"只读, ");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_HIDDEN)
-                //    PhAppendStringBuilder2(&stringBuilder, L"Hidden, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"隐藏, ");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_SYSTEM)
-                //    PhAppendStringBuilder2(&stringBuilder, L"System, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"系统, ");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-                //    PhAppendStringBuilder2(&stringBuilder, L"Directory, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"目录, ");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_ARCHIVE)
-                //    PhAppendStringBuilder2(&stringBuilder, L"Archive, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"存档, ");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_DEVICE)
-                //    PhAppendStringBuilder2(&stringBuilder, L"Device, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"设备, ");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_NORMAL)
-                //    PhAppendStringBuilder2(&stringBuilder, L"Normal, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"正常, ");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_TEMPORARY)
-                //    PhAppendStringBuilder2(&stringBuilder, L"Temporary, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"临时, ");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_SPARSE_FILE)
-                //    PhAppendStringBuilder2(&stringBuilder, L"Sparse, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"稀疏, ");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_REPARSE_POINT)
-                //    PhAppendStringBuilder2(&stringBuilder, L"Reparse point, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"重解析点, ");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_COMPRESSED)
-                //    PhAppendStringBuilder2(&stringBuilder, L"Compressed, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"已压缩, ");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_OFFLINE)
-                //    PhAppendStringBuilder2(&stringBuilder, L"Offline, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"离线, ");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_NOT_CONTENT_INDEXED)
-                //    PhAppendStringBuilder2(&stringBuilder, L"Not indexed, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"未索引, ");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_ENCRYPTED)
-                //    PhAppendStringBuilder2(&stringBuilder, L"Encrypted, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"已加密, ");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_INTEGRITY_STREAM)
-                //    PhAppendStringBuilder2(&stringBuilder, L"Integiry, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"完整性");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_VIRTUAL)
-                //    PhAppendStringBuilder2(&stringBuilder, L"Virtual, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"虚拟, ");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_NO_SCRUB_DATA)
-                //    PhAppendStringBuilder2(&stringBuilder, L"No scrub, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"未清理, ");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_EA)
-                //    PhAppendStringBuilder2(&stringBuilder, L"Extended attributes, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"扩展属性, ");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_PINNED)
-                //    PhAppendStringBuilder2(&stringBuilder, L"Pinned, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"已固定, ");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_UNPINNED)
-                //    PhAppendStringBuilder2(&stringBuilder, L"Unpinned, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"未固定, ");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_RECALL_ON_OPEN)
-                //    PhAppendStringBuilder2(&stringBuilder, L"Recall on opened, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"打开时重调用, ");
                 //if (basicInfo.FileAttributes & FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS)
-                //    PhAppendStringBuilder2(&stringBuilder, L"Recall on data, ");
+                //    PhAppendStringBuilder2(&stringBuilder, L"数据重调用, ");
                 //if (PhEndsWithString2(stringBuilder.String, L", ", FALSE))
                 //    PhRemoveEndStringBuilder(&stringBuilder, 2);
 
@@ -1512,11 +1512,11 @@ VOID PvpSetPeImageFileProperties(
             PhInitFormatI64X(&format[2], internalInfo.IndexNumber.QuadPart);
             PhInitFormatS(&format[3], L")");
 
-            PhInitFormatS(&format[4], L" (MFT record: ");
+            PhInitFormatS(&format[4], L" (MFT 记录: ");
             PhInitFormatI64U(&format[5], internalInfo.MftRecordIndex);
             PhInitFormatS(&format[6], L")");
 
-            PhInitFormatS(&format[7], L" (Sequence number: ");
+            PhInitFormatS(&format[7], L" (序列号: ");
             PhInitFormatI64U(&format[8], internalInfo.SequenceNumber);
             PhInitFormatS(&format[9], L")");
 
@@ -1673,7 +1673,7 @@ VOID PvpSetPeImageDebugRepoHash(
 
             if (!PhEndsWithString(string, timeStamp, TRUE))
             {
-                PhMoveReference(&string, PhConcatStringRefZ(&string->sr, L" (incorrect)"));
+                PhMoveReference(&string, PhConcatStringRefZ(&string->sr, L" (不正确)"));
             }
 
             PhDereferenceObject(timeStamp);
@@ -1732,7 +1732,7 @@ VOID PvpSetPeImageDebugPdb(
                     hash = PhBufferToHexStringEx((PUCHAR)&codeviewEntry->PdbGuid, sizeof(GUID), FALSE);
 
                     PhMoveReference(&string, PhFormatString(
-                        L"%s (%s) (deterministic)",
+                        L"%s (%s) (确定)",
                         PhGetStringOrEmpty(string),
                         PhGetStringOrEmpty(hash)
                         ));
@@ -1808,30 +1808,30 @@ VOID PvpSetPeImageProperties(
     ExtendedListView_SetRedraw(Context->ListViewHandle, FALSE);
     ListView_DeleteAllItems(Context->ListViewHandle);
 
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_NAME, L"Target machine", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_TIMESTAMP, L"Time stamp", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_ENTROPY, L"Image entropy", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_IMAGEBASE, L"Image base", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_IMAGESIZE, L"Image size", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_ENTRYPOINT, L"Entry point", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_CHECKSUM, L"Header checksum", NULL);
-    //PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_CHECKSUMIAT, L"Import checksum", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_HEADERSPARE, L"Header spare", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_SUBSYSTEM, L"Subsystem", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_SUBSYSTEMVERSION, L"Subsystem version", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_CHARACTERISTICS, L"Characteristics", NULL);
-    //PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_FILEINFO, PVP_IMAGE_GENERAL_INDEX_FILEATTRIBUTES, L"Attributes", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_FILEINFO, PVP_IMAGE_GENERAL_INDEX_FILECREATEDTIME, L"Created time", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_FILEINFO, PVP_IMAGE_GENERAL_INDEX_FILEMODIFIEDTIME, L"Modified time", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_FILEINFO, PVP_IMAGE_GENERAL_INDEX_FILELASTWRITETIME, L"Updated time", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_DEBUGINFO, PVP_IMAGE_GENERAL_INDEX_DEBUGPDB, L"Guid", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_DEBUGINFO, PVP_IMAGE_GENERAL_INDEX_DEBUGIMAGE, L"Image name", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_DEBUGINFO, PVP_IMAGE_GENERAL_INDEX_DEBUGVCFEATURE, L"Feature count", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_DEBUGINFO, PVP_IMAGE_GENERAL_INDEX_DEBUGREPRO, L"Reproducible hash", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_EXTRAINFO, PVP_IMAGE_GENERAL_INDEX_FILEINDEX, L"File index", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_EXTRAINFO, PVP_IMAGE_GENERAL_INDEX_FILEID, L"File identifier", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_EXTRAINFO, PVP_IMAGE_GENERAL_INDEX_FILEOBJECTID, L"File object identifier", NULL);
-    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_EXTRAINFO, PVP_IMAGE_GENERAL_INDEX_FILEUSN, L"File last USN", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_NAME, L"目标平台", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_TIMESTAMP, L"时间戳", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_ENTROPY, L"映像熵", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_IMAGEBASE, L"映像基址", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_IMAGESIZE, L"映像大小", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_ENTRYPOINT, L"入口点", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_CHECKSUM, L"头部校验和", NULL);
+    //PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_CHECKSUMIAT, L"导入表校验和", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_HEADERSPARE, L"头部备用", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_SUBSYSTEM, L"子系统", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_SUBSYSTEMVERSION, L"子系统版本", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, PVP_IMAGE_GENERAL_INDEX_CHARACTERISTICS, L"特征", NULL);
+    //PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_FILEINFO, PVP_IMAGE_GENERAL_INDEX_FILEATTRIBUTES, L"属性", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_FILEINFO, PVP_IMAGE_GENERAL_INDEX_FILECREATEDTIME, L"创建时间", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_FILEINFO, PVP_IMAGE_GENERAL_INDEX_FILEMODIFIEDTIME, L"修改时间", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_FILEINFO, PVP_IMAGE_GENERAL_INDEX_FILELASTWRITETIME, L"更新时间", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_DEBUGINFO, PVP_IMAGE_GENERAL_INDEX_DEBUGPDB, L"GUID", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_DEBUGINFO, PVP_IMAGE_GENERAL_INDEX_DEBUGIMAGE, L"映像名称", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_DEBUGINFO, PVP_IMAGE_GENERAL_INDEX_DEBUGVCFEATURE, L"特征计数", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_DEBUGINFO, PVP_IMAGE_GENERAL_INDEX_DEBUGREPRO, L"可复现哈希", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_EXTRAINFO, PVP_IMAGE_GENERAL_INDEX_FILEINDEX, L"文件索引", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_EXTRAINFO, PVP_IMAGE_GENERAL_INDEX_FILEID, L"文件标识符", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_EXTRAINFO, PVP_IMAGE_GENERAL_INDEX_FILEOBJECTID, L"文件对象标识符", NULL);
+    PhAddListViewGroupItem(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_EXTRAINFO, PVP_IMAGE_GENERAL_INDEX_FILEUSN, L"文件最后 USN", NULL);
 
     PvpSetPeImageMachineType(Context->ListViewHandle);
     PvpSetPeImageTimeStamp(Context->ListViewHandle);
@@ -1860,10 +1860,10 @@ VOID PvPeAddImagePropertiesGroups(
     ExtendedListView_SetRedraw(Context->ListViewHandle, FALSE);
 
     ListView_EnableGroupView(Context->ListViewHandle, TRUE);
-    PhAddListViewGroup(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, L"Image information");
-    PhAddListViewGroup(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_FILEINFO, L"File information");
-    PhAddListViewGroup(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_DEBUGINFO, L"Debug information");
-    PhAddListViewGroup(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_EXTRAINFO, L"Internal information");
+    PhAddListViewGroup(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_BASICINFO, L"映像信息");
+    PhAddListViewGroup(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_FILEINFO, L"文件信息");
+    PhAddListViewGroup(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_DEBUGINFO, L"调试信息");
+    PhAddListViewGroup(Context->ListViewHandle, PVP_IMAGE_GENERAL_CATEGORY_EXTRAINFO, L"内部信息");
 
     ExtendedListView_SetRedraw(Context->ListViewHandle, TRUE);
 }
@@ -2034,8 +2034,8 @@ INT_PTR CALLBACK PvPeGeneralDlgProc(
 
             PhSetListViewStyle(context->ListViewHandle, FALSE, TRUE);
             PhSetControlTheme(context->ListViewHandle, L"explorer");
-            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 150, L"Name");
-            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 300, L"Value");
+            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 150, L"名称");
+            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 300, L"值");
             PhSetExtendedListView(context->ListViewHandle);
             //PhLoadListViewColumnsFromSetting(L"ImageGeneralPropertiesListViewColumns", context->ListViewHandle);
             //PhLoadListViewSortColumnsFromSetting(L"ImageGeneralPropertiesListViewSort", context->ListViewHandle);
@@ -2112,7 +2112,7 @@ INT_PTR CALLBACK PvPeGeneralDlgProc(
             if (headerCheckSum == 0)
             {
                 // Some executables, like .NET ones, don't have a check sum.
-                string = PhFormatString(L"0x0 (real 0x%I32x)", realCheckSum);
+                string = PhFormatString(L"0x0 (实际为 0x%I32x)", realCheckSum);
                 PhSetListViewSubItem(context->ListViewHandle, PVP_IMAGE_GENERAL_INDEX_CHECKSUM, 1, string->Buffer);
                 PhDereferenceObject(string);
             }
@@ -2124,7 +2124,7 @@ INT_PTR CALLBACK PvPeGeneralDlgProc(
             }
             else
             {
-                string = PhFormatString(L"0x%I32x (incorrect, real 0x%I32x)", headerCheckSum, realCheckSum);
+                string = PhFormatString(L"0x%I32x (不正确, 实际为 0x%I32x)", headerCheckSum, realCheckSum);
                 PhSetListViewSubItem(context->ListViewHandle, PVP_IMAGE_GENERAL_INDEX_CHECKSUM, 1, string->Buffer);
                 PhDereferenceObject(string);
             }
@@ -2138,7 +2138,7 @@ INT_PTR CALLBACK PvPeGeneralDlgProc(
             {
                 if (PvImageSignerName)
                 {
-                    string = PhFormatString(L"<a>(Verified) %s</a>", PvImageSignerName->Buffer);
+                    string = PhFormatString(L"<a>(已验证) %s</a>", PvImageSignerName->Buffer);
                     PhSetDialogItemText(hwndDlg, IDC_COMPANYNAME_LINK, string->Buffer);
                     PhDereferenceObject(string);
                     ShowWindow(GetDlgItem(hwndDlg, IDC_COMPANYNAME), SW_HIDE);
@@ -2146,14 +2146,14 @@ INT_PTR CALLBACK PvPeGeneralDlgProc(
                 }
                 else
                 {
-                    string = PhConcatStrings2(L"(Verified) ", PhGetStringOrEmpty(PvImageVersionInfo.CompanyName));
+                    string = PhConcatStrings2(L"(已验证) ", PhGetStringOrEmpty(PvImageVersionInfo.CompanyName));
                     PhSetDialogItemText(hwndDlg, IDC_COMPANYNAME, string->Buffer);
                     PhDereferenceObject(string);
                 }
             }
             else if (PvImageVerifyResult != VrUnknown)
             {
-                string = PhConcatStrings2(L"(UNVERIFIED) ", PhGetStringOrEmpty(PvImageVersionInfo.CompanyName));
+                string = PhConcatStrings2(L"(未验证) ", PhGetStringOrEmpty(PvImageVersionInfo.CompanyName));
                 PhSetDialogItemText(hwndDlg, IDC_COMPANYNAME, string->Buffer);
                 PhDereferenceObject(string);
             }

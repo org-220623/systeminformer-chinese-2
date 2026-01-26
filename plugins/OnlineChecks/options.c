@@ -99,12 +99,12 @@ INT_PTR CALLBACK OptionsGeoLiteDlgProc(
 
             if (id == IDC_APIKEYIDBTN)
             {
-                PhSetDialogItemText(WindowHandle, IDC_KEYTEXT_L, L"Paste the license key here:");
+                PhSetDialogItemText(WindowHandle, IDC_KEYTEXT_L, L"在此处粘贴密钥:");
                 PhSetDialogItemText(WindowHandle, IDC_KEY_EDIT, PhaGetStringSetting(SETTING_NAME_HYBRIDANAL_DEFAULT_PAT)->Buffer);
             }
             else
             {
-                PhSetDialogItemText(WindowHandle, IDC_KEYTEXT_L, L"Paste the license key here:");
+                PhSetDialogItemText(WindowHandle, IDC_KEYTEXT_L, L"在此处粘贴密钥:");
                 PhSetDialogItemText(WindowHandle, IDC_KEY_EDIT, PhaGetStringSetting(SETTING_NAME_VIRUSTOTAL_DEFAULT_PAT)->Buffer);
             }
 

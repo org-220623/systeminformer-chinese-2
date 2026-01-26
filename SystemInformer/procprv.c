@@ -281,7 +281,7 @@ BOOLEAN PhProcessProviderInitialization(
 
     PhInitializeSListHead(&PhProcessQueryDataListHead);
 
-    RtlInitUnicodeString(&PhDpcsProcessInformation->ImageName, L"DPCs");
+    RtlInitUnicodeString(&PhDpcsProcessInformation->ImageName, L"DPC");
     PhDpcsProcessInformation->UniqueProcessId = DPCS_PROCESS_ID;
     PhDpcsProcessInformation->InheritedFromUniqueProcessId = SYSTEM_IDLE_PROCESS_ID;
 
@@ -587,7 +587,7 @@ VOID PhpAddProcessItem(
     )
 {
     PhTrace(
-        "Adding process item: %ls (%lu)",
+        "正在添加进程项: %ls (%lu)",
         PhGetString(ProcessItem->ProcessName),
         HandleToUlong(ProcessItem->ProcessId)
         );
@@ -606,7 +606,7 @@ VOID PhpRemoveProcessItem(
     )
 {
     PhTrace(
-        "Removing process item: %ls (%lu)",
+        "正在移除进程项: %ls (%lu)",
         PhGetString(ProcessItem->ProcessName),
         HandleToUlong(ProcessItem->ProcessId)
         );
@@ -877,7 +877,7 @@ VOID PhpProcessQueryStage1(
     HANDLE processHandleLimited = processItem->QueryHandle;
 
     PhTrace(
-        "Process query stage 1: %ls (%lu)",
+        "进程查询阶段 1: %ls (%lu)",
         PhGetString(processItem->ProcessName),
         HandleToUlong(processId)
         );
@@ -905,7 +905,7 @@ VOID PhpProcessQueryStage1(
 
         if (PhEnableCycleCpuUsage && processId == INTERRUPTS_PROCESS_ID)
         {
-            static CONST PH_STRINGREF descriptionText = PH_STRINGREF_INIT(L"Interrupts and DPCs");
+            static CONST PH_STRINGREF descriptionText = PH_STRINGREF_INIT(L"中断和 DPC");
             PhMoveReference(&Data->VersionInfo.FileDescription, PhCreateString2(&descriptionText));
         }
     }
@@ -1094,7 +1094,7 @@ VOID PhpProcessQueryStage2(
     PPH_PROCESS_ITEM processItem = Data->Header.ProcessItem;
 
     PhTrace(
-        "Process query stage 2: %ls (%lu)",
+        "进程查询阶段 2: %ls (%lu)",
         PhGetString(processItem->ProcessName),
         HandleToUlong(processItem->ProcessId)
         );
@@ -2230,7 +2230,7 @@ PPH_STRING PhGetStatisticsTimeString(
     }
     else
     {
-        return PhCreateString(L"Unknown time");
+        return PhCreateString(L"未知时间");
     }
 }
 
@@ -2560,7 +2560,7 @@ VOID PhProcessProviderUpdate(
 
     // Pre-update tasks
 
-    PhTraceFuncEnter("Process provider run count: %lu", runCount);
+    PhTraceFuncEnter("进程提供程序运行计数: %lu", runCount);
 
     if (runCount > 0)
     {
@@ -2613,7 +2613,7 @@ VOID PhProcessProviderUpdate(
 
     if (!NT_SUCCESS(status = PhEnumProcesses(&processes)))
     {
-        PhTraceFuncExit("Failed to enumerate processes: %lu %!STATUS!", runCount, status);
+        PhTraceFuncExit("枚举进程失败: %lu %!STATUS!", runCount, status);
         return;
     }
 
@@ -3659,7 +3659,7 @@ VOID PhProcessProviderUpdate(
 
     PhInvokeCallback(PhGetGeneralCallback(GeneralCallbackProcessProviderUpdatedEvent), UlongToPtr(runCount));
 
-    PhTraceFuncExit("Process provider run count: %lu", runCount);
+    PhTraceFuncExit("进程提供程序运行计数: %lu", runCount);
 
     runCount++;
 }
@@ -4594,7 +4594,7 @@ PPH_PROCESS_ITEM PhCreateProcessItemFromHandle(
     if (processItem->FileName)
         processItem->ProcessName = PhGetBaseName(processItem->FileName);
     else
-        processItem->ProcessName = PhCreateString(L"Unknown");
+        processItem->ProcessName = PhCreateString(L"未知");
 
     // Basic process information and not-so-dynamic information.
 
