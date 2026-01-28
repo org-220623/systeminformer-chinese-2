@@ -2490,8 +2490,8 @@ INT CALLBACK PhModalPropSheetWindowProcedure(
 
             // Hide the OK button.
             ShowWindow(GetDlgItem(hwndDlg, IDOK), SW_HIDE);
-            // Set the Cancel button's text to "Close".
-            PhSetDialogItemText(hwndDlg, IDCANCEL, L"Close");
+            // Set the Cancel button's text to "关闭".
+            PhSetDialogItemText(hwndDlg, IDCANCEL, L"关闭");
         }
         break;
     }

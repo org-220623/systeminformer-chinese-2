@@ -145,11 +145,11 @@ INT WINAPI wWinMain(
     {
         PhShowWarning2(
             NULL,
-            L"Warning.",
+            L"警告",
             L"%s",
-            L"You are attempting to run the 32-bit version of System Informer on 64-bit Windows. "
-            L"Most features will not work correctly.\n\n"
-            L"Please run the 64-bit version of System Informer instead."
+            L"您尝试在 64 位 Windows 系统上运行 32 位版本的 System Informer。"
+            L"大多数功能将无法正常工作。\n\n"
+            L"请改用 64 位版本的 System Informer。"
             );
         PhExitApplication(STATUS_IMAGE_SUBSYSTEM_NOT_PRESENT);
     }
@@ -184,7 +184,7 @@ INT WINAPI wWinMain(
 
     if (!PhMainWndInitialization(CmdShow))
     {
-        PhShowStatus(NULL, L"Unable to create the window.", 0, ERROR_OUTOFMEMORY);
+        PhShowStatus(NULL, L"无法创建窗口。", 0, ERROR_OUTOFMEMORY);
         return 1;
     }
 
@@ -430,7 +430,7 @@ static BOOLEAN CALLBACK PhPreviousInstanceWindowEnumProc(
                 ULONG_PTR result = 0;
 
                 PhTrace(
-                    "Found previous instance window: %ls (%p)",
+                    "找到之前的实例窗口: %ls (%p)",
                     className,
                     WindowHandle
                     );
@@ -492,7 +492,7 @@ static VOID PhForegroundPreviousInstance(
     ULONG sessionId = 0;
     ULONG attempts = 0;
 
-    PhTraceFuncEnter("Foreground previous instance: %lu", HandleToUlong(ProcessId));
+    PhTraceFuncEnter("前一个实例: %lu", HandleToUlong(ProcessId));
 
     memset(&context, 0, sizeof(PHP_PREVIOUS_MAIN_WINDOW_CONTEXT));
     context.ProcessId = ProcessId;
@@ -535,7 +535,7 @@ CleanupExit:
     PhClearReference(&context.WindowName);
 
     PhTraceFuncExit(
-        "Foreground previous instance: %lu (%lu attempts)",
+        "前一个实例: %lu (尝试次数: %lu)",
         HandleToUlong(ProcessId),
         attempts
         );
@@ -660,7 +660,7 @@ VOID PhActivatePreviousInstance(
     //HANDLE fileHandle;
     //PPH_STRING applicationFileName;
 
-    PhTraceFuncEnter("Activate previous instance");
+    PhTraceFuncEnter("激活前一个实例");
 
     status = PhEnumDirectoryObjects(PhGetNamespaceHandle(), PhpPreviousInstancesCallback, NULL);
 
@@ -713,7 +713,7 @@ VOID PhActivatePreviousInstance(
     //    PhDereferenceObject(applicationFileName);
     //}
 
-    PhTraceFuncExit("Activate previous instance: %!STATUS!", status);
+    PhTraceFuncExit("激活前一个实例: %!STATUS!", status);
 }
 
 /**
@@ -925,12 +925,12 @@ LONG CALLBACK PhpUnhandledExceptionCallback(
         TASKDIALOGCONFIG config = { sizeof(TASKDIALOGCONFIG) };
         TASKDIALOG_BUTTON buttons[6] =
         {
-            { 101, L"Full\nA complete dump of the process, rarely needed most of the time." },
-            { 102, L"Normal\nFor most purposes, this dump file is the most useful." },
-            { 103, L"Minimal\nA very limited dump with limited data." },
-            { 104, L"Restart\nRestart the application." }, // and hope it doesn't crash again.";
-            { 105, L"Ignore" },  // \nTry ignore the exception and continue.";
-            { 106, L"Exit" }, // \nTerminate the program.";
+            { 101, L"完全\n完整的进程转储，大多数情况下很少需要。" },
+            { 102, L"正常\n在大多数情况下，此转储文件最为有用。" },
+            { 103, L"小型\n数据非常有限的转储文件。" },
+            { 104, L"重启\n重新启动应用程序。" }, // and hope it doesn't crash again.";
+            { 105, L"忽略" },  // \nTry ignore the exception and continue.";
+            { 106, L"退出" }, // \nTerminate the program.";
         };
 
         if (NT_NTWIN32(ExceptionInfo->ExceptionRecord->ExceptionCode))
@@ -947,7 +947,7 @@ LONG CALLBACK PhpUnhandledExceptionCallback(
         config.dwFlags = TDF_ALLOW_DIALOG_CANCELLATION | TDF_USE_COMMAND_LINKS | TDF_EXPAND_FOOTER_AREA;
         config.pszWindowTitle = PhApplicationName;
         config.pszMainIcon = TD_ERROR_ICON;
-        config.pszMainInstruction = L"System Informer has crashed :(";
+        config.pszMainInstruction = L"System Informer 已崩溃 :(";
         config.cButtons = RTL_NUMBER_OF(buttons);
         config.pButtons = buttons;
         config.nDefaultButton = 106;
@@ -995,8 +995,8 @@ LONG CALLBACK PhpUnhandledExceptionCallback(
             if (PhShowMessage(
                 NULL,
                 MB_YESNO | MB_ICONWARNING | MB_DEFBUTTON2,
-                L"System Informer has crashed :(\r\n\r\n%s",
-                L"Do you want to create a minidump on the Desktop?"
+                L"System Informer 已崩溃 :(\r\n\r\n%s",
+                L"是否要在桌面上创建小型转储文件?"
                 ) == IDYES)
             {
                 PhpCreateUnhandledExceptionCrashDump(ExceptionInfo, PhTriageDumpTypeMinimal);
@@ -1013,7 +1013,7 @@ LONG CALLBACK PhpUnhandledExceptionCallback(
         else
             errorMessage = PhGetStatusMessage(ExceptionInfo->ExceptionRecord->ExceptionCode, 0);
 
-        title = PhCreateString(L"System Informer has crashed :(");
+        title = PhCreateString(L"System Informer 已崩溃 :(");
 #ifdef DEBUG
         message = PhFormatString(
             L"%s\r\n0x%08X (%s)\r\n%s",
@@ -1365,7 +1365,7 @@ VOID PhInitializeDesktopPolicy(
 
     if (!NT_SUCCESS(status))
     {
-        PhShowStatus(NULL, L"Unable to initialize desktop policy.", status, 0);
+        PhShowStatus(NULL, L"无法初始化桌面策略。", status, 0);
     }
 
     PhExitApplication(status);
@@ -1402,7 +1402,7 @@ VOID PhEnableTerminationPolicy(
 
         if (!NT_SUCCESS(status))
         {
-            PhShowStatus(NULL, L"Unable to configure termination policy.", status, 0);
+            PhShowStatus(NULL, L"无法配置终止策略。", status, 0);
         }
     }
 }
@@ -1589,8 +1589,8 @@ VOID PhInitializeAppSettings(
                     NULL,
                     TD_YES_BUTTON | TD_NO_BUTTON,
                     TD_WARNING_ICON,
-                    L"System Informer's settings file is corrupt. Do you want to reset it?",
-                    L"If you select No, the settings system will not function properly."
+                    L"System Informer 的设置文件已损坏。是否要重置设置?",
+                    L"如果选择“否”，设置系统将无法正常运行。"
                     ) == IDYES)
                 {
                     PhResetSettingsFile(&PhSettingsFileName->sr);
@@ -1904,7 +1904,7 @@ VOID PhpProcessStartupParameters(
     {
         PhShowInformation2(
             NULL,
-            L"Command line options:",
+            L"命令行选项:",
             L"%s",
             L"-debug\n"
             L"-elevate\n"

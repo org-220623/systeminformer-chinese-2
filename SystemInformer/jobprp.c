@@ -79,7 +79,7 @@ VOID PhShowJobProperties(
         PSH_PROPTITLE;
     propSheetHeader.hInstance = PhInstanceHandle;
     propSheetHeader.hwndParent = ParentWindowHandle;
-    propSheetHeader.pszCaption = Title ? Title : L"Job";
+    propSheetHeader.pszCaption = Title ? Title : L"作业";
     propSheetHeader.nPages = 1;
     propSheetHeader.nStartPage = 0;
     propSheetHeader.phpage = pages;
@@ -235,12 +235,12 @@ INT_PTR CALLBACK PhpJobPageProc(
             PhSetExtendedListView(processesLv);
             PhSetExtendedListView(limitsLv);
 
-            PhAddListViewColumn(processesLv, 0, 0, 0, LVCFMT_LEFT, 240, L"Name");
-            PhAddListViewColumn(limitsLv, 0, 0, 0, LVCFMT_LEFT, 120, L"Name");
-            PhAddListViewColumn(limitsLv, 1, 1, 1, LVCFMT_LEFT, 160, L"Value");
+            PhAddListViewColumn(processesLv, 0, 0, 0, LVCFMT_LEFT, 240, L"名称");
+            PhAddListViewColumn(limitsLv, 0, 0, 0, LVCFMT_LEFT, 120, L"名称");
+            PhAddListViewColumn(limitsLv, 1, 1, 1, LVCFMT_LEFT, 160, L"值");
             PhLoadListViewColumnsFromSetting(SETTING_JOB_LIST_VIEW_COLUMNS, limitsLv);
 
-            PhSetDialogItemText(hwndDlg, IDC_NAME, L"Unknown");
+            PhSetDialogItemText(hwndDlg, IDC_NAME, L"未知");
 
             if (NT_SUCCESS(jobPageContext->OpenObject(
                 &jobHandle,
@@ -268,7 +268,7 @@ INT_PTR CALLBACK PhpJobPageProc(
                 if (jobObjectName && jobObjectName->Length == 0)
                     jobObjectName = NULL;
 
-                PhSetDialogItemText(hwndDlg, IDC_NAME, PhGetStringOrDefault(jobObjectName, L"(unnamed job)"));
+                PhSetDialogItemText(hwndDlg, IDC_NAME, PhGetStringOrDefault(jobObjectName, L"(未命名作业)"));
 
                 // Processes
                 PhpAddJobProcesses(hwndDlg, jobHandle);
@@ -283,30 +283,30 @@ INT_PTR CALLBACK PhpJobPageProc(
                     {
                         WCHAR value[PH_INT32_STR_LEN_1];
                         PhPrintUInt32(value, extendedLimits.BasicLimitInformation.ActiveProcessLimit);
-                        PhpAddLimit(limitsLv, L"Active processes", value);
+                        PhpAddLimit(limitsLv, L"活动的进程", value);
                     }
 
                     if (flags & JOB_OBJECT_LIMIT_AFFINITY)
                     {
                         WCHAR value[PH_PTR_STR_LEN_1];
                         PhPrintPointer(value, (PVOID)extendedLimits.BasicLimitInformation.Affinity);
-                        PhpAddLimit(limitsLv, L"Affinity", value);
+                        PhpAddLimit(limitsLv, L"处理器相关性", value);
                     }
 
                     if (flags & JOB_OBJECT_LIMIT_BREAKAWAY_OK)
                     {
-                        PhpAddLimit(limitsLv, L"Breakaway OK", L"Enabled");
+                        PhpAddLimit(limitsLv, L"断开连接", L"启用");
                     }
 
                     if (flags & JOB_OBJECT_LIMIT_DIE_ON_UNHANDLED_EXCEPTION)
                     {
-                        PhpAddLimit(limitsLv, L"Die on unhandled exception", L"Enabled");
+                        PhpAddLimit(limitsLv, L"遇到未处理异常时终止", L"启用");
                     }
 
                     if (flags & JOB_OBJECT_LIMIT_JOB_MEMORY)
                     {
                         PPH_STRING value = PhaFormatSize(extendedLimits.JobMemoryLimit, ULONG_MAX);
-                        PhpAddLimit(limitsLv, L"Job memory", value->Buffer);
+                        PhpAddLimit(limitsLv, L"作业内存", value->Buffer);
                     }
 
                     if (flags & JOB_OBJECT_LIMIT_JOB_TIME)
@@ -314,12 +314,12 @@ INT_PTR CALLBACK PhpJobPageProc(
                         WCHAR value[PH_TIMESPAN_STR_LEN_1];
                         PhPrintTimeSpan(value, extendedLimits.BasicLimitInformation.PerJobUserTimeLimit.QuadPart,
                             PH_TIMESPAN_DHMS);
-                        PhpAddLimit(limitsLv, L"Job time", value);
+                        PhpAddLimit(limitsLv, L"作业时间", value);
                     }
 
                     if (flags & JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE)
                     {
-                        PhpAddLimit(limitsLv, L"Kill on job close", L"Enabled");
+                        PhpAddLimit(limitsLv, L"作业关闭时终止", L"启用");
                     }
 
                     if (flags & JOB_OBJECT_LIMIT_PRIORITY_CLASS)
@@ -328,14 +328,14 @@ INT_PTR CALLBACK PhpJobPageProc(
 
                         if (value = PhGetProcessPriorityClassString(extendedLimits.BasicLimitInformation.PriorityClass))
                         {
-                            PhpAddLimit(limitsLv, L"Priority class", value->Buffer);
+                            PhpAddLimit(limitsLv, L"优先级类", value->Buffer);
                         }
                     }
 
                     if (flags & JOB_OBJECT_LIMIT_PROCESS_MEMORY)
                     {
                         PPH_STRING value = PhaFormatSize(extendedLimits.ProcessMemoryLimit, ULONG_MAX);
-                        PhpAddLimit(limitsLv, L"Process memory", value->Buffer);
+                        PhpAddLimit(limitsLv, L"进程内存", value->Buffer);
                     }
 
                     if (flags & JOB_OBJECT_LIMIT_PROCESS_TIME)
@@ -343,19 +343,19 @@ INT_PTR CALLBACK PhpJobPageProc(
                         WCHAR value[PH_TIMESPAN_STR_LEN_1];
                         PhPrintTimeSpan(value, extendedLimits.BasicLimitInformation.PerProcessUserTimeLimit.QuadPart,
                             PH_TIMESPAN_DHMS);
-                        PhpAddLimit(limitsLv, L"Process time", value);
+                        PhpAddLimit(limitsLv, L"进程时间", value);
                     }
 
                     if (flags & JOB_OBJECT_LIMIT_SCHEDULING_CLASS)
                     {
                         WCHAR value[PH_INT32_STR_LEN_1];
                         PhPrintUInt32(value, extendedLimits.BasicLimitInformation.SchedulingClass);
-                        PhpAddLimit(limitsLv, L"Scheduling class", value);
+                        PhpAddLimit(limitsLv, L"任务计划类", value);
                     }
 
                     if (flags & JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK)
                     {
-                        PhpAddLimit(limitsLv, L"Silent breakaway OK", L"Enabled");
+                        PhpAddLimit(limitsLv, L"静默断开连接", L"启用");
                     }
 
                     if (flags & JOB_OBJECT_LIMIT_WORKINGSET)
@@ -363,10 +363,10 @@ INT_PTR CALLBACK PhpJobPageProc(
                         PPH_STRING value;
 
                         value = PhaFormatSize(extendedLimits.BasicLimitInformation.MinimumWorkingSetSize, ULONG_MAX);
-                        PhpAddLimit(limitsLv, L"Working set minimum", value->Buffer);
+                        PhpAddLimit(limitsLv, L"工作集最小值", value->Buffer);
 
                         value = PhaFormatSize(extendedLimits.BasicLimitInformation.MaximumWorkingSetSize, ULONG_MAX);
-                        PhpAddLimit(limitsLv, L"Working set maximum", value->Buffer);
+                        PhpAddLimit(limitsLv, L"工作集最大值", value->Buffer);
                     }
                 }
 
@@ -375,21 +375,21 @@ INT_PTR CALLBACK PhpJobPageProc(
                     ULONG flags = basicUiRestrictions.UIRestrictionsClass;
 
                     if (flags & JOB_OBJECT_UILIMIT_DESKTOP)
-                        PhpAddLimit(limitsLv, L"Desktop", L"Limited");
+                        PhpAddLimit(limitsLv, L"桌面", L"受限");
                     if (flags & JOB_OBJECT_UILIMIT_DISPLAYSETTINGS)
-                        PhpAddLimit(limitsLv, L"Display settings", L"Limited");
+                        PhpAddLimit(limitsLv, L"显示设置", L"受限");
                     if (flags & JOB_OBJECT_UILIMIT_EXITWINDOWS)
-                        PhpAddLimit(limitsLv, L"Exit windows", L"Limited");
+                        PhpAddLimit(limitsLv, L"退出窗口", L"受限");
                     if (flags & JOB_OBJECT_UILIMIT_GLOBALATOMS)
-                        PhpAddLimit(limitsLv, L"Global atoms", L"Limited");
+                        PhpAddLimit(limitsLv, L"全局原子表", L"受限");
                     if (flags & JOB_OBJECT_UILIMIT_HANDLES)
-                        PhpAddLimit(limitsLv, L"Handles", L"Limited");
+                        PhpAddLimit(limitsLv, L"句柄", L"受限");
                     if (flags & JOB_OBJECT_UILIMIT_READCLIPBOARD)
-                        PhpAddLimit(limitsLv, L"Read clipboard", L"Limited");
+                        PhpAddLimit(limitsLv, L"读取剪贴板", L"受限");
                     if (flags & JOB_OBJECT_UILIMIT_SYSTEMPARAMETERS)
-                        PhpAddLimit(limitsLv, L"System parameters", L"Limited");
+                        PhpAddLimit(limitsLv, L"系统参数", L"受限");
                     if (flags & JOB_OBJECT_UILIMIT_WRITECLIPBOARD)
-                        PhpAddLimit(limitsLv, L"Write clipboard", L"Limited");
+                        PhpAddLimit(limitsLv, L"写入剪贴板", L"受限");
                 }
 
                 NtClose(jobHandle);
@@ -414,9 +414,9 @@ INT_PTR CALLBACK PhpJobPageProc(
                 {
                     if (PhShowConfirmMessage(
                         hwndDlg,
-                        L"terminate",
-                        L"the job",
-                        L"Terminating a job will terminate all processes assigned to it.",
+                        L"终止",
+                        L"作业",
+                        L"终止作业将终止分配给该作业的所有进程。",
                         TRUE
                         ))
                     {
@@ -434,7 +434,7 @@ INT_PTR CALLBACK PhpJobPageProc(
                         }
 
                         if (!NT_SUCCESS(status))
-                            PhShowStatus(hwndDlg, L"Unable to terminate the job", status, 0);
+                            PhShowStatus(hwndDlg, L"无法终止作业", status, 0);
                     }
                 }
                 break;
@@ -447,7 +447,7 @@ INT_PTR CALLBACK PhpJobPageProc(
 
                     while (PhShowChooseProcessDialog(
                         hwndDlg,
-                        L"Select a process to add to the job permanently.",
+                        L"选择要永久添加到该作业的进程。",
                         &processId
                         ))
                     {
@@ -480,7 +480,7 @@ INT_PTR CALLBACK PhpJobPageProc(
                         if (NT_SUCCESS(status))
                             break;
                         else
-                            PhShowStatus(hwndDlg, L"Unable to add the process to the job", status, 0);
+                            PhShowStatus(hwndDlg, L"无法向作业添加进程", status, 0);
                     }
                 }
                 break;
@@ -540,7 +540,7 @@ INT_PTR CALLBACK PhpJobPageProc(
                 if (numberOfItems != 0)
                 {
                     menu = PhCreateEMenu();
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, IDC_COPY, L"&Copy", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, IDC_COPY, L"复制(&C)", NULL, NULL), ULONG_MAX);
                     PhInsertCopyListViewEMenuItem(menu, IDC_COPY, listViewHandle);
 
                     item = PhShowEMenu(
@@ -602,7 +602,7 @@ VOID PhpShowJobAdvancedProperties(
         PSH_USECALLBACK;
     propSheetHeader.hInstance = PhInstanceHandle;
     propSheetHeader.hwndParent = ParentWindowHandle;
-    propSheetHeader.pszCaption = L"Job";
+    propSheetHeader.pszCaption = L"作业";
     propSheetHeader.nPages = 2;
     propSheetHeader.nStartPage = 0;
     propSheetHeader.phpage = pages;
@@ -621,8 +621,8 @@ VOID PhpShowJobAdvancedProperties(
     // Security
 
     pages[1] = PhCreateSecurityPage(
-        L"Job",
-        L"Job",
+        L"作业",
+        L"作业",
         Context->OpenObject,
         NULL,
         Context->Context
@@ -677,23 +677,23 @@ static VOID PhpRefreshJobStatisticsInfo(
     }
     else
     {
-        PhSetDialogItemText(hwndDlg, IDC_ZACTIVEPROCESSES_V, L"Unknown");
-        PhSetDialogItemText(hwndDlg, IDC_ZTOTALPROCESSES_V, L"Unknown");
-        PhSetDialogItemText(hwndDlg, IDC_ZTERMINATEDPROCESSES_V, L"Unknown");
+        PhSetDialogItemText(hwndDlg, IDC_ZACTIVEPROCESSES_V, L"未知");
+        PhSetDialogItemText(hwndDlg, IDC_ZTOTALPROCESSES_V, L"未知");
+        PhSetDialogItemText(hwndDlg, IDC_ZTERMINATEDPROCESSES_V, L"未知");
 
-        PhSetDialogItemText(hwndDlg, IDC_ZUSERTIME_V, L"Unknown");
-        PhSetDialogItemText(hwndDlg, IDC_ZKERNELTIME_V, L"Unknown");
-        PhSetDialogItemText(hwndDlg, IDC_ZUSERTIMEPERIOD_V, L"Unknown");
-        PhSetDialogItemText(hwndDlg, IDC_ZKERNELTIMEPERIOD_V, L"Unknown");
+        PhSetDialogItemText(hwndDlg, IDC_ZUSERTIME_V, L"未知");
+        PhSetDialogItemText(hwndDlg, IDC_ZKERNELTIME_V, L"未知");
+        PhSetDialogItemText(hwndDlg, IDC_ZUSERTIMEPERIOD_V, L"未知");
+        PhSetDialogItemText(hwndDlg, IDC_ZKERNELTIMEPERIOD_V, L"未知");
 
-        PhSetDialogItemText(hwndDlg, IDC_ZPAGEFAULTS_V, L"Unknown");
+        PhSetDialogItemText(hwndDlg, IDC_ZPAGEFAULTS_V, L"未知");
 
-        PhSetDialogItemText(hwndDlg, IDC_ZIOREADS_V, L"Unknown");
-        PhSetDialogItemText(hwndDlg, IDC_ZIOREADBYTES_V, L"Unknown");
-        PhSetDialogItemText(hwndDlg, IDC_ZIOWRITES_V, L"Unknown");
-        PhSetDialogItemText(hwndDlg, IDC_ZIOWRITEBYTES_V, L"Unknown");
-        PhSetDialogItemText(hwndDlg, IDC_ZIOOTHER_V, L"Unknown");
-        PhSetDialogItemText(hwndDlg, IDC_ZIOOTHERBYTES_V, L"Unknown");
+        PhSetDialogItemText(hwndDlg, IDC_ZIOREADS_V, L"未知");
+        PhSetDialogItemText(hwndDlg, IDC_ZIOREADBYTES_V, L"未知");
+        PhSetDialogItemText(hwndDlg, IDC_ZIOWRITES_V, L"未知");
+        PhSetDialogItemText(hwndDlg, IDC_ZIOWRITEBYTES_V, L"未知");
+        PhSetDialogItemText(hwndDlg, IDC_ZIOOTHER_V, L"未知");
+        PhSetDialogItemText(hwndDlg, IDC_ZIOOTHERBYTES_V, L"未知");
     }
 
     if (jobHandle && NT_SUCCESS(PhGetJobExtendedLimits(
@@ -706,8 +706,8 @@ static VOID PhpRefreshJobStatisticsInfo(
     }
     else
     {
-        PhSetDialogItemText(hwndDlg, IDC_ZPEAKPROCESSUSAGE_V, L"Unknown");
-        PhSetDialogItemText(hwndDlg, IDC_ZPEAKJOBUSAGE_V, L"Unknown");
+        PhSetDialogItemText(hwndDlg, IDC_ZPEAKPROCESSUSAGE_V, L"未知");
+        PhSetDialogItemText(hwndDlg, IDC_ZPEAKJOBUSAGE_V, L"未知");
     }
 
     if (jobHandle)

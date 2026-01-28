@@ -15,95 +15,95 @@ VOID DiskDeviceAddListViewItems(
     _Inout_ PDV_DISK_PAGE_CONTEXT Context
     )
 {
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FS_CREATION_TIME, L"Volume creation time", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_SERIAL_NUMBER, L"Volume serial number", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_UNIQUEID, L"Volume unique identifier", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_PARTITIONID, L"Volume partition identifier(s)", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FILE_SYSTEM, L"Volume file system", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FS_VERSION, L"Volume version", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_LFS_VERSION, L"LFS version", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FS_CREATION_TIME, L"卷创建时间", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_SERIAL_NUMBER, L"卷序列号", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_UNIQUEID, L"卷唯一标识符", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_PARTITIONID, L"卷分区标识符", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FILE_SYSTEM, L"卷文件系统", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FS_VERSION, L"卷版本", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_LFS_VERSION, L"LFS 版本", NULL);
 
-    //PhAddListViewItem(Context->ListViewHandle, MAXINT, L"BytesPerPhysicalSector", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_TOTAL_SIZE, L"Total size", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_TOTAL_FREE, L"Total free", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_TOTAL_USED, L"Total used", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_TOTAL_SECTORS, L"Total sectors", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_TOTAL_CLUSTERS, L"Total clusters", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FREE_CLUSTERS, L"Free clusters", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_TOTAL_RESERVED, L"Reserved clusters", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_TOTAL_BYTES_PER_SECTOR, L"Bytes per sector", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_TOTAL_BYTES_PER_CLUSTER, L"Bytes per cluster", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_TOTAL_BYTES_PER_RECORD, L"Bytes per file record segment", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_TOTAL_CLUSTERS_PER_RECORD, L"Clusters per File record segment", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, MAXINT, L"每物理扇区字节数", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_TOTAL_SIZE, L"总大小", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_TOTAL_FREE, L"空闲总计", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_TOTAL_USED, L"已使用总计", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_TOTAL_SECTORS, L"扇区总计", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_TOTAL_CLUSTERS, L"簇总计", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FREE_CLUSTERS, L"空闲簇", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_TOTAL_RESERVED, L"保留簇", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_TOTAL_BYTES_PER_SECTOR, L"每扇区字节数", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_TOTAL_BYTES_PER_CLUSTER, L"每簇字节数", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_TOTAL_BYTES_PER_RECORD, L"每文件记录段字节数", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_TOTAL_CLUSTERS_PER_RECORD, L"每文件记录段簇数", NULL);
 
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_RECORDS, L"MFT records", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_SIZE, L"MFT size", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_START, L"MFT start", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_ZONE, L"MFT Zone clusters", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_ZONE_SIZE, L"MFT zone size", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_MIRROR_START, L"MFT mirror start", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_RECORDS, L"MFT 记录", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_SIZE, L"MFT 大小", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_START, L"MFT 起始位置", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_ZONE, L"MFT 区域簇", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_ZONE_SIZE, L"MFT 区域大小", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_MIRROR_START, L"MFT 镜像起始位置", NULL);
 
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FILE_READS, L"File reads", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FILE_WRITES, L"File writes", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_DISK_READS, L"Disk reads", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_DISK_WRITES, L"Disk writes", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FILE_READ_BYTES, L"File read bytes", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FILE_WRITE_BYTES, L"File write bytes", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FILE_READS, L"文件读取", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FILE_WRITES, L"文件写入", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_DISK_READS, L"磁盘读取", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_DISK_WRITES, L"磁盘写入", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FILE_READ_BYTES, L"文件读取字节", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FILE_WRITE_BYTES, L"文件写入字节", NULL);
 
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_METADATA_READS, L"Metadata reads", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_METADATA_WRITES, L"Metadata writes", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_METADATA_DISK_READS, L"Metadata disk reads", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_METADATA_DISK_WRITES, L"Metadata disk writes", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_METADATA_READ_BYTES, L"Metadata read bytes", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_METADATA_WRITE_BYTES, L"Metadata write bytes", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_METADATA_READS, L"元数据读取", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_METADATA_WRITES, L"元数据写入", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_METADATA_DISK_READS, L"元数据磁盘读取", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_METADATA_DISK_WRITES, L"元数据磁盘写入", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_METADATA_READ_BYTES, L"元数据读取字节", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_METADATA_WRITE_BYTES, L"元数据写入字节", NULL);
 
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_READS, L"Mft reads", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_WRITES, L"Mft writes", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_READ_BYTES, L"Mft read bytes", NULL);
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_WRITE_BYTES, L"Mft write bytes", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_READS, L"MFT 读取", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_WRITES, L"MFT 写入", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_READ_BYTES, L"MFT 读取字节", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_WRITE_BYTES, L"MFT 写入字节", NULL);
 
-    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_ROOT_INDEX_READS, L"RootIndex reads", NULL);
-    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_ROOT_INDEX_WRITES, L"RootIndex writes", NULL);
-    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_ROOT_INDEX_READ_BYTES, L"RootIndex read bytes", NULL);
-    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_ROOT_INDEX_WRITE_BYTES, L"RootIndex write bytes", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_ROOT_INDEX_READS, L"根索引读取", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_ROOT_INDEX_WRITES, L"根索引写入", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_ROOT_INDEX_READ_BYTES, L"根索引读取字节", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_ROOT_INDEX_WRITE_BYTES, L"根索引写入字节", NULL);
 
-    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_BITMAP_READS, L"Bitmap reads", NULL);
-    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_BITMAP_WRITES, L"Bitmap writes", NULL);
-    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_BITMAP_READ_BYTES, L"Bitmap read bytes", NULL);
-    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_BITMAP_WRITE_BYTES, L"Bitmap write bytes", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_BITMAP_READS, L"位图读取", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_BITMAP_WRITES, L"位图写入", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_BITMAP_READ_BYTES, L"位图读取字节", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_BITMAP_WRITE_BYTES, L"位图写入字节", NULL);
 
-    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_BITMAP_READS, L"Mft bitmap reads", NULL);
-    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_BITMAP_WRITES, L"Mft bitmap writes", NULL);
-    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_BITMAP_READ_BYTES, L"Mft bitmap read bytes", NULL);
-    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_BITMAP_WRITE_BYTES, L"Mft bitmap write bytes", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_BITMAP_READS, L"MFT 位图读取", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_BITMAP_WRITES, L"MFT 位图写入", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_BITMAP_READ_BYTES, L"MFT 位图读取字节", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_MFT_BITMAP_WRITE_BYTES, L"MFT 位图写入字节", NULL);
 
-    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_USER_INDEX_READS, L"User Index reads", NULL);
-    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_USER_INDEX_WRITES, L"User Index writes", NULL);
-    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_USER_INDEX_READ_BYTES, L"User Index read bytes", NULL);
-    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_USER_INDEX_WRITE_BYTES, L"User Index write bytes", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_USER_INDEX_READS, L"用户索引读取", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_USER_INDEX_WRITES, L"用户索引写入", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_USER_INDEX_READ_BYTES, L"用户索引读取字节", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_USER_INDEX_WRITE_BYTES, L"用户索引写入字节", NULL);
 
-    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_LOGFILE_READS, L"LogFile reads", NULL);
-    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_LOGFILE_WRITES, L"LogFile writes", NULL);
-    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_LOGFILE_READ_BYTES, L"LogFile read bytes", NULL);
-    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_LOGFILE_WRITE_BYTES, L"LogFile write bytes", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_LOGFILE_READS, L"日志文件读取", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_LOGFILE_WRITES, L"日志文件写入", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_LOGFILE_READ_BYTES, L"日志文件读取字节", NULL);
+    //PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_LOGFILE_WRITE_BYTES, L"日志文件写入字节", NULL);
 
-    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_OTHER_EXCEPTIONS, L"Exceptions", NULL);
+    PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_OTHER_EXCEPTIONS, L"异常", NULL);
 
     if (PhWindowsVersion >= WINDOWS_8_1)
     {
-        PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_RESOURCES_EXHAUSTED, L"Resources exhausted", NULL);
+        PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_RESOURCES_EXHAUSTED, L"资源耗尽", NULL);
     }
 
     if (PhWindowsVersion >= WINDOWS_10)
     {
-        PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_VOLUME_TRIM_COUNT, L"Volume trim count", NULL);
-        PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_VOLUME_TRIM_TIME, L"Volume trim time", NULL);
-        PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_VOLUME_TRIM_BYTES, L"Volume trim bytes", NULL);
-        PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_VOLUME_TRIM_SKIPPED_COUNT, L"Volume trim skipped count", NULL);
-        PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_VOLUME_TRIM_SKIPPED_BYTES, L"Volume trim skipped bytes", NULL);
-        PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FILE_TRIM_COUNT, L"File trim count", NULL);
-        PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FILE_TRIM_TIME, L"File trim time", NULL);
-        PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FILE_TRIM_BYTES, L"File trim bytes", NULL);
+        PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_VOLUME_TRIM_COUNT, L"卷修剪计数", NULL);
+        PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_VOLUME_TRIM_TIME, L"卷修剪时间", NULL);
+        PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_VOLUME_TRIM_BYTES, L"卷修剪字节", NULL);
+        PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_VOLUME_TRIM_SKIPPED_COUNT, L"卷修剪跳过计数", NULL);
+        PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_VOLUME_TRIM_SKIPPED_BYTES, L"卷修剪跳过字节", NULL);
+        PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FILE_TRIM_COUNT, L"文件修剪计数", NULL);
+        PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FILE_TRIM_TIME, L"文件修剪时间", NULL);
+        PhAddListViewItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FILE_TRIM_BYTES, L"文件修剪字节", NULL);
     }
 }
 
@@ -214,33 +214,33 @@ VOID DiskDeviceQuerySmart(
             {
                 // https://en.wikipedia.org/wiki/Self-Monitoring,_Analysis_and_Reporting_Technology#Known_NVMe_S.M.A.R.T._attributes
 
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Available spare is below threshold", PhaFormatUInt64(healthInfo.CriticalWarning.AvailableSpaceLow, TRUE));
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Temperature is over threshold", PhaFormatUInt64(healthInfo.CriticalWarning.TemperatureThreshold, TRUE));
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Drive reliability is degraded", PhaFormatUInt64(healthInfo.CriticalWarning.ReliabilityDegraded, TRUE));
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Drive is in read only mode", PhaFormatUInt64(healthInfo.CriticalWarning.ReadOnly, TRUE));
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Volatile memory backup device failed", PhaFormatUInt64(healthInfo.CriticalWarning.VolatileMemoryBackupDeviceFailed, TRUE));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"可用备件低于阈值", PhaFormatUInt64(healthInfo.CriticalWarning.AvailableSpaceLow, TRUE));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"温度高于阈值", PhaFormatUInt64(healthInfo.CriticalWarning.TemperatureThreshold, TRUE));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"驱动器可靠性降低", PhaFormatUInt64(healthInfo.CriticalWarning.ReliabilityDegraded, TRUE));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"驱动器处于只读模式", PhaFormatUInt64(healthInfo.CriticalWarning.ReadOnly, TRUE));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"易失性内存备份设备故障", PhaFormatUInt64(healthInfo.CriticalWarning.VolatileMemoryBackupDeviceFailed, TRUE));
 
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Temperature", PhaFormatString(L"%u\u00b0C", *(PUSHORT)(healthInfo.Temperature) - 273));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"温度", PhaFormatString(L"%u\u00b0C", *(PUSHORT)(healthInfo.Temperature) - 273));
 
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Available spare", PhaFormatString(L"%u%%", healthInfo.AvailableSpare));
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Available spare threshold", PhaFormatString(L"%u%%", healthInfo.AvailableSpareThreshold));
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Percentage used", PhaFormatString(L"%u%%", healthInfo.PercentageUsed));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"可用备用容量", PhaFormatString(L"%u%%", healthInfo.AvailableSpare));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"可用备用容量阈值", PhaFormatString(L"%u%%", healthInfo.AvailableSpareThreshold));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"已用百分比", PhaFormatString(L"%u%%", healthInfo.PercentageUsed));
 
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Data read", PhaFormatSize(*(ULONG64*)(healthInfo.DataUnitRead) * 1000 * 512, ULONG_MAX));
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Data written", PhaFormatSize(*(ULONG64*)(healthInfo.DataUnitWritten) * 1000 * 512, ULONG_MAX));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"读取数据", PhaFormatSize(*(ULONG64*)(healthInfo.DataUnitRead) * 1000 * 512, ULONG_MAX));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"写入数据", PhaFormatSize(*(ULONG64*)(healthInfo.DataUnitWritten) * 1000 * 512, ULONG_MAX));
 
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Host read commands", PhaFormatUInt64(*(ULONG64*)(healthInfo.HostReadCommands), TRUE));
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Host write commands", PhaFormatUInt64(*(ULONG64*)(healthInfo.HostWrittenCommands), TRUE));
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Controller busy time", PhaFormatUInt64(*(ULONG64*)(healthInfo.ControllerBusyTime), TRUE));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"主机读取命令", PhaFormatUInt64(*(ULONG64*)(healthInfo.HostReadCommands), TRUE));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"主机写入命令", PhaFormatUInt64(*(ULONG64*)(healthInfo.HostWrittenCommands), TRUE));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"控制器繁忙时间", PhaFormatUInt64(*(ULONG64*)(healthInfo.ControllerBusyTime), TRUE));
 
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Power cycles", PhaFormatUInt64(*(ULONG64*)(healthInfo.PowerCycle), TRUE));
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Power on hours", PhaFormatUInt64(*(ULONG64*)(healthInfo.PowerOnHours), TRUE));
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Unsafe shutdowns", PhaFormatUInt64(*(ULONG64*)(healthInfo.UnsafeShutdowns), TRUE));
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Media and data integrity errors", PhaFormatUInt64(*(ULONG64*)(healthInfo.MediaErrors), TRUE));
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Error information log entries", PhaFormatUInt64(*(ULONG64*)(healthInfo.ErrorInfoLogEntryCount), TRUE));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"电源循环次数", PhaFormatUInt64(*(ULONG64*)(healthInfo.PowerCycle), TRUE));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"通电时间", PhaFormatUInt64(*(ULONG64*)(healthInfo.PowerOnHours), TRUE));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"不安全关机次数", PhaFormatUInt64(*(ULONG64*)(healthInfo.UnsafeShutdowns), TRUE));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"介质和数据完整性错误", PhaFormatUInt64(*(ULONG64*)(healthInfo.MediaErrors), TRUE));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"错误信息日志条目", PhaFormatUInt64(*(ULONG64*)(healthInfo.ErrorInfoLogEntryCount), TRUE));
 
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Warning composite temperature time", PhaFormatUInt64(healthInfo.WarningCompositeTemperatureTime, TRUE));
-                AddNvmeSmartEntry(Context->ListViewHandle, L"Critical composite temperature time", PhaFormatUInt64(healthInfo.CriticalCompositeTemperatureTime, TRUE));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"警告复合温度时间", PhaFormatUInt64(healthInfo.WarningCompositeTemperatureTime, TRUE));
+                AddNvmeSmartEntry(Context->ListViewHandle, L"关键复合温度时间", PhaFormatUInt64(healthInfo.CriticalCompositeTemperatureTime, TRUE));
             }
         }
 
@@ -397,14 +397,14 @@ VOID DiskDeviceQueryFileSystem(
                 if (volumeInfo->VolumeLabelLength > 0)
                 {
                     PhAddListViewColumn(Context->ListViewHandle, column, column, column, LVCFMT_LEFT, 200, PhaFormatString(
-                        L"Volume %wc: [%s]", entry->DeviceLetter,
+                        L"卷 %wc: [%s]", entry->DeviceLetter,
                         PhaCreateStringEx(volumeInfo->VolumeLabel, volumeInfo->VolumeLabelLength)->Buffer
                         )->Buffer);
                 }
                 else
                 {
                     PhAddListViewColumn(Context->ListViewHandle, column, column, column, LVCFMT_LEFT, 200, PhaFormatString(
-                        L"Volume %wc:", entry->DeviceLetter)->Buffer);
+                        L"卷 %wc:", entry->DeviceLetter)->Buffer);
                 }
             }
 
@@ -417,7 +417,7 @@ VOID DiskDeviceQueryFileSystem(
             if (AddListViewColumns)
             {
                 PhAddListViewColumn(Context->ListViewHandle, column, column, column, LVCFMT_LEFT, 200, PhaFormatString(
-                    L"Volume %wc:", entry->DeviceLetter)->Buffer);
+                    L"卷 %wc:", entry->DeviceLetter)->Buffer);
             }
         }
 
@@ -502,7 +502,7 @@ VOID DiskDeviceQueryFileSystem(
                         PhSetListViewSubItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_VOLUME_TRIM_COUNT, column,
                             PhaFormatUInt64(buffer->NtfsStatistics.VolumeTrimCount, TRUE)->Buffer);
                         PhSetListViewSubItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_VOLUME_TRIM_TIME, column,
-                            PhaFormatString(L"%.2f seconds", volumeTrimTime)->Buffer);
+                            PhaFormatString(L"%.2f 秒", volumeTrimTime)->Buffer);
                         PhSetListViewSubItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_VOLUME_TRIM_BYTES, column,
                             PhaFormatSize(buffer->NtfsStatistics.VolumeTrimByteCount, ULONG_MAX)->Buffer);
                         PhSetListViewSubItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_VOLUME_TRIM_SKIPPED_COUNT, column,
@@ -513,7 +513,7 @@ VOID DiskDeviceQueryFileSystem(
                         PhSetListViewSubItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FILE_TRIM_COUNT, column,
                             PhaFormatUInt64(buffer->NtfsStatistics.FileLevelTrimCount, TRUE)->Buffer);
                         PhSetListViewSubItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FILE_TRIM_TIME, column,
-                            PhaFormatString(L"%.2f seconds", fileTrimTime)->Buffer);
+                            PhaFormatString(L"%.2f 秒", fileTrimTime)->Buffer);
                         PhSetListViewSubItem(Context->ListViewHandle, DISKDRIVE_DETAILS_INDEX_FILE_TRIM_BYTES, column,
                             PhaFormatSize(buffer->NtfsStatistics.FileLevelTrimByteCount, ULONG_MAX)->Buffer);
                     }
@@ -653,7 +653,7 @@ INT_PTR CALLBACK DiskDeviceFileSystemDetailsDlgProc(
 
             PhSetListViewStyle(context->ListViewHandle, FALSE, TRUE);
             PhSetControlTheme(context->ListViewHandle, L"explorer");
-            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 290, L"Property");
+            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 290, L"属性");
             PhSetExtendedListView(context->ListViewHandle);
 
             DiskDeviceAddListViewItems(context);
@@ -747,7 +747,7 @@ INT_PTR CALLBACK DiskDeviceFileSystemDetailsDlgProc(
                 if (numberOfItems != 0)
                 {
                     menu = PhCreateEMenu();
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_IDC_COPY, L"&Copy", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_IDC_COPY, L"复制(&C)", NULL, NULL), ULONG_MAX);
                     PhInsertCopyListViewEMenuItem(menu, PHAPP_IDC_COPY, context->ListViewHandle);
 
                     item = PhShowEMenu(
@@ -824,13 +824,13 @@ INT_PTR CALLBACK DiskDeviceSmartDetailsDlgProc(
 
             PhSetListViewStyle(context->ListViewHandle, FALSE, TRUE);
             PhSetControlTheme(context->ListViewHandle, L"explorer");
-            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 240, L"Property");
-            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 50, L"Value");
-            PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 50, L"Best");
-            PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 80, L"Raw");
-            PhAddListViewColumn(context->ListViewHandle, 4, 4, 4, LVCFMT_LEFT, 80, L"Raw (Hex)");
-            //PhAddListViewColumn(context->ListViewHandle, 5, 5, 5, LVCFMT_LEFT, 80, L"Advisory");
-            //PhAddListViewColumn(context->ListViewHandle, 6, 6, 6, LVCFMT_LEFT, 80, L"Failure Imminent");
+            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 240, L"属性");
+            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 50, L"值");
+            PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 50, L"最佳");
+            PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 80, L"原始数据");
+            PhAddListViewColumn(context->ListViewHandle, 4, 4, 4, LVCFMT_LEFT, 80, L"原始数据 (十六进制)");
+            //PhAddListViewColumn(context->ListViewHandle, 5, 5, 5, LVCFMT_LEFT, 80, L"建议");
+            //PhAddListViewColumn(context->ListViewHandle, 6, 6, 6, LVCFMT_LEFT, 80, L"即将发生故障");
             PhSetExtendedListView(context->ListViewHandle);
             //ExtendedListView_SetItemColorFunction(context->ListViewHandle, PhpColorItemColorFunction);
             PhLoadListViewColumnsFromSetting(SETTING_NAME_SMART_COUNTERS_COLUMNS, context->ListViewHandle);
@@ -901,7 +901,7 @@ INT_PTR CALLBACK DiskDeviceSmartDetailsDlgProc(
                 if (numberOfItems != 0)
                 {
                     menu = PhCreateEMenu();
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_IDC_COPY, L"&Copy", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, PHAPP_IDC_COPY, L"复制(&C)", NULL, NULL), ULONG_MAX);
                     PhInsertCopyListViewEMenuItem(menu, PHAPP_IDC_COPY, context->ListViewHandle);
 
                     item = PhShowEMenu(
@@ -962,7 +962,7 @@ NTSTATUS ShowDiskDeviceDetailsDialogThread(
 
     PhSetEvent(&pageContext->SysInfoContext->DetailsWindowInitializedEvent);
 
-    if (propContext = HdCreatePropContext(L"Disk Device"))
+    if (propContext = HdCreatePropContext(L"磁盘设备"))
     {
         PPV_PROPPAGECONTEXT newPage;
 
@@ -1015,7 +1015,7 @@ VOID ShowDiskDeviceDetailsDialog(
 
         if (!NT_SUCCESS(PhCreateThreadEx(&threadHandle, ShowDiskDeviceDetailsDialogThread, pageContext)))
         {
-            PhShowError2(Context->WindowHandle, L"Unable to create the window.", L"%s", L"");
+            PhShowError2(Context->WindowHandle, L"无法创建窗口。", L"%s", L"");
             return;
         }
 

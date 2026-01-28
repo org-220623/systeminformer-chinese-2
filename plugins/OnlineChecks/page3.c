@@ -167,9 +167,9 @@ VOID ShowFileUploadProgressDialog(
     config.dwCommonButtons = TDCBF_CANCEL_BUTTON;
     config.hMainIcon = PhGetApplicationIcon(FALSE);
 
-    config.pszWindowTitle = PhaFormatString(L"Uploading %s...", PhGetStringOrEmpty(Context->BaseFileName))->Buffer;
-    config.pszMainInstruction = PhaFormatString(L"Uploading %s...", PhGetStringOrEmpty(Context->BaseFileName))->Buffer;
-    config.pszContent = L"Uploaded: ~ of ~ (0%)\r\nSpeed: ~ KB/s";
+    config.pszWindowTitle = PhaFormatString(L"正在上传 %s...", PhGetStringOrEmpty(Context->BaseFileName))->Buffer;
+    config.pszMainInstruction = PhaFormatString(L"正在上传 %s...", PhGetStringOrEmpty(Context->BaseFileName))->Buffer;
+    config.pszContent = L"已上传: ~ 共 ~ (0%)\r\n速度: ~ KB/s";
 
     config.cxWidth = 200;
     config.lpCallbackData = (LONG_PTR)Context;
@@ -190,8 +190,8 @@ VOID ShowVirusTotalReScanProgressDialog(
     config.dwCommonButtons = TDCBF_CANCEL_BUTTON;
     config.hMainIcon = PhGetApplicationIcon(FALSE);
 
-    config.pszWindowTitle = PhaFormatString(L"Rescanning %s...", PhGetStringOrEmpty(Context->BaseFileName))->Buffer;
-    config.pszMainInstruction = PhaFormatString(L"Rescanning %s...", PhGetStringOrEmpty(Context->BaseFileName))->Buffer;
+    config.pszWindowTitle = PhaFormatString(L"正在重新扫描 %s...", PhGetStringOrEmpty(Context->BaseFileName))->Buffer;
+    config.pszMainInstruction = PhaFormatString(L"正在重新扫描 %s...", PhGetStringOrEmpty(Context->BaseFileName))->Buffer;
 
     config.cxWidth = 200;
     config.lpCallbackData = (LONG_PTR)Context;
@@ -212,8 +212,8 @@ VOID ShowVirusTotalViewReportProgressDialog(
     config.dwCommonButtons = TDCBF_CANCEL_BUTTON;
     config.hMainIcon = PhGetApplicationIcon(FALSE);
 
-    config.pszWindowTitle = PhaFormatString(L"Locating analysis for %s...", PhGetStringOrEmpty(Context->BaseFileName))->Buffer;
-    config.pszMainInstruction = PhaFormatString(L"Locating analysis for %s...", PhGetStringOrEmpty(Context->BaseFileName))->Buffer;
+    config.pszWindowTitle = PhaFormatString(L"正在查找 %s 的分析结果...", PhGetStringOrEmpty(Context->BaseFileName))->Buffer;
+    config.pszMainInstruction = PhaFormatString(L"正在查找 %s 的分析结果...", PhGetStringOrEmpty(Context->BaseFileName))->Buffer;
 
     config.cxWidth = 200;
     config.lpCallbackData = (LONG_PTR)Context;

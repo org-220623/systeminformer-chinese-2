@@ -51,21 +51,21 @@ static INT_PTR CALLBACK PhpAboutDlgProc(
             PhDereferenceObject(versionString);
 
             PhSetDialogItemText(hwndDlg, IDC_CREDITS,
-                L"Thanks to:\n"
+                L"鸣谢: \n"
                 L"    <a href=\"https://github.com/wj32\">wj32</a> - Wen Jia Liu\n"
                 L"    <a href=\"https://github.com/dmex\">dmex</a> - Steven G\n"
                 L"    <a href=\"https://github.com/jxy-s\">jxy-s</a> - Johnny Shaw\n"
                 L"    <a href=\"https://github.com/ionescu007\">ionescu007</a> - Alex Ionescu\n"
                 L"    <a href=\"https://github.com/yardenshafir\">yardenshafir</a> - Yarden Shafir\n"
-                L"    <a href=\"https://github.com/winsiderss/systeminformer/graphs/contributors\">Contributors</a> - thank you for your additions!\n"
-                L"    Donors - thank you for your support!\n\n"
-                L"System Informer uses the following components:\n"
-                L"    <a href=\"https://github.com/GameTechDev/PresentMon\">PresentMon</a> by Intel Corporation\n"
-                L"    <a href=\"https://github.com/michaelrsweet/mxml\">Mini-XML</a> by Michael Sweet\n"
-                L"    <a href=\"https://github.com/PCRE2Project/pcre2\">PCRE2</a> by Philip Hazel\n"
-                L"    <a href=\"https://github.com/json-c/json-c\">json-c</a> by Michael Clark\n"
-                L"    MD5 code by Jouni Malinen\n"
-                L"    SHA1 code by Filip Navara, based on code by Steve Reid\n"
+                L"    感谢各位<a href=\"https://github.com/winsiderss/systeminformer/graphs/contributors\">贡献者</a>对本项目的付出!\n"
+                L"    感谢各位捐赠者对本项目的支持!\n\n"
+                L"System Informer 使用以下组件:\n"
+                L"    <a href=\"https://github.com/GameTechDev/PresentMon\">PresentMon</a> - Intel 公司\n"
+                L"    <a href=\"https://github.com/michaelrsweet/mxml\">Mini-XML</a> - Michael Sweet\n"
+                L"    <a href=\"https://github.com/PCRE2Project/pcre2\">PCRE2</a> - Philip Hazel\n"
+                L"    <a href=\"https://github.com/json-c/json-c\">json-c</a> - Michael Clark\n"
+                L"    Jouni Malinen 编写的 MD5 编码\n"
+                L"    Filip Navara 编写的 SHA1 编码，基于 Steve Reid 的代码\n"
                 );
 
             PhSetDialogFocus(hwndDlg, GetDlgItem(hwndDlg, IDOK));
@@ -178,10 +178,10 @@ PPH_STRING PhGetDiagnosticsString(
     PhAppendStringBuilder2(&stringBuilder, L"\r\n");
     PhDereferenceObject(versionString);
 
-    PhAppendStringBuilder2(&stringBuilder, L"OBJECT INFORMATION\r\n");
+    PhAppendStringBuilder2(&stringBuilder, L"对象信息\r\n");
 
 #define OBJECT_TYPE_COUNT(Type) PhAppendFormatStringBuilder(&stringBuilder, \
-    TEXT(#Type) L": %lu objects\r\n", PhpGetObjectTypeObjectCount(Type))
+    TEXT(#Type) L": %lu 个对象\r\n", PhpGetObjectTypeObjectCount(Type))
 
     // ref
     OBJECT_TYPE_COUNT(PhObjectTypeObject);
@@ -209,7 +209,7 @@ PPH_STRING PhGetDiagnosticsString(
     OBJECT_TYPE_COUNT(PhImageListItemType);
 
 #ifdef DEBUG
-    PhAppendStringBuilder2(&stringBuilder, L"STATISTIC INFORMATION\r\n");
+    PhAppendStringBuilder2(&stringBuilder, L"统计数据信息\r\n");
 
 #define PRINT_STATISTIC(Name) PhAppendFormatStringBuilder(&stringBuilder, \
     TEXT(#Name) L": %u\r\n", PhLibStatisticsBlock.Name)
