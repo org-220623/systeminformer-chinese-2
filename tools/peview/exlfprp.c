@@ -20,7 +20,7 @@ PWSTR PvpGetSymbolTypeName(
     switch (ELF_ST_TYPE(TypeInfo))
     {
     case STT_NOTYPE:
-        return L"No type";
+        return L"无类型";
     case STT_OBJECT:
         return L"Object";
     case STT_FUNC:
@@ -30,14 +30,14 @@ PWSTR PvpGetSymbolTypeName(
     case STT_FILE:
         return L"File";
     case STT_COMMON:
-        return L"Common";
+        return L"公共";
     case STT_TLS:
         return L"TLS";
     case STT_GNU_IFUNC:
         return L"IFUNC";
     }
 
-    return L"***ERROR***";
+    return L"***错误***";
 }
 
 PWSTR PvpGetSymbolBindingName(
@@ -47,16 +47,16 @@ PWSTR PvpGetSymbolBindingName(
     switch (ELF_ST_BIND(TypeInfo))
     {
     case STB_LOCAL:
-        return L"Local";
+        return L"本地";
     case STB_GLOBAL:
-        return L"Global";
+        return L"全局";
     case STB_WEAK:
-        return L"Weak";
+        return L"弱";
     case STB_GNU_UNIQUE:
-        return L"Unique";
+        return L"唯一";
     }
 
-    return L"***ERROR***";
+    return L"***错误***";
 }
 
 PWSTR PvpGetSymbolVisibility(
@@ -66,16 +66,16 @@ PWSTR PvpGetSymbolVisibility(
     switch (ELF_ST_VISIBILITY(OtherInfo))
     {
     case STV_DEFAULT:
-        return L"Default";
+        return L"默认";
     case STV_INTERNAL:
-        return L"Internal";
+        return L"内部";
     case STV_HIDDEN:
-        return L"Hidden";
+        return L"隐藏";
     case STV_PROTECTED:
-        return L"Protected";
+        return L"保护";
     }
 
-    return L"***ERROR***";
+    return L"***错误***";
 }
 
 PPH_STRING PvpGetSymbolSectionName(
@@ -89,7 +89,7 @@ PPH_STRING PvpGetSymbolSectionName(
     case SHN_ABS:
         return PhCreateString(L"ABS");
     case SHN_COMMON:
-        return PhCreateString(L"Common");
+        return PhCreateString(L"公共");
     }
 
     return PhaFormatUInt64(Index, TRUE);
@@ -200,9 +200,9 @@ VOID PvpSetWslmageVersionInfo(
     _In_ HWND WindowHandle
     )
 {
-    PhSetDialogItemText(WindowHandle, IDC_NAME, L"Loading...");
-    PhSetDialogItemText(WindowHandle, IDC_COMPANYNAME, L"Loading...");
-    PhSetDialogItemText(WindowHandle, IDC_VERSION, L"Loading...");
+    PhSetDialogItemText(WindowHandle, IDC_NAME, L"加载中...");
+    PhSetDialogItemText(WindowHandle, IDC_COMPANYNAME, L"加载中...");
+    PhSetDialogItemText(WindowHandle, IDC_VERSION, L"加载中...");
 
     PhCreateThread2(PvpQueryWslImageThreadStart, WindowHandle);
 
@@ -218,16 +218,16 @@ VOID PvpSetWslImageType(
     switch (PvMappedImage.Header->e_type)
     {
     case ET_REL:
-        type = L"Relocatable";
+        type = L"可重定位";
         break;
     case ET_DYN:
-        type = L"Dynamic";
+        type = L"动态";
         break;
     case ET_EXEC:
-        type = L"Executable";
+        type = L"可执行";
         break;
     default:
-        type = L"ERROR";
+        type = L"错误";
         break;
     }
 
@@ -249,7 +249,7 @@ VOID PvpSetWslImageMachineType(
         type = L"AMD64";
         break;
     default:
-        type = L"ERROR";
+        type = L"错误";
         break;
     }
 
@@ -354,7 +354,7 @@ PWSTR PvpGetWslImageSectionTypeName(
         return L"VERSYM";
     }
 
-    return L"***ERROR***";
+    return L"***错误***";
 }
 
 PPH_STRING PvpGetWslImageSectionFlagsString(
@@ -366,20 +366,20 @@ PPH_STRING PvpGetWslImageSectionFlagsString(
     PhInitializeStringBuilder(&sb, 100);
 
     if (Flags & SHF_ALLOC)
-        PhAppendStringBuilder2(&sb, L"Allocated, ");
+        PhAppendStringBuilder2(&sb, L"已分配, ");
 
     if (!(Flags & SHF_WRITE))
-        PhAppendStringBuilder2(&sb, L"Read-only, ");
+        PhAppendStringBuilder2(&sb, L"只读, ");
 
     if (Flags & SHF_EXECINSTR)
-        PhAppendStringBuilder2(&sb, L"Code, ");
+        PhAppendStringBuilder2(&sb, L"代码, ");
     else
-        PhAppendStringBuilder2(&sb, L"Data, ");
+        PhAppendStringBuilder2(&sb, L"数据, ");
 
     if (sb.String->Length != 0)
         PhRemoveEndStringBuilder(&sb, 2);
     else
-        PhAppendStringBuilder2(&sb, L"(None)");
+        PhAppendStringBuilder2(&sb, L"(无)");
 
     // TODO: The "objdump -h /bin/su --wide" command shows section flags
     // such as CONTENT which appears to be based on ElfSectionType != SHT_NOBITS
@@ -447,12 +447,12 @@ INT_PTR CALLBACK PvpExlfGeneralDlgProc(
             lvHandle = GetDlgItem(hwndDlg, IDC_LIST);
             PhSetListViewStyle(lvHandle, TRUE, TRUE);
             PhSetControlTheme(lvHandle, L"explorer");
-            PhAddListViewColumn(lvHandle, 0, 0, 0, LVCFMT_LEFT, 80, L"Name");
-            PhAddListViewColumn(lvHandle, 1, 1, 1, LVCFMT_LEFT, 80, L"Type");
+            PhAddListViewColumn(lvHandle, 0, 0, 0, LVCFMT_LEFT, 80, L"名称");
+            PhAddListViewColumn(lvHandle, 1, 1, 1, LVCFMT_LEFT, 80, L"类型");
             PhAddListViewColumn(lvHandle, 2, 2, 2, LVCFMT_LEFT, 80, L"VA");
-            PhAddListViewColumn(lvHandle, 3, 3, 3, LVCFMT_LEFT, 80, L"Offset");
-            PhAddListViewColumn(lvHandle, 4, 4, 4, LVCFMT_LEFT, 80, L"Size");
-            PhAddListViewColumn(lvHandle, 5, 5, 5, LVCFMT_LEFT, 80, L"Flags");
+            PhAddListViewColumn(lvHandle, 3, 3, 3, LVCFMT_LEFT, 80, L"偏移");
+            PhAddListViewColumn(lvHandle, 4, 4, 4, LVCFMT_LEFT, 80, L"大小");
+            PhAddListViewColumn(lvHandle, 5, 5, 5, LVCFMT_LEFT, 80, L"标志");
             PhSetExtendedListView(lvHandle);
             PhLoadListViewColumnsFromSetting(L"GeneralWslTreeListColumns", lvHandle);
 

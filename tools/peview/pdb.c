@@ -24,7 +24,7 @@ PH_QUEUED_LOCK SearchResultsLock = PH_QUEUED_LOCK_INIT;
 
 PPH_STRINGREF rgBaseType[] =
 {
-    SREF(L"<NoType>"),                         // btNoType = 0,
+    SREF(L"<无类型>"),                         // btNoType = 0,
     SREF(L"void"),                             // btVoid = 1,
     SREF(L"char"),                             // btChar = 2,
     SREF(L"wchar_t"),                          // btWChar = 3,
@@ -134,7 +134,7 @@ PPH_STRINGREF rgUdtKind[] =
 
 PPH_STRINGREF rgDataKind[] =
 {
-    SREF(L"Unknown"),
+    SREF(L"未知"),
     SREF(L"Local"),
     SREF(L"Static Local"),
     SREF(L"Param"),
@@ -213,7 +213,7 @@ VOID PrintLocation(
 
     if (IDiaSymbol_get_locationType(IDiaSymbol, &dwLocType) != S_OK)
     {
-        PhAppendFormatStringBuilder(StringBuilder, L"symbol in optimized code");
+        PhAppendFormatStringBuilder(StringBuilder, L"已优化代码中的符号");
         return;
     }
 
@@ -245,7 +245,7 @@ VOID PrintLocation(
         if ((IDiaSymbol_get_registerId(IDiaSymbol, &dwReg) == S_OK) &&
             (IDiaSymbol_get_offset(IDiaSymbol, &lOffset) == S_OK))
         {
-            //PhAppendFormatStringBuilder(StringBuilder, L"%s Relative, [%08X]", SzNameC7Reg((USHORT)dwReg), lOffset);
+            //PhAppendFormatStringBuilder(StringBuilder, L"%s 相对, [%08X]", SzNameC7Reg((USHORT)dwReg), lOffset);
         }
         break;
 
@@ -267,7 +267,7 @@ VOID PrintLocation(
         {
             if (IDiaSymbol_get_registerId(IDiaSymbol, &dwReg) == S_OK)
             {
-                //PhAppendFormatStringBuilder(StringBuilder, L"enregistered %s", SzNameC7Reg((USHORT)dwReg));
+                //PhAppendFormatStringBuilder(StringBuilder, L"已注册 %s", SzNameC7Reg((USHORT)dwReg));
             }
         }
         break;
@@ -295,7 +295,7 @@ VOID PrintLocation(
     case LocIsNull:
         break;
     default:
-        PhAppendFormatStringBuilder(StringBuilder, L"Error - invalid location type: 0x%X", dwLocType);
+        PhAppendFormatStringBuilder(StringBuilder, L"错误 - 无效本地类型: 0x%X", dwLocType);
         break;
     }
 }
@@ -310,7 +310,7 @@ VOID PrintName(
 
     if (IDiaSymbol_get_name(pSymbol, &bstrName) != S_OK)
     {
-        PhAppendFormatStringBuilder(StringBuilder, L"(none)");
+        PhAppendFormatStringBuilder(StringBuilder, L"(无)");
         return;
     }
 
@@ -347,7 +347,7 @@ VOID PrintData(
 
     if (IDiaSymbol_get_dataKind(IDiaSymbol, &dwDataKind) != S_OK)
     {
-        PhAppendFormatStringBuilder(StringBuilder, L"ERROR - PrintData() get_dataKind");
+        PhAppendFormatStringBuilder(StringBuilder, L"错误 - PrintData() get_dataKind");
         return;
     }
 
@@ -393,7 +393,7 @@ VOID PrintType(
 
     if (IDiaSymbol_get_symTag(pSymbol, &dwTag) != S_OK)
     {
-        PhAppendStringBuilder2(StringBuilder, L"ERROR - can't retrieve the symbol's SymTag\n");
+        PhAppendStringBuilder2(StringBuilder, L"错误 - 无法检索符号的 SymTag\n");
         return;
     }
     IDiaSymbol_get_length(pSymbol, &ulLen);
@@ -662,7 +662,7 @@ VOID PrintType(
 
             if ((IDiaSymbol_get_dataBytes(pSymbol, cbData, &cbData, NULL) == S_OK) && (cbData != 0))
             {
-                PhAppendFormatStringBuilder(StringBuilder, L", Data: ");
+                PhAppendFormatStringBuilder(StringBuilder, L", 数据: ");
 
                 BYTE* pbData = PhAllocate(cbData);
 
@@ -698,7 +698,7 @@ VOID PrintSymbolType(
 
     if (IDiaSymbol_get_type(Symbol, &idiaSymbolType) == S_OK)
     {
-        PhAppendFormatStringBuilder(StringBuilder, L", Type: ");
+        PhAppendFormatStringBuilder(StringBuilder, L", 类型: ");
 
         PrintType(StringBuilder, idiaSymbolType);
 
@@ -876,7 +876,7 @@ VOID PrintTypeInDetail(
         break;
 
     default:
-        PhAppendFormatStringBuilder(StringBuilder, L"ERROR - PrintTypeInDetail() invalid SymTag\n");
+        PhAppendFormatStringBuilder(StringBuilder, L"错误 - PrintTypeInDetail() 无效的 SymTag\n");
     }
 
     PhAppendCharStringBuilder(StringBuilder, L'\n');
@@ -1300,7 +1300,7 @@ NTSTATUS PeDumpFileSymbols(
 
             if (!NT_SUCCESS(status))
             {
-                PhShowStatus(NULL, L"Unable to load the file.", status, 0);
+                PhShowStatus(NULL, L"无法加载文件。", status, 0);
                 return status;
             }
 
@@ -1322,7 +1322,7 @@ NTSTATUS PeDumpFileSymbols(
 
         if (!NT_SUCCESS(status))
         {
-            PhShowStatus(NULL, L"Unable to load the file.", status, 0);
+            PhShowStatus(NULL, L"无法加载文件。", status, 0);
             return status;
         }
     }
@@ -1330,7 +1330,7 @@ NTSTATUS PeDumpFileSymbols(
     if (!baseOfDll)
     {
         PostMessage(Context->WindowHandle, WM_PV_SEARCH_FINISHED, 0, 0);
-        PhShowStatus(NULL, L"Unable to load the file.", STATUS_UNSUCCESSFUL, 0);
+        PhShowStatus(NULL, L"无法加载文件。", STATUS_UNSUCCESSFUL, 0);
         return STATUS_UNSUCCESSFUL;
     }
 

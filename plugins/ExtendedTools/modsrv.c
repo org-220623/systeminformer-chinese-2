@@ -54,13 +54,13 @@ NTSTATUS EtpModuleServicesDialogThreadStart(
 
     if (status != ERROR_SUCCESS)
     {
-        PhShowStatus(context->ParentWindowHandle, L"Unable to query module references.", 0, status);
+        PhShowStatus(context->ParentWindowHandle, L"无法查询模块引用。", 0, status);
         return STATUS_SUCCESS;
     }
 
     if (serviceList->Count == 0)
     {
-        PhShowInformation2(context->ParentWindowHandle, L"Unable to query module references.", L"%s", L"This module was not referenced by a service.");
+        PhShowInformation2(context->ParentWindowHandle, L"无法查询模块引用。", L"%s", L"此模块未被任何服务引用。");
         PhDereferenceObject(serviceList);
         PhFree(context);
         return STATUS_SUCCESS;
@@ -220,7 +220,7 @@ INT_PTR CALLBACK EtpModuleServicesDlgProc(
                 if (processItem = PhReferenceProcessItem(context->ProcessId))
                 {
                     message = PhFormatString(
-                        L"Services referencing %s in %s (%lu):",
+                        L"引用 %s 的服务位于 %s (%lu):",
                         PhGetString(context->ModuleName),
                         PhGetStringOrEmpty(processItem->ProcessName),
                         HandleToUlong(processItem->ProcessId)
@@ -230,7 +230,7 @@ INT_PTR CALLBACK EtpModuleServicesDlgProc(
                 else
                 {
                     message = PhFormatString(
-                        L"Services referencing %s:",
+                        L"引用 %s 的服务:",
                         PhGetString(context->ModuleName)
                         );
                 }

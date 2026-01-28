@@ -69,18 +69,18 @@ VOID ShowCheckForUpdatesDialog(
 {
     static TASKDIALOG_BUTTON UpdateTaskDialogButtonArray[] =
     {
-        { IDOK, L"Check" }
+        { IDOK, L"检查" }
     };
     //static TASKDIALOG_BUTTON SwitchTaskDialogButtonArray[] =
     //{
-    //    { IDOK, L"Yes" }
+    //    { IDOK, L"是" }
     //};
     static TASKDIALOG_BUTTON checkForUpdatesRadioButtons[] =
     {
-        { IDOK, L"Stable\n - Recommended" },
-        { IDRETRY, L"Canary\n - Preview" },
-        //{ IDIGNORE, L"Stable\n - Recommended" },
-        //{ IDCONTINUE, L"Canary\n - Preview" },
+        { IDOK, L"稳定版\n - 推荐" },
+        { IDRETRY, L"测试版\n - 预览" },
+        //{ IDIGNORE, L"稳定版\n - 推荐" },
+        //{ IDCONTINUE, L"测试版\n - 预览" },
     };
     TASKDIALOGCONFIG config;
 
@@ -95,7 +95,7 @@ VOID ShowCheckForUpdatesDialog(
     config.lpCallbackData = (LONG_PTR)Context;
     config.cxWidth = 200;
 
-    config.pszWindowTitle = L"System Informer - Updater";
+    config.pszWindowTitle = L"System Informer - 更新程序";
 
     switch (Context->Channel)
     {
@@ -116,37 +116,37 @@ VOID ShowCheckForUpdatesDialog(
     //    switch (Context->Channel)
     //    {
     //    case PhReleaseChannel:
-    //        config.pszMainInstruction = L"Switch to the System Informer release channel?";
+    //        config.pszMainInstruction = L"切换到 System Informer 正式版通道?";
     //        break;
     //    //case PhPreviewChannel:
-    //    //    config.pszMainInstruction = L"Switch to the System Informer preview channel?";
+    //    //    config.pszMainInstruction = L"切换到 System Informer 预览版通道?";
     //    //    break;
     //    case PhCanaryChannel:
-    //        config.pszMainInstruction = L"Switch to the System Informer canary channel?";
+    //        config.pszMainInstruction = L"切换到 System Informer 测试版通道?";
     //        break;
     //    //case PhDeveloperChannel:
-    //    //    config.pszMainInstruction = L"Switch to the System Informer developer channel?";
+    //    //    config.pszMainInstruction = L"切换到 System Informer 开发者版通道?";
     //    //    break;
     //    default:
-    //        config.pszMainInstruction = L"Switch the System Informer update channel?";
+    //        config.pszMainInstruction = L"切换 System Informer 更新通道?";
     //        break;
     //    }
     //
     //    //if (Context->Channel < PhGetPhReleaseChannel())
     //    //{
-    //    //    config.pszContent = L"Downgrading the channel might cause instability.\r\n\r\nClick Yes to continue.\r\n";
+    //    //    config.pszContent = L"降级通道可能会导致软件不稳定。\r\n\r\n单击“是”继续。\r\n";
     //    //}
     //    //else
     //    {
-    //        config.pszContent = L"Click Yes to continue.";
+    //        config.pszContent = L"单击“是”继续。";
     //    }
     //}
     //else
     {
         config.pButtons = UpdateTaskDialogButtonArray;
         config.cButtons = RTL_NUMBER_OF(UpdateTaskDialogButtonArray);
-        config.pszMainInstruction = L"Check for an updated System Informer release?";
-        config.pszContent = L"Click Check to continue.";
+        config.pszMainInstruction = L"检查是否有更新的 System Informer 版本?";
+        config.pszContent = L"单击“检查”继续。";
     }
 
 

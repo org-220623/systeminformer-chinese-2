@@ -135,11 +135,11 @@ VOID PhpSplitUserName(
 
 static CONST PH_KEY_VALUE_PAIR PhpLogonTypePairs[] =
 {
-    SIP(L"Batch", LOGON32_LOGON_BATCH),
-    SIP(L"Interactive", LOGON32_LOGON_INTERACTIVE),
-    SIP(L"Network", LOGON32_LOGON_NETWORK),
-    SIP(L"New credentials", LOGON32_LOGON_NEW_CREDENTIALS),
-    SIP(L"Service", LOGON32_LOGON_SERVICE)
+    SIP(L"批处理", LOGON32_LOGON_BATCH),
+    SIP(L"交互式", LOGON32_LOGON_INTERACTIVE),
+    SIP(L"网络", LOGON32_LOGON_NETWORK),
+    SIP(L"新凭据", LOGON32_LOGON_NEW_CREDENTIALS),
+    SIP(L"服务", LOGON32_LOGON_SERVICE)
 };
 
 static WCHAR RunAsOldServiceName[32] = L"";
@@ -1120,7 +1120,7 @@ VOID PhRunAsExecuteCommmand(
         &logonType
         ))
     {
-        PhShowStatus(Context->WindowHandle, L"Unable to start the program.", STATUS_INVALID_PARAMETER, 0);
+        PhShowStatus(Context->WindowHandle, L"无法启动程序。", STATUS_INVALID_PARAMETER, 0);
         return;
     }
 
@@ -1254,16 +1254,16 @@ CleanupExit:
             {
                 PhShowError2(
                     Context->WindowHandle,
-                    L"Unable to start the program.",
+                    L"无法启动程序。",
                     L"%s",
-                    L"Unable to start the execution alias with a process token."
+                    L"无法使用进程令牌启动执行别名。"
                     );
             }
             else
             {
                 PhShowStatus(
                     Context->WindowHandle,
-                    L"Unable to start the program.",
+                    L"无法启动程序。",
                     status,
                     0
                     );
@@ -1333,12 +1333,12 @@ INT_PTR CALLBACK PhpRunAsDlgProc(
                 }
             }
 
-            ComboBox_AddString(context->TypeComboBoxWindowHandle, L"Batch");
-            ComboBox_AddString(context->TypeComboBoxWindowHandle, L"Interactive");
-            ComboBox_AddString(context->TypeComboBoxWindowHandle, L"Network");
-            ComboBox_AddString(context->TypeComboBoxWindowHandle, L"New credentials");
-            ComboBox_AddString(context->TypeComboBoxWindowHandle, L"Service");
-            PhSelectComboBoxString(context->TypeComboBoxWindowHandle, L"Interactive", FALSE);
+            ComboBox_AddString(context->TypeComboBoxWindowHandle, L"批处理");
+            ComboBox_AddString(context->TypeComboBoxWindowHandle, L"交互式");
+            ComboBox_AddString(context->TypeComboBoxWindowHandle, L"网络");
+            ComboBox_AddString(context->TypeComboBoxWindowHandle, L"新凭据");
+            ComboBox_AddString(context->TypeComboBoxWindowHandle, L"服务");
+            PhSelectComboBoxString(context->TypeComboBoxWindowHandle, L"交互式", FALSE);
 
             PhpAddProgramsToComboBox(context->ProgramComboBoxWindowHandle);
             PhpAddAccountsToComboBox(context->UserComboBoxWindowHandle);
@@ -1410,8 +1410,8 @@ INT_PTR CALLBACK PhpRunAsDlgProc(
                 {
                     static PH_FILETYPE_FILTER filters[] =
                     {
-                        { L"Programs (*.exe;*.pif;*.com;*.bat)", L"*.exe;*.pif;*.com;*.bat" },
-                        { L"All files (*.*)", L"*.*" }
+                        { L"应用程序 (*.exe;*.pif;*.com;*.bat)", L"*.exe;*.pif;*.com;*.bat" },
+                        { L"所有文件 (*.*)", L"*.*" }
                     };
                     PVOID fileDialog;
 
@@ -1452,12 +1452,12 @@ INT_PTR CALLBACK PhpRunAsDlgProc(
                         if (IsServiceAccount(username))
                         {
                             EnableWindow(context->PasswordEditWindowHandle, FALSE);
-                            PhSelectComboBoxString(context->TypeComboBoxWindowHandle, L"Service", FALSE);
+                            PhSelectComboBoxString(context->TypeComboBoxWindowHandle, L"服务", FALSE);
                         }
                         else
                         {
                             EnableWindow(context->PasswordEditWindowHandle, TRUE);
-                            PhSelectComboBoxString(context->TypeComboBoxWindowHandle, L"Interactive", FALSE);
+                            PhSelectComboBoxString(context->TypeComboBoxWindowHandle, L"交互式", FALSE);
                         }
                     }
                 }
@@ -1789,8 +1789,8 @@ NTSTATUS PhRunAsUpdateWindowStation(
 //            WindowHandle,
 //            TD_YES_BUTTON | TD_NO_BUTTON,
 //            TD_WARNING_ICON,
-//            L"WARNING: This will grant Everyone access to the current window station and desktop.",
-//            L"Are you sure you want to continue?"
+//            L"警告: 这将授予 Everyone (任何用户) 对当前窗口工作站和桌面的访问权限。",
+//            L"您确定要继续吗?"
 //            ) == IDNO)
 //        {
 //            PhSetIntegerSetting(SETTING_ENABLE_WARNINGS_RUNAS, 0);
@@ -2910,7 +2910,7 @@ INT_PTR CALLBACK PhpRunFileWndProc(
                         {
                             if (!(NT_NTWIN32(status) && WIN32_FROM_NTSTATUS(status) == ERROR_CANCELLED))
                             {
-                                PhShowStatus(hwndDlg, L"Unable to execute the command.", status, 0);
+                                PhShowStatus(hwndDlg, L"无法执行命令。", status, 0);
                             }
                         }
 
@@ -2922,8 +2922,8 @@ INT_PTR CALLBACK PhpRunFileWndProc(
                 {
                     PH_FILETYPE_FILTER filters[] =
                     {
-                        { L"Executable files (*.exe;*.pif;*.com;*.bat;*.cmd)", L"*.exe;*.pif;*.com;*.bat;*.cmd" },
-                        { L"All files (*.*)", L"*.*" }
+                        { L"可执行文件 (*.exe;*.pif;*.com;*.bat;*.cmd)", L"*.exe;*.pif;*.com;*.bat;*.cmd" },
+                        { L"所有文件 (*.*)", L"*.*" }
                     };
                     PVOID fileDialog = PhCreateOpenFileDialog();
 
@@ -3554,7 +3554,7 @@ VOID PhRunAsPackageInitializeTree(
     _Inout_ PPH_RUNAS_PACKAGE_CONTEXT Context
     )
 {
-    static CONST PH_STRINGREF PhRunAsPackageLoadingText = PH_STRINGREF_INIT(L"Loading package information...");
+    static CONST PH_STRINGREF PhRunAsPackageLoadingText = PH_STRINGREF_INIT(L"正在加载软件包信息...");
 
     Context->NodeList = PhCreateList(20);
     Context->NodeHashtable = PhCreateHashtable(
@@ -3572,8 +3572,8 @@ VOID PhRunAsPackageInitializeTree(
     TreeNew_SetCallback(Context->TreeNewHandle, PhRunAsPackageTreeNewCallback, Context);
     TreeNew_SetRowHeight(Context->TreeNewHandle, PhGetDpi(48, Context->WindowDpi));
 
-    PhAddTreeNewColumnEx2(Context->TreeNewHandle, PH_RUNASPACKAGE_TREE_COLUMN_ITEM_NAME, TRUE, L"Package", 80, PH_ALIGN_LEFT, 0, 0, TN_COLUMN_FLAG_CUSTOMDRAW);
-    //PhAddTreeNewColumnEx2(Context->TreeNewHandle, PH_PLUGIN_TREE_COLUMN_ITEM_VERSION, TRUE, L"Version", 80, PH_ALIGN_CENTER, 1, DT_CENTER, 0);
+    PhAddTreeNewColumnEx2(Context->TreeNewHandle, PH_RUNASPACKAGE_TREE_COLUMN_ITEM_NAME, TRUE, L"包", 80, PH_ALIGN_LEFT, 0, 0, TN_COLUMN_FLAG_CUSTOMDRAW);
+    //PhAddTreeNewColumnEx2(Context->TreeNewHandle, PH_PLUGIN_TREE_COLUMN_ITEM_VERSION, TRUE, L"版本", 80, PH_ALIGN_CENTER, 1, DT_CENTER, 0);
 
     //PhRunAsPackageLoadSettingsTreeList(Context);
 
@@ -3747,7 +3747,7 @@ INT_PTR CALLBACK PhRunAsPackageWndProc(
             PhCreateSearchControl(
                 WindowHandle,
                 context->SearchBoxHandle,
-                L"Search Packages",
+                L"搜索软件包",
                 PhpRunAsPackageSearchControlCallback,
                 context
                 );
@@ -3827,8 +3827,8 @@ INT_PTR CALLBACK PhRunAsPackageWndProc(
                 {
                     PH_FILETYPE_FILTER filters[] =
                     {
-                        { L"Executable files (*.exe;*.pif;*.com;*.bat;*.cmd)", L"*.exe;*.pif;*.com;*.bat;*.cmd" },
-                        { L"All files (*.*)", L"*.*" }
+                        { L"可执行文件 (*.exe;*.pif;*.com;*.bat;*.cmd)", L"*.exe;*.pif;*.com;*.bat;*.cmd" },
+                        { L"所有文件 (*.*)", L"*.*" }
                     };
                     PVOID fileDialog = PhCreateOpenFileDialog();
 
@@ -3901,7 +3901,7 @@ INT_PTR CALLBACK PhRunAsPackageWndProc(
                             }
                             else
                             {
-                                PhShowStatus(WindowHandle, L"Unable to execute the command.", 0, status);
+                                PhShowStatus(WindowHandle, L"无法执行命令。", 0, status);
                             }
 
                             PhClearReference(&directoryString);

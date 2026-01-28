@@ -76,7 +76,7 @@ VOID NTAPI MenuItemCallback(
             //{
             //    PhShowStatus(
             //        menuItem->OwnerWindow,
-            //        PhaFormatString(L"Unable to restart %s", serviceItem->Name->Buffer)->Buffer,
+            //        PhaFormatString(L"无法重新启动 %s", serviceItem->Name->Buffer)->Buffer,
             //        status,
             //        0
             //        );
@@ -148,7 +148,7 @@ VOID NTAPI ProcessMenuInitializingCallback(
         // * There are no extra submenus.
         if (serviceList->Count != 1)
         {
-            servicesMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, 0, L"Ser&vices", NULL);
+            servicesMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, 0, L"服务(&V)", NULL);
         }
 
         // Create and add a menu item for each service.
@@ -168,7 +168,7 @@ VOID NTAPI ProcessMenuInitializingCallback(
             if (serviceList->Count == 1)
             {
                 // "Service (Xxx)"
-                escapedName = PhaFormatString(L"Ser&vice (%s)", escapedName->Buffer);
+                escapedName = PhaFormatString(L"服务 (%s)(&V)", escapedName->Buffer);
             }
 
             serviceMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, 0, escapedName->Buffer, NULL);
@@ -179,11 +179,11 @@ VOID NTAPI ProcessMenuInitializingCallback(
                 servicesMenuItem = serviceMenuItem;
             }
 
-            PhInsertEMenuItem(serviceMenuItem, PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_GOTOSERVICE, L"&Go to service", serviceItem), ULONG_MAX);
-            PhInsertEMenuItem(serviceMenuItem, startMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_START, L"Sta&rt", serviceItem), ULONG_MAX);
-            PhInsertEMenuItem(serviceMenuItem, continueMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_CONTINUE, L"&Continue", serviceItem), ULONG_MAX);
-            PhInsertEMenuItem(serviceMenuItem, pauseMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_PAUSE, L"&Pause", serviceItem), ULONG_MAX);
-            PhInsertEMenuItem(serviceMenuItem, stopMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_STOP, L"St&op", serviceItem), ULONG_MAX);
+            PhInsertEMenuItem(serviceMenuItem, PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_GOTOSERVICE, L"转到服务(&G)", serviceItem), ULONG_MAX);
+            PhInsertEMenuItem(serviceMenuItem, startMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_START, L"启动(&R)", serviceItem), ULONG_MAX);
+            PhInsertEMenuItem(serviceMenuItem, continueMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_CONTINUE, L"继续运行(&C)", serviceItem), ULONG_MAX);
+            PhInsertEMenuItem(serviceMenuItem, pauseMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_PAUSE, L"暂停(&P)", serviceItem), ULONG_MAX);
+            PhInsertEMenuItem(serviceMenuItem, stopMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_STOP, L"停止(&O)", serviceItem), ULONG_MAX);
 
             // Massive copy and paste from mainwnd.c.
             // == START ==
@@ -296,7 +296,7 @@ VOID NTAPI ServicePropertiesInitializingCallback(
         propSheetPage.dwFlags = PSP_USETITLE;
         propSheetPage.hInstance = NtCurrentImageBase();
         propSheetPage.pszTemplate = MAKEINTRESOURCE(IDD_SRVLIST);
-        propSheetPage.pszTitle = L"Dependencies";
+        propSheetPage.pszTitle = L"依赖项";
         propSheetPage.pfnDlgProc = EspServiceDependenciesDlgProc;
         propSheetPage.lParam = (LPARAM)serviceItem;
         objectProperties->Pages[objectProperties->NumberOfPages++] = CreatePropertySheetPage(&propSheetPage);
@@ -310,7 +310,7 @@ VOID NTAPI ServicePropertiesInitializingCallback(
         propSheetPage.dwFlags = PSP_USETITLE;
         propSheetPage.hInstance = NtCurrentImageBase();
         propSheetPage.pszTemplate = MAKEINTRESOURCE(IDD_SRVLIST);
-        propSheetPage.pszTitle = L"Dependents";
+        propSheetPage.pszTitle = L"依赖项";
         propSheetPage.pfnDlgProc = EspServiceDependentsDlgProc;
         propSheetPage.lParam = (LPARAM)serviceItem;
         objectProperties->Pages[objectProperties->NumberOfPages++] = CreatePropertySheetPage(&propSheetPage);
@@ -324,7 +324,7 @@ VOID NTAPI ServicePropertiesInitializingCallback(
         propSheetPage.dwFlags = PSP_USETITLE;
         propSheetPage.hInstance = NtCurrentImageBase();
         propSheetPage.pszTemplate = MAKEINTRESOURCE(IDD_SRVTRIGGERS);
-        propSheetPage.pszTitle = L"Triggers";
+        propSheetPage.pszTitle = L"触发器";
         propSheetPage.pfnDlgProc = EspServiceTriggersDlgProc;
         propSheetPage.lParam = (LPARAM)serviceItem;
         objectProperties->Pages[objectProperties->NumberOfPages++] = CreatePropertySheetPage(&propSheetPage);
@@ -338,7 +338,7 @@ VOID NTAPI ServicePropertiesInitializingCallback(
         propSheetPage.dwFlags = PSP_USETITLE;
         propSheetPage.hInstance = NtCurrentImageBase();
         propSheetPage.pszTemplate = MAKEINTRESOURCE(IDD_SRVPACKAGE);
-        propSheetPage.pszTitle = L"Package";
+        propSheetPage.pszTitle = L"程序包";
         propSheetPage.pfnDlgProc = EspPackageServiceDlgProc;
         propSheetPage.lParam = (LPARAM)serviceItem;
         objectProperties->Pages[objectProperties->NumberOfPages++] = CreatePropertySheetPage(&propSheetPage);
@@ -366,7 +366,7 @@ VOID NTAPI ServicePropertiesInitializingCallback(
         propSheetPage.dwFlags = PSP_USETITLE;
         propSheetPage.hInstance = NtCurrentImageBase();
         propSheetPage.pszTemplate = MAKEINTRESOURCE(IDD_SRVOTHER);
-        propSheetPage.pszTitle = L"Other";
+        propSheetPage.pszTitle = L"其他";
         propSheetPage.pfnDlgProc = EspServiceOtherDlgProc;
         propSheetPage.lParam = (LPARAM)serviceItem;
         objectProperties->Pages[objectProperties->NumberOfPages++] = CreatePropertySheetPage(&propSheetPage);
@@ -399,7 +399,7 @@ VOID NTAPI ServiceMenuInitializingCallback(
 
         PhInsertEMenuItem(
             menuInfo->Menu,
-            PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_RESTART, L"R&estart", menuInfo->u.Service.Services[0]),
+            PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_RESTART, L"重新启动(&E)", menuInfo->u.Service.Services[0]),
             indexOfMenuItem
             );
     }
@@ -459,7 +459,7 @@ VOID MiListSectionMenuInitializingCallback(
         // * There are no extra submenus.
         if (serviceList->Count != 1)
         {
-            servicesMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, 0, L"Ser&vices", NULL);
+            servicesMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, 0, L"服务(&V)", NULL);
         }
 
         // Create and add a menu item for each service.
@@ -479,7 +479,7 @@ VOID MiListSectionMenuInitializingCallback(
             if (serviceList->Count == 1)
             {
                 // "Service (Xxx)"
-                escapedName = PhaFormatString(L"Ser&vice (%s)", escapedName->Buffer);
+                escapedName = PhaFormatString(L"服务 (%s)(&V)", escapedName->Buffer);
             }
 
             serviceMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, 0, escapedName->Buffer, NULL);
@@ -490,11 +490,11 @@ VOID MiListSectionMenuInitializingCallback(
                 servicesMenuItem = serviceMenuItem;
             }
 
-            PhInsertEMenuItem(serviceMenuItem, PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_GOTOSERVICE, L"&Go to service", serviceItem), ULONG_MAX);
-            PhInsertEMenuItem(serviceMenuItem, startMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_START, L"Sta&rt", serviceItem), ULONG_MAX);
-            PhInsertEMenuItem(serviceMenuItem, continueMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_CONTINUE, L"&Continue", serviceItem), ULONG_MAX);
-            PhInsertEMenuItem(serviceMenuItem, pauseMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_PAUSE, L"&Pause", serviceItem), ULONG_MAX);
-            PhInsertEMenuItem(serviceMenuItem, stopMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_STOP, L"St&op", serviceItem), ULONG_MAX);
+            PhInsertEMenuItem(serviceMenuItem, PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_GOTOSERVICE, L"转到服务(&G)", serviceItem), ULONG_MAX);
+            PhInsertEMenuItem(serviceMenuItem, startMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_START, L"启动(&R)", serviceItem), ULONG_MAX);
+            PhInsertEMenuItem(serviceMenuItem, continueMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_CONTINUE, L"继续运行(&C)", serviceItem), ULONG_MAX);
+            PhInsertEMenuItem(serviceMenuItem, pauseMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_PAUSE, L"暂停(&P)", serviceItem), ULONG_MAX);
+            PhInsertEMenuItem(serviceMenuItem, stopMenuItem = PhPluginCreateEMenuItem(PluginInstance, 0, ID_SERVICE_STOP, L"停止(&O)", serviceItem), ULONG_MAX);
 
             // Massive copy and paste from mainwnd.c.
             // == START ==
@@ -588,8 +588,8 @@ LOGICAL DllMain(
             if (!PluginInstance)
                 return FALSE;
 
-            info->DisplayName = L"Extended Services";
-            info->Description = L"Extends service management capabilities.";
+            info->DisplayName = L"扩展服务";
+            info->Description = L"扩展服务管理功能。";
 
             PhRegisterCallback(
                 PhGetPluginCallback(PluginInstance, PluginCallbackMenuItem),

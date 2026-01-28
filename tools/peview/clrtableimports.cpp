@@ -118,17 +118,17 @@ PPH_STRING PvClrImportFlagsToString(
     PhInitializeStringBuilder(&stringBuilder, 10);
 
     if (IsPmNoMangle(Flags))
-        PhAppendStringBuilder2(&stringBuilder, L"No mangle, ");
+        PhAppendStringBuilder2(&stringBuilder, L"无损坏, ");
     if (IsPmCharSetAnsi(Flags))
-        PhAppendStringBuilder2(&stringBuilder, L"Ansi charset, ");
+        PhAppendStringBuilder2(&stringBuilder, L"ANSI 字符集, ");
     if (IsPmCharSetUnicode(Flags))
-        PhAppendStringBuilder2(&stringBuilder, L"Unicode charset, ");
+        PhAppendStringBuilder2(&stringBuilder, L"Unicode 字符集, ");
     if (IsPmCharSetAuto(Flags))
-        PhAppendStringBuilder2(&stringBuilder, L"Auto charset, ");
+        PhAppendStringBuilder2(&stringBuilder, L"自动字符集, ");
     if (IsPmSupportsLastError(Flags))
-        PhAppendStringBuilder2(&stringBuilder, L"Supports last error, ");
+        PhAppendStringBuilder2(&stringBuilder, L"支持 LastError, ");
     if (IsPmCallConvWinapi(Flags))
-        PhAppendStringBuilder2(&stringBuilder, L"Winapi, ");
+        PhAppendStringBuilder2(&stringBuilder, L"WINAPI, ");
     if (IsPmCallConvCdecl(Flags))
         PhAppendStringBuilder2(&stringBuilder, L"Cdecl, ");
     if (IsPmCallConvStdcall(Flags))
@@ -138,17 +138,17 @@ PPH_STRING PvClrImportFlagsToString(
     if (IsPmCallConvFastcall(Flags))
         PhAppendStringBuilder2(&stringBuilder, L"Fastcall, ");
     if (IsPmBestFitEnabled(Flags))
-        PhAppendStringBuilder2(&stringBuilder, L"Bestfit enabled, ");
+        PhAppendStringBuilder2(&stringBuilder, L"Bestfit 已启用, ");
     if (IsPmBestFitDisabled(Flags))
-        PhAppendStringBuilder2(&stringBuilder, L"Bestfit disabled, ");
+        PhAppendStringBuilder2(&stringBuilder, L"Bestfit 已禁用, ");
     if (IsPmBestFitUseAssem(Flags))
-        PhAppendStringBuilder2(&stringBuilder, L"Bestfit assembly, ");
+        PhAppendStringBuilder2(&stringBuilder, L"Bestfit 汇编, ");
     if (IsPmThrowOnUnmappableCharEnabled(Flags))
-        PhAppendStringBuilder2(&stringBuilder, L"ThrowOnUnmappableChar enabled, ");
+        PhAppendStringBuilder2(&stringBuilder, L"ThrowOnUnmappableChar 已启用, ");
     if (IsPmThrowOnUnmappableCharDisabled(Flags))
-        PhAppendStringBuilder2(&stringBuilder, L"ThrowOnUnmappableChar disabled, ");
+        PhAppendStringBuilder2(&stringBuilder, L"ThrowOnUnmappableChar 已禁用, ");
     if (IsPmThrowOnUnmappableCharUseAssem(Flags))
-        PhAppendStringBuilder2(&stringBuilder, L"ThrowOnUnmappableChar assembly, ");
+        PhAppendStringBuilder2(&stringBuilder, L"ThrowOnUnmappableChar 汇编, ");
 
     if (PhEndsWithString2(stringBuilder.String, L", ", FALSE))
         PhRemoveEndStringBuilder(&stringBuilder, 2);
@@ -656,7 +656,7 @@ EXTERN_C HRESULT PvGetClrImageImports(
         PPV_CLR_IMAGE_IMPORT_DLL importDll;
 
         importDll = static_cast<PPV_CLR_IMAGE_IMPORT_DLL>(PhAllocateZero(sizeof(PV_CLR_IMAGE_IMPORT_DLL)));
-        importDll->ImportName = PhCreateString(L"Unknown");
+        importDll->ImportName = PhCreateString(L"未知");
         importDll->ImportToken = ULONG_MAX;
 
         PhAddItemList(clrImportsList, importDll);
@@ -723,7 +723,7 @@ EXTERN_C HRESULT PvGetClrImageImports(
                     if (!importDll->Functions)
                         importDll->Functions = PhCreateList(1);
                     if (!importName)
-                        importName = "Unknown";
+                        importName = "未知";
 
                     if (importDll->Functions)
                     {
@@ -749,7 +749,7 @@ EXTERN_C HRESULT PvGetClrImageImports(
                 if (!unknownImportDll->Functions)
                     unknownImportDll->Functions = PhCreateList(1);
                 if (!importName)
-                    importName = "Unknown";
+                    importName = "未知";
 
                 if (unknownImportDll->Functions)
                 {
