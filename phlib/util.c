@@ -2129,9 +2129,9 @@ PPH_STRING PhFormatTimeSpanRelative(
     {
         // Special vowel case: a hour -> an hour
         if (string->Buffer[2] != L'h')
-            PhMoveReference(&string, PhConcatStrings2(L"a ", &string->Buffer[2]));
+            PhMoveReference(&string, PhConcatStrings2(L"1 ", &string->Buffer[2]));
         else
-            PhMoveReference(&string, PhConcatStrings2(L"an ", &string->Buffer[2]));
+            PhMoveReference(&string, PhConcatStrings2(L"1 ", &string->Buffer[2]));
     }
 
     return string;
