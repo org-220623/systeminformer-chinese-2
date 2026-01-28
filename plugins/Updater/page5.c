@@ -79,7 +79,7 @@ VOID ShowUpdateInstallDialog(
 {
     TASKDIALOG_BUTTON TaskDialogButtonArray[] =
     {
-        { IDYES, L"Install" }
+        { IDYES, L"安装" }
     };
     TASKDIALOGCONFIG config;
 
@@ -94,34 +94,34 @@ VOID ShowUpdateInstallDialog(
     config.pButtons = TaskDialogButtonArray;
     config.cButtons = RTL_NUMBER_OF(TaskDialogButtonArray);
 
-    config.pszWindowTitle = L"System Informer - Updater";
+    config.pszWindowTitle = L"System Informer - 更新程序";
     if (Context->SwitchingChannel)
     {
         switch (Context->Channel)
         {
         case PhReleaseChannel:
-            config.pszMainInstruction = L"Ready to switch to the release channel?";
+            config.pszMainInstruction = L"确认切换到正式版通道?";
             break;
         //case PhPreviewChannel:
-        //    config.pszMainInstruction = L"Ready to switch to the preview channel?";
+        //    config.pszMainInstruction = L"确认切换到预览版通道?";
         //    break;
         case PhCanaryChannel:
-            config.pszMainInstruction = L"Ready to switch to the canary channel?";
+            config.pszMainInstruction = L"确认切换到测试版通道?";
             break;
         //case PhDeveloperChannel:
-        //    config.pszMainInstruction = L"Ready to switch to the developer channel?";
+        //    config.pszMainInstruction = L"确认切换到开发者版通道?";
         //    break;
         default:
-            config.pszMainInstruction = L"Ready to switch the channel?";
+            config.pszMainInstruction = L"确认切换更新通道?";
             break;
         }
 
-        config.pszContent = L"The channel has been successfully downloaded and verified.\r\n\r\nClick Install to continue.";
+        config.pszContent = L"已成功从更新通道下载并验证安装程序。\r\n\r\n单击“安装”继续。";
     }
     else
     {
-        config.pszMainInstruction = L"Ready to install update?";
-        config.pszContent = L"The update has been successfully downloaded and verified.\r\n\r\nClick Install to continue.";
+        config.pszMainInstruction = L"确认安装更新?";
+        config.pszContent = L"更新已成功下载并验证。\r\n\r\n单击“安装”继续。";
     }
 
     PhTaskDialogNavigatePage(Context->DialogHandle, &config);
@@ -152,7 +152,7 @@ PPH_STRING UpdaterGetLatestVersionText(
             PhGetString(commit)
             );
         PhMoveReference(&version, PhFormatString(
-            L"%s\r\n\r\n<A HREF=\"changelog.txt\">View changelog</A>",
+            L"%s\r\n\r\n<A HREF=\"changelog.txt\">查看更新日志</A>",
             PhGetStringOrEmpty(version)
             ));
     }
@@ -166,7 +166,7 @@ PPH_STRING UpdaterGetLatestVersionText(
             revisionVersion
             );
         PhMoveReference(&version, PhFormatString(
-            L"%s\r\n\r\n<A HREF=\"changelog.txt\">View changelog</A>",
+            L"%s\r\n\r\n<A HREF=\"changelog.txt\">查看更新日志</A>",
             PhGetStringOrEmpty(version)
             ));
     }
@@ -194,8 +194,8 @@ VOID ShowLatestVersionDialog(
     config.pfCallback = FinalTaskDialogCallbackProc;
     config.lpCallbackData = (LONG_PTR)Context;
 
-    config.pszWindowTitle = L"System Informer - Updater";
-    config.pszMainInstruction = L"You're running the latest version.";
+    config.pszWindowTitle = L"System Informer - 更新程序";
+    config.pszMainInstruction = L"您使用的软件是最新版本。";
     config.pszContent = PH_AUTO_T(PH_STRING, UpdaterGetLatestVersionText(Context))->Buffer;
 
     PhTaskDialogNavigatePage(Context->DialogHandle, &config);
@@ -216,8 +216,8 @@ VOID ShowNewerVersionDialog(
     config.pfCallback = FinalTaskDialogCallbackProc;
     config.lpCallbackData = (LONG_PTR)Context;
 
-    config.pszWindowTitle = L"System Informer - Updater";
-    config.pszMainInstruction = L"You're running a pre-release build.";
+    config.pszWindowTitle = L"System Informer - 更新程序";
+    config.pszMainInstruction = L"您使用的软件是预发布版本。";
     config.pszContent = PH_AUTO_T(PH_STRING, UpdaterGetLatestVersionText(Context))->Buffer;
 
     PhTaskDialogNavigatePage(Context->DialogHandle, &config);
@@ -238,25 +238,25 @@ VOID ShowUpdateFailedDialog(
     config.dwCommonButtons = TDCBF_CLOSE_BUTTON | TDCBF_RETRY_BUTTON;
     config.hMainIcon = PhGetApplicationIcon(FALSE);
 
-    config.pszWindowTitle = L"System Informer - Updater";
+    config.pszWindowTitle = L"System Informer - 更新程序";
     if (Context->SwitchingChannel)
-        config.pszMainInstruction = L"Error downloading the channel.";
+        config.pszMainInstruction = L"从更新通道下载数据时出现错误。";
     else
-        config.pszMainInstruction = L"Error downloading the update.";
+        config.pszMainInstruction = L"下载更新时出现错误。";
 
     if (SignatureFailed)
     {
         if (Context->SwitchingChannel)
-            config.pszContent = L"Signature check failed. Click Retry to download the channel again.";
+            config.pszContent = L"签名检查失败。单击“重试”重新从更新通道下载数据。";
         else
-            config.pszContent = L"Signature check failed. Click Retry to download the update again.";
+            config.pszContent = L"签名检查失败。单击“重试”重新下载更新。";
     }
     else if (HashFailed)
     {
         if (Context->SwitchingChannel)
-            config.pszContent = L"Hash check failed. Click Retry to download the channel again.";
+            config.pszContent = L"哈希校验失败。单击“重试”重新从更新通道下载数据。";
         else
-            config.pszContent = L"Hash check failed. Click Retry to download the update again.";
+            config.pszContent = L"哈希校验失败。单击“重试”重新下载更新。";
     }
     else
     {
@@ -277,17 +277,17 @@ VOID ShowUpdateFailedDialog(
             else
             {
                 if (Context->SwitchingChannel)
-                    config.pszContent = L"Click Retry to download the channel again.";
+                    config.pszContent = L"单击“重试”重新从更新通道下载数据。";
                 else
-                    config.pszContent = L"Click Retry to download the update again.";
+                    config.pszContent = L"单击“重试”重新下载更新。";
             }
         }
         else
         {
             if (Context->SwitchingChannel)
-                config.pszContent = L"Click Retry to download the channel again.";
+                config.pszContent = L"单击“重试”重新从更新通道下载数据。";
             else
-                config.pszContent = L"Click Retry to download the update again.";
+                config.pszContent = L"单击“重试”重新下载更新。";
         }
     }
 

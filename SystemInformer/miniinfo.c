@@ -495,8 +495,8 @@ VOID PhMipOnShowWindow(
     SetWindowFont(GetDlgItem(PhMipWindow, IDC_SECTION), CurrentParameters.MediumFont, FALSE);
 
     PhMipCreateInternalListSection(L"CPU", 0, PhMipCpuListSectionCallback);
-    PhMipCreateInternalListSection(L"Commit charge", 0, PhMipCommitListSectionCallback);
-    PhMipCreateInternalListSection(L"Physical memory", 0, PhMipPhysicalListSectionCallback);
+    PhMipCreateInternalListSection(L"提交用量", 0, PhMipCommitListSectionCallback);
+    PhMipCreateInternalListSection(L"物理内存", 0, PhMipPhysicalListSectionCallback);
     PhMipCreateInternalListSection(L"I/O", 0, PhMipIoListSectionCallback);
 
     if (PhPluginsEnabled)
@@ -1111,7 +1111,7 @@ PPH_EMENU PhpMipCreateMenu(
     PPH_EMENU_ITEM menuItem;
 
     menu = PhCreateEMenu();
-    menuItem = PhCreateEMenuItem(0, 0, L"&Opacity", NULL, NULL);
+    menuItem = PhCreateEMenuItem(0, 0, L"透明度(&O)", NULL, NULL);
     PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, ID_OPACITY_10, L"10%", NULL, NULL), ULONG_MAX);
     PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, ID_OPACITY_20, L"20%", NULL, NULL), ULONG_MAX);
     PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, ID_OPACITY_30, L"30%", NULL, NULL), ULONG_MAX);
@@ -1121,11 +1121,11 @@ PPH_EMENU PhpMipCreateMenu(
     PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, ID_OPACITY_70, L"70%", NULL, NULL), ULONG_MAX);
     PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, ID_OPACITY_80, L"80%", NULL, NULL), ULONG_MAX);
     PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, ID_OPACITY_90, L"90%", NULL, NULL), ULONG_MAX);
-    PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, ID_OPACITY_OPAQUE, L"Opaque", NULL, NULL), ULONG_MAX);
+    PhInsertEMenuItem(menuItem, PhCreateEMenuItem(0, ID_OPACITY_OPAQUE, L"不透明", NULL, NULL), ULONG_MAX);
     PhInsertEMenuItem(menu, menuItem, ULONG_MAX);
     PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_MINIINFO_REFRESH, L"&Refresh\bF5", NULL, NULL), ULONG_MAX);
-    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_MINIINFO_REFRESHAUTOMATICALLY, L"Refresh a&utomatically\bF6", NULL, NULL), ULONG_MAX);
+    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_MINIINFO_REFRESH, L"刷新(&R)\bF5", NULL, NULL), ULONG_MAX);
+    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_MINIINFO_REFRESHAUTOMATICALLY, L"自动刷新(&U)\bF6", NULL, NULL), ULONG_MAX);
 
     return menu;
 }
@@ -1370,7 +1370,7 @@ INT_PTR CALLBACK PhMipListSectionDialogProc(
             TreeNew_SetRedraw(listSection->TreeNewHandle, FALSE);
             TreeNew_SetCallback(listSection->TreeNewHandle, PhMipListSectionTreeNewCallback, listSection);
             TreeNew_SetRowHeight(listSection->TreeNewHandle, PhMipCalculateRowHeight(hwndDlg));
-            PhAddTreeNewColumnEx2(listSection->TreeNewHandle, MIP_SINGLE_COLUMN_ID, TRUE, L"Process", 1,
+            PhAddTreeNewColumnEx2(listSection->TreeNewHandle, MIP_SINGLE_COLUMN_ID, TRUE, L"进程", 1,
                 PH_ALIGN_LEFT, 0, 0, TN_COLUMN_FLAG_CUSTOMDRAW);
             TreeNew_SetRedraw(listSection->TreeNewHandle, TRUE);
 
@@ -1679,7 +1679,7 @@ BOOLEAN PhMipListSectionTreeNewCallback(
             else
             {
                 getTitleText.Subtitle = PhFormatString(
-                    L"%s (%u processes)",
+                    L"%s (%u 个进程)",
                     processItem->ProcessName->Buffer,
                     node->ProcessGroup->Processes->Count
                     );
@@ -1691,7 +1691,7 @@ BOOLEAN PhMipListSectionTreeNewCallback(
             // Special text for hung windows
             if (node->RepresentativeIsHung)
             {
-                static CONST PH_STRINGREF hungPrefix = PH_STRINGREF_INIT(L"(Not responding) ");
+                static CONST PH_STRINGREF hungPrefix = PH_STRINGREF_INIT(L"(未响应) ");
 
                 PhMoveReference(&getTitleText.Title, PhConcatStringRef2(&hungPrefix, &getTitleText.Title->sr));
                 getTitleText.TitleColor = RGB(0xff, 0x00, 0x00);
@@ -1699,7 +1699,7 @@ BOOLEAN PhMipListSectionTreeNewCallback(
 
             if (node->RepresentativeIsTerminated)
             {
-                static CONST PH_STRINGREF terminatedPrefix = PH_STRINGREF_INIT(L"(Terminated) ");
+                static CONST PH_STRINGREF terminatedPrefix = PH_STRINGREF_INIT(L"(已终止) ");
 
                 PhMoveReference(&getTitleText.Title, PhConcatStringRef2(&terminatedPrefix, &getTitleText.Title->sr));
                 getTitleText.TitleColor = RGB(0xA9, 0xA9, 0xA9);
@@ -1858,7 +1858,7 @@ BOOLEAN PhMipListSectionTreeNewCallback(
                                     SETTING_FILE_BROWSE_EXECUTABLE,
                                     node->ProcessGroup->Representative->FileName->Buffer,
                                     FALSE,
-                                    L"Make sure the Explorer executable file is present."
+                                    L"请确保资源管理器可执行文件存在。"
                                     );
                             }
                         }
@@ -1964,13 +1964,13 @@ VOID PhMipShowListSectionContextMenu(
     // TODO: If there are multiple processes, then create submenus for each process.
     PhAddMiniProcessMenuItems(menu, ListSection->SelectedRepresentativeProcessId);
     PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_PROCESS_GOTOPROCESS, L"&Go to process", NULL, NULL), ULONG_MAX);
+    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_PROCESS_GOTOPROCESS, L"转到进程(&G)", NULL, NULL), ULONG_MAX);
     PhSetFlagsEMenuItem(menu, ID_PROCESS_GOTOPROCESS, PH_EMENU_DEFAULT, PH_EMENU_DEFAULT);
 
     if (selectedNode->ProcessGroup->Processes->Count != 1)
     {
         if (item = PhFindEMenuItem(menu, 0, NULL, ID_PROCESS_GOTOPROCESS))
-            PhModifyEMenuItem(item, PH_EMENU_MODIFY_TEXT, 0, L"&Go to processes", NULL);
+            PhModifyEMenuItem(item, PH_EMENU_MODIFY_TEXT, 0, L"转到进程(&G)", NULL);
     }
 
     memset(&menuInfo, 0, sizeof(PH_MINIINFO_LIST_SECTION_MENU_INFORMATION));
@@ -2059,7 +2059,7 @@ VOID PhMipHandleListSectionCommand(
 
             if (invalid)
             {
-                PhShowStatus(PhMainWndHandle, L"The process does not exist.", STATUS_INVALID_CID, 0);
+                PhShowStatus(PhMainWndHandle, L"进程不存在。", STATUS_INVALID_CID, 0);
             }
         }
         break;
@@ -2212,7 +2212,7 @@ BOOLEAN PhMipCommitListSectionCallback(
             FLOAT commitFraction = (FLOAT)PhPerfInformation.CommittedPages / PhPerfInformation.CommitLimit;
             PH_FORMAT format[5];
 
-            PhInitFormatS(&format[0], L"Commit    ");
+            PhInitFormatS(&format[0], L"提交    ");
             PhInitFormatSize(&format[1], UInt32x32To64(PhPerfInformation.CommittedPages, PAGE_SIZE));
             PhInitFormatS(&format[2], L" (");
             PhInitFormatF(&format[3], commitFraction * 100, PhMaxPrecisionUnit);
@@ -2276,7 +2276,7 @@ BOOLEAN PhMipCommitListSectionCallback(
             privateBytes = *(PULONG64)getUsageText->SortData->UserData;
 
             PhMoveReference(&getUsageText->Line1, PhFormatSize(privateBytes, ULONG_MAX));
-            PhMoveReference(&getUsageText->Line2, PhCreateString(L"Private bytes"));
+            PhMoveReference(&getUsageText->Line2, PhCreateString(L"私有字节"));
             getUsageText->Line2Color = GetSysColor(COLOR_GRAYTEXT);
         }
         return TRUE;
@@ -2323,7 +2323,7 @@ BOOLEAN PhMipPhysicalListSectionCallback(
             FLOAT physicalPercent = physicalFraction * 100;
             PH_FORMAT format[5];
 
-            PhInitFormatS(&format[0], L"Physical    ");
+            PhInitFormatS(&format[0], L"物理内存    ");
             PhInitFormatSize(&format[1], UInt32x32To64(physicalUsage, PAGE_SIZE));
             PhInitFormatS(&format[2], L" (");
             PhInitFormatF(&format[3], physicalPercent, PhMaxPrecisionUnit);
@@ -2387,7 +2387,7 @@ BOOLEAN PhMipPhysicalListSectionCallback(
             privateBytes = *(PULONG64)getUsageText->SortData->UserData;
 
             PhMoveReference(&getUsageText->Line1, PhFormatSize(privateBytes, ULONG_MAX));
-            PhMoveReference(&getUsageText->Line2, PhCreateString(L"Working set"));
+            PhMoveReference(&getUsageText->Line2, PhCreateString(L"工作集"));
             getUsageText->Line2Color = GetSysColor(COLOR_GRAYTEXT);
         }
         return TRUE;

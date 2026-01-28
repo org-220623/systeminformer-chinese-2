@@ -762,10 +762,10 @@ INT_PTR CALLBACK TracertDlgProc(
             LONG dpiValue;
 
             PhSetWindowText(hwndDlg,
-                PhaFormatString(L"Tracing %s...", context->RemoteAddressString)->Buffer
+                PhaFormatString(L"正在跟踪 %s...", context->RemoteAddressString)->Buffer
                 );
             PhSetWindowText(GetDlgItem(hwndDlg, IDC_STATUS),
-                PhaFormatString(L"Tracing route to %s with %lu bytes of data...", context->RemoteAddressString, PhGetIntegerSetting(SETTING_NAME_PING_SIZE))->Buffer
+                PhaFormatString(L"正在跟踪路由 %s 具有 %lu 字节的数据...", context->RemoteAddressString, PhGetIntegerSetting(SETTING_NAME_PING_SIZE))->Buffer
                 );
 
             dpiValue = PhGetWindowDpi(hwndDlg);
@@ -835,11 +835,11 @@ INT_PTR CALLBACK TracertDlgProc(
             case IDC_REFRESH:
                 {
                     PhSetWindowText(context->WindowHandle, PhaFormatString(
-                        L"Tracing %s...",
+                        L"正在跟踪 %s...",
                         context->RemoteAddressString
                         )->Buffer);
                     PhSetWindowText(GetDlgItem(hwndDlg, IDC_STATUS), PhaFormatString(
-                        L"Tracing route to %s with %lu bytes of data...",
+                        L"正在跟踪路由 %s 具有 %lu 字节的数据...",
                         context->RemoteAddressString,
                         PhGetIntegerSetting(SETTING_NAME_PING_SIZE)
                         )->Buffer);
@@ -866,10 +866,10 @@ INT_PTR CALLBACK TracertDlgProc(
                     {
                         menu = PhCreateEMenu();
                         PhInsertEMenuItem(menu, PhCreateEMenuItem(0, MAINMENU_ACTION_PING, L"Ping", NULL, NULL), ULONG_MAX);
-                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, NETWORK_ACTION_TRACEROUTE, L"Traceroute", NULL, NULL), ULONG_MAX);
+                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, NETWORK_ACTION_TRACEROUTE, L"跟踪路由", NULL, NULL), ULONG_MAX);
                         PhInsertEMenuItem(menu, PhCreateEMenuItem(0, NETWORK_ACTION_WHOIS, L"Whois", NULL, NULL), ULONG_MAX);
                         PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, MENU_ACTION_COPY, L"Copy", NULL, NULL), ULONG_MAX);
+                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, MENU_ACTION_COPY, L"复制", NULL, NULL), ULONG_MAX);
                         PhInsertCopyCellEMenuItem(menu, MENU_ACTION_COPY, context->TreeNewHandle, contextMenuEvent->Column);
 
                         if (PhIsNullOrEmptyString(selectedNode->IpAddressString))
@@ -977,15 +977,15 @@ INT_PTR CALLBACK TracertDlgProc(
             EnableWindow(GetDlgItem(hwndDlg, IDC_REFRESH), TRUE);
 
             PhSetWindowText(context->WindowHandle, PhaFormatString(
-                L"Tracing %s... %s",
+                L"正在跟踪 %s... %s",
                 context->RemoteAddressString,
-                failed ? L"error" : L"complete"
+                failed ? L"错误" : L"完成"
                 )->Buffer);
             PhSetWindowText(GetDlgItem(hwndDlg, IDC_STATUS), PhaFormatString(
-                L"Tracing route to %s with %lu bytes of data... %s.",
+                L"正在跟踪路由 %s 具有 %lu 字节的数据... %s。",
                 context->RemoteAddressString,
                 PhGetIntegerSetting(SETTING_NAME_PING_SIZE),
-                failed ? L"error" : L"complete"
+                failed ? L"错误" : L"完成"
                 )->Buffer);
 
             TreeNew_NodesStructured(context->TreeNewHandle);

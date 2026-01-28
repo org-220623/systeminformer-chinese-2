@@ -83,7 +83,7 @@ VOID EtShowWsWatchDialog(
 
     if (!NT_SUCCESS(status))
     {
-        PhShowStatus(ParentWindowHandle, L"Unable to open the process.", status, 0);
+        PhShowStatus(ParentWindowHandle, L"无法打开进程。", status, 0);
         return;
     }
 
@@ -465,9 +465,9 @@ INT_PTR CALLBACK EtpWsWatchDlgProc(
 
             PhSetListViewStyle(context->ListViewHandle, TRUE, TRUE);
             PhSetControlTheme(context->ListViewHandle, L"explorer");
-            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 250, L"Instruction");
-            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 80, L"Filename");
-            PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 80, L"Count");
+            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 250, L"指令");
+            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 80, L"文件名");
+            PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 80, L"计数");
             PhSetExtendedListView(context->ListViewHandle);
             PhLoadListViewColumnsFromSetting(SETTING_NAME_WSWATCH_COLUMNS, context->ListViewHandle);
             ExtendedListView_SetSort(context->ListViewHandle, 2, DescendingSortOrder);
@@ -490,7 +490,7 @@ INT_PTR CALLBACK EtpWsWatchDlgProc(
 
             if (!context->SymbolProvider)
             {
-                PhShowError2(hwndDlg, L"Unable to create the symbol provider.", L"%s", L"");
+                PhShowError2(hwndDlg, L"无法创建符号提供程序。", L"%s", L"");
                 EndDialog(hwndDlg, IDCANCEL);
                 break;
             }
@@ -579,7 +579,7 @@ INT_PTR CALLBACK EtpWsWatchDlgProc(
                     }
                     else
                     {
-                        PhShowStatus(hwndDlg, L"Unable to enable WS watch.", status, 0);
+                        PhShowStatus(hwndDlg, L"无法启用工作集监视。", status, 0);
                     }
                 }
                 break;
@@ -620,7 +620,7 @@ INT_PTR CALLBACK EtpWsWatchDlgProc(
                                     SETTING_PROGRAM_INSPECT_EXECUTABLES,
                                     PhGetString(fileNameWin32),
                                     FALSE,
-                                    L"Make sure the PE Viewer executable file is present."
+                                    L"请确保 PE Viewer 可执行文件存在。"
                                     );
                             }
                         }
@@ -670,11 +670,11 @@ INT_PTR CALLBACK EtpWsWatchDlgProc(
             fileNameWin32 = PhGetListViewItemText(context->ListViewHandle, lvItemIndex, 1);
 
             menu = PhCreateEMenu();
-            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 1, L"&Inspect", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 1, L"检查(&I)", NULL, NULL), ULONG_MAX);
             PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 2, L"Open &file location", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 2, L"打开文件所在位置(&F)", NULL, NULL), ULONG_MAX);
             PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 3, L"&Copy", NULL, NULL), ULONG_MAX);
+            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 3, L"复制(&C)", NULL, NULL), ULONG_MAX);
             PhInsertCopyListViewEMenuItem(menu, 3, context->ListViewHandle);
             PhSetFlagsEMenuItem(menu, 1, PH_EMENU_DEFAULT, PH_EMENU_DEFAULT);
 
@@ -706,7 +706,7 @@ INT_PTR CALLBACK EtpWsWatchDlgProc(
                                 SETTING_PROGRAM_INSPECT_EXECUTABLES,
                                 PhGetString(fileNameWin32),
                                 FALSE,
-                                L"Make sure the PE Viewer executable file is present."
+                                L"请确保 PE Viewer 可执行文件存在。"
                                 );
                         }
                         break;
@@ -717,7 +717,7 @@ INT_PTR CALLBACK EtpWsWatchDlgProc(
                                 SETTING_FILE_BROWSE_EXECUTABLE,
                                 PhGetString(fileNameWin32),
                                 FALSE,
-                                L"Make sure the Explorer executable file is present."
+                                L"请确保资源管理器可执行文件存在。"
                                 );
                         }
                         break;

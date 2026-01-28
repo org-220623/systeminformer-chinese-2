@@ -264,24 +264,24 @@ PCWSTR EtPresentModeToString(
     switch (PresentMode)
     {
     case 1:
-        return L"Hardware: Legacy Flip";
+        return L"硬件: 传统翻转";
     case 2:
-        return L"Hardware: Legacy Copy to front buffer";
+        return L"硬件: 传统复制到前缓冲区";
     case 3:
-        return L"Hardware: Independent Flip";
+        return L"硬件: 独立翻转";
     case 4:
-        return L"Composed: Flip";
+        return L"合成: 翻转";
     case 5:
-        return L"Composed: Copy with GPU GDI";
+        return L"合成: 使用 GPU GDI 复制";
     case 6:
-        return L"Composed: Copy with CPU GDI";
+        return L"合成: 使用 CPU GDI 复制";
     case 7:
-        return L"Composed: Composition Atlas";
+        return L"合成: 合成图谱";
     case 8:
-        return L"Hardware Composed: Independent Flip";
+        return L"硬件合成: 独立翻转";
     }
 
-    return L"Other";
+    return L"其他";
 }
 
 PCWSTR EtRuntimeToString(
@@ -296,5 +296,5 @@ PCWSTR EtRuntimeToString(
         return L"D3D9";
     }
 
-    return L"Other";
+    return L"其他";
 }

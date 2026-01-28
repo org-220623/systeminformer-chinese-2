@@ -111,9 +111,9 @@ VOID PvEnumerateExceptionEntries(
 {
     static const PH_ACCESS_ENTRY unwFlags[] =
     {
-        { L"UNW_FLAG_EHANDLER",  UNW_FLAG_EHANDLER, FALSE, FALSE, L"Exception handler" },
-        { L"UNW_FLAG_UHANDLER",  UNW_FLAG_UHANDLER, FALSE, FALSE, L"Termination handler" },
-        { L"UNW_FLAG_CHAININFO", UNW_FLAG_CHAININFO, FALSE, FALSE, L"Chained unwind info" },
+        { L"UNW_FLAG_EHANDLER",  UNW_FLAG_EHANDLER, FALSE, FALSE, L"异常处理程序" },
+        { L"UNW_FLAG_UHANDLER",  UNW_FLAG_UHANDLER, FALSE, FALSE, L"终止处理程序" },
+        { L"UNW_FLAG_CHAININFO", UNW_FLAG_CHAININFO, FALSE, FALSE, L"链式展开信息" },
     };
 
     ULONG count = 0;
@@ -320,7 +320,7 @@ VOID PvEnumerateExceptionEntries(
                 {
                     IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA* data;
 
-                    PhSetListViewSubItem(Context->ListViewHandle, lvItemIndex, 1, L"Full");
+                    PhSetListViewSubItem(Context->ListViewHandle, lvItemIndex, 1, L"完全");
 
                     PhPrintPointer(value, UlongToPtr(entry->UnwindData));
                     PhSetListViewSubItem(Context->ListViewHandle, lvItemIndex, 4, value);
@@ -340,7 +340,7 @@ VOID PvEnumerateExceptionEntries(
                 {
                     ULONG functionLength = entry->FunctionLength << 2;
 
-                    PhSetListViewSubItem(Context->ListViewHandle, lvItemIndex, 1, L"Function");
+                    PhSetListViewSubItem(Context->ListViewHandle, lvItemIndex, 1, L"函数");
                     PhPrintPointer(value, PTR_ADD_OFFSET(UlongToPtr(entry->BeginAddress), functionLength));
                     PhSetListViewSubItem(Context->ListViewHandle, lvItemIndex, 3, value);
                     PhSetListViewSubItem(Context->ListViewHandle, lvItemIndex, 5, PhaFormatSize(functionLength, ULONG_MAX)->Buffer);
@@ -350,14 +350,14 @@ VOID PvEnumerateExceptionEntries(
                 {
                     ULONG functionLength = entry->FunctionLength << 2;
 
-                    PhSetListViewSubItem(Context->ListViewHandle, lvItemIndex, 1, L"Fragment");
+                    PhSetListViewSubItem(Context->ListViewHandle, lvItemIndex, 1, L"片段");
                     PhPrintPointer(value, PTR_ADD_OFFSET(UlongToPtr(entry->BeginAddress), functionLength));
                     PhSetListViewSubItem(Context->ListViewHandle, lvItemIndex, 3, value);
                     PhSetListViewSubItem(Context->ListViewHandle, lvItemIndex, 5, PhaFormatSize(functionLength, ULONG_MAX)->Buffer);
                 }
                 break;
             case 3: // undocumented
-                PhSetListViewSubItem(Context->ListViewHandle, lvItemIndex, 1, L"Reserved"); // ?
+                PhSetListViewSubItem(Context->ListViewHandle, lvItemIndex, 1, L"保留"); // ?
                 break;
             default:
                 break;
@@ -484,34 +484,34 @@ INT_PTR CALLBACK PvpPeExceptionDlgProc(
 
             if (imageMachine == IMAGE_FILE_MACHINE_I386)
             {
-                PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 100, L"SEH Handler");
-                PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 200, L"Symbol");
-                PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 100, L"Section");
+                PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 100, L"SEH 处理程序");
+                PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 200, L"符号");
+                PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 100, L"节区");
                 PhLoadListViewColumnsFromSetting(L"ImageExceptionsIa32ListViewColumns", context->ListViewHandle);
             }
             else if (imageMachine == IMAGE_FILE_MACHINE_AMD64)
             {
-                PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 100, L"RVA (start)");
-                PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 100, L"RVA (end)");
-                PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 100, L"Data");
-                PhAddListViewColumn(context->ListViewHandle, 4, 4, 4, LVCFMT_LEFT, 100, L"Size");
-                PhAddListViewColumn(context->ListViewHandle, 5, 5, 5, LVCFMT_LEFT, 200, L"Symbol");
-                PhAddListViewColumn(context->ListViewHandle, 6, 6, 6, LVCFMT_LEFT, 100, L"Section");
-                PhAddListViewColumn(context->ListViewHandle, 7, 7, 7, LVCFMT_LEFT, 100, L"Flags");
-                PhAddListViewColumn(context->ListViewHandle, 8, 8, 8, LVCFMT_LEFT, 200, L"Handler");
+                PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 100, L"RVA (开始)");
+                PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 100, L"RVA (结束)");
+                PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 100, L"数据");
+                PhAddListViewColumn(context->ListViewHandle, 4, 4, 4, LVCFMT_LEFT, 100, L"大小");
+                PhAddListViewColumn(context->ListViewHandle, 5, 5, 5, LVCFMT_LEFT, 200, L"符号");
+                PhAddListViewColumn(context->ListViewHandle, 6, 6, 6, LVCFMT_LEFT, 100, L"节区");
+                PhAddListViewColumn(context->ListViewHandle, 7, 7, 7, LVCFMT_LEFT, 100, L"标志");
+                PhAddListViewColumn(context->ListViewHandle, 8, 8, 8, LVCFMT_LEFT, 200, L"处理程序");
                 PhLoadListViewColumnsFromSetting(L"ImageExceptionsAmd64ListViewColumns", context->ListViewHandle);
 
                 ExtendedListView_SetCompareFunction(context->ListViewHandle, 4, PvpPeExceptionSizeCompareFunctionAmd64);
             }
             else if (imageMachine == IMAGE_FILE_MACHINE_ARM64)
             {
-                PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 100, L"Type");
-                PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 100, L"RVA (start)");
-                PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 100, L"RVA (end)");
-                PhAddListViewColumn(context->ListViewHandle, 4, 4, 4, LVCFMT_LEFT, 100, L"Data");
-                PhAddListViewColumn(context->ListViewHandle, 5, 5, 5, LVCFMT_LEFT, 100, L"Size");
-                PhAddListViewColumn(context->ListViewHandle, 6, 6, 6, LVCFMT_LEFT, 200, L"Symbol");
-                PhAddListViewColumn(context->ListViewHandle, 7, 7, 7, LVCFMT_LEFT, 100, L"Section");
+                PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 100, L"类型");
+                PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 100, L"RVA (开始)");
+                PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 100, L"RVA (结束)");
+                PhAddListViewColumn(context->ListViewHandle, 4, 4, 4, LVCFMT_LEFT, 100, L"数据");
+                PhAddListViewColumn(context->ListViewHandle, 5, 5, 5, LVCFMT_LEFT, 100, L"大小");
+                PhAddListViewColumn(context->ListViewHandle, 6, 6, 6, LVCFMT_LEFT, 200, L"符号");
+                PhAddListViewColumn(context->ListViewHandle, 7, 7, 7, LVCFMT_LEFT, 100, L"节区");
 
                 PhLoadListViewColumnsFromSetting(L"ImageExceptionsArm64ListViewColumns", context->ListViewHandle);
             }

@@ -342,7 +342,7 @@ NTSTATUS CALLBACK SetupExtractBuild(
             WCHAR string[MAX_PATH];
             PPH_STRING baseName = PhGetBaseName(extractPath);
 
-            PhInitFormatS(&format[0], L"Extracting: ");
+            PhInitFormatS(&format[0], L"正在复制: ");
             PhInitFormatS(&format[1], PhGetStringOrEmpty(baseName));
 
             if (PhFormatToBuffer(format, 2, string, sizeof(string), NULL))
@@ -350,9 +350,9 @@ NTSTATUS CALLBACK SetupExtractBuild(
                 SendMessage(Context->DialogHandle, TDM_UPDATE_ELEMENT_TEXT, TDE_MAIN_INSTRUCTION, (LPARAM)string);
             }
 
-            PhInitFormatS(&format[0], L"Progress: ");
+            PhInitFormatS(&format[0], L"进度: ");
             PhInitFormatSize(&format[1], currentLength);
-            PhInitFormatS(&format[2], L" of ");
+            PhInitFormatS(&format[2], L"，总计: ");
             PhInitFormatSize(&format[3], totalLength);
             PhInitFormatS(&format[4], L" (");
             PhInitFormatI64U(&format[5], percent);

@@ -566,10 +566,10 @@ PDN_PROCESS_APPDOMAIN_ENTRY DnGetDotNetAppDomainDataFromAddress(
     switch (AppDomainType)
     {
     case DN_CLR_APPDOMAIN_TYPE_SHARED:
-        entry->AppDomainName = PhCreateString(L"SharedDomain");
+        entry->AppDomainName = PhCreateString(L"共享域");
         break;
     case DN_CLR_APPDOMAIN_TYPE_SYSTEM:
-        entry->AppDomainName = PhCreateString(L"SystemDomain");
+        entry->AppDomainName = PhCreateString(L"系统域");
         break;
     case DN_CLR_APPDOMAIN_TYPE_DYNAMIC:
         {
@@ -604,43 +604,43 @@ PDN_PROCESS_APPDOMAIN_ENTRY DnGetDotNetAppDomainDataFromAddress(
         switch (appdomainAddressData.appDomainStage)
         {
         case STAGE_CREATING:
-            entry->AppDomainStage = PhCreateString(L"Creating");
+            entry->AppDomainStage = PhCreateString(L"正在创建");
             break;
         case STAGE_READYFORMANAGEDCODE:
-            entry->AppDomainStage = PhCreateString(L"ReadyForManagedCode");
+            entry->AppDomainStage = PhCreateString(L"就绪运行托管代码");
             break;
         case STAGE_ACTIVE:
-            entry->AppDomainStage = PhCreateString(L"Active");
+            entry->AppDomainStage = PhCreateString(L"活动");
             break;
         case STAGE_OPEN:
-            entry->AppDomainStage = PhCreateString(L"Open");
+            entry->AppDomainStage = PhCreateString(L"打开");
             break;
         case STAGE_UNLOAD_REQUESTED:
-            entry->AppDomainStage = PhCreateString(L"UnloadRequested");
+            entry->AppDomainStage = PhCreateString(L"请求卸载");
             break;
         case STAGE_EXITING:
-            entry->AppDomainStage = PhCreateString(L"Exiting");
+            entry->AppDomainStage = PhCreateString(L"正在退出");
             break;
         case STAGE_EXITED:
-            entry->AppDomainStage = PhCreateString(L"Exited");
+            entry->AppDomainStage = PhCreateString(L"已退出");
             break;
         case STAGE_FINALIZING:
-            entry->AppDomainStage = PhCreateString(L"Finalizing");
+            entry->AppDomainStage = PhCreateString(L"正在完成");
             break;
         case STAGE_FINALIZED:
-            entry->AppDomainStage = PhCreateString(L"Finalized");
+            entry->AppDomainStage = PhCreateString(L"已完成");
             break;
         case STAGE_HANDLETABLE_NOACCESS:
-            entry->AppDomainStage = PhCreateString(L"HandleTableNoAccess");
+            entry->AppDomainStage = PhCreateString(L"无句柄表访问权限");
             break;
         case STAGE_CLEARED:
-            entry->AppDomainStage = PhCreateString(L"Cleared");
+            entry->AppDomainStage = PhCreateString(L"已清理");
             break;
         case STAGE_COLLECTED:
-            entry->AppDomainStage = PhCreateString(L"Collected");
+            entry->AppDomainStage = PhCreateString(L"已收集");
             break;
         case STAGE_CLOSED:
-            entry->AppDomainStage = PhCreateString(L"Closed");
+            entry->AppDomainStage = PhCreateString(L"已关闭");
             break;
         }
     }
@@ -1075,7 +1075,7 @@ VOID DnGetProcessDotNetRuntimes(
         PDN_PROCESS_CLR_RUNTIME_ENTRY entry = PhItemList(context.RuntimeList, i);
 
         dprintf(
-            "Runtime version: %S @ 0x%I64x [%S]\n",
+            "运行时版本: %S @ 0x%I64x [%S]\n",
             PhGetString(entry->RuntimeVersion),
             (ULONG_PTR)entry->DllBase,
             PhGetString(entry->FileName)

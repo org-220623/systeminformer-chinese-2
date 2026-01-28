@@ -414,7 +414,7 @@ VOID FindDiskDrives(
                     PH_FORMAT format[7];
 
                     // Disk %lu (%s) [%s]
-                    PhInitFormatS(&format[0], L"Disk ");
+                    PhInitFormatS(&format[0], L"磁盘 ");
                     PhInitFormatU(&format[1], diskIndex);
                     PhInitFormatS(&format[2], L" (");
                     PhInitFormatSR(&format[3], diskMountPoints->sr);
@@ -429,7 +429,7 @@ VOID FindDiskDrives(
                     PH_FORMAT format[5];
 
                     // Disk %lu (%s)
-                    PhInitFormatS(&format[0], L"Disk ");
+                    PhInitFormatS(&format[0], L"磁盘 ");
                     PhInitFormatU(&format[1], diskIndex);
                     PhInitFormatS(&format[2], L" [");
                     PhInitFormatSR(&format[3], deviceDescription->sr);
@@ -506,7 +506,7 @@ VOID FindDiskDrives(
         {
             PPH_STRING description;
 
-            if (description = PhCreateString(L"Unknown disk"))
+            if (description = PhCreateString(L"未知磁盘"))
             {
                 AddDiskDriveToListView(
                     Context,
@@ -701,13 +701,13 @@ INT_PTR CALLBACK DiskDriveOptionsDlgProc(
             PhSetListViewStyle(context->ListViewHandle, FALSE, TRUE);
             ListView_SetExtendedListViewStyleEx(context->ListViewHandle, LVS_EX_CHECKBOXES, LVS_EX_CHECKBOXES);
             PhSetControlTheme(context->ListViewHandle, L"explorer");
-            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 350, L"Disk Drives");
+            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 350, L"磁盘驱动器");
             PhSetExtendedListView(context->ListViewHandle);
             LoadDiskDriveImages(context);
 
             ListView_EnableGroupView(context->ListViewHandle, TRUE);
-            PhAddListViewGroup(context->ListViewHandle, 0, L"Connected");
-            PhAddListViewGroup(context->ListViewHandle, 1, L"Disconnected");
+            PhAddListViewGroup(context->ListViewHandle, 0, L"已连接");
+            PhAddListViewGroup(context->ListViewHandle, 1, L"已断开连接");
 
             PhInitializeLayoutManager(&context->LayoutManager, hwndDlg);
             PhAddLayoutItem(&context->LayoutManager, context->ListViewHandle, NULL, PH_ANCHOR_ALL);
