@@ -616,15 +616,15 @@ PCPH_STRINGREF PhGetBasePrioritySymbolicString(
     )
 {
     static const PH_STRINGREF errorReturn = PH_STRINGREF_INIT(L"");
-    static const PH_STRINGREF realTime = PH_STRINGREF_INIT(L"Real-time");
-    static const PH_STRINGREF idle = PH_STRINGREF_INIT(L"Idle");
-    static const PH_STRINGREF background = PH_STRINGREF_INIT(L"Background");
-    static const PH_STRINGREF timeCritical = PH_STRINGREF_INIT(L"Time critical");
-    static const PH_STRINGREF highest = PH_STRINGREF_INIT(L"Highest");
-    static const PH_STRINGREF aboveNormal = PH_STRINGREF_INIT(L"Above normal");
-    static const PH_STRINGREF normal = PH_STRINGREF_INIT(L"Normal");
-    static const PH_STRINGREF belowNormal = PH_STRINGREF_INIT(L"Below normal");
-    static const PH_STRINGREF lowest = PH_STRINGREF_INIT(L"Lowest");
+    static const PH_STRINGREF realTime = PH_STRINGREF_INIT(L"实时");
+    static const PH_STRINGREF idle = PH_STRINGREF_INIT(L"空闲");
+    static const PH_STRINGREF background = PH_STRINGREF_INIT(L"后台");
+    static const PH_STRINGREF timeCritical = PH_STRINGREF_INIT(L"时间关键");
+    static const PH_STRINGREF highest = PH_STRINGREF_INIT(L"最高");
+    static const PH_STRINGREF aboveNormal = PH_STRINGREF_INIT(L"高于正常");
+    static const PH_STRINGREF normal = PH_STRINGREF_INIT(L"正常");
+    static const PH_STRINGREF belowNormal = PH_STRINGREF_INIT(L"低于正常");
+    static const PH_STRINGREF lowest = PH_STRINGREF_INIT(L"最低");
 
     if (BasePriority == THREAD_PRIORITY_ERROR_RETURN)
         return &errorReturn;

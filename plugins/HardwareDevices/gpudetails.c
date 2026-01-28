@@ -49,22 +49,22 @@ typedef struct _GPU_DETAILS_CONTEXT
 VOID EtpGpuDetailsAddListViewItemGroups(
     _In_ HWND ListView)
 {
-    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_PHYSICALLOCTION, L"Physical Location", NULL);
-    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_DRIVERDATE, L"Driver Date", NULL);
-    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_DRIVERVERSION, L"Driver Version", NULL);
-    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_WDDMVERSION, L"WDDM Version", NULL);
-    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_VENDORID, L"Vendor ID", NULL);
-    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_DEVICEID, L"Device ID", NULL);
-    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_TOTALMEMORY, L"Total Memory", NULL);
-    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_RESERVEDMEMORY, L"Reserved Memory", NULL);
-    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_GPUFREQUENCY, L"GPU Frequency", NULL);
-    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_GPUMAXFREQUENCY, L"Max GPU Frequency", NULL);
-    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_MEMORYFREQUENCY, L"Memory Frequency", NULL);
-    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_MEMORYBANDWIDTH, L"Memory Bandwidth", NULL);
-    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_PCIEBANDWIDTH, L"PCIE Bandwidth", NULL);
-    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_FANRPM, L"Fan RPM", NULL);
-    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_POWERUSAGE, L"Power Usage", NULL);
-    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_TEMPERATURE, L"Temperature", NULL);
+    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_PHYSICALLOCTION, L"物理位置", NULL);
+    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_DRIVERDATE, L"驱动程序时间", NULL);
+    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_DRIVERVERSION, L"驱动程序版本", NULL);
+    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_WDDMVERSION, L"WDDM 版本", NULL);
+    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_VENDORID, L"供应商 ID", NULL);
+    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_DEVICEID, L"设备 ID", NULL);
+    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_TOTALMEMORY, L"显存总计", NULL);
+    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_RESERVEDMEMORY, L"保留显存", NULL);
+    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_GPUFREQUENCY, L"GPU 频率", NULL);
+    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_GPUMAXFREQUENCY, L"最大 GPU 频率", NULL);
+    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_MEMORYFREQUENCY, L"显存频率", NULL);
+    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_MEMORYBANDWIDTH, L"显存带宽", NULL);
+    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_PCIEBANDWIDTH, L"PCIE 带宽", NULL);
+    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_FANRPM, L"风扇转速 (转每分)", NULL);
+    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_POWERUSAGE, L"电源用量", NULL);
+    PhAddListViewItem(ListView, GPUADAPTER_DETAILS_INDEX_TEMPERATURE, L"温度", NULL);
 }
 
 VOID EtpQueryAdapterDeviceProperties(
@@ -413,8 +413,8 @@ INT_PTR CALLBACK GraphicsDeviceDetailsDlgProc(
 
             PhSetListViewStyle(context->ListViewHandle, FALSE, TRUE);
             PhSetControlTheme(context->ListViewHandle, L"explorer");
-            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 230, L"Property");
-            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 200, L"Value");
+            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 230, L"属性");
+            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 200, L"值");
             PhSetExtendedListView(context->ListViewHandle);
 
             PhInitializeLayoutManager(&context->LayoutManager, hwndDlg);
@@ -516,7 +516,7 @@ INT_PTR CALLBACK GraphicsDeviceDetailsDlgProc(
                 if (numberOfItems != 0)
                 {
                     menu = PhCreateEMenu();
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 1, L"&Copy", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 1, L"复制(&C)", NULL, NULL), ULONG_MAX);
                     PhInsertCopyListViewEMenuItem(menu, 1, context->ListViewHandle);
 
                     item = PhShowEMenu(

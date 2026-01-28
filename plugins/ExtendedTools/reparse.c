@@ -478,7 +478,7 @@ PCWSTR EtReparseTagToString(
         return L"LX_BLK";
     }
 
-    return PhaFormatString(L"UNKNOWN: %lu", Tag)->Buffer;
+    return PhaFormatString(L"未知: %lu", Tag)->Buffer;
 }
 
 NTSTATUS NTAPI EtEnumVolumeReparseCallback(
@@ -990,7 +990,7 @@ INT_PTR CALLBACK EtFindSecurityIdsDlgProc(
         {
             context->ListViewHandle = GetDlgItem(hwndDlg, IDC_REPARSE_LIST);
 
-            PhSetWindowText(hwndDlg, L"NTFS SecurityID");
+            PhSetWindowText(hwndDlg, L"NTFS 安全 ID");
             PhSetApplicationWindowIcon(hwndDlg);
 
             ShowWindow(GetDlgItem(hwndDlg, IDRETRY), SW_HIDE);
@@ -1007,7 +1007,7 @@ INT_PTR CALLBACK EtFindSecurityIdsDlgProc(
             PhSetListViewStyle(context->ListViewHandle, TRUE, TRUE);
             PhSetControlTheme(context->ListViewHandle, L"explorer");
             PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 40, L"#");
-            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 250, L"Filename");
+            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 250, L"文件名");
 
             PhInitializeWindowTheme(hwndDlg, !!PhGetIntegerSetting(SETTING_ENABLE_THEME_SUPPORT));
 
@@ -1078,7 +1078,7 @@ INT_PTR CALLBACK EtFindSecurityIdsDlgProc(
                             break;
 
                         menu = PhCreateEMenu();
-                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, USHRT_MAX, L"&Copy", NULL, NULL), ULONG_MAX);
+                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, USHRT_MAX, L"复制(&C)", NULL, NULL), ULONG_MAX);
                         PhInsertCopyListViewEMenuItem(menu, USHRT_MAX, context->ListViewHandle);
 
                         selectedItem = PhShowEMenu(
@@ -1157,13 +1157,13 @@ INT_PTR CALLBACK EtReparseDlgProc(
             switch (context->MenuItemIndex)
             {
             case ID_REPARSE_POINTS:
-                PhSetWindowText(hwndDlg, L"NTFS Reparse Points");
+                PhSetWindowText(hwndDlg, L"NTFS 重解析点");
                 break;
             case ID_REPARSE_OBJID:
-                PhSetWindowText(hwndDlg, L"NTFS Object Identifiers");
+                PhSetWindowText(hwndDlg, L"NTFS 对象标识符");
                 break;
             case ID_REPARSE_SDDL:
-                PhSetWindowText(hwndDlg, L"NTFS Security Descriptors");
+                PhSetWindowText(hwndDlg, L"NTFS 安全描述符");
                 break;
             }
 
@@ -1187,23 +1187,23 @@ INT_PTR CALLBACK EtReparseDlgProc(
             switch (context->MenuItemIndex)
             {
             case ID_REPARSE_POINTS:
-                PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 100, L"File index");
-                PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 100, L"Reparse tag");
-                PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 250, L"Filename");
+                PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 100, L"文件索引");
+                PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 100, L"重解析标签");
+                PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 250, L"文件名");
                 PhLoadListViewColumnsFromSetting(SETTING_NAME_REPARSE_LISTVIEW_COLUMNS, context->ListViewHandle);
                 break;
             case ID_REPARSE_OBJID:
-                PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 100, L"File index");
-                PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 100, L"Object identifier");
-                PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 250, L"Filename");
+                PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 100, L"文件索引");
+                PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 100, L"对象标识符");
+                PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 250, L"文件名");
                 PhLoadListViewColumnsFromSetting(SETTING_NAME_REPARSE_OBJECTID_LISTVIEW_COLUMNS, context->ListViewHandle);
                 break;
             case ID_REPARSE_SDDL:
-                PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 50, L"Volume");
-                PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 50, L"SecurityID");
-                PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 100, L"Hash");
-                PhAddListViewColumn(context->ListViewHandle, 4, 4, 4, LVCFMT_LEFT, 80, L"Length");
-                PhAddListViewColumn(context->ListViewHandle, 5, 5, 5, LVCFMT_LEFT, 150, L"Owner");
+                PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 50, L"卷");
+                PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 50, L"安全 ID");
+                PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 100, L"哈希");
+                PhAddListViewColumn(context->ListViewHandle, 4, 4, 4, LVCFMT_LEFT, 80, L"长度");
+                PhAddListViewColumn(context->ListViewHandle, 5, 5, 5, LVCFMT_LEFT, 150, L"所有者");
                 PhAddListViewColumn(context->ListViewHandle, 6, 6, 6, LVCFMT_LEFT, 250, L"SDDL");
                 PhLoadListViewColumnsFromSetting(SETTING_NAME_REPARSE_SD_LISTVIEW_COLUMNS, context->ListViewHandle);
                 break;
@@ -1342,7 +1342,7 @@ INT_PTR CALLBACK EtReparseDlgProc(
 
             if (!NT_SUCCESS(status))
             {
-                PhShowStatus(hwndDlg, L"Unable to enumerate the objects.", status, 0);
+                PhShowStatus(hwndDlg, L"无法枚举对象。", status, 0);
             }
 
             EnableWindow(GetDlgItem(hwndDlg, IDRETRY), TRUE);
@@ -1384,7 +1384,7 @@ INT_PTR CALLBACK EtReparseDlgProc(
                     NMLVEMPTYMARKUP* listview = (NMLVEMPTYMARKUP*)lParam;
 
                     listview->dwFlags = EMF_CENTERED;
-                    wcsncpy_s(listview->szMarkup, RTL_NUMBER_OF(listview->szMarkup), L"Querying objects...", _TRUNCATE);
+                    wcsncpy_s(listview->szMarkup, RTL_NUMBER_OF(listview->szMarkup), L"正在查询对象...", _TRUNCATE);
 
                     SetWindowLongPtr(hwndDlg, DWLP_MSGRESULT, TRUE);
                     return TRUE;
@@ -1414,15 +1414,15 @@ INT_PTR CALLBACK EtReparseDlgProc(
                         {
                         case ID_REPARSE_POINTS:
                         case ID_REPARSE_OBJID:
-                            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 1, L"Remove...", NULL, NULL), ULONG_MAX);
+                            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 1, L"删除...", NULL, NULL), ULONG_MAX);
                             break;
                         case ID_REPARSE_SDDL:
-                            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 1, L"Find files...", NULL, NULL), ULONG_MAX);
+                            PhInsertEMenuItem(menu, PhCreateEMenuItem(0, 1, L"查找文件...", NULL, NULL), ULONG_MAX);
                             break;
                         }
 
                         PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, USHRT_MAX, L"&Copy", NULL, NULL), ULONG_MAX);
+                        PhInsertEMenuItem(menu, PhCreateEMenuItem(0, USHRT_MAX, L"复制(&C)", NULL, NULL), ULONG_MAX);
                         PhInsertCopyListViewEMenuItem(menu, USHRT_MAX, context->ListViewHandle);
 
                         selectedItem = PhShowEMenu(
@@ -1451,9 +1451,9 @@ INT_PTR CALLBACK EtReparseDlgProc(
                                         {
                                             if (PhGetIntegerSetting(SETTING_ENABLE_WARNINGS) && !PhShowConfirmMessage(
                                                 hwndDlg,
-                                                L"remove",
-                                                L"the repase point",
-                                                L"The repase point will be permanently deleted.",
+                                                L"删除",
+                                                L"重解析点",
+                                                L"重解析点将被永久删除。",
                                                 FALSE
                                                 ))
                                             {
@@ -1466,9 +1466,9 @@ INT_PTR CALLBACK EtReparseDlgProc(
                                         {
                                             if (PhGetIntegerSetting(SETTING_ENABLE_WARNINGS) && !PhShowConfirmMessage(
                                                 hwndDlg,
-                                                L"remove",
-                                                L"the object identifier",
-                                                L"The object identifier will be permanently deleted.",
+                                                L"删除",
+                                                L"对象标识符",
+                                                L"对象标识符将被永久删除。",
                                                 FALSE
                                                 ))
                                             {
@@ -1505,7 +1505,7 @@ INT_PTR CALLBACK EtReparseDlgProc(
                                                     }
                                                     else
                                                     {
-                                                        PhShowStatus(hwndDlg, L"Unable to remove the reparse point.", status, 0);
+                                                        PhShowStatus(hwndDlg, L"无法删除重解析点。", status, 0);
                                                     }
                                                 }
                                                 break;
@@ -1521,7 +1521,7 @@ INT_PTR CALLBACK EtReparseDlgProc(
                                                     }
                                                     else
                                                     {
-                                                        PhShowStatus(hwndDlg, L"Unable to remove the object identifier.", status, 0);
+                                                        PhShowStatus(hwndDlg, L"无法删除对象标识符。", status, 0);
                                                     }
                                                 }
                                                 break;
@@ -1541,7 +1541,7 @@ INT_PTR CALLBACK EtReparseDlgProc(
                                                     }
                                                     else
                                                     {
-                                                        PhShowStatus(hwndDlg, L"Unable to locate files with the SecurityId.", STATUS_NOT_FOUND, 0);
+                                                        PhShowStatus(hwndDlg, L"无法根据安全 ID 定位文件。", STATUS_NOT_FOUND, 0);
                                                     }
                                                 }
                                                 break;

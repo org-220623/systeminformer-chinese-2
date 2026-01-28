@@ -87,49 +87,49 @@ VOID PvpPeEnumerateFileStreams(
                     PhInitializeStringBuilder(&stringBuilder, 0x100);
 
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_READONLY)
-                        PhAppendStringBuilder2(&stringBuilder, L"Readonly, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"只读, ");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_HIDDEN)
-                        PhAppendStringBuilder2(&stringBuilder, L"Hidden, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"隐藏, ");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_SYSTEM)
-                        PhAppendStringBuilder2(&stringBuilder, L"System, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"系统, ");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-                        PhAppendStringBuilder2(&stringBuilder, L"Directory, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"目录, ");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_ARCHIVE)
-                        PhAppendStringBuilder2(&stringBuilder, L"Archive, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"存档, ");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_DEVICE)
-                        PhAppendStringBuilder2(&stringBuilder, L"Device, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"设备, ");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_NORMAL)
-                        PhAppendStringBuilder2(&stringBuilder, L"Normal, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"正常, ");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_TEMPORARY)
-                        PhAppendStringBuilder2(&stringBuilder, L"Temporary, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"临时, ");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_SPARSE_FILE)
-                        PhAppendStringBuilder2(&stringBuilder, L"Sparse, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"稀疏, ");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_REPARSE_POINT)
-                        PhAppendStringBuilder2(&stringBuilder, L"Reparse point, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"重解析点, ");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_COMPRESSED)
-                        PhAppendStringBuilder2(&stringBuilder, L"Compressed, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"已压缩, ");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_OFFLINE)
-                        PhAppendStringBuilder2(&stringBuilder, L"Offline, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"离线, ");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_NOT_CONTENT_INDEXED)
-                        PhAppendStringBuilder2(&stringBuilder, L"Not indexed, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"未索引, ");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_ENCRYPTED)
-                        PhAppendStringBuilder2(&stringBuilder, L"Encrypted, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"已加密, ");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_INTEGRITY_STREAM)
-                        PhAppendStringBuilder2(&stringBuilder, L"Integiry, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"完整性");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_VIRTUAL)
-                        PhAppendStringBuilder2(&stringBuilder, L"Virtual, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"虚拟, ");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_NO_SCRUB_DATA)
-                        PhAppendStringBuilder2(&stringBuilder, L"No scrub, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"未清理, ");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_EA)
-                        PhAppendStringBuilder2(&stringBuilder, L"Extended attributes, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"扩展属性, ");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_PINNED)
-                        PhAppendStringBuilder2(&stringBuilder, L"Pinned, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"已固定, ");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_UNPINNED)
-                        PhAppendStringBuilder2(&stringBuilder, L"Unpinned, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"未固定, ");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_RECALL_ON_OPEN)
-                        PhAppendStringBuilder2(&stringBuilder, L"Recall on opened, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"打开时重调用, ");
                     if (streamInfo.FileAttributes & FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS)
-                        PhAppendStringBuilder2(&stringBuilder, L"Recall on data, ");
+                        PhAppendStringBuilder2(&stringBuilder, L"数据重调用, ");
                     if (PhEndsWithString2(stringBuilder.String, L", ", FALSE))
                         PhRemoveEndStringBuilder(&stringBuilder, 2);
 
@@ -192,9 +192,9 @@ INT_PTR CALLBACK PvpPeStreamsDlgProc(
             PhSetListViewStyle(context->ListViewHandle, TRUE, TRUE);
             PhSetControlTheme(context->ListViewHandle, L"explorer");
             PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 40, L"#");
-            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 150, L"Name");
-            PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 150, L"Size");
-            PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 100, L"Attributes");
+            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 150, L"名称");
+            PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 150, L"大小");
+            PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 100, L"属性");
             PhSetExtendedListView(context->ListViewHandle);
             PhLoadListViewColumnsFromSetting(L"ImageStreamsListViewColumns", context->ListViewHandle);
             PvConfigTreeBorders(context->ListViewHandle);
@@ -259,7 +259,7 @@ INT_PTR CALLBACK PvpPeStreamsDlgProc(
                 if (numberOfItems != 0)
                 {
                     menu = PhCreateEMenu();
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, USHRT_MAX, L"&Copy", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, USHRT_MAX, L"复制(&C)", NULL, NULL), ULONG_MAX);
                     PvInsertCopyListViewEMenuItem(menu, USHRT_MAX, context->ListViewHandle);
 
                     item = PhShowEMenu(

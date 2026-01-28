@@ -118,60 +118,60 @@ typedef struct _TOKEN_PAGE_CONTEXT
 
 static CONST PH_KEY_VALUE_PAIR PhElevationTypePairs[] =
 {
-    SIP(SREF(L"Unknown"), 0),
-    SIP(SREF(L"No (Default)"), TokenElevationTypeDefault),
-    SIP(SREF(L"No (Full)"), TokenElevationTypeFull),
-    SIP(SREF(L"No (Limited)"), TokenElevationTypeLimited),
-    SIP(SREF(L"Yes"), 4),
-    SIP(SREF(L"Yes (Default)"), 4 + TokenElevationTypeDefault),
-    SIP(SREF(L"Yes (Full)"), 4 + TokenElevationTypeFull),
-    SIP(SREF(L"Yes (Limited)"), 4 + TokenElevationTypeLimited),
+    SIP(SREF(L"未知"), 0),
+    SIP(SREF(L"否 (默认)"), TokenElevationTypeDefault),
+    SIP(SREF(L"否 (完全)"), TokenElevationTypeFull),
+    SIP(SREF(L"否 (受限)"), TokenElevationTypeLimited),
+    SIP(SREF(L"是"), 4),
+    SIP(SREF(L"是 (默认)"), 4 + TokenElevationTypeDefault),
+    SIP(SREF(L"是 (完全)"), 4 + TokenElevationTypeFull),
+    SIP(SREF(L"是 (受限)"), 4 + TokenElevationTypeLimited),
 };
 
 static CONST PH_KEY_VALUE_PAIR PhImpersonationLevelPairs[] =
 {
-    SIP(L"Anonymous", SecurityAnonymous),
-    SIP(L"Identification", SecurityIdentification),
-    SIP(L"Impersonation", SecurityImpersonation),
-    SIP(L"Delegation", SecurityDelegation),
+    SIP(L"匿名", SecurityAnonymous),
+    SIP(L"身份", SecurityIdentification),
+    SIP(L"模拟", SecurityImpersonation),
+    SIP(L"委托", SecurityDelegation),
 };
 
 static CONST PH_KEY_VALUE_PAIR PhTokenTypePairs[] =
 {
-    SIP(L"Unknown", 0),
-    SIP(L"Primary", TokenPrimary),
-    SIP(L"Impersonation", TokenImpersonation),
+    SIP(L"未知", 0),
+    SIP(L"候选", TokenPrimary),
+    SIP(L"模拟", TokenImpersonation),
 };
 
 static CONST PH_KEY_VALUE_PAIR PhSidTypePairs[] =
 {
-    SIP(L"Unknown", 0),
-    SIP(L"User", SidTypeUser),
-    SIP(L"Group", SidTypeGroup),
-    SIP(L"Domain", SidTypeDomain),
-    SIP(L"Alias", SidTypeAlias),
-    SIP(L"WellKnownGroup", SidTypeWellKnownGroup),
-    SIP(L"DeletedAccount", SidTypeDeletedAccount),
-    SIP(L"Yes (Limited)", SidTypeInvalid),
-    SIP(L"Unknown", SidTypeUnknown),
-    SIP(L"Computer", SidTypeComputer),
-    SIP(L"Label", SidTypeLabel),
-    SIP(L"Logon session", SidTypeLogonSession),
+    SIP(L"未知", 0),
+    SIP(L"用户", SidTypeUser),
+    SIP(L"组", SidTypeGroup),
+    SIP(L"域", SidTypeDomain),
+    SIP(L"别名", SidTypeAlias),
+    SIP(L"特定组", SidTypeWellKnownGroup),
+    SIP(L"已删除账户", SidTypeDeletedAccount),
+    SIP(L"是 (受限)", SidTypeInvalid),
+    SIP(L"未知", SidTypeUnknown),
+    SIP(L"计算机", SidTypeComputer),
+    SIP(L"标签", SidTypeLabel),
+    SIP(L"已登录会话", SidTypeLogonSession),
 };
 
 PH_ACCESS_ENTRY CONST PhpGroupDescriptionEntries[6] =
 {
-    { NULL, SE_GROUP_INTEGRITY | SE_GROUP_INTEGRITY_ENABLED, FALSE, FALSE, L"Integrity" },
-    { NULL, SE_GROUP_LOGON_ID, FALSE, FALSE, L"Logon Id" },
-    { NULL, SE_GROUP_OWNER, FALSE, FALSE, L"Owner" },
-    { NULL, SE_GROUP_MANDATORY, FALSE, FALSE, L"Mandatory" },
-    { NULL, SE_GROUP_USE_FOR_DENY_ONLY, FALSE, FALSE, L"Use for deny only" },
-    { NULL, SE_GROUP_RESOURCE, FALSE, FALSE, L"Resource" }
+    { NULL, SE_GROUP_INTEGRITY | SE_GROUP_INTEGRITY_ENABLED, FALSE, FALSE, L"完整性" },
+    { NULL, SE_GROUP_LOGON_ID, FALSE, FALSE, L"登录 ID" },
+    { NULL, SE_GROUP_OWNER, FALSE, FALSE, L"所有者" },
+    { NULL, SE_GROUP_MANDATORY, FALSE, FALSE, L"强制性" },
+    { NULL, SE_GROUP_USE_FOR_DENY_ONLY, FALSE, FALSE, L"仅用于拒绝" },
+    { NULL, SE_GROUP_RESOURCE, FALSE, FALSE, L"资源" }
 };
 
-static CONST PH_STRINGREF PhpEmptyTokenAttributesText = PH_STRINGREF_INIT(L"There are no attributes to display.");
-static CONST PH_STRINGREF PhpEmptyTokenClaimsText = PH_STRINGREF_INIT(L"There are no claims to display.");
-static CONST PH_STRINGREF PhpEmptyTokenCapabilitiesText = PH_STRINGREF_INIT(L"There are no capabilities to display.");
+static CONST PH_STRINGREF PhpEmptyTokenAttributesText = PH_STRINGREF_INIT(L"没有要显示的属性。");
+static CONST PH_STRINGREF PhpEmptyTokenClaimsText = PH_STRINGREF_INIT(L"没有要显示的内容。");
+static CONST PH_STRINGREF PhpEmptyTokenCapabilitiesText = PH_STRINGREF_INIT(L"没有要显示的能力。");
 
 UINT CALLBACK PhpTokenPropPageProc(
     _In_ HWND hwnd,
@@ -305,7 +305,7 @@ VOID PhCreateTokenDialog(
         DUPLICATE_SAME_ACCESS | DUPLICATE_SAME_ATTRIBUTES
         )))
     {
-        PhShowStatus(NULL, L"Unable to duplicate the token.", status, 0);
+        PhShowStatus(NULL, L"无法复制令牌。", status, 0);
         return;
     }
 
@@ -402,7 +402,7 @@ PPH_STRING PhGetGroupAttributesString(
     if (FlagOn(Attributes, SE_GROUP_INTEGRITY | SE_GROUP_INTEGRITY_ENABLED))
     {
         if (FlagOn(Attributes, SE_GROUP_ENABLED))
-            string = PhCreateString(L"Enabled (as a group)");
+            string = PhCreateString(L"已启用 (作为组)");
         else
             string = PhReferenceEmptyString();
     }
@@ -411,22 +411,22 @@ PPH_STRING PhGetGroupAttributesString(
         if (FlagOn(Attributes, SE_GROUP_ENABLED))
         {
             if (FlagOn(Attributes, SE_GROUP_ENABLED_BY_DEFAULT))
-                string = PhCreateString(L"Enabled");
+                string = PhCreateString(L"已启用");
             else
-                string = PhCreateString(L"Enabled (modified)");
+                string = PhCreateString(L"已启用 (已修改)");
         }
         else
         {
             if (FlagOn(Attributes, SE_GROUP_ENABLED_BY_DEFAULT))
-                string = PhCreateString(L"Disabled (modified)");
+                string = PhCreateString(L"已禁用 (已修改)");
             else
-                string = PhCreateString(L"Disabled");
+                string = PhCreateString(L"已禁用");
         }
     }
 
     if (Restricted)
     {
-        PhMoveReference(&string, PhConcatStringRefZ(&string->sr, L" (restricted)"));
+        PhMoveReference(&string, PhConcatStringRefZ(&string->sr, L" (受限)"));
     }
 
     return string;
@@ -588,22 +588,22 @@ PCWSTR PhGetPrivilegeAttributesString(
 {
     if (FlagOn(Attributes, SE_PRIVILEGE_REMOVED))
     {
-        return L"Removed";
+        return L"已删除";
     }
 
     if (FlagOn(Attributes, SE_PRIVILEGE_ENABLED))
     {
         if (FlagOn(Attributes, SE_PRIVILEGE_ENABLED_BY_DEFAULT))
-            return L"Enabled";
+            return L"已启用";
         else
-            return L"Enabled (modified)";
+            return L"已启用 (已修改)";
     }
     else
     {
         if (FlagOn(Attributes, SE_PRIVILEGE_ENABLED_BY_DEFAULT))
-            return L"Disabled (modified)";
+            return L"已禁用 (已修改)";
         else
-            return L"Disabled";
+            return L"已禁用";
     }
 }
 
@@ -766,7 +766,7 @@ static NTSTATUS NTAPI PhpTokenGroupResolveWorker(
             }
         }
 
-        PhSetListViewSubItem(context->ListViewHandle, ItemIndex, PH_PROCESS_TOKEN_INDEX_NAME, PhGetStringOrDefault(sidString, L"[Unknown SID]"));
+        PhSetListViewSubItem(context->ListViewHandle, ItemIndex, PH_PROCESS_TOKEN_INDEX_NAME, PhGetStringOrDefault(sidString, L"[未知 SID]"));
         PhSetListViewSubItem(context->ListViewHandle, ItemIndex, PH_PROCESS_TOKEN_INDEX_TYPE, PhGetSidAccountTypeString(context->TokenGroupSid));
 
         PhClearReference(&sidString);
@@ -823,7 +823,7 @@ VOID PhpUpdateSidsFromTokenGroups(
             TokenPageContext->ListViewHandle,
             lvitem->GroupId,
             MAXINT,
-            L"Resolving...",
+            L"正在解析...",
             lvitem
             );
 
@@ -1023,7 +1023,7 @@ VOID PhpUpdateTokenDangerousFlagItem(
     // Name
     itemIndex = PhAddListViewGroupItem(ListViewHandle, lvitem->GroupId, MAXINT, Name, lvitem);
     // Status
-    PhSetListViewSubItem(ListViewHandle, itemIndex, PH_PROCESS_TOKEN_INDEX_STATUS, State ? L"Enabled (modified)" : L"Disabled (modified)");
+    PhSetListViewSubItem(ListViewHandle, itemIndex, PH_PROCESS_TOKEN_INDEX_STATUS, State ? L"已启用 (已修改)" : L"已禁用 (已修改)");
     // Description
     PhSetListViewSubItem(ListViewHandle, itemIndex, PH_PROCESS_TOKEN_INDEX_DESCRIPTION, Description);
     // Value
@@ -1048,8 +1048,8 @@ BOOLEAN PhpUpdateTokenDangerousFlags(
                 TokenPageContext->ListViewHandle,
                 PH_PROCESS_TOKEN_FLAG_NO_WRITE_UP,
                 FALSE,
-                L"No-Write-Up Policy",
-                L"Prevents the process from modifying objects with a higher integrity"
+                L"No-Write-Up 策略",
+                L"防止该进程修改具有更高完整性的对象。"
                 );
         }
     }
@@ -1063,8 +1063,8 @@ BOOLEAN PhpUpdateTokenDangerousFlags(
                 TokenPageContext->ListViewHandle,
                 PH_PROCESS_TOKEN_FLAG_SANDBOX_INERT,
                 TRUE,
-                L"Sandbox Inert",
-                L"Ignore AppLocker rules and Software Restriction Policies"
+                L"沙箱惰性",
+                L"忽略 AppLocker 规则和软件限制策略"
                 );
         }
     }
@@ -1079,7 +1079,7 @@ BOOLEAN PhpUpdateTokenDangerousFlags(
                 PH_PROCESS_TOKEN_FLAG_UIACCESS,
                 TRUE,
                 L"UIAccess",
-                L"Ignore User Interface Privilege Isolation"
+                L"忽略用户界面权限隔离"
                 );
         }
     }
@@ -1284,30 +1284,30 @@ INT_PTR CALLBACK PhpTokenPageProc(
 
             PhSetListViewStyle(tokenPageContext->ListViewHandle, TRUE, TRUE);
             PhSetControlTheme(tokenPageContext->ListViewHandle, L"explorer");
-            PhAddListViewColumn(tokenPageContext->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 100, L"Name");
-            PhAddListViewColumn(tokenPageContext->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 100, L"Status");
-            PhAddListViewColumn(tokenPageContext->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 170, L"Description");
+            PhAddListViewColumn(tokenPageContext->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 100, L"名称");
+            PhAddListViewColumn(tokenPageContext->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 100, L"状态");
+            PhAddListViewColumn(tokenPageContext->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 170, L"描述");
             PhAddListViewColumn(tokenPageContext->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 100, L"SID");
-            PhAddListViewColumn(tokenPageContext->ListViewHandle, 4, 4, 4, LVCFMT_LEFT, 100, L"Type");
-            PhAddListViewColumn(tokenPageContext->ListViewHandle, 5, 5, 5, LVCFMT_LEFT, 100, L"Use");
+            PhAddListViewColumn(tokenPageContext->ListViewHandle, 4, 4, 4, LVCFMT_LEFT, 100, L"类型");
+            PhAddListViewColumn(tokenPageContext->ListViewHandle, 5, 5, 5, LVCFMT_LEFT, 100, L"使用");
 
             PhSetExtendedListView(tokenPageContext->ListViewHandle);
             ExtendedListView_SetCompareFunction(tokenPageContext->ListViewHandle, 1, PhpTokenStatusColumnCompareFunction);
             ExtendedListView_SetItemColorFunction(tokenPageContext->ListViewHandle, PhpTokenGroupColorFunction);
             ListView_EnableGroupView(tokenPageContext->ListViewHandle, TRUE);
-            PhAddListViewGroup(tokenPageContext->ListViewHandle, PH_PROCESS_TOKEN_CATEGORY_FLAGS, L"Flags");
-            PhAddListViewGroup(tokenPageContext->ListViewHandle, PH_PROCESS_TOKEN_CATEGORY_PRIVILEGES, L"Privileges");
-            PhAddListViewGroup(tokenPageContext->ListViewHandle, PH_PROCESS_TOKEN_CATEGORY_RESTRICTED, L"Restricting SIDs");
-            PhAddListViewGroup(tokenPageContext->ListViewHandle, PH_PROCESS_TOKEN_CATEGORY_GROUPS, L"Groups");
-            PhAddListViewGroup(tokenPageContext->ListViewHandle, PH_PROCESS_TOKEN_CATEGORY_LOGON, L"Groups (Logon SID)");
-            PhAddListViewGroup(tokenPageContext->ListViewHandle, PH_PROCESS_TOKEN_CATEGORY_INTEGRITY, L"Groups (Mandatory label)");
+            PhAddListViewGroup(tokenPageContext->ListViewHandle, PH_PROCESS_TOKEN_CATEGORY_FLAGS, L"标志");
+            PhAddListViewGroup(tokenPageContext->ListViewHandle, PH_PROCESS_TOKEN_CATEGORY_PRIVILEGES, L"特权");
+            PhAddListViewGroup(tokenPageContext->ListViewHandle, PH_PROCESS_TOKEN_CATEGORY_RESTRICTED, L"受限 SID");
+            PhAddListViewGroup(tokenPageContext->ListViewHandle, PH_PROCESS_TOKEN_CATEGORY_GROUPS, L"组");
+            PhAddListViewGroup(tokenPageContext->ListViewHandle, PH_PROCESS_TOKEN_CATEGORY_LOGON, L"组 (登录 SID)");
+            PhAddListViewGroup(tokenPageContext->ListViewHandle, PH_PROCESS_TOKEN_CATEGORY_INTEGRITY, L"组 (强制性标签)");
             PhLoadListViewColumnsFromSetting(SETTING_TOKEN_GROUPS_LIST_VIEW_COLUMNS, tokenPageContext->ListViewHandle);
             PhLoadListViewGroupStatesFromSetting(SETTING_TOKEN_GROUPS_LIST_VIEW_STATES, tokenPageContext->ListViewHandle);
             PhLoadListViewSortColumnsFromSetting(SETTING_TOKEN_GROUPS_LIST_VIEW_SORT, tokenPageContext->ListViewHandle);
             PhpTokenSetImageList(hwndDlg, tokenPageContext);
 
-            PhSetDialogItemText(hwndDlg, IDC_USER, L"Unknown");
-            PhSetDialogItemText(hwndDlg, IDC_USERSID, L"Unknown");
+            PhSetDialogItemText(hwndDlg, IDC_USER, L"未知");
+            PhSetDialogItemText(hwndDlg, IDC_USERSID, L"未知");
 
             if (NT_SUCCESS(tokenPageContext->OpenObject(
                 &tokenHandle,
@@ -1337,7 +1337,7 @@ INT_PTR CALLBACK PhpTokenPageProc(
                     {
                         PPHP_TOKEN_USER_RESOLVE_CONTEXT tokenUserResolve;
 
-                        PhSetDialogItemText(hwndDlg, IDC_USER, L"Resolving...");
+                        PhSetDialogItemText(hwndDlg, IDC_USER, L"正在解析...");
 
                         tokenUserResolve = PhAllocateZero(sizeof(PHP_TOKEN_USER_RESOLVE_CONTEXT));
                         tokenUserResolve->WindowHandle = GetDlgItem(hwndDlg, IDC_USER);
@@ -1360,12 +1360,12 @@ INT_PTR CALLBACK PhpTokenPageProc(
                 if (tokenSessionId != ULONG_MAX)
                     PhSetDialogItemValue(hwndDlg, IDC_SESSIONID, tokenSessionId, FALSE);
                 else
-                    PhSetDialogItemText(hwndDlg, IDC_SESSIONID, L"Unknown");
+                    PhSetDialogItemText(hwndDlg, IDC_SESSIONID, L"未知");
 
                 if (PhGetElevationTypeString(tokenElevation, tokenElevationType, &tokenElevationTypeString))
                     PhSetDialogItemText(hwndDlg, IDC_ELEVATED, PhGetStringRefZ(tokenElevationTypeString));
                 else
-                    PhSetDialogItemText(hwndDlg, IDC_ELEVATED, L"Unknown");
+                    PhSetDialogItemText(hwndDlg, IDC_ELEVATED, L"未知");
 
                 if (NT_SUCCESS(PhGetTokenIsVirtualizationAllowed(tokenHandle, &isVirtualizationAllowed)))
                 {
@@ -1373,12 +1373,12 @@ INT_PTR CALLBACK PhpTokenPageProc(
                     {
                         if (NT_SUCCESS(PhGetTokenIsVirtualizationEnabled(tokenHandle, &isVirtualizationEnabled)))
                         {
-                            PhSetDialogItemText(hwndDlg, IDC_VIRTUALIZED, isVirtualizationEnabled ? L"Yes" : L"No");
+                            PhSetDialogItemText(hwndDlg, IDC_VIRTUALIZED, isVirtualizationEnabled ? L"是" : L"否");
                         }
                     }
                     else
                     {
-                        PhSetDialogItemText(hwndDlg, IDC_VIRTUALIZED, L"Not allowed");
+                        PhSetDialogItemText(hwndDlg, IDC_VIRTUALIZED, L"不允许");
                     }
                 }
 
@@ -1433,7 +1433,7 @@ INT_PTR CALLBACK PhpTokenPageProc(
                 if (page) PhFree(page);
 
                 PhSetApplicationWindowIcon(hwndDlg);
-                PhSetWindowText(hwndDlg, L"Linked Token");
+                PhSetWindowText(hwndDlg, L"已链接令牌");
 
                 PhInitializeLayoutManager(&tokenPageContext->LayoutManager, hwndDlg);
                 PhAddLayoutItem(&tokenPageContext->LayoutManager, tokenPageContext->ListViewHandle, NULL, PH_ANCHOR_ALL);
@@ -1539,10 +1539,9 @@ INT_PTR CALLBACK PhpTokenPageProc(
                     {
                         if (!PhShowConfirmMessage(
                             hwndDlg,
-                            L"remove",
-                            L"the selected privilege(s)",
-                            L"Removing privileges may reduce the functionality of the process, "
-                            L"and is permanent for the lifetime of the process.",
+                            L"移除",
+                            L"已选中的特权",
+                            L"移除权限可能会降低进程的功能，并且对进程的生命周期是永久性的。",
                             FALSE
                             ))
                         {
@@ -1634,27 +1633,27 @@ INT_PTR CALLBACK PhpTokenPageProc(
                             }
                             else
                             {
-                                PWSTR action = L"set";
+                                PWSTR action = L"设置";
 
                                 switch (GET_WM_COMMAND_ID(wParam, lParam))
                                 {
                                 case ID_PRIVILEGE_ENABLE:
-                                    action = L"enable";
+                                    action = L"启用";
                                     break;
                                 case ID_PRIVILEGE_DISABLE:
-                                    action = L"disable";
+                                    action = L"禁用";
                                     break;
                                 case ID_PRIVILEGE_RESET:
-                                    action = L"reset";
+                                    action = L"重置";
                                     break;
                                 case ID_PRIVILEGE_REMOVE:
-                                    action = L"remove";
+                                    action = L"移除";
                                     break;
                                 }
 
                                 if (!PhShowContinueStatus(
                                     hwndDlg,
-                                    PhaFormatString(L"Unable to %s %s.", action, PhGetStringOrDefault(privilegeName, L"privilege"))->Buffer,
+                                    PhaFormatString(L"无法%s %s。", action, PhGetStringOrDefault(privilegeName, L"特权"))->Buffer,
                                     STATUS_UNSUCCESSFUL,
                                     0
                                     ))
@@ -1669,7 +1668,7 @@ INT_PTR CALLBACK PhpTokenPageProc(
                     }
                     else
                     {
-                        PhShowStatus(hwndDlg, L"Unable to open the token.", status, 0);
+                        PhShowStatus(hwndDlg, L"无法打开令牌。", status, 0);
                     }
 
                     PhFree(listViewItems);
@@ -1773,24 +1772,24 @@ INT_PTR CALLBACK PhpTokenPageProc(
                             }
                             else
                             {
-                                PWSTR action = L"set";
+                                PWSTR action = L"设置";
 
                                 switch (GET_WM_COMMAND_ID(wParam, lParam))
                                 {
                                 case ID_GROUP_ENABLE:
-                                    action = L"enable";
+                                    action = L"启用";
                                     break;
                                 case ID_GROUP_DISABLE:
-                                    action = L"disable";
+                                    action = L"禁用";
                                     break;
                                 case ID_GROUP_RESET:
-                                    action = L"reset";
+                                    action = L"重置";
                                     break;
                                 }
 
                                 if (!PhShowContinueStatus(
                                     hwndDlg,
-                                    PhaFormatString(L"Unable to %s %s.", action, L"group")->Buffer,
+                                    PhaFormatString(L"无法%s %s。", action, L"组")->Buffer,
                                     status,
                                     0
                                     ))
@@ -1809,7 +1808,7 @@ INT_PTR CALLBACK PhpTokenPageProc(
                     }
                     else
                     {
-                        PhShowStatus(hwndDlg, L"Unable to open the token.", status, 0);
+                        PhShowStatus(hwndDlg, L"无法打开令牌。", status, 0);
                     }
 
                     PhFree(listViewItems);
@@ -1843,10 +1842,9 @@ INT_PTR CALLBACK PhpTokenPageProc(
 
                     if (!PhShowConfirmMessage(
                         hwndDlg,
-                        L"remove",
-                        L"the UIAccess flag",
-                        L"Removing this flag may reduce the functionality of the process "
-                        L"provided it is an accessibility application.",
+                        L"移除",
+                        L"UIAccess 标志",
+                        L"如果这是一个辅助功能应用程序，移除此标志可能会降低该进程的功能。",
                         FALSE
                         ))
                     {
@@ -1883,7 +1881,7 @@ INT_PTR CALLBACK PhpTokenPageProc(
                         }
                         else
                         {
-                            PhShowStatus(hwndDlg, L"Unable to disable UIAccess flag.", status, 0);
+                            PhShowStatus(hwndDlg, L"无法禁用 UIAccess 标志。", status, 0);
                         }
 
                         ExtendedListView_SortItems(tokenPageContext->ListViewHandle);
@@ -1897,7 +1895,7 @@ INT_PTR CALLBACK PhpTokenPageProc(
                     }
                     else
                     {
-                        PhShowStatus(hwndDlg, L"Unable to open the token.", status, 0);
+                        PhShowStatus(hwndDlg, L"无法打开令牌。", status, 0);
                     }
 
                     PhFree(listViewItems);
@@ -1907,7 +1905,7 @@ INT_PTR CALLBACK PhpTokenPageProc(
                 {
                     PhEditSecurity(
                         PhCsForceNoParent ? NULL : hwndDlg,
-                        L"Default Token",
+                        L"默认令牌",
                         L"TokenDefault",
                         tokenPageContext->OpenObject,
                         tokenPageContext->CloseObject,
@@ -1940,15 +1938,15 @@ INT_PTR CALLBACK PhpTokenPageProc(
                         break;
 
                     menu = PhCreateEMenu();
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, MandatorySecureProcessRID, L"Protected", NULL, NULL), ULONG_MAX);
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, MandatorySystemRID, L"System", NULL, NULL), ULONG_MAX);
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, MandatoryHighRID, L"High", NULL, NULL), ULONG_MAX);
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, MandatoryMediumPlusRID, L"Medium +", NULL, NULL), ULONG_MAX);
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, MandatoryMediumRID, L"Medium", NULL, NULL), ULONG_MAX);
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, MandatoryLowRID, L"Low", NULL, NULL), ULONG_MAX);
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, MandatoryUntrustedRID, L"Untrusted", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, MandatorySecureProcessRID, L"受保护", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, MandatorySystemRID, L"系统", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, MandatoryHighRID, L"高", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, MandatoryMediumPlusRID, L"中等 +", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, MandatoryMediumRID, L"中等", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, MandatoryLowRID, L"低", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, MandatoryUntrustedRID, L"不受信任", NULL, NULL), ULONG_MAX);
                     PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, USHRT_MAX, L"Custom...", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, USHRT_MAX, L"自定义...", NULL, NULL), ULONG_MAX);
 
                     integrityLevelRID = ULONG_MAX;
 
@@ -1989,7 +1987,7 @@ INT_PTR CALLBACK PhpTokenPageProc(
                             {
                                 PPH_EMENU_ITEM unknownIntegrityItem;
 
-                                unknownIntegrityItem = PhCreateEMenuItem(0, (ULONG)integrityLevelRID, L"Intermediate level", NULL, NULL);
+                                unknownIntegrityItem = PhCreateEMenuItem(0, (ULONG)integrityLevelRID, L"中级", NULL, NULL);
                                 unknownIntegrityItem->Flags |= PH_EMENU_CHECKED | PH_EMENU_RADIOCHECK;
                                 PhInsertEMenuItem(menu, unknownIntegrityItem, customLevelPosition);
                             }
@@ -2023,9 +2021,9 @@ INT_PTR CALLBACK PhpTokenPageProc(
                     {
                         if (PhShowConfirmMessage(
                             hwndDlg,
-                            L"set",
-                            L"the integrity level",
-                            L"Once lowered, the integrity level of the token cannot be raised again.",
+                            L"设置",
+                            L"完整性级别",
+                            L"令牌的完整性级别一旦降低，就无法再次提高。",
                             FALSE
                             ))
                         {
@@ -2038,8 +2036,8 @@ INT_PTR CALLBACK PhpTokenPageProc(
 
                                 while (PhaChoiceDialog(
                                     hwndDlg,
-                                    L"Integrity Level",
-                                    L"Enter a custom integrity level:",
+                                    L"完整性级别",
+                                    L"输入自定义完整性级别:",
                                     NULL,
                                     0,
                                     NULL,
@@ -2110,7 +2108,7 @@ INT_PTR CALLBACK PhpTokenPageProc(
                             }
 
                             if (!NT_SUCCESS(status))
-                                PhShowStatus(hwndDlg, L"Unable to set the integrity level", status, 0);
+                                PhShowStatus(hwndDlg, L"无法设置完整性级别", status, 0);
                         }
                     }
 
@@ -2229,10 +2227,10 @@ INT_PTR CALLBACK PhpTokenPageProc(
                         {
                         case PH_PROCESS_TOKEN_CATEGORY_PRIVILEGES:
                             {
-                                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_PRIVILEGE_ENABLE, L"&Enable", NULL, NULL), ULONG_MAX);
-                                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_PRIVILEGE_DISABLE, L"&Disable", NULL, NULL), ULONG_MAX);
-                                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_PRIVILEGE_RESET, L"Re&set", NULL, NULL), ULONG_MAX);
-                                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_PRIVILEGE_REMOVE, L"&Remove", NULL, NULL), ULONG_MAX);
+                                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_PRIVILEGE_ENABLE, L"启用(&E)", NULL, NULL), ULONG_MAX);
+                                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_PRIVILEGE_DISABLE, L"禁用(&D)", NULL, NULL), ULONG_MAX);
+                                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_PRIVILEGE_RESET, L"重置(&S)", NULL, NULL), ULONG_MAX);
+                                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_PRIVILEGE_REMOVE, L"移除(&R)", NULL, NULL), ULONG_MAX);
                                 PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
 
                                 if (hasRemovedItems)
@@ -2245,22 +2243,22 @@ INT_PTR CALLBACK PhpTokenPageProc(
                         case PH_PROCESS_TOKEN_CATEGORY_LOGON:
                         case PH_PROCESS_TOKEN_CATEGORY_INTEGRITY:
                             {
-                                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_GROUP_ENABLE, L"&Enable", NULL, NULL), ULONG_MAX);
-                                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_GROUP_DISABLE, L"&Disable", NULL, NULL), ULONG_MAX);
-                                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_GROUP_RESET, L"Re&set", NULL, NULL), ULONG_MAX);
+                                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_GROUP_ENABLE, L"启用(&E)", NULL, NULL), ULONG_MAX);
+                                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_GROUP_DISABLE, L"禁用(&D)", NULL, NULL), ULONG_MAX);
+                                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_GROUP_RESET, L"重置(&S)", NULL, NULL), ULONG_MAX);
                                 PhInsertEMenuItem(menu, PhCreateEMenuSeparator(), ULONG_MAX);
                             }
                             break;
                         case PH_PROCESS_TOKEN_CATEGORY_FLAGS:
                             {
                                 if ((numberOfItems == 1) && (listviewItems[0]->ItemFlag == PH_PROCESS_TOKEN_FLAG_UIACCESS))
-                                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_UIACCESS_REMOVE, L"&Remove", NULL, NULL), ULONG_MAX);
+                                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_UIACCESS_REMOVE, L"移除(&R)", NULL, NULL), ULONG_MAX);
                             }
                             break;
                         }
                     }
 
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, IDC_COPY, L"&Copy", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, IDC_COPY, L"复制(&C)", NULL, NULL), ULONG_MAX);
                     PhInsertCopyListViewEMenuItem(menu, IDC_COPY, tokenPageContext->ListViewHandle);
 
                     item = PhShowEMenu(
@@ -2341,7 +2339,7 @@ VOID PhpShowTokenAdvancedProperties(
         PSH_PROPTITLE;
     propSheetHeader.hInstance = NtCurrentImageBase();
     propSheetHeader.hwndParent = ParentWindowHandle;
-    propSheetHeader.pszCaption = L"Token";
+    propSheetHeader.pszCaption = L"令牌";
     propSheetHeader.nStartPage = 0;
     propSheetHeader.phpage = pages;
 
@@ -2376,7 +2374,7 @@ VOID PhpShowTokenAdvancedProperties(
             page.dwFlags = PSP_USETITLE;
             page.pszTemplate = MAKEINTRESOURCE(IDD_TOKADVANCED);
             page.hInstance = NtCurrentImageBase();
-            page.pszTitle = L"Container";
+            page.pszTitle = L"容器";
             page.pfnDlgProc = PhpTokenContainerPageProc;
             page.lParam = (LPARAM)Context;
             pages[numberOfPages++] = CreatePropertySheetPage(&page);
@@ -2399,7 +2397,7 @@ VOID PhpShowTokenAdvancedProperties(
         page.dwFlags = PSP_USETITLE;
         page.pszTemplate = MAKEINTRESOURCE(IDD_TOKATTRIBUTES);
         page.hInstance = NtCurrentImageBase();
-        page.pszTitle = L"Claims";
+        page.pszTitle = L"声明";
         page.pfnDlgProc = PhpTokenClaimsPageProc;
         page.lParam = (LPARAM)Context;
         pages[numberOfPages++] = CreatePropertySheetPage(&page);
@@ -2411,7 +2409,7 @@ VOID PhpShowTokenAdvancedProperties(
         page.dwFlags = PSP_USETITLE;
         page.pszTemplate = MAKEINTRESOURCE(IDD_TOKAPPPOLICY);
         page.hInstance = NtCurrentImageBase();
-        page.pszTitle = L"Policy";
+        page.pszTitle = L"策略";
         page.pfnDlgProc = PhpTokenAppPolicyPageProc;
         page.lParam = (LPARAM)Context;
         pages[numberOfPages++] = CreatePropertySheetPage(&page);
@@ -2423,7 +2421,7 @@ VOID PhpShowTokenAdvancedProperties(
         page.dwFlags = PSP_USETITLE;
         page.pszTemplate = MAKEINTRESOURCE(IDD_TOKATTRIBUTES);
         page.hInstance = NtCurrentImageBase();
-        page.pszTitle = L"Attributes";
+        page.pszTitle = L"属性";
         page.pfnDlgProc = PhpTokenAttributesPageProc;
         page.lParam = (LPARAM)Context;
         pages[numberOfPages++] = CreatePropertySheetPage(&page);
@@ -2484,9 +2482,9 @@ INT_PTR CALLBACK PhpTokenGeneralPageProc(
             PPH_STRINGREF tokenElevationTypeString;
             BOOLEAN hasLinkedToken = FALSE;
             PWSTR tokenVirtualization = L"N/A";
-            PWSTR tokenUIAccess = L"Unknown";
-            WCHAR tokenSourceName[TOKEN_SOURCE_LENGTH + 1] = { L"Unknown" };
-            WCHAR tokenSourceLuid[PH_INT64_STR_LEN_1] = { L"Unknown" };
+            PWSTR tokenUIAccess = L"未知";
+            WCHAR tokenSourceName[TOKEN_SOURCE_LENGTH + 1] = { L"未知" };
+            WCHAR tokenSourceLuid[PH_INT64_STR_LEN_1] = { L"未知" };
 
             // HACK
             PhCenterWindow(GetParent(hwndDlg), GetParent(GetParent(hwndDlg)));
@@ -2535,18 +2533,18 @@ INT_PTR CALLBACK PhpTokenGeneralPageProc(
                     {
                         if (NT_SUCCESS(PhGetTokenIsVirtualizationEnabled(tokenHandle, &isVirtualizationEnabled)))
                         {
-                            tokenVirtualization = isVirtualizationEnabled ? L"Enabled" : L"Disabled";
+                            tokenVirtualization = isVirtualizationEnabled ? L"已启用" : L"已禁用";
                         }
                     }
                     else
                     {
-                        tokenVirtualization = L"Not Allowed";
+                        tokenVirtualization = L"不允许";
                     }
                 }
 
                 if (NT_SUCCESS(PhGetTokenUIAccess(tokenHandle, &isUIAccessEnabled)))
                 {
-                    tokenUIAccess = isUIAccessEnabled ? L"Enabled": L"Disabled";
+                    tokenUIAccess = isUIAccessEnabled ? L"已启用": L"已禁用";
                 }
 
                 tokenPageContext->CloseObject(tokenHandle, FALSE, tokenPageContext->Context);
@@ -2584,20 +2582,20 @@ INT_PTR CALLBACK PhpTokenGeneralPageProc(
                 tokenPageContext->CloseObject(tokenHandle, FALSE, tokenPageContext->Context);
             }
 
-            PhSetDialogItemText(hwndDlg, IDC_USER, PhGetStringOrDefault(tokenUserName, L"Unknown"));
-            PhSetDialogItemText(hwndDlg, IDC_USERSID, PhGetStringOrDefault(tokenUserSid, L"Unknown"));
-            PhSetDialogItemText(hwndDlg, IDC_OWNER, PhGetStringOrDefault(tokenOwnerName, L"Unknown"));
-            PhSetDialogItemText(hwndDlg, IDC_PRIMARYGROUP, PhGetStringOrDefault(tokenPrimaryGroupName, L"Unknown"));
+            PhSetDialogItemText(hwndDlg, IDC_USER, PhGetStringOrDefault(tokenUserName, L"未知"));
+            PhSetDialogItemText(hwndDlg, IDC_USERSID, PhGetStringOrDefault(tokenUserSid, L"未知"));
+            PhSetDialogItemText(hwndDlg, IDC_OWNER, PhGetStringOrDefault(tokenOwnerName, L"未知"));
+            PhSetDialogItemText(hwndDlg, IDC_PRIMARYGROUP, PhGetStringOrDefault(tokenPrimaryGroupName, L"未知"));
 
             if (tokenSessionId != ULONG_MAX)
                 PhSetDialogItemValue(hwndDlg, IDC_SESSIONID, tokenSessionId, FALSE);
             else
-                PhSetDialogItemText(hwndDlg, IDC_SESSIONID, L"Unknown");
+                PhSetDialogItemText(hwndDlg, IDC_SESSIONID, L"未知");
 
             if (PhGetElevationTypeString(tokenElevation, tokenElevationType, &tokenElevationTypeString))
                 PhSetDialogItemText(hwndDlg, IDC_ELEVATED, PhGetStringRefZ(tokenElevationTypeString));
             else
-                PhSetDialogItemText(hwndDlg, IDC_ELEVATED, L"Unknown");
+                PhSetDialogItemText(hwndDlg, IDC_ELEVATED, L"未知");
 
             PhSetDialogItemText(hwndDlg, IDC_VIRTUALIZATION, tokenVirtualization);
             PhSetDialogItemText(hwndDlg, IDC_UIACCESS, tokenUIAccess);
@@ -2633,14 +2631,14 @@ INT_PTR CALLBACK PhpTokenGeneralPageProc(
                             PhpCloseLinkedToken,
                             tokenPageContext->ProcessId,
                             (PVOID)tokenHandle,
-                            L"Linked Token"
+                            L"已链接令牌"
                             );
 
                         tokenPageContext->CloseObject(tokenHandle, FALSE, tokenPageContext->Context);
                     }
                     else
                     {
-                        PhShowStatus(hwndDlg, L"Unable to open the token", status, 0);
+                        PhShowStatus(hwndDlg, L"无法打开令牌", status, 0);
                     }
                 }
                 break;
@@ -2707,12 +2705,12 @@ INT_PTR CALLBACK PhpTokenAdvancedPageProc(
         {
             HANDLE tokenHandle;
             LONG listViewGroupIndex = 0;
-            PWSTR tokenType = L"Unknown";
-            PWSTR tokenImpersonationLevel = L"Unknown";
-            WCHAR tokenLuid[PH_PTR_STR_LEN_1] = { L"Unknown" };
-            WCHAR authenticationLuid[PH_PTR_STR_LEN_1] = { L"Unknown" };
-            WCHAR tokenModifiedLuid[PH_PTR_STR_LEN_1] = { L"Unknown" };
-            WCHAR tokenOriginLogonSession[PH_PTR_STR_LEN_1] = { L"Unknown" };
+            PWSTR tokenType = L"未知";
+            PWSTR tokenImpersonationLevel = L"未知";
+            WCHAR tokenLuid[PH_PTR_STR_LEN_1] = { L"未知" };
+            WCHAR authenticationLuid[PH_PTR_STR_LEN_1] = { L"未知" };
+            WCHAR tokenModifiedLuid[PH_PTR_STR_LEN_1] = { L"未知" };
+            WCHAR tokenOriginLogonSession[PH_PTR_STR_LEN_1] = { L"未知" };
             PPH_STRING memoryUsed = NULL;
             PPH_STRING memoryAvailable = NULL;
             PPH_STRING tokenNamedObjectPathString = NULL;
@@ -2728,28 +2726,28 @@ INT_PTR CALLBACK PhpTokenAdvancedPageProc(
 
             PhSetListViewStyle(context->ListViewHandle, FALSE, TRUE);
             PhSetControlTheme(context->ListViewHandle, L"explorer");
-            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 120, L"Name");
-            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 280, L"Value");
+            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 120, L"名称");
+            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 280, L"值");
             PhSetExtendedListView(context->ListViewHandle);
 
             PhInitializeLayoutManager(&context->LayoutManager, hwndDlg);
             PhAddLayoutItem(&context->LayoutManager, context->ListViewHandle, NULL, PH_ANCHOR_ALL);
 
             ListView_EnableGroupView(context->ListViewHandle, TRUE);
-            PhAddListViewGroup(context->ListViewHandle, listViewGroupIndex++, L"General");
-            PhAddListViewGroup(context->ListViewHandle, listViewGroupIndex++, L"LUIDs");
-            PhAddListViewGroup(context->ListViewHandle, listViewGroupIndex++, L"Memory");
-            PhAddListViewGroup(context->ListViewHandle, listViewGroupIndex++, L"Properties");
-            PhAddListViewGroupItem(context->ListViewHandle, 0, MAXINT, L"Type", NULL);
-            PhAddListViewGroupItem(context->ListViewHandle, 0, MAXINT, L"Impersonation level", NULL);
-            PhAddListViewGroupItem(context->ListViewHandle, 1, MAXINT, L"Token LUID", NULL);
-            PhAddListViewGroupItem(context->ListViewHandle, 1, MAXINT, L"Authentication LUID", NULL);
-            PhAddListViewGroupItem(context->ListViewHandle, 1, MAXINT, L"ModifiedId LUID", NULL);
-            PhAddListViewGroupItem(context->ListViewHandle, 1, MAXINT, L"Origin LUID", NULL);
-            PhAddListViewGroupItem(context->ListViewHandle, 2, MAXINT, L"Memory used", NULL);
-            PhAddListViewGroupItem(context->ListViewHandle, 2, MAXINT, L"Memory available", NULL);
-            PhAddListViewGroupItem(context->ListViewHandle, 3, MAXINT, L"Token object path", NULL);
-            PhAddListViewGroupItem(context->ListViewHandle, 3, MAXINT, L"Token SDDL", NULL);
+            PhAddListViewGroup(context->ListViewHandle, listViewGroupIndex++, L"常规");
+            PhAddListViewGroup(context->ListViewHandle, listViewGroupIndex++, L"LUID");
+            PhAddListViewGroup(context->ListViewHandle, listViewGroupIndex++, L"内存");
+            PhAddListViewGroup(context->ListViewHandle, listViewGroupIndex++, L"属性");
+            PhAddListViewGroupItem(context->ListViewHandle, 0, MAXINT, L"类型", NULL);
+            PhAddListViewGroupItem(context->ListViewHandle, 0, MAXINT, L"模拟级别", NULL);
+            PhAddListViewGroupItem(context->ListViewHandle, 1, MAXINT, L"令牌 LUID", NULL);
+            PhAddListViewGroupItem(context->ListViewHandle, 1, MAXINT, L"认证 LUID", NULL);
+            PhAddListViewGroupItem(context->ListViewHandle, 1, MAXINT, L"已修改 LUID", NULL);
+            PhAddListViewGroupItem(context->ListViewHandle, 1, MAXINT, L"原始 LUID", NULL);
+            PhAddListViewGroupItem(context->ListViewHandle, 2, MAXINT, L"已使用内存", NULL);
+            PhAddListViewGroupItem(context->ListViewHandle, 2, MAXINT, L"可用内存", NULL);
+            PhAddListViewGroupItem(context->ListViewHandle, 3, MAXINT, L"令牌对象路径", NULL);
+            PhAddListViewGroupItem(context->ListViewHandle, 3, MAXINT, L"令牌 SDDL", NULL);
 
             if (NT_SUCCESS(tokenPageContext->OpenObject(
                 &tokenHandle,
@@ -2794,8 +2792,8 @@ INT_PTR CALLBACK PhpTokenAdvancedPageProc(
                     LONG trustLevelNameIndex;
 
                     trustLevelGroupIndex = PhAddListViewGroup(context->ListViewHandle, listViewGroupIndex++, L"TrustLevel");
-                    trustLevelSidIndex = PhAddListViewGroupItem(context->ListViewHandle, trustLevelGroupIndex, MAXINT, L"TrustLevel Sid", NULL);
-                    trustLevelNameIndex = PhAddListViewGroupItem(context->ListViewHandle, trustLevelGroupIndex, MAXINT, L"TrustLevel Name", NULL);
+                    trustLevelSidIndex = PhAddListViewGroupItem(context->ListViewHandle, trustLevelGroupIndex, MAXINT, L"TrustLevel SID", NULL);
+                    trustLevelNameIndex = PhAddListViewGroupItem(context->ListViewHandle, trustLevelGroupIndex, MAXINT, L"TrustLevel 名称", NULL);
                     PhSetListViewSubItem(context->ListViewHandle, trustLevelSidIndex, 1, PhGetStringOrDefault(tokenTrustLevelSidString, L"N/A"));
                     PhSetListViewSubItem(context->ListViewHandle, trustLevelNameIndex, 1, PhGetStringOrDefault(tokenTrustLevelNameString, L"N/A"));
 
@@ -2808,11 +2806,11 @@ INT_PTR CALLBACK PhpTokenAdvancedPageProc(
                 //{
                 //    PPH_STRING tokenLogonName = PhGetSidFullName(tokenLogonGroups->Groups[0].Sid, TRUE, NULL);
                 //    PPH_STRING tokenLogonSid = PhSidToStringSid(tokenLogonGroups->Groups[0].Sid);
-                //    LONG tokenLogonGroupIndex = PhAddListViewGroup(context->ListViewHandle, listViewGroupIndex++, L"Logon");
-                //    LONG tokenLogonNameIndex = PhAddListViewGroupItem(context->ListViewHandle, tokenLogonGroupIndex, MAXINT, L"Token logon SID", NULL);
-                //    LONG tokenLogonSidIndex = PhAddListViewGroupItem(context->ListViewHandle, tokenLogonGroupIndex, MAXINT, L"Token logon Name", NULL);
-                //    PhSetListViewSubItem(context->ListViewHandle, tokenLogonNameIndex, 1, PhGetStringOrDefault(tokenLogonName, L"Unknown"));
-                //    PhSetListViewSubItem(context->ListViewHandle, tokenLogonSidIndex, 1, PhGetStringOrDefault(tokenLogonSid, L"Unknown"));
+                //    LONG tokenLogonGroupIndex = PhAddListViewGroup(context->ListViewHandle, listViewGroupIndex++, L"登录");
+                //    LONG tokenLogonNameIndex = PhAddListViewGroupItem(context->ListViewHandle, tokenLogonGroupIndex, MAXINT, L"令牌登录 SID", NULL);
+                //    LONG tokenLogonSidIndex = PhAddListViewGroupItem(context->ListViewHandle, tokenLogonGroupIndex, MAXINT, L"令牌登录名称", NULL);
+                //    PhSetListViewSubItem(context->ListViewHandle, tokenLogonNameIndex, 1, PhGetStringOrDefault(tokenLogonName, L"未知"));
+                //    PhSetListViewSubItem(context->ListViewHandle, tokenLogonSidIndex, 1, PhGetStringOrDefault(tokenLogonSid, L"未知"));
                 //    PhFree(tokenLogonGroups);
                 //}
 
@@ -2822,9 +2820,9 @@ INT_PTR CALLBACK PhpTokenAdvancedPageProc(
                     LONG profileFolderIndex;
                     LONG profileRegistryIndex;
 
-                    profileGroupIndex = PhAddListViewGroup(context->ListViewHandle, listViewGroupIndex++, L"Profile");
-                    profileFolderIndex = PhAddListViewGroupItem(context->ListViewHandle, profileGroupIndex, MAXINT, L"Folder path", NULL);
-                    profileRegistryIndex = PhAddListViewGroupItem(context->ListViewHandle, profileGroupIndex, MAXINT, L"Registry path", NULL);
+                    profileGroupIndex = PhAddListViewGroup(context->ListViewHandle, listViewGroupIndex++, L"配置文件");
+                    profileFolderIndex = PhAddListViewGroupItem(context->ListViewHandle, profileGroupIndex, MAXINT, L"文件夹路径", NULL);
+                    profileRegistryIndex = PhAddListViewGroupItem(context->ListViewHandle, profileGroupIndex, MAXINT, L"注册表路径", NULL);
 
                     PhSetListViewSubItem(context->ListViewHandle, profileFolderIndex, 1, PhGetStringOrDefault(tokenProfilePathString, L"N/A"));
 
@@ -2850,9 +2848,9 @@ INT_PTR CALLBACK PhpTokenAdvancedPageProc(
                 LONG systemIdPublisherIndex;
                 LONG systemIdUserIndex;
 
-                systemIdGroupIndex = PhAddListViewGroup(context->ListViewHandle, listViewGroupIndex++, L"System ID");
-                systemIdPublisherIndex = PhAddListViewGroupItem(context->ListViewHandle, systemIdGroupIndex, MAXINT, L"HWID (Publisher)", NULL);
-                systemIdUserIndex = PhAddListViewGroupItem(context->ListViewHandle, systemIdGroupIndex, MAXINT, L"HWID (User)", NULL);
+                systemIdGroupIndex = PhAddListViewGroup(context->ListViewHandle, listViewGroupIndex++, L"系统 ID");
+                systemIdPublisherIndex = PhAddListViewGroupItem(context->ListViewHandle, systemIdGroupIndex, MAXINT, L"HWID (发布者)", NULL);
+                systemIdUserIndex = PhAddListViewGroupItem(context->ListViewHandle, systemIdGroupIndex, MAXINT, L"HWID (用户)", NULL);
 
                 PhSetListViewSubItem(context->ListViewHandle, systemIdPublisherIndex, 1, PhGetStringOrDefault(tokenSystemIdForPublisher, L"N/A"));
                 PhSetListViewSubItem(context->ListViewHandle, systemIdUserIndex, 1, PhGetStringOrDefault(tokenSystemIdForUser, L"N/A"));
@@ -2867,10 +2865,10 @@ INT_PTR CALLBACK PhpTokenAdvancedPageProc(
             PhSetListViewSubItem(context->ListViewHandle, 3, 1, authenticationLuid);
             PhSetListViewSubItem(context->ListViewHandle, 4, 1, tokenModifiedLuid);
             PhSetListViewSubItem(context->ListViewHandle, 5, 1, tokenOriginLogonSession);
-            PhSetListViewSubItem(context->ListViewHandle, 6, 1, PhGetStringOrDefault(memoryUsed, L"Unknown"));
-            PhSetListViewSubItem(context->ListViewHandle, 7, 1, PhGetStringOrDefault(memoryAvailable, L"Unknown"));
-            PhSetListViewSubItem(context->ListViewHandle, 8, 1, PhGetStringOrDefault(tokenNamedObjectPathString, L"Unknown"));
-            PhSetListViewSubItem(context->ListViewHandle, 9, 1, PhGetStringOrDefault(tokenSecurityDescriptorString, L"Unknown"));
+            PhSetListViewSubItem(context->ListViewHandle, 6, 1, PhGetStringOrDefault(memoryUsed, L"未知"));
+            PhSetListViewSubItem(context->ListViewHandle, 7, 1, PhGetStringOrDefault(memoryAvailable, L"未知"));
+            PhSetListViewSubItem(context->ListViewHandle, 8, 1, PhGetStringOrDefault(tokenNamedObjectPathString, L"未知"));
+            PhSetListViewSubItem(context->ListViewHandle, 9, 1, PhGetStringOrDefault(tokenSecurityDescriptorString, L"未知"));
 
             PhClearReference(&memoryUsed);
             PhClearReference(&memoryAvailable);
@@ -2916,7 +2914,7 @@ INT_PTR CALLBACK PhpTokenAdvancedPageProc(
                 if (numberOfItems != 0)
                 {
                     menu = PhCreateEMenu();
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, IDC_COPY, L"&Copy", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, IDC_COPY, L"复制(&C)", NULL, NULL), ULONG_MAX);
                     PhInsertCopyListViewEMenuItem(menu, IDC_COPY, context->ListViewHandle);
 
                     item = PhShowEMenu(
@@ -3144,7 +3142,7 @@ VOID PhpInitializeAttributeTreeContext(
     TreeNew_SetRedraw(TreeNewHandle, FALSE);
     TreeNew_SetCallback(TreeNewHandle, PhpAttributeTreeNewCallback, Context);
     //TreeNew_GetViewParts(TreeNewHandle, &parts); // column width = (parts.ClientRect.right - parts.VScrollWidth) // TODO: VScrollWidth not set during INITDIALOG. (dmex)
-    PhAddTreeNewColumnEx2(TreeNewHandle, 0, TRUE, L"Attributes", 200, PH_ALIGN_LEFT, 0, 0, TN_COLUMN_FLAG_NODPISCALEONADD);
+    PhAddTreeNewColumnEx2(TreeNewHandle, 0, TRUE, L"属性", 200, PH_ALIGN_LEFT, 0, 0, TN_COLUMN_FLAG_NODPISCALEONADD);
     TreeNew_SetRedraw(TreeNewHandle, TRUE);
 }
 
@@ -3201,13 +3199,13 @@ BOOLEAN PhpAddTokenCapabilities(
 
             if (name = PhGetSidFullName(TokenPageContext->Capabilities->Groups[i].Sid, TRUE, NULL))
             {
-                PhpAddAttributeNode(&TokenPageContext->CapsTreeContext, node, PhFormatString(L"FullName: %s", PhGetString(name)));
+                PhpAddAttributeNode(&TokenPageContext->CapsTreeContext, node, PhFormatString(L"全名: %s", PhGetString(name)));
                 PhDereferenceObject(name);
             }
 
             if (name = PhGetCapabilitySidName(TokenPageContext->Capabilities->Groups[i].Sid))
             {
-                PhpAddAttributeNode(&TokenPageContext->CapsTreeContext, node, PhFormatString(L"Capability: %s", PhGetString(name)));
+                PhpAddAttributeNode(&TokenPageContext->CapsTreeContext, node, PhFormatString(L"能力: %s", PhGetString(name)));
                 PhDereferenceObject(name);
             }
 
@@ -3229,7 +3227,7 @@ BOOLEAN PhpAddTokenCapabilities(
                         {
                             if (PhIsPackageCapabilitySid(tokenAppContainer.AppContainer.Sid, TokenPageContext->Capabilities->Groups[i].Sid))
                             {
-                                static CONST PH_STRINGREF packageNameStringRef = PH_STRINGREF_INIT(L"Package: ");
+                                static CONST PH_STRINGREF packageNameStringRef = PH_STRINGREF_INIT(L"包: ");
 
                                 if (NT_SUCCESS(PhGetTokenPackageFullName(tokenHandle, &name)))
                                 {
@@ -3265,8 +3263,8 @@ BOOLEAN PhpAddTokenCapabilities(
 
                         if (name = PhFormatGuid(&capabilityGuid.Guid))
                         {
-                            static CONST PH_STRINGREF guidNameStringRef = PH_STRINGREF_INIT(L"Guid: ");
-                            static CONST PH_STRINGREF capabilityNameStringRef = PH_STRINGREF_INIT(L"Capability: ");
+                            static CONST PH_STRINGREF guidNameStringRef = PH_STRINGREF_INIT(L"GUID: ");
+                            static CONST PH_STRINGREF capabilityNameStringRef = PH_STRINGREF_INIT(L"能力: ");
 
                             PhpAddAttributeNode(&TokenPageContext->CapsTreeContext, node, PhConcatStringRef2(&guidNameStringRef, &name->sr));
 
@@ -3318,7 +3316,7 @@ INT_PTR CALLBACK PhpTokenCapabilitiesPageProc(
             TreeNew_SetRedraw(tnHandle, FALSE);
             TreeNew_SetEmptyText(tnHandle, &PhpEmptyTokenCapabilitiesText, 0);
             TreeNew_SetCallback(tnHandle, PhpAttributeTreeNewCallback, &tokenPageContext->CapsTreeContext);
-            PhAddTreeNewColumnEx2(tnHandle, 0, TRUE, L"Capabilities", 200, PH_ALIGN_LEFT, 0, 0, TN_COLUMN_FLAG_NODPISCALEONADD);
+            PhAddTreeNewColumnEx2(tnHandle, 0, TRUE, L"能力", 200, PH_ALIGN_LEFT, 0, 0, TN_COLUMN_FLAG_NODPISCALEONADD);
             PhpAddTokenCapabilities(tokenPageContext, tnHandle);
             TreeNew_NodesStructured(tnHandle);
             TreeNew_SetRedraw(tnHandle, TRUE);
@@ -3356,7 +3354,7 @@ INT_PTR CALLBACK PhpTokenCapabilitiesPageProc(
             if (numberOfAttributeObjectNodes != 0)
             {
                 menu = PhCreateEMenu();
-                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, IDC_COPY, L"Copy", NULL, NULL), ULONG_MAX);
+                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, IDC_COPY, L"复制", NULL, NULL), ULONG_MAX);
                 PhInsertCopyCellEMenuItem(menu, IDC_COPY, tnHandle, contextMenuEvent->Column);
 
                 selectedItem = PhShowEMenu(
@@ -3407,23 +3405,23 @@ PWSTR PhGetSecurityAttributeTypeString(
     switch (Type)
     {
     case TOKEN_SECURITY_ATTRIBUTE_TYPE_INVALID:
-        return L"Invalid";
+        return L"无效";
     case TOKEN_SECURITY_ATTRIBUTE_TYPE_INT64:
         return L"Int64";
     case TOKEN_SECURITY_ATTRIBUTE_TYPE_UINT64:
         return L"UInt64";
     case TOKEN_SECURITY_ATTRIBUTE_TYPE_STRING:
-        return L"String";
+        return L"字符串";
     case TOKEN_SECURITY_ATTRIBUTE_TYPE_FQBN:
         return L"FQBN";
     case TOKEN_SECURITY_ATTRIBUTE_TYPE_SID:
         return L"SID";
     case TOKEN_SECURITY_ATTRIBUTE_TYPE_BOOLEAN:
-        return L"Boolean";
+        return L"布尔值";
     case TOKEN_SECURITY_ATTRIBUTE_TYPE_OCTET_STRING:
-        return L"Octet string";
+        return L"八位字符串";
     default:
-        return L"(Unknown)";
+        return L"(未知)";
     }
 }
 
@@ -3438,24 +3436,24 @@ PPH_STRING PhGetSecurityAttributeFlagsString(
     PhInitializeStringBuilder(&sb, 100);
 
     if (Flags & TOKEN_SECURITY_ATTRIBUTE_MANDATORY)
-        PhAppendStringBuilder2(&sb, L"Mandatory, ");
+        PhAppendStringBuilder2(&sb, L"强制, ");
     if (Flags & TOKEN_SECURITY_ATTRIBUTE_DISABLED)
-        PhAppendStringBuilder2(&sb, L"Disabled, ");
+        PhAppendStringBuilder2(&sb, L"禁用, ");
     if (Flags & TOKEN_SECURITY_ATTRIBUTE_DISABLED_BY_DEFAULT)
-        PhAppendStringBuilder2(&sb, L"Default disabled, ");
+        PhAppendStringBuilder2(&sb, L"默认禁用, ");
     if (Flags & TOKEN_SECURITY_ATTRIBUTE_USE_FOR_DENY_ONLY)
-        PhAppendStringBuilder2(&sb, L"Use for deny only, ");
+        PhAppendStringBuilder2(&sb, L"仅用于拒绝, ");
     if (Flags & TOKEN_SECURITY_ATTRIBUTE_VALUE_CASE_SENSITIVE)
-        PhAppendStringBuilder2(&sb, L"Case-sensitive, ");
+        PhAppendStringBuilder2(&sb, L"区分大小写, ");
     if (Flags & TOKEN_SECURITY_ATTRIBUTE_NON_INHERITABLE)
-        PhAppendStringBuilder2(&sb, L"Non-inheritable, ");
+        PhAppendStringBuilder2(&sb, L"不可继承, ");
     if (Flags & TOKEN_SECURITY_ATTRIBUTE_COMPARE_IGNORE)
-        PhAppendStringBuilder2(&sb, L"Compare-ignore, ");
+        PhAppendStringBuilder2(&sb, L"比较忽略, ");
 
     if (sb.String->Length != 0)
         PhRemoveEndStringBuilder(&sb, 2);
     else
-        PhAppendStringBuilder2(&sb, L"(None)");
+        PhAppendStringBuilder2(&sb, L"(无)");
 
     return PhFinalStringBuilderString(&sb);
 }
@@ -3479,7 +3477,7 @@ PPH_STRING PhFormatClaimSecurityAttributeValue(
         return PhCreateString(Attribute->Values.ppString[ValueIndex]);
     case CLAIM_SECURITY_ATTRIBUTE_TYPE_FQBN:
         {
-            PhInitFormatS(&format[0], L"Version ");
+            PhInitFormatS(&format[0], L"版本 ");
             PhInitFormatU(&format[1], HIWORD(Attribute->Values.pFqbn[ValueIndex].Version >> 32));
             PhInitFormatC(&format[2], L'.');
             PhInitFormatU(&format[3], LOWORD(Attribute->Values.pFqbn[ValueIndex].Version >> 32));
@@ -3508,13 +3506,13 @@ PPH_STRING PhFormatClaimSecurityAttributeValue(
                     return name;
             }
         }
-        return PhCreateString(L"(Invalid SID)");
+        return PhCreateString(L"(无效 SID)");
     case CLAIM_SECURITY_ATTRIBUTE_TYPE_BOOLEAN:
-        return PhCreateString(Attribute->Values.pInt64[ValueIndex] != 0 ? L"True" : L"False");
+        return PhCreateString(Attribute->Values.pInt64[ValueIndex] != 0 ? L"是" : L"否");
     case CLAIM_SECURITY_ATTRIBUTE_TYPE_OCTET_STRING:
-        return PhCreateString(L"(Octet string)");
+        return PhCreateString(L"(八位字符串)");
     default:
-        return PhCreateString(L"(Unknown)");
+        return PhCreateString(L"(未知)");
     }
 }
 
@@ -3546,14 +3544,14 @@ PPH_STRING PhFormatTokenSecurityAttributeValue(
         static const PH_ACCESS_ENTRY activationTokenFlag[] =
         {
             PH_ACTIVIATION_TOKEN_FLAG(PSM_ACTIVATION_TOKEN_PACKAGED_APPLICATION, L"AppX"),
-            PH_ACTIVIATION_TOKEN_FLAG(PSM_ACTIVATION_TOKEN_SHARED_ENTITY, L"Shared token"),
-            PH_ACTIVIATION_TOKEN_FLAG(PSM_ACTIVATION_TOKEN_FULL_TRUST, L"Trusted"),
-            PH_ACTIVIATION_TOKEN_FLAG(PSM_ACTIVATION_TOKEN_NATIVE_SERVICE, L"Service"),
-            PH_ACTIVIATION_TOKEN_FLAG(PSM_ACTIVATION_TOKEN_MULTIPLE_INSTANCES_ALLOWED, L"Multiple instances allowed"),
-            PH_ACTIVIATION_TOKEN_FLAG(PSM_ACTIVATION_TOKEN_BREAKAWAY_INHIBITED, L"Breakaway inhibited"),
-            PH_ACTIVIATION_TOKEN_FLAG(PSM_ACTIVATION_TOKEN_RUNTIME_BROKER, L"Runtime broker"),
-            PH_ACTIVIATION_TOKEN_FLAG(PSM_ACTIVATION_TOKEN_UNIVERSAL_CONSOLE, L"Universal console"),
-            PH_ACTIVIATION_TOKEN_FLAG(PSM_ACTIVATION_TOKEN_WIN32ALACARTE_PROCESS, L"Win32 process"),
+            PH_ACTIVIATION_TOKEN_FLAG(PSM_ACTIVATION_TOKEN_SHARED_ENTITY, L"已共享令牌"),
+            PH_ACTIVIATION_TOKEN_FLAG(PSM_ACTIVATION_TOKEN_FULL_TRUST, L"受信任"),
+            PH_ACTIVIATION_TOKEN_FLAG(PSM_ACTIVATION_TOKEN_NATIVE_SERVICE, L"服务"),
+            PH_ACTIVIATION_TOKEN_FLAG(PSM_ACTIVATION_TOKEN_MULTIPLE_INSTANCES_ALLOWED, L"允许多实例"),
+            PH_ACTIVIATION_TOKEN_FLAG(PSM_ACTIVATION_TOKEN_BREAKAWAY_INHIBITED, L"已禁止分离"),
+            PH_ACTIVIATION_TOKEN_FLAG(PSM_ACTIVATION_TOKEN_RUNTIME_BROKER, L"运行时代理"),
+            PH_ACTIVIATION_TOKEN_FLAG(PSM_ACTIVATION_TOKEN_UNIVERSAL_CONSOLE, L"通用控制台"),
+            PH_ACTIVIATION_TOKEN_FLAG(PSM_ACTIVATION_TOKEN_WIN32ALACARTE_PROCESS, L"Win32 进程"),
 
         };
 
@@ -3564,28 +3562,28 @@ PPH_STRING PhFormatTokenSecurityAttributeValue(
         switch (upper)
         {
         case PackageOrigin_Unknown:
-            PhInitFormatS(&format[count++], L"Unknown");
+            PhInitFormatS(&format[count++], L"未知");
             break;
         case PackageOrigin_Unsigned:
-            PhInitFormatS(&format[count++], L"Unsigned");
+            PhInitFormatS(&format[count++], L"未签名");
             break;
         case PackageOrigin_Inbox:
-            PhInitFormatS(&format[count++], L"Inbox");
+            PhInitFormatS(&format[count++], L"收件箱");
             break;
         case PackageOrigin_Store:
-            PhInitFormatS(&format[count++], L"Store");
+            PhInitFormatS(&format[count++], L"存储");
             break;
         case PackageOrigin_DeveloperUnsigned:
-            PhInitFormatS(&format[count++], L"Developer unsigned");
+            PhInitFormatS(&format[count++], L"开发者未签名");
             break;
         case PackageOrigin_DeveloperSigned:
-            PhInitFormatS(&format[count++], L"Developer signed");
+            PhInitFormatS(&format[count++], L"开发者已签名");
             break;
         case PackageOrigin_LineOfBusiness:
-            PhInitFormatS(&format[count++], L"Line of business");
+            PhInitFormatS(&format[count++], L"业务线");
             break;
         default:
-            PhInitFormatS(&format[count++], L"Undefined");
+            PhInitFormatS(&format[count++], L"未定义");
             break;
         }
 
@@ -3618,22 +3616,22 @@ PPH_STRING PhFormatTokenSecurityAttributeValue(
         switch (Attribute->Values.Uint64[0])
         {
         case PsmActNotBackground:
-            PhInitFormatS(&format[0], L"Not background");
+            PhInitFormatS(&format[0], L"非后台");
             break;
         case PsmActMixedHost:
-            PhInitFormatS(&format[0], L"Mixed host");
+            PhInitFormatS(&format[0], L"混合代理");
             break;
         case PsmActPureHost:
-            PhInitFormatS(&format[0], L"Pure host");
+            PhInitFormatS(&format[0], L"纯代理");
             break;
         case PsmActSystemHost:
-            PhInitFormatS(&format[0], L"System host");
+            PhInitFormatS(&format[0], L"系统代理");
             break;
         case PsmActInvalidType:
-            PhInitFormatS(&format[0], L"Invalid");
+            PhInitFormatS(&format[0], L"无效");
             break;
         default:
-            PhInitFormatS(&format[0], L"Unknown");
+            PhInitFormatS(&format[0], L"未知");
             break;
         }
 
@@ -3672,15 +3670,15 @@ PPH_STRING PhFormatTokenSecurityAttributeValue(
 
         static const PH_ACCESS_ENTRY originClaimResults[] =
         {
-            PH_ORIGIN_CLAIM_RESULT(SeSafeOpenExperienceCalled, L"Called"),
-            PH_ORIGIN_CLAIM_RESULT(SeSafeOpenExperienceAppRepCalled, L"App reputation called"),
-            PH_ORIGIN_CLAIM_RESULT(SeSafeOpenExperiencePromptDisplayed, L"Prompt displayed"),
+            PH_ORIGIN_CLAIM_RESULT(SeSafeOpenExperienceCalled, L"已调用"),
+            PH_ORIGIN_CLAIM_RESULT(SeSafeOpenExperienceAppRepCalled, L"应用信誉度已调用"),
+            PH_ORIGIN_CLAIM_RESULT(SeSafeOpenExperiencePromptDisplayed, L"已显示提示"),
             PH_ORIGIN_CLAIM_RESULT(SeSafeOpenExperienceUAC, L"UAC"),
-            PH_ORIGIN_CLAIM_RESULT(SeSafeOpenExperienceUninstaller, L"Uninstaller"),
-            PH_ORIGIN_CLAIM_RESULT(SeSafeOpenExperienceIgnoreUnknownOrBad, L"Ignore unknown or bad"),
-            PH_ORIGIN_CLAIM_RESULT(SeSafeOpenExperienceDefenderTrustedInstaller, L"Defender trusted installer"),
-            PH_ORIGIN_CLAIM_RESULT(SeSafeOpenExperienceMOTWPresent, L"MOTW present"),
-            PH_ORIGIN_CLAIM_RESULT(SeSafeOpenExperienceElevatedNoPropagation, L"Elevated no propagation"),
+            PH_ORIGIN_CLAIM_RESULT(SeSafeOpenExperienceUninstaller, L"卸载程序"),
+            PH_ORIGIN_CLAIM_RESULT(SeSafeOpenExperienceIgnoreUnknownOrBad, L"忽略未知或损坏信息"),
+            PH_ORIGIN_CLAIM_RESULT(SeSafeOpenExperienceDefenderTrustedInstaller, L"Defender 可信安装程序"),
+            PH_ORIGIN_CLAIM_RESULT(SeSafeOpenExperienceMOTWPresent, L"MOTW 呈现"),
+            PH_ORIGIN_CLAIM_RESULT(SeSafeOpenExperienceElevatedNoPropagation, L"未传播"),
         };
 
         resultsString = PhGetAccessString(
@@ -3723,7 +3721,7 @@ PPH_STRING PhFormatTokenSecurityAttributeValue(
         return PhCreateStringFromUnicodeString(&Attribute->Values.String[ValueIndex]);
     case TOKEN_SECURITY_ATTRIBUTE_TYPE_FQBN:
         {
-            PhInitFormatS(&format[0], L"Version ");
+            PhInitFormatS(&format[0], L"版本 ");
             PhInitFormatU(&format[1], HIWORD(Attribute->Values.Fqbn[ValueIndex].Version >> 32));
             PhInitFormatC(&format[2], L'.');
             PhInitFormatU(&format[3], LOWORD(Attribute->Values.Fqbn[ValueIndex].Version >> 32));
@@ -3752,16 +3750,16 @@ PPH_STRING PhFormatTokenSecurityAttributeValue(
                     return name;
             }
         }
-        return PhCreateString(L"(Invalid SID)");
+        return PhCreateString(L"(无效 SID)");
     case TOKEN_SECURITY_ATTRIBUTE_TYPE_BOOLEAN:
-        return PhCreateString(Attribute->Values.Int64[ValueIndex] != 0 ? L"True" : L"False");
+        return PhCreateString(Attribute->Values.Int64[ValueIndex] != 0 ? L"是" : L"否");
     case TOKEN_SECURITY_ATTRIBUTE_TYPE_OCTET_STRING:
-        PhInitFormatS(&format[0], L"(Octet string of ");
+        PhInitFormatS(&format[0], L"(八位字符串 ");
         PhInitFormatD(&format[1], Attribute->Values.OctetString[ValueIndex].ValueLength);
-        PhInitFormatS(&format[2], L" bytes)");
+        PhInitFormatS(&format[2], L" 字节)");
         return PhFormat(format, 3, 10);
     default:
-        return PhCreateString(L"(Unknown)");
+        return PhCreateString(L"(未知)");
     }
 }
 
@@ -3796,11 +3794,11 @@ BOOLEAN PhpAddTokenClaimAttributes(
             node = PhpAddAttributeNode(&TokenPageContext->ClaimsTreeContext, Parent, PhCreateString(attribute->Name));
             // Type
             PhpAddAttributeNode(&TokenPageContext->ClaimsTreeContext, node,
-                PhFormatString(L"Type: %s", PhGetSecurityAttributeTypeString(attribute->ValueType)));
+                PhFormatString(L"类型: %s", PhGetSecurityAttributeTypeString(attribute->ValueType)));
             // Flags
             temp = PhGetSecurityAttributeFlagsString(attribute->Flags);
             PhpAddAttributeNode(&TokenPageContext->ClaimsTreeContext, node,
-                PhFormatString(L"Flags: %s (0x%lx)", temp->Buffer, attribute->Flags));
+                PhFormatString(L"标志: %s (0x%lx)", temp->Buffer, attribute->Flags));
             PhDereferenceObject(temp);
 
             // Values
@@ -3808,7 +3806,7 @@ BOOLEAN PhpAddTokenClaimAttributes(
             {
                 temp = PhFormatClaimSecurityAttributeValue(attribute, j);
                 PhpAddAttributeNode(&TokenPageContext->ClaimsTreeContext, node,
-                    PhFormatString(L"Value %u: %s", j, temp->Buffer));
+                    PhFormatString(L"值 %u: %s", j, temp->Buffer));
                 PhDereferenceObject(temp);
             }
         }
@@ -3850,8 +3848,8 @@ INT_PTR CALLBACK PhpTokenClaimsPageProc(
             TreeNew_SetEmptyText(tnHandle, &PhpEmptyTokenClaimsText, 0);
             TreeNew_SetRedraw(tnHandle, FALSE);
 
-            userNode = PhpAddAttributeNode(&tokenPageContext->ClaimsTreeContext, NULL, PhCreateString(L"User claims"));
-            deviceNode = PhpAddAttributeNode(&tokenPageContext->ClaimsTreeContext, NULL, PhCreateString(L"Device claims"));
+            userNode = PhpAddAttributeNode(&tokenPageContext->ClaimsTreeContext, NULL, PhCreateString(L"用户声明"));
+            deviceNode = PhpAddAttributeNode(&tokenPageContext->ClaimsTreeContext, NULL, PhCreateString(L"设备声明"));
 
             PhpAddTokenClaimAttributes(tokenPageContext, tnHandle, FALSE, userNode);
             PhpAddTokenClaimAttributes(tokenPageContext, tnHandle, TRUE, deviceNode);
@@ -3864,9 +3862,9 @@ INT_PTR CALLBACK PhpTokenClaimsPageProc(
             else
             {
                 if (userNode->Children->Count == 0)
-                    PhpAddAttributeNode(&tokenPageContext->ClaimsTreeContext, userNode, PhCreateString(L"(None)"));
+                    PhpAddAttributeNode(&tokenPageContext->ClaimsTreeContext, userNode, PhCreateString(L"(无)"));
                 if (deviceNode->Children->Count == 0)
-                    PhpAddAttributeNode(&tokenPageContext->ClaimsTreeContext, deviceNode, PhCreateString(L"(None)"));
+                    PhpAddAttributeNode(&tokenPageContext->ClaimsTreeContext, deviceNode, PhCreateString(L"(无)"));
             }
 
             TreeNew_NodesStructured(tnHandle);
@@ -3899,7 +3897,7 @@ INT_PTR CALLBACK PhpTokenClaimsPageProc(
             if (numberOfAttributeObjectNodes != 0)
             {
                 menu = PhCreateEMenu();
-                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, IDC_COPY, L"Copy", NULL, NULL), ULONG_MAX);
+                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, IDC_COPY, L"复制", NULL, NULL), ULONG_MAX);
                 PhInsertCopyCellEMenuItem(menu, IDC_COPY, tnHandle, contextMenuEvent->Column);
 
                 selectedItem = PhShowEMenu(
@@ -3973,11 +3971,11 @@ BOOLEAN PhpAddTokenAttributes(
             node = PhpAddAttributeNode(&TokenPageContext->AuthzTreeContext, NULL, PhReferenceObject(name));
             // Type
             PhpAddAttributeNode(&TokenPageContext->AuthzTreeContext, node,
-                PhFormatString(L"Type: %s", PhGetSecurityAttributeTypeString(attribute->ValueType)));
+                PhFormatString(L"类型: %s", PhGetSecurityAttributeTypeString(attribute->ValueType)));
             // Flags
             temp = PhGetSecurityAttributeFlagsString(attribute->Flags);
             PhpAddAttributeNode(&TokenPageContext->AuthzTreeContext, node,
-                PhFormatString(L"Flags: %s (0x%lx)", temp->Buffer, attribute->Flags));
+                PhFormatString(L"标志: %s (0x%lx)", temp->Buffer, attribute->Flags));
             PhDereferenceObject(temp);
 
             // Values
@@ -3985,7 +3983,7 @@ BOOLEAN PhpAddTokenAttributes(
             {
                 temp = PhFormatTokenSecurityAttributeValue(&name->sr, attribute, j);
                 PhpAddAttributeNode(&TokenPageContext->AuthzTreeContext, node,
-                    PhFormatString(L"Value %u: %s", j, temp->Buffer));
+                    PhFormatString(L"值 %u: %s", j, temp->Buffer));
                 PhDereferenceObject(temp);
             }
         }
@@ -4027,7 +4025,7 @@ INT_PTR CALLBACK PhpTokenAttributesPageProc(
             PhpAddTokenAttributes(tokenPageContext, tnHandle);
 
             //if (tokenPageContext->AuthzTreeContext.RootList->Count == 0)
-            //    PhpAddAttributeNode(&tokenPageContext->AuthzTreeContext, NULL, PhCreateString(L"(None)"));
+            //    PhpAddAttributeNode(&tokenPageContext->AuthzTreeContext, NULL, PhCreateString(L"(无)"));
 
             TreeNew_NodesStructured(tnHandle);
             TreeNew_SetRedraw(tnHandle, TRUE);
@@ -4059,7 +4057,7 @@ INT_PTR CALLBACK PhpTokenAttributesPageProc(
             if (numberOfAttributeObjectNodes != 0)
             {
                 menu = PhCreateEMenu();
-                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, IDC_COPY, L"Copy", NULL, NULL), ULONG_MAX);
+                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, IDC_COPY, L"复制", NULL, NULL), ULONG_MAX);
                 PhInsertCopyCellEMenuItem(menu, IDC_COPY, tnHandle, contextMenuEvent->Column);
 
                 selectedItem = PhShowEMenu(
@@ -4397,32 +4395,32 @@ INT_PTR CALLBACK PhpTokenContainerPageProc(
 
             PhSetListViewStyle(context->ListViewHandle, FALSE, TRUE);
             PhSetControlTheme(context->ListViewHandle, L"explorer");
-            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 120, L"Name");
-            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 280, L"Value");
+            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 120, L"名称");
+            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 280, L"值");
             PhSetExtendedListView(context->ListViewHandle);
 
             PhInitializeLayoutManager(&context->LayoutManager, hwndDlg);
             PhAddLayoutItem(&context->LayoutManager, context->ListViewHandle, NULL, PH_ANCHOR_ALL);
 
             ListView_EnableGroupView(context->ListViewHandle, TRUE);
-            PhAddListViewGroup(context->ListViewHandle, 0, L"General");
-            PhAddListViewGroup(context->ListViewHandle, 1, L"Properties");
-            PhAddListViewGroup(context->ListViewHandle, 2, L"Parent");
-            PhAddListViewGroup(context->ListViewHandle, 3, L"Package");
-            PhAddListViewGroup(context->ListViewHandle, 4, L"Profile");
+            PhAddListViewGroup(context->ListViewHandle, 0, L"常规");
+            PhAddListViewGroup(context->ListViewHandle, 1, L"属性");
+            PhAddListViewGroup(context->ListViewHandle, 2, L"父对象");
+            PhAddListViewGroup(context->ListViewHandle, 3, L"包");
+            PhAddListViewGroup(context->ListViewHandle, 4, L"配置文件");
 
-            PhAddListViewGroupItem(context->ListViewHandle, 0, MAXINT, L"Name", NULL);
-            PhAddListViewGroupItem(context->ListViewHandle, 0, MAXINT, L"Type", NULL);
+            PhAddListViewGroupItem(context->ListViewHandle, 0, MAXINT, L"名称", NULL);
+            PhAddListViewGroupItem(context->ListViewHandle, 0, MAXINT, L"类型", NULL);
             PhAddListViewGroupItem(context->ListViewHandle, 0, MAXINT, L"SID", NULL);
-            PhAddListViewGroupItem(context->ListViewHandle, 1, MAXINT, L"Number", NULL);
+            PhAddListViewGroupItem(context->ListViewHandle, 1, MAXINT, L"编号", NULL);
             PhAddListViewGroupItem(context->ListViewHandle, 1, MAXINT, L"LPAC", NULL);
-            PhAddListViewGroupItem(context->ListViewHandle, 1, MAXINT, L"Token object path", NULL);
-            PhAddListViewGroupItem(context->ListViewHandle, 2, MAXINT, L"Name", NULL);
+            PhAddListViewGroupItem(context->ListViewHandle, 1, MAXINT, L"令牌对象路径", NULL);
+            PhAddListViewGroupItem(context->ListViewHandle, 2, MAXINT, L"名称", NULL);
             PhAddListViewGroupItem(context->ListViewHandle, 2, MAXINT, L"SID", NULL);
-            PhAddListViewGroupItem(context->ListViewHandle, 3, MAXINT, L"Name", NULL);
-            PhAddListViewGroupItem(context->ListViewHandle, 3, MAXINT, L"Path", NULL);
-            PhAddListViewGroupItem(context->ListViewHandle, 4, MAXINT, L"Folder path", NULL);
-            PhAddListViewGroupItem(context->ListViewHandle, 4, MAXINT, L"Registry path", NULL);
+            PhAddListViewGroupItem(context->ListViewHandle, 3, MAXINT, L"名称", NULL);
+            PhAddListViewGroupItem(context->ListViewHandle, 3, MAXINT, L"路径", NULL);
+            PhAddListViewGroupItem(context->ListViewHandle, 4, MAXINT, L"文件夹路径", NULL);
+            PhAddListViewGroupItem(context->ListViewHandle, 4, MAXINT, L"注册表路径", NULL);
 
             if (NT_SUCCESS(tokenPageContext->OpenObject(
                 &tokenHandle,
@@ -4459,10 +4457,10 @@ INT_PTR CALLBACK PhpTokenContainerPageProc(
                 switch (appContainerSidType)
                 {
                 case ChildAppContainerSidType:
-                    PhSetListViewSubItem(context->ListViewHandle, 1, 1, L"Child");
+                    PhSetListViewSubItem(context->ListViewHandle, 1, 1, L"子对象");
                     break;
                 case ParentAppContainerSidType:
-                    PhSetListViewSubItem(context->ListViewHandle, 1, 1, L"Parent");
+                    PhSetListViewSubItem(context->ListViewHandle, 1, 1, L"父对象");
                     break;
                 }
 
@@ -4476,19 +4474,19 @@ INT_PTR CALLBACK PhpTokenContainerPageProc(
                 {
                     if (NT_SUCCESS(PhGetTokenAppContainerNumber(tokenHandle, &appContainerNumber)))
                     {
-                        WCHAR string[PH_INT64_STR_LEN_1] = L"Unknown";
+                        WCHAR string[PH_INT64_STR_LEN_1] = L"未知";
 
                         PhPrintUInt32(string, appContainerNumber);
                         PhSetListViewSubItem(context->ListViewHandle, 3, 1, string);
                     }
 
                     PhGetTokenIsLessPrivilegedAppContainer(tokenHandle, &isLessPrivilegedAppContainer);
-                    PhSetListViewSubItem(context->ListViewHandle, 4, 1, isLessPrivilegedAppContainer ? L"True" : L"False");
+                    PhSetListViewSubItem(context->ListViewHandle, 4, 1, isLessPrivilegedAppContainer ? L"是" : L"否");
                 }
 
                 if (NT_SUCCESS(PhGetAppContainerNamedObjectPath(tokenHandle, NULL, FALSE, &tokenNamedObjectPathString)))
                 {
-                    PhSetListViewSubItem(context->ListViewHandle, 5, 1, PhGetStringOrDefault(tokenNamedObjectPathString, L"Unknown"));
+                    PhSetListViewSubItem(context->ListViewHandle, 5, 1, PhGetStringOrDefault(tokenNamedObjectPathString, L"未知"));
                     PhDereferenceObject(tokenNamedObjectPathString);
                 }
 
@@ -4612,7 +4610,7 @@ INT_PTR CALLBACK PhpTokenContainerPageProc(
                 if (numberOfItems != 0)
                 {
                     menu = PhCreateEMenu();
-                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, IDC_COPY, L"&Copy", NULL, NULL), ULONG_MAX);
+                    PhInsertEMenuItem(menu, PhCreateEMenuItem(0, IDC_COPY, L"复制(&C)", NULL, NULL), ULONG_MAX);
                     PhInsertCopyListViewEMenuItem(menu, IDC_COPY, context->ListViewHandle);
 
                     item = PhShowEMenu(
@@ -4989,7 +4987,7 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_LifecycleManager_Unmanaged:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Unmanaged"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"未管理"));
             break;
         case AppModelPolicy_LifecycleManager_ManagedByPLM:
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"ManagedByPLM"));
@@ -5007,10 +5005,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_AppDataAccess_Allowed:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Allowed"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"已允许"));
             break;
         case AppModelPolicy_AppDataAccess_Denied:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Denied"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"已拒绝"));
             break;
         }
     }
@@ -5031,7 +5029,7 @@ VOID PhEnumTokenAppModelPolicy(
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"LegacyPhone"));
             break;
         case AppModelPolicy_WindowingModel_None:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"None"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"无"));
             break;
         }
     }
@@ -5058,10 +5056,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_Fusion_Full:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Full"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"完全"));
             break;
         case AppModelPolicy_Fusion_Limited:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Limited"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"受限"));
             break;
         }
     }
@@ -5073,10 +5071,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_NonWindowsCodecLoading_Allowed:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Allowed"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"已允许"));
             break;
         case AppModelPolicy_NonWindowsCodecLoading_Denied:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Denied"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"已拒绝"));
             break;
         }
     }
@@ -5106,7 +5104,7 @@ VOID PhEnumTokenAppModelPolicy(
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"RoInitialize"));
             break;
         case AppModelPolicy_BeginThreadInit_None:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"None"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"无"));
             break;
         }
     }
@@ -5121,7 +5119,7 @@ VOID PhEnumTokenAppModelPolicy(
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"UI"));
             break;
         case AppModelPolicy_DeveloperInformation_None:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"None"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"无"));
             break;
         }
     }
@@ -5133,10 +5131,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_CreateFileAccess_Full:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Full"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"完全"));
             break;
         case AppModelPolicy_CreateFileAccess_Limited:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Limited"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"受限"));
             break;
         }
     }
@@ -5148,10 +5146,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_ImplicitPackageBreakaway_Allowed:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Allowed"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"已允许"));
             break;
         case AppModelPolicy_ImplicitPackageBreakaway_Denied:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Denied"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"已拒绝"));
             break;
         case AppModelPolicy_ImplicitPackageBreakaway_DeniedByApp:
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"DeniedByApp"));
@@ -5166,7 +5164,7 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_ProcessActivationShim_None:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"None"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"无"));
             break;
         case AppModelPolicy_ProcessActivationShim_PackagedCWALauncher:
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"PackagedCWALauncher"));
@@ -5181,10 +5179,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_AppKnownToStateRepository_Known:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Known"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"已知"));
             break;
         case AppModelPolicy_AppKnownToStateRepository_Unknown:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Unknown"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"未知"));
             break;
         }
     }
@@ -5196,7 +5194,7 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_AudioManagement_Unmanaged:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Unmanaged"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"未管理"));
             break;
         case AppModelPolicy_AudioManagement_ManagedByPBM:
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"ManagedByPBM"));
@@ -5211,10 +5209,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_PackageMayContainPublicComRegistrations_Yes:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Yes"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"是"));
             break;
         case AppModelPolicy_PackageMayContainPublicComRegistrations_No:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"No"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"否"));
             break;
         }
     }
@@ -5226,7 +5224,7 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_PackageMayContainPrivateComRegistrations_None:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"None"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"无"));
             break;
         case AppModelPolicy_PackageMayContainPrivateComRegistrations_PrivateHive:
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"PrivateHive"));
@@ -5241,7 +5239,7 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_LaunchCreateProcessExtensions_None:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"None"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"无"));
             break;
         case AppModelPolicy_LaunchCreateProcessExtensions_RegisterWithPsm:
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"RegisterWithPsm"));
@@ -5262,13 +5260,13 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_ClrCompat_Others:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Others"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"其他"));
             break;
         case AppModelPolicy_ClrCompat_ClassicDesktop:
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"ClassicDesktop"));
             break;
         case AppModelPolicy_ClrCompat_Universal:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Universal"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"通用"));
             break;
         case AppModelPolicy_ClrCompat_PackagedDesktop:
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"PackagedDesktop"));
@@ -5283,10 +5281,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_LoaderIgnoreAlteredSearchForRelativePath_False:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"False"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"否"));
             break;
         case AppModelPolicy_LoaderIgnoreAlteredSearchForRelativePath_True:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"True"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"是"));
             break;
         }
     }
@@ -5298,10 +5296,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_ImplicitlyActivateClassicAAAServersAsIU_Yes:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Yes"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"是"));
             break;
         case AppModelPolicy_ImplicitlyActivateClassicAAAServersAsIU_No:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"No"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"否"));
             break;
         }
     }
@@ -5343,10 +5341,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_ComAppLaunchPerfEnhancements_Enabled:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Enabled"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"已启用"));
             break;
         case AppModelPolicy_ComAppLaunchPerfEnhancements_Disabled:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Disabled"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"已禁用"));
             break;
         }
     }
@@ -5388,10 +5386,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_ComDefaultExceptionHandling_HandleAll:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"All"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"全部"));
             break;
         case AppModelPolicy_ComDefaultExceptionHandling_HandleNone:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"None"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"无"));
             break;
         }
     }
@@ -5403,10 +5401,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_ComOopProxyAgility_Agile:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Agile"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"灵敏"));
             break;
         case AppModelPolicy_ComOopProxyAgility_NonAgile:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"NonAgile"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"非灵敏"));
             break;
         }
     }
@@ -5451,7 +5449,7 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_WinInetStoragePartitioning_Isolated:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Isolated"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"已隔离"));
             break;
         case AppModelPolicy_WinInetStoragePartitioning_SharedWithAppContainer:
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"SharedWithAppContainer"));
@@ -5481,10 +5479,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_LoaderIncludeUserDirectories_False:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"False"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"否"));
             break;
         case AppModelPolicy_LoaderIncludeUserDirectories_True:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"True"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"是"));
             break;
         }
     }
@@ -5496,10 +5494,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_ConvertAppContainerToRestrictedAppContainer_False:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"False"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"否"));
             break;
         case AppModelPolicy_ConvertAppContainerToRestrictedAppContainer_True:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"True"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"是"));
             break;
         }
     }
@@ -5511,7 +5509,7 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_PackageMayContainPrivateMapiProvider_None:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"None"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"无"));
             break;
         case AppModelPolicy_PackageMayContainPrivateMapiProvider_PrivateHive:
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"PrivateHive"));
@@ -5526,10 +5524,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_AdminProcessPackageClaims_None:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"None"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"无"));
             break;
         case AppModelPolicy_AdminProcessPackageClaims_Caller:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Caller"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"调用方"));
             break;
         }
     }
@@ -5541,10 +5539,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_RegistryRedirectionBehavior_None:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"None"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"无"));
             break;
         case AppModelPolicy_RegistryRedirectionBehavior_CopyOnWrite:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"CopyOnWrite"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"写时复制"));
             break;
         }
     }
@@ -5556,10 +5554,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_BypassCreateProcessAppxExtension_False:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"False"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"否"));
             break;
         case AppModelPolicy_BypassCreateProcessAppxExtension_True:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"True"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"是"));
             break;
         }
     }
@@ -5571,7 +5569,7 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_KnownFolderRedirection_Isolated:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Isolated"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"已隔离"));
             break;
         case AppModelPolicy_KnownFolderRedirection_RedirectToPackage:
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"RedirectToPackage"));
@@ -5604,7 +5602,7 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_AppPrivateFolderRedirection_None:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"None"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"无"));
             break;
         case AppModelPolicy_AppPrivateFolderRedirection_AppPrivate:
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"AppPrivate"));
@@ -5619,10 +5617,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_GlobalSystemAppDataAccess_Normal:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Normal"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"正常"));
             break;
         case AppModelPolicy_GlobalSystemAppDataAccess_Virtualized:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Virtualized"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"已虚拟化"));
             break;
         }
     }
@@ -5637,7 +5635,7 @@ VOID PhEnumTokenAppModelPolicy(
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"ConsoleOnly"));
             break;
         case AppModelPolicy_ConsoleHandleInheritance_All:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"All"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"全部"));
             break;
         }
     }
@@ -5652,7 +5650,7 @@ VOID PhEnumTokenAppModelPolicy(
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"RestrictedUnidirectional"));
             break;
         case AppModelPolicy_ConsoleBufferAccess_Unrestricted:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Unrestricted"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"未受限"));
             break;
         }
     }
@@ -5679,10 +5677,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_ShellExecuteRetrieveIdentityFromCurrentProcess_False:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"False"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"否"));
             break;
         case AppModelPolicy_ShellExecuteRetrieveIdentityFromCurrentProcess_True:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"True"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"是"));
             break;
         }
     }
@@ -5694,7 +5692,7 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_CodeIntegritySigning_Default:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Default"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"默认"));
             break;
         case AppModelPolicy_CodeIntegritySigning_OriginBased:
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"OriginBased"));
@@ -5712,7 +5710,7 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_PTCActivation_Default:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Default"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"默认"));
             break;
         case AppModelPolicy_PTCActivation_AllowActivationInBrokerForMediumILContainer:
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"AllowActivationInBrokerForMediumIL"));
@@ -5727,10 +5725,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_Type_ComIntraPackageRpcCall_NoWake:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"NoWake"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"非唤醒"));
             break;
         case AppModelPolicy_Type_ComIntraPackageRpcCall_Wake:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Wake"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"唤醒"));
             break;
         }
     }
@@ -5742,10 +5740,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_LoadUser32ShimOnWindowsCoreOS_True:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"True"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"是"));
             break;
         case AppModelPolicy_LoadUser32ShimOnWindowsCoreOS_False:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"False"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"否"));
             break;
         }
     }
@@ -5757,7 +5755,7 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_SecurityCapabilitiesOverride_None:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"None"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"无"));
             break;
         case AppModelPolicy_SecurityCapabilitiesOverride_PackageCapabilities:
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"PackageCapabilities"));
@@ -5772,7 +5770,7 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_CurrentDirectoryOverride_None:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"None"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"无"));
             break;
         case AppModelPolicy_CurrentDirectoryOverride_PackageInstallDirectory:
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"PackageInstallDirectory"));
@@ -5802,10 +5800,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_UseOriginalFileNameInTokenFQBNAttribute_False:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"False"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"否"));
             break;
         case AppModelPolicy_UseOriginalFileNameInTokenFQBNAttribute_True:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"True"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"是"));
             break;
         }
     }
@@ -5817,10 +5815,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_LoaderIncludeAlternateForwarders_False:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"False"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"否"));
             break;
         case AppModelPolicy_LoaderIncludeAlternateForwarders_True:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"True"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"是"));
             break;
         }
     }
@@ -5832,10 +5830,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_PullPackageDependencyData_False:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"False"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"否"));
             break;
         case AppModelPolicy_PullPackageDependencyData_True:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"True"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"是"));
             break;
         }
     }
@@ -5862,10 +5860,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_BackgroundTaskRegistrationType_Unsupported:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Unsupported"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"不受支持"));
             break;
         case AppModelPolicy_BackgroundTaskRegistrationType_Manifested:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Manifested"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"显现"));
             break;
         case AppModelPolicy_BackgroundTaskRegistrationType_Win32Clsid:
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Win32Clsid"));
@@ -5880,10 +5878,10 @@ VOID PhEnumTokenAppModelPolicy(
         switch (result)
         {
         case AppModelPolicy_Type_ModsPowerNotification_Disabled:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Disabled"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"已禁用"));
             break;
         case AppModelPolicy_Type_ModsPowerNotification_Enabled:
-            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"Enabled"));
+            PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"已启用"));
             break;
         case AppModelPolicy_Type_ModsPowerNotification_QueryDam:
             PhpAddAttributeNode(&TokenPageContext->AppPolicyTreeContext, node, PhCreateString(L"QueryDam"));
@@ -6083,8 +6081,8 @@ BOOLEAN NTAPI PhpAppPolicyTreeNewCallback(
     return FALSE;
 }
 
-static CONST PH_STRINGREF PhAppPolicyLoadingText = PH_STRINGREF_INIT(L"Initializing kernelbase symbols...");
-static CONST PH_STRINGREF PhAppPolicyEmptyText = PH_STRINGREF_INIT(L"There are no policies to display.");
+static CONST PH_STRINGREF PhAppPolicyLoadingText = PH_STRINGREF_INIT(L"正在初始化 kernelbase 符号...");
+static CONST PH_STRINGREF PhAppPolicyEmptyText = PH_STRINGREF_INIT(L"没有要显示的策略。");
 
 INT_PTR CALLBACK PhpTokenAppPolicyPageProc(
     _In_ HWND hwndDlg,
@@ -6115,8 +6113,8 @@ INT_PTR CALLBACK PhpTokenAppPolicyPageProc(
             TreeNew_SetRedraw(tnHandle, FALSE);
             TreeNew_SetEmptyText(tnHandle, &PhAppPolicyLoadingText, 0);
             TreeNew_SetCallback(tnHandle, PhpAppPolicyTreeNewCallback, &tokenPageContext->AppPolicyTreeContext);
-            PhAddTreeNewColumnEx2(tnHandle, 0, TRUE, L"Policy", 220, PH_ALIGN_LEFT, 0, 0, TN_COLUMN_FLAG_NODPISCALEONADD);
-            PhAddTreeNewColumnEx2(tnHandle, 1, TRUE, L"Value", 150, PH_ALIGN_LEFT, 1, 0, TN_COLUMN_FLAG_NODPISCALEONADD);
+            PhAddTreeNewColumnEx2(tnHandle, 0, TRUE, L"策略", 220, PH_ALIGN_LEFT, 0, 0, TN_COLUMN_FLAG_NODPISCALEONADD);
+            PhAddTreeNewColumnEx2(tnHandle, 1, TRUE, L"值", 150, PH_ALIGN_LEFT, 1, 0, TN_COLUMN_FLAG_NODPISCALEONADD);
             TreeNew_SetTriState(tnHandle, TRUE);
             TreeNew_SetRedraw(tnHandle, TRUE);
 
@@ -6163,7 +6161,7 @@ INT_PTR CALLBACK PhpTokenAppPolicyPageProc(
             if (numberOfAttributeObjectNodes != 0)
             {
                 menu = PhCreateEMenu();
-                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, IDC_COPY, L"Copy", NULL, NULL), ULONG_MAX);
+                PhInsertEMenuItem(menu, PhCreateEMenuItem(0, IDC_COPY, L"复制", NULL, NULL), ULONG_MAX);
                 PhInsertCopyCellEMenuItem(menu, IDC_COPY, tnHandle, contextMenuEvent->Column);
 
                 selectedItem = PhShowEMenu(

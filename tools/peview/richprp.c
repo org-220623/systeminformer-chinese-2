@@ -46,9 +46,9 @@ PWSTR PvpGetProductIdName(
     else if (ProductId >= prodidAliasObj60)
         return L"Visual Studio 1998 (6.0)";
     else if (ProductId == 1)
-        return L"Linker (Import Table)";
+        return L"链接器 (导入列表)";
 
-    return PhaFormatString(L"Report error (%lu)", ProductId)->Buffer;
+    return PhaFormatString(L"报告错误 (%lu)", ProductId)->Buffer;
 }
 
 PWSTR PvpGetProductIdComponent(
@@ -58,11 +58,11 @@ PWSTR PvpGetProductIdComponent(
     switch (ProductId)
     {
     case prodidUnknown: // linker generated unnamed ordinal export stubs with RVAs of zero?
-        return L"Linker generated export object";
+        return L"链接器生成的导出对象";
     case prodidImport0:
-        return L"Linker generated import object";
+        return L"链接器生成的导入对象";
     case prodidResource:
-        return L"Resource compiler object";
+        return L"资源编译器对象";
 
     case prodidAliasObj60:
         return L"ALIASOBJ (6.0)";
@@ -89,89 +89,89 @@ PWSTR PvpGetProductIdComponent(
         return L"ALIASOBJ (14.0)";
 
     case prodidCvtpgd1400:
-        return L"Profile Guided Optimization (PGO) (14.0)";
+        return L"性能分析指导优化 (PGO) (14.0)";
     case prodidCvtpgd1500:
-        return L"Profile Guided Optimization (PGO) (15.0)";
+        return L"性能分析指导优化 (PGO) (15.0)";
     case prodidCvtpgd1600:
-        return L"Profile Guided Optimization (PGO) (16.0)";
+        return L"性能分析指导优化 (PGO) (16.0)";
     case prodidCvtpgd1610:
-        return L"Profile Guided Optimization (PGO) (16.1)";
+        return L"性能分析指导优化 (PGO) (16.1)";
     case prodidCvtpgd1700:
-        return L"Profile Guided Optimization (PGO) (17.0)";
+        return L"性能分析指导优化 (PGO) (17.0)";
     case prodidCvtpgd1800:
-        return L"Profile Guided Optimization (PGO) (18.0)";
+        return L"性能分析指导优化 (PGO) (18.0)";
     case prodidCvtpgd1810:
-        return L"Profile Guided Optimization (PGO) (18.1)";
+        return L"性能分析指导优化 (PGO) (18.1)";
     case prodidCvtpgd1900:
-        return L"Profile Guided Optimization (PGO) (19.0)";
+        return L"性能分析指导优化 (PGO) (19.0)";
 
     case prodidCvtres800:
-        return L"Resource File To COFF Object (8.0)";
+        return L"资源文件到 COFF 对象 (8.0)";
     case prodidCvtres900:
-        return L"Resource File To COFF Object (9.0)";
+        return L"资源文件到 COFF 对象 (9.0)";
     case prodidCvtres1000:
-        return L"Resource File To COFF Object (10.0)";
+        return L"资源文件到 COFF 对象 (10.0)";
     case prodidCvtres1010:
-        return L"Resource File To COFF Object (10.1)";
+        return L"资源文件到 COFF 对象 (10.1)";
     case prodidCvtres1100:
-        return L"Resource File To COFF Object (11.0)";
+        return L"资源文件到 COFF 对象 (11.0)";
     case prodidCvtres1200:
-        return L"Resource File To COFF Object (12.0)";
+        return L"资源文件到 COFF 对象 (12.0)";
     case prodidCvtres1210:
-        return L"Resource File To COFF Object (12.1)";
+        return L"资源文件到 COFF 对象 (12.1)";
     case prodidCvtres1400:
-        return L"Resource File To COFF Object (14.0)";
+        return L"资源文件到 COFF 对象 (14.0)";
 
     case prodidExport800:
-        return L"Export (8.0)";
+        return L"导出 (8.0)";
     case prodidExport900:
-        return L"Export (9.0)";
+        return L"导出 (9.0)";
     case prodidExport1000:
-        return L"Export (10.0)";
+        return L"导出 (10.0)";
     case prodidExport1010:
-        return L"Export (10.1)";
+        return L"导出 (10.1)";
     case prodidExport1100:
-        return L"Export (11.0)";
+        return L"导出 (11.0)";
     case prodidExport1200:
-        return L"Export (12.0)";
+        return L"导出 (12.0)";
     case prodidExport1210:
-        return L"Export (12.1)";
+        return L"导出 (12.1)";
     case prodidExport1400:
-        return L"Export (14.0)";
+        return L"导出 (14.0)";
 
     case prodidImplib800:
-        return L"Import library tool (LIB) (8.0)";
+        return L"导入库工具 (LIB) (8.0)";
     case prodidImplib900:
-        return L"Import library tool (LIB) (9.0)";
+        return L"导入库工具 (LIB) (9.0)";
     case prodidImplib1000:
-        return L"Import library tool (LIB) (10.0)";
+        return L"导入库工具 (LIB) (10.0)";
     case prodidImplib1010:
-        return L"Import library tool (LIB) (10.1)";
+        return L"导入库工具 (LIB) (10.1)";
     case prodidImplib1100:
-        return L"Import library tool (LIB) (11.0)";
+        return L"导入库工具 (LIB) (11.0)";
     case prodidImplib1200:
-        return L"Import library tool (LIB) (12.0)";
+        return L"导入库工具 (LIB) (12.0)";
     case prodidImplib1210:
-        return L"Import library tool (LIB) (12.1)";
+        return L"导入库工具 (LIB) (12.1)";
     case prodidImplib1400:
-        return L"Import library tool (LIB) (14.0)";
+        return L"导入库工具 (LIB) (14.0)";
 
     case prodidLinker800:
-        return L"Linker (8.0)";
+        return L"链接器 (8.0)";
     case prodidLinker900:
-        return L"Linker (9.0)";
+        return L"链接器 (9.0)";
     case prodidLinker1000:
-        return L"Linker (10.0)";
+        return L"链接器 (10.0)";
     case prodidLinker1010:
-        return L"Linker (10.1)";
+        return L"链接器 (10.1)";
     case prodidLinker1100:
-        return L"Linker (11.0)";
+        return L"链接器 (11.0)";
     case prodidLinker1200:
-        return L"Linker (12.0)";
+        return L"链接器 (12.0)";
     case prodidLinker1210:
-        return L"Linker (12.1)";
+        return L"链接器 (12.1)";
     case prodidLinker1400:
-        return L"Linker (14.0)";
+        return L"链接器 (14.0)";
 
     case prodidMasm800:
         return L"MASM (8.0)";
@@ -191,112 +191,112 @@ PWSTR PvpGetProductIdComponent(
         return L"MASM (14.0)";
 
     case prodidUtc1400_C:
-        return L"C files (14.0)";
+        return L"C 文件 (14.0)";
     case prodidUtc1500_C:
-        return L"C files (15.0)";
+        return L"C 文件 (15.0)";
     case prodidUtc1610_C:
-        return L"C files (16.1)";
+        return L"C 文件 (16.1)";
     case prodidUtc1700_C:
-        return L"C files (17.0)";
+        return L"C 文件 (17.0)";
     case prodidUtc1800_C:
-        return L"C files (18.0)";
+        return L"C 文件 (18.0)";
     case prodidUtc1810_C:
-        return L"C files (18.1)";
+        return L"C 文件 (18.1)";
     case prodidUtc1900_C:
-        return L"C files (19.0)";
+        return L"C 文件 (19.0)";
 
     case prodidUtc1400_CPP:
-        return L"CPP files (14.0)";
+        return L"CPP 文件 (14.0)";
     case prodidUtc1500_CPP:
-        return L"CPP files (15.0)";
+        return L"CPP 文件 (15.0)";
     case prodidUtc1610_CPP:
-        return L"CPP files (16.1)";
+        return L"CPP 文件 (16.1)";
     case prodidUtc1700_CPP:
-        return L"CPP files (17.0)";
+        return L"CPP 文件 (17.0)";
     case prodidUtc1800_CPP:
-        return L"CPP files (18.0)";
+        return L"CPP 文件 (18.0)";
     case prodidUtc1810_CPP:
-        return L"CPP files (18.1)";
+        return L"CPP 文件 (18.1)";
     case prodidUtc1900_CPP:
-        return L"CPP files (19.0)";
+        return L"CPP 文件 (19.0)";
 
     case prodidUtc1500_CVTCIL_C:
-        return L"CIL to Native Converter (C99) (15.0)";
+        return L"CIL 到本机代码转译器 (C99) (15.0)";
     case prodidUtc1610_CVTCIL_C:
-        return L"CIL to Native Converter (C99) (16.1)";
+        return L"CIL 到本机代码转译器 (C99) (16.1)";
     case prodidUtc1700_CVTCIL_C:
-        return L"CIL to Native Converter (C99) (17.0)";
+        return L"CIL 到本机代码转译器 (C99) (17.0)";
     case prodidUtc1800_CVTCIL_C:
-        return L"CIL to Native Converter (C11) (18.0)";
+        return L"CIL 到本机代码转译器 (C11) (18.0)";
     case prodidUtc1810_CVTCIL_C:
-        return L"CIL to Native Converter (C11) (18.1)";
+        return L"CIL 到本机代码转译器 (C11) (18.1)";
     case prodidUtc1900_CVTCIL_C:
-        return L"CIL to Native Converter (C11) (19.0)";
+        return L"CIL 到本机代码转译器 (C11) (19.0)";
 
     case prodidUtc1500_CVTCIL_CPP:
-        return L"CIL to Native Converter (CPP) (15.0)";
+        return L"CIL 到本机代码转译器 (CPP) (15.0)";
     case prodidUtc1610_CVTCIL_CPP:
-        return L"CIL to Native Converter (CPP) (16.1)";
+        return L"CIL 到本机代码转译器 (CPP) (16.1)";
     case prodidUtc1700_CVTCIL_CPP:
-        return L"CIL to Native Converter (CPP) (17.0)";
+        return L"CIL 到本机代码转译器 (CPP) (17.0)";
     case prodidUtc1800_CVTCIL_CPP:
-        return L"CIL to Native Converter (CPP) (18.0)";
+        return L"CIL 到本机代码转译器 (CPP) (18.0)";
     case prodidUtc1810_CVTCIL_CPP:
-        return L"CIL to Native Converter (CPP) (18.1)";
+        return L"CIL 到本机代码转译器 (CPP) (18.1)";
     case prodidUtc1900_CVTCIL_CPP:
-        return L"CIL to Native Converter (CPP) (19.0)";
+        return L"CIL 到本机代码转译器 (CPP) (19.0)";
 
     case prodidUtc1500_LTCG_C:
-        return L"Link-time Code Generation (C99) (15.0)";
+        return L"链接时代码生成 (C99) (15.0)";
     case prodidUtc1610_LTCG_C:
-        return L"Link-time Code Generation (C99) (16.1)";
+        return L"链接时代码生成 (C99) (16.1)";
     case prodidUtc1700_LTCG_C:
-        return L"Link-time Code Generation (C99) (17.0)";
+        return L"链接时代码生成 (C99) (17.0)";
     case prodidUtc1800_LTCG_C:
-        return L"Link-time Code Generation (C11) (18.0)";
+        return L"链接时代码生成 (C11) (18.0)";
     case prodidUtc1810_LTCG_C:
-        return L"Link-time Code Generation (C11) (18.1)";
+        return L"链接时代码生成 (C11) (18.1)";
     case prodidUtc1900_LTCG_C:
-        return L"Link-time Code Generation (C11) (19.0)";
+        return L"链接时代码生成 (C11) (19.0)";
 
     case prodidUtc1500_LTCG_CPP:
-        return L"Link-time Code Generation (CPP) (15.0)";
+        return L"链接时代码生成 (CPP) (15.0)";
     case prodidUtc1610_LTCG_CPP:
-        return L"Link-time Code Generation (CPP) (16.1)";
+        return L"链接时代码生成 (CPP) (16.1)";
     case prodidUtc1700_LTCG_CPP:
-        return L"Link-time Code Generation (CPP) (17.0)";
+        return L"链接时代码生成 (CPP) (17.0)";
     case prodidUtc1800_LTCG_CPP:
-        return L"Link-time Code Generation (CPP) (18.0)";
+        return L"链接时代码生成 (CPP) (18.0)";
     case prodidUtc1810_LTCG_CPP:
-        return L"Link-time Code Generation (CPP) (18.1)";
+        return L"链接时代码生成 (CPP) (18.1)";
     case prodidUtc1900_LTCG_CPP:
-        return L"Link-time Code Generation (CPP) (19.0)";
+        return L"链接时代码生成 (CPP) (19.0)";
 
     case prodidUtc1500_LTCG_MSIL:
-        return L"Link-time Code Generation (MSIL) (15.0)";
+        return L"链接时代码生成 (MSIL) (15.0)";
     case prodidUtc1610_LTCG_MSIL:
-        return L"Link-time Code Generation (MSIL) (16.1)";
+        return L"链接时代码生成 (MSIL) (16.1)";
     case prodidUtc1700_LTCG_MSIL:
-        return L"Link-time Code Generation (MSIL) (17.0)";
+        return L"链接时代码生成 (MSIL) (17.0)";
     case prodidUtc1800_LTCG_MSIL:
-        return L"Link-time Code Generation (MSIL) (18.0)";
+        return L"链接时代码生成 (MSIL) (18.0)";
     case prodidUtc1810_LTCG_MSIL:
-        return L"Link-time Code Generation (MSIL) (18.1)";
+        return L"链接时代码生成 (MSIL) (18.1)";
     case prodidUtc1900_LTCG_MSIL:
-        return L"Link-time Code Generation (MSIL) (19.0)";
+        return L"链接时代码生成 (MSIL) (19.0)";
 
     case prodidUtc1500_POGO_I_C:
-        return L"Profile Guided Optimization (Input) (C11) (15.0)";
+        return L"性能分析指导优化 (输入) (C11) (15.0)";
     case prodidUtc1610_POGO_I_C:
-        return L"Profile Guided Optimization (Input) (C11) (16.1)";
+        return L"性能分析指导优化 (输入) (C11) (16.1)";
     case prodidUtc1700_POGO_I_C:
-        return L"Profile Guided Optimization (Input) (C11) (17.0)";
+        return L"性能分析指导优化 (输入) (C11) (17.0)";
     case prodidUtc1800_POGO_I_C:
-        return L"Profile Guided Optimization (Input) (C11) (18.0)";
+        return L"性能分析指导优化 (输入) (C11) (18.0)";
     case prodidUtc1810_POGO_I_C:
-        return L"Profile Guided Optimization (Input) (C11) (18.1)";
+        return L"性能分析指导优化 (输入) (C11) (18.1)";
     case prodidUtc1900_POGO_I_C:
-        return L"Profile Guided Optimization (Input) (C11) (19.0)";
+        return L"性能分析指导优化 (输入) (C11) (19.0)";
 
     case prodidUtc1400_POGO_O_C:
     case prodidUtc1500_POGO_O_C:
@@ -305,7 +305,7 @@ PWSTR PvpGetProductIdComponent(
     case prodidUtc1800_POGO_O_C:
     case prodidUtc1810_POGO_O_C:
     case prodidUtc1900_POGO_O_C:
-        return L"Profile Guided Optimization (Output) (C11)";
+        return L"性能分析指导优化 (输出) (C11)";
 
     case prodidUtc1400_POGO_I_CPP:
     case prodidUtc1500_POGO_I_CPP:
@@ -314,7 +314,7 @@ PWSTR PvpGetProductIdComponent(
     case prodidUtc1800_POGO_I_CPP:
     case prodidUtc1810_POGO_I_CPP:
     case prodidUtc1900_POGO_I_CPP:
-        return L"Profile Guided Optimization (Input) (CPP)";
+        return L"性能分析指导优化 (输入) (CPP)";
 
     case prodidUtc1400_POGO_O_CPP:
     case prodidUtc1500_POGO_O_CPP:
@@ -323,10 +323,10 @@ PWSTR PvpGetProductIdComponent(
     case prodidUtc1800_POGO_O_CPP:
     case prodidUtc1810_POGO_O_CPP:
     case prodidUtc1900_POGO_O_CPP:
-        return L"Profile Guided Optimization (Output) (C11)";
+        return L"性能分析指导优化 (输出) (C11)";
     }
 
-    return PhaFormatString(L"Report error (%lu)", ProductId)->Buffer;
+    return PhaFormatString(L"报告错误 (%lu)", ProductId)->Buffer;
 }
 
 VOID PvpPeEnumProdEntries(
@@ -347,7 +347,7 @@ VOID PvpPeEnumProdEntries(
     {
         PPH_STRING text;
 
-        text = prodids.Valid ? prodids.Key : PhaConcatStrings2(PhGetStringOrEmpty(prodids.Key), L" (incorrect)");
+        text = prodids.Valid ? prodids.Key : PhaConcatStrings2(PhGetStringOrEmpty(prodids.Key), L" (不正确)");
         PhSetDialogItemText(WindowHandle, IDC_PRODCHECKSUM, PhGetStringOrEmpty(text));
         PhSetDialogItemText(WindowHandle, IDC_PRODHASH, PhGetStringOrEmpty(prodids.RawHash));
         PhSetDialogItemText(WindowHandle, IDC_PRODHASH2, PhGetStringOrEmpty(prodids.Hash));
@@ -423,10 +423,10 @@ INT_PTR CALLBACK PvpPeProdIdDlgProc(
             PhSetListViewStyle(context->ListViewHandle, TRUE, TRUE);
             PhSetControlTheme(context->ListViewHandle, L"explorer");
             PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 40, L"#");
-            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 100, L"Component");
-            PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 100, L"Version");
-            PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 100, L"Count");
-            //PhAddListViewColumn(context->ListViewHandle, 4, 4, 4, LVCFMT_LEFT, 100, L"Product");
+            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 100, L"组件");
+            PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 100, L"版本");
+            PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 100, L"计数");
+            //PhAddListViewColumn(context->ListViewHandle, 4, 4, 4, LVCFMT_LEFT, 100, L"产品");
             PhSetExtendedListView(context->ListViewHandle);
             PhLoadListViewColumnsFromSetting(L"ImageProdIdListViewColumns", context->ListViewHandle);
             PvConfigTreeBorders(context->ListViewHandle);

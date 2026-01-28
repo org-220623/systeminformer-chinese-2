@@ -59,7 +59,7 @@ PPH_STRING VirusTotalRelativeTimeString(
     PhLargeIntegerToLocalSystemTime(&timeFields, &time);
     timeString = PhaFormatDateTime(&timeFields);
 
-    return PhFormatString(L"%s ago (%s)", timeRelativeString->Buffer, timeString->Buffer);
+    return PhFormatString(L"%s 以前 (%s)", timeRelativeString->Buffer, timeString->Buffer);
 }
 
 PPH_STRING VirusTotalDateToTime(

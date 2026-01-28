@@ -14,8 +14,8 @@
 
 CONST PPH_STRINGREF OptionsGeoLiteEdition[2] =
 {
-    SREF(L"GeoLite Country (Small)"),
-    SREF(L"GeoLite City (Large)"),
+    SREF(L"GeoLite 国家 (小)"),
+    SREF(L"GeoLite 城市 (大)"),
 };
 
 VOID ShowGeoLiteConfigDialog(
@@ -127,8 +127,8 @@ INT_PTR CALLBACK OptionsDlgProc(
                 {
                     static PH_FILETYPE_FILTER filters[] =
                     {
-                        { L"GeoIP.conf files (*.conf)", L"*.conf" },
-                        { L"All files (*.*)", L"*.*" }
+                        { L"GeoIP 配置文件 (*.conf)", L"*.conf" },
+                        { L"所有文件 (*.*)", L"*.*" }
                     };
                     PVOID fileDialog;
                     PPH_STRING fileName = NULL;
@@ -188,12 +188,12 @@ INT_PTR CALLBACK OptionsGeoLiteDlgProc(
 
             if (id == IDC_KEYTEXT)
             {
-                PhSetDialogItemText(WindowHandle, IDC_KEYTEXT_L, L"Paste the license key here:");
+                PhSetDialogItemText(WindowHandle, IDC_KEYTEXT_L, L"在此处粘贴许可证密钥:");
                 PhSetDialogItemText(WindowHandle, IDC_KEY_EDIT, PhaGetStringSetting(SETTING_NAME_GEOLITE_API_KEY)->Buffer);
             }
             else
             {
-                PhSetDialogItemText(WindowHandle, IDC_KEYTEXT_L, L"Paste the account id here:");
+                PhSetDialogItemText(WindowHandle, IDC_KEYTEXT_L, L"在此处粘贴帐户 ID:");
                 PhSetDialogItemText(WindowHandle, IDC_KEY_EDIT, PhaGetStringSetting(SETTING_NAME_GEOLITE_API_ID)->Buffer);
             }
 

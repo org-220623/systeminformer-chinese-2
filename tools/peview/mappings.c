@@ -86,15 +86,15 @@ VOID PvAddMappingsEntry(
     }
     else if (Entry->ViewMapType == VIEW_MAP_TYPE_SESSION)
     {
-        lvItemIndex = PhAddListViewItem(ListViewHandle, MAXINT, L"Session", NULL);
+        lvItemIndex = PhAddListViewItem(ListViewHandle, MAXINT, L"会话", NULL);
     }
     else if (Entry->ViewMapType == VIEW_MAP_TYPE_SYSTEM_CACHE)
     {
-        lvItemIndex = PhAddListViewItem(ListViewHandle, MAXINT, L"System", NULL);
+        lvItemIndex = PhAddListViewItem(ListViewHandle, MAXINT, L"系统", NULL);
     }
     else
     {
-        lvItemIndex = PhAddListViewItem(ListViewHandle, MAXINT, L"Unknown", NULL);
+        lvItemIndex = PhAddListViewItem(ListViewHandle, MAXINT, L"未知", NULL);
     }
 
     PhSetListViewSubItem(ListViewHandle, lvItemIndex, 1, Type);
@@ -125,7 +125,7 @@ VOID PvEnumerateMappingsEntries(
         {
             for (ULONG i = 0; i < sectionInfo->NumberOfMappings; i++)
             {
-                PvAddMappingsEntry(ListViewHandle, &sectionInfo->Mappings[i], L"Image");
+                PvAddMappingsEntry(ListViewHandle, &sectionInfo->Mappings[i], L"映像");
             }
 
             PhFree(sectionInfo);
@@ -140,7 +140,7 @@ VOID PvEnumerateMappingsEntries(
         {
             for (ULONG i = 0; i < sectionInfo->NumberOfMappings; i++)
             {
-                PvAddMappingsEntry(ListViewHandle, &sectionInfo->Mappings[i], L"Data");
+                PvAddMappingsEntry(ListViewHandle, &sectionInfo->Mappings[i], L"数据");
             }
 
             PhFree(sectionInfo);
@@ -190,10 +190,10 @@ INT_PTR CALLBACK PvpMappingsDlgProc(
 
             PhSetListViewStyle(context->ListViewHandle, TRUE, TRUE);
             PhSetControlTheme(context->ListViewHandle, L"explorer");
-            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 200, L"View");
-            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 60, L"Type");
-            PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 100, L"Start");
-            PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 100, L"End");
+            PhAddListViewColumn(context->ListViewHandle, 0, 0, 0, LVCFMT_LEFT, 200, L"查看");
+            PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 60, L"类型");
+            PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 100, L"开始");
+            PhAddListViewColumn(context->ListViewHandle, 3, 3, 3, LVCFMT_LEFT, 100, L"结束");
             PhSetExtendedListView(context->ListViewHandle);
             PvConfigTreeBorders(context->ListViewHandle);
 
